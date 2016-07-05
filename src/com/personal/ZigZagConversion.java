@@ -31,6 +31,6 @@ public class ZigZagConversion {
     }
 
     public static void main(String[] args) {
-        System.out.print(new ZigZagConversion().convert("ABC", 1));
+        System.out.print(new ZigZagConversion().convert("ABCDEFGHI", 2)); //this
     }
 }
