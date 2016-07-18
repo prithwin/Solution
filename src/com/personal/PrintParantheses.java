@@ -27,7 +27,7 @@ public class PrintParantheses {
     private static boolean valid(String s) {
         Stack<Character> stack = new Stack<Character>();
         for (char c : s.toCharArray()) {
-            if (c == '{') {
+            if (c == '(') {
                 stack.push(c);
             } else {
                 if(!stack.isEmpty())
@@ -42,9 +42,17 @@ public class PrintParantheses {
         return false;
     }
 
+    public List<String> generateParenthesis(int n) {
+        Set<String> resultSet = new HashSet<>();
+        generate(getInitialSetByNumber(n), "",resultSet);
+        List<String> returnList = new ArrayList<String>();
+        returnList.addAll(resultSet);
+        return returnList;
+    }
+
     public static void main(String[] args) {
         Set<String> resultSet = new HashSet<>();
-        generate(getInitialSetByNumber(6), "",resultSet);
+        generate(getInitialSetByNumber(3), "",resultSet);
         for (String s : resultSet){
             System.out.println(s);
         }
@@ -54,9 +62,9 @@ public class PrintParantheses {
         StringBuilder stringBuilder = new StringBuilder();
         for(int i=1; i<=(n*2) ;i++){
             if(i<=n){
-                stringBuilder.append("{");
+                stringBuilder.append("(");
             } else {
-              stringBuilder.append("}");
+              stringBuilder.append(")");
             }
         }
         return stringBuilder.toString();
