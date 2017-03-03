@@ -18,6 +18,7 @@ public class PrintParantheses2 {
         if(left>right){
             return;
         }
+        System.out.println(s+"\n");
         if(left == 0 && right == 0){
             result.add(s);
             return;
@@ -33,7 +34,7 @@ public class PrintParantheses2 {
     }
 
     public static void main(String[] args){
-        List<String> jam = new PrintParantheses2().generateParenthesis(5);
+        List<String> jam = new PrintParantheses2().generateParenthesis(3);
         System.out.println(jam);
     }
 }

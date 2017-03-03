@@ -24,7 +24,7 @@ public class Permutations {
     }
 
     public static void main(String[] args){
-        generate("ABC","");
+        generate("ABCD","");
     }
 
     private static String getRemainderString(int i, char[] charArray) {

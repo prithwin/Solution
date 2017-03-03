@@ -54,4 +54,9 @@ public class Permutations2 {
         }
         return remainderArray;
     }
+
+    public static void main(String[] args){
+        int[] times = {1,2,3};
+        System.out.println(new Permutations2().permute(times));
+    }
 }
