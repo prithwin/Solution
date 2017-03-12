@@ -4,15 +4,23 @@ package com.personal.util;
  * Created by prajeev on 9/8/16.
  */
 public class LinkedList {
-    ListNode head;
+    public ListNode head;
+    int length;
+
+     public LinkedList(){
+        super();
+         length=0;
+     }
 
     public LinkedList(int[] fromList){
+        length=0;
        for(int item : fromList){
            add(item);
        }
     }
 
     public void add(int item) {
+        length++;
         if(head==null){
             head = new ListNode(item);
             return;
@@ -26,5 +34,10 @@ public class LinkedList {
 
     public ListNode getHead(){
         return  head;
+    }
+
+    public int size() {
+        return length;
+
     }
 }

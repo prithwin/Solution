@@ -10,4 +10,10 @@ public class ListNode {
     public ListNode(int x) {
         val = x;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        ListNode otherNode = (ListNode) obj;
+        return this.val==((ListNode) obj).val;
+    }
 }
