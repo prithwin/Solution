@@ -40,4 +40,35 @@ public class LinkedList {
         return length;
 
     }
+
+    public void printList(){
+        ListNode node = head;
+        while (node!=null){
+            System.out.println(node.val);
+            node = node.next;
+        }
+    }
+
+    public static void printInReverese(ListNode node){
+        if(node==null)
+            return;
+        printInReverese(node.next);
+        System.out.println(node.val);
+    }
+
+    public void rotate() {
+        ListNode preTail = this.getPreTail();
+        ListNode tail = preTail.next;
+        tail.next = head;
+        preTail.next = null;
+        this.head = tail;
+    }
+
+    private ListNode getPreTail() {
+        ListNode tail = head;
+        while(tail.next.next!=null){
+            tail = tail.next;
+        }
+        return tail;
+    }
 }

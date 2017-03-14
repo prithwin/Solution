@@ -11,9 +11,10 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class BlockingQueue {
 
-    private List<Integer> whatLiesWithin = new ArrayList<Integer>();
+    private List<Integer> whatLiesWithin = new ArrayList<Integer>(56);
     Lock queueLock = new ReentrantLock();
     Condition conditionFull = queueLock.newCondition();
+
 
     private int THEORITICAL_MAX = 3;
 
@@ -23,8 +24,8 @@ public class BlockingQueue {
         while (whatLiesWithin.size()<1){
             conditionFull.await();
         }
-        returnValue = whatLiesWithin.get(whatLiesWithin.size()-1);
-        whatLiesWithin.remove(whatLiesWithin.size()-1);
+        returnValue = whatLiesWithin.get(0);
+        whatLiesWithin.remove(0);
         conditionFull.signalAll();
         queueLock.unlock();
         return returnValue;

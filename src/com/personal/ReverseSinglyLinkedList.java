@@ -13,7 +13,6 @@ public class ReverseSinglyLinkedList {
     }
 
     private ListNode realReverse(ListNode current) {
-        ListNode returnValue = current;
         ListNode prevNode = null;
        while (current!=null){
            ListNode nextCurrent = current.next;
@@ -28,7 +27,16 @@ public class ReverseSinglyLinkedList {
         int[] source = {1,2,3,4,5};
         LinkedList target = new LinkedList(source);
         ReverseSinglyLinkedList toool = new ReverseSinglyLinkedList();
+        System.out.println("Original List!");
+        target.printList();
+        System.out.println("printing in reverse");
+        LinkedList.printInReverese(target.head);
         toool.reverseList(target);
-        System.out.println("examine");
+        System.out.println("Reversed List");
+        target.printList();
+        System.out.println("printing in reverse");
+        LinkedList.printInReverese(target.head);
+
+
     }
 }

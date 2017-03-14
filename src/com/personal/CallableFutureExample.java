@@ -23,6 +23,7 @@ public class CallableFutureExample {
         }
         return;
     }
+
     static class CallableClass implements Callable<Integer> {
 
         @Override
