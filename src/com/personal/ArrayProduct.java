@@ -16,6 +16,7 @@ public class ArrayProduct {
             if(i<=j){
                 if(i==j){
                     if(target[i]==0){
+                        grossProduct = 0;
                         zeroOccurences++;
                     } else {
                         productArray[i] = grossProduct;
