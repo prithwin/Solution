@@ -13,7 +13,12 @@ public class ArrayProduct {
         int nonZeroNumbers = 0;
 
         for (int i = 0,j = target.length-1; i < target.length; i++,j--) {
-            if(i<j){
+            if(i<=j){
+                if(i==j){
+                    productArray[i] = grossProduct;
+                    grossProduct = grossProduct*target[i];
+                    continue;
+                }
                 if(target[i]!=0 && target[j]!=0) {
                     grossProduct = grossProduct * target[i] * target[j];
                     nonZeroProduct = nonZeroProduct * target[i] * target[j];
@@ -56,7 +61,7 @@ public class ArrayProduct {
     }
 
     public static void main(String[] args) {
-        int[] target = {1,1,1,1,1,1,1,2,1};
+        int[] target = {10,3,5,6,2};
         System.out.println(new LinkedList(target));
         int[] result = new ArrayProduct().computeProductArray(target);
         System.out.println(new LinkedList(result));
