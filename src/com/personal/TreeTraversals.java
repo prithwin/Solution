@@ -42,7 +42,6 @@ public class TreeTraversals {
         printQueue.add(this.tree.root);
         printLevelOrderInternal(printQueue);
     }
-
     private void printLevelOrderInternal(Queue<TreeNode> printQueue) {
         if(printQueue.isEmpty()){
             return;
@@ -54,6 +53,38 @@ public class TreeTraversals {
         if(examination.right!=null)
             printQueue.add(examination.right);
         printLevelOrderInternal(printQueue);
+
+    }
+
+
+    public void printSpiralOrder(){
+        Queue<TreeNode> printQueue = new LinkedList<>();
+        printQueue.add(this.tree.root);
+        printSpiralOrderInternal(printQueue,false);
+    }
+
+    private void printSpiralOrderInternal(Queue<TreeNode> printQueue, boolean switcharoo) {
+        if(printQueue.isEmpty()){
+            return;
+        }
+        if(switcharoo){
+            TreeNode examination = printQueue.remove();
+            System.out.println(examination.number);
+            if(examination.left!=null)
+                printQueue.add(examination.left);
+            if(examination.right!=null)
+                printQueue.add(examination.right);
+            printSpiralOrderInternal(printQueue,!switcharoo);
+        } else {
+            TreeNode examination = printQueue.remove();
+            System.out.println(examination.number);
+            if(examination.right!=null)
+                printQueue.add(examination.right);
+            if(examination.left!=null)
+                printQueue.add(examination.left);
+            printSpiralOrderInternal(printQueue,!switcharoo);
+        }
+
 
     }
 
@@ -88,11 +119,22 @@ public class TreeTraversals {
         treeTraversals2.tree.root.left.left = new TreeNode(4);
         treeTraversals2.tree.root.left.right = new TreeNode(5);
         treeTraversals2.tree.root.right.left = new TreeNode(6);
-        treeTraversals2.tree.root.right.left.left = new TreeNode(8);
-        treeTraversals2.tree.root.right.left.right = new TreeNode(9);
+//        treeTraversals2.tree.root.right.left.left = new TreeNode(8);
+//        treeTraversals2.tree.root.right.left.right = new TreeNode(9);
         treeTraversals2.tree.root.right.right = new TreeNode(7);
 
-        System.out.println("checking equality with itsself: "+ treeTraversals.tree.equals(treeTraversals2.tree));
+        System.out.println("checking equality with a Copy: "+ treeTraversals.tree.equals(treeTraversals2.tree));
+
+        System.out.println("mirroring second tree and printing the level order traversal:");
+        //treeTraversals2.tree.mirror();
+        treeTraversals2.printLevelOrder();
+
+        System.out.println("printing all the paths in this tree:");
+        treeTraversals.tree.printAllPaths();
+
+        System.out.println("printing the Tree in spiral order");
+        treeTraversals2.printSpiralOrder();
+
 
     }
 }

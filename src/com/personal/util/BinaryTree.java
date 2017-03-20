@@ -1,5 +1,8 @@
 package com.personal.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by prajeev on 19/3/17.
  */
@@ -11,6 +14,10 @@ public class BinaryTree {
         this.root = treeNode;
         this.root.left = null;
         this.root.right = null;
+    }
+
+    public BinaryTree() {
+        super();
     }
 
     public int height(){
@@ -59,4 +66,45 @@ public class BinaryTree {
         }
         return (lhs.number.equals(rhs.number)) && btreeEquals(lhs.left,rhs.left) && btreeEquals(lhs.right,rhs.right);
     }
+
+    public void mirror(){
+        realMirror(this.root);
+    }
+
+    private void realMirror(TreeNode node) {
+        if(node==null){
+            return;
+        }
+        realMirror(node.left);
+        realMirror(node.right);
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+
+    public void printAllPaths(){
+        List<TreeNode> treeList = new ArrayList<>();
+        printAllPaths(this.root,treeList,0);
+    }
+
+    private void printAllPaths(TreeNode node, List<TreeNode> pathList, int pathLenght) {
+        if(node==null){
+            return;
+        }
+        pathList.add(node);
+        pathLenght++;
+        if(node.left == null && node.right == null){
+            System.out.println(pathList);
+            int removal = pathList.size() - pathLenght;
+            for(int i=0; i<removal;i++){
+                pathList.remove(pathList.size()-1);
+            }
+            //remove i elements from level
+        }else {
+            printAllPaths(node.left, pathList, pathLenght);
+            printAllPaths(node.right, pathList, pathLenght);
+        }
+    }
+
+
 }

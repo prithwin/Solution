@@ -25,4 +25,9 @@ public class TreeNode {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return number.toString();
+    }
 }
