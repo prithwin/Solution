@@ -1,5 +1,7 @@
 package com.personal.util;
 
+import java.util.List;
+
 /**
  * Created by prajeev on 9/8/16.
  */
@@ -71,4 +73,16 @@ public class LinkedList {
         }
         return tail;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        ListNode temp = this.getHead();
+        while (temp!=null){
+            stringBuilder.append(temp.val+",");
+            temp = temp.next;
+        }
+        return stringBuilder.toString();
+    }
+
 }
