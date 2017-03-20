@@ -10,29 +10,33 @@ public class ArrayProduct {
         int[] productArray = new int[target.length];
         int grossProduct = 1;
         int nonZeroProduct = 1;
-        int nonZeroNumbers = 0;
+        int zeroOccurences = 0;
 
         for (int i = 0,j = target.length-1; i < target.length; i++,j--) {
             if(i<=j){
                 if(i==j){
-                    productArray[i] = grossProduct;
-                    grossProduct = grossProduct*target[i];
-                    continue;
+                    if(target[i]==0){
+                        zeroOccurences++;
+                    } else {
+                        productArray[i] = grossProduct;
+                        grossProduct = grossProduct*target[i];
+                        continue;
+                    }
                 }
                 if(target[i]!=0 && target[j]!=0) {
                     grossProduct = grossProduct * target[i] * target[j];
                     nonZeroProduct = nonZeroProduct * target[i] * target[j];
                 } else {
                     grossProduct = 0;
-                    if(nonZeroNumbers > 1 || (target[i]==0 && target[j]==0)){
+                    if(zeroOccurences > 1 || (target[i]==0 && target[j]==0)){
                         return productArray;
                     }
                     if(target[i]==0 && target[j]!=0){
                         nonZeroProduct = nonZeroProduct*target[j];
-                        nonZeroNumbers++;
+                        zeroOccurences++;
                     } else if(target[i]!=0 && target[j]==0){
                         nonZeroProduct = nonZeroProduct*target[i];
-                        nonZeroNumbers++;
+                        zeroOccurences++;
                     }
                 }
             } else {
