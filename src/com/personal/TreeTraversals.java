@@ -130,10 +130,10 @@ public class TreeTraversals {
         treeTraversals2.printLevelOrder();
 
         System.out.println("printing all the paths in this tree:");
-        treeTraversals.tree.printAllPaths();
+        treeTraversals2.tree.printAllPaths();
 
         System.out.println("printing the Tree in spiral order");
-        treeTraversals2.printSpiralOrder();
+        //treeTraversals2.printSpiralOrder();
 
 
     }

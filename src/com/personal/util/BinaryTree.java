@@ -84,7 +84,7 @@ public class BinaryTree {
 
     public void printAllPaths(){
         List<TreeNode> treeList = new ArrayList<>();
-        printAllPaths(this.root,treeList,0);
+        printAllPaths(this.root,treeList,1);
     }
 
     private void printAllPaths(TreeNode node, List<TreeNode> pathList, int pathLenght) {
@@ -92,17 +92,13 @@ public class BinaryTree {
             return;
         }
         pathList.add(node);
-        pathLenght++;
         if(node.left == null && node.right == null){
             System.out.println(pathList);
-            int removal = pathList.size() - pathLenght;
-            for(int i=0; i<removal;i++){
-                pathList.remove(pathList.size()-1);
-            }
-            //remove i elements from level
         }else {
-            printAllPaths(node.left, pathList, pathLenght);
-            printAllPaths(node.right, pathList, pathLenght);
+            printAllPaths(node.left, pathList, pathLenght+1);
+            pathList.remove(pathList.size()-1);
+            printAllPaths(node.right, pathList, pathLenght+1);
+            pathList.remove(pathList.size()-1);
         }
     }
 

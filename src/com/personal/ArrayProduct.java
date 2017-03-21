@@ -66,7 +66,7 @@ public class ArrayProduct {
     }
 
     public static void main(String[] args) {
-        int[] target = {10,3,5,6,2};
+        int[] target = {6,3,7,8,2,2,4,2,7,3,9,8,0};
         System.out.println(new LinkedList(target));
         int[] result = new ArrayProduct().computeProductArray(target);
         System.out.println(new LinkedList(result));
