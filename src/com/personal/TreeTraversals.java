@@ -6,6 +6,7 @@ import com.personal.util.TreeNode;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by prajeev on 19/3/17.
@@ -58,34 +59,34 @@ public class TreeTraversals {
 
 
     public void printSpiralOrder(){
-        Queue<TreeNode> printQueue = new LinkedList<>();
-        printQueue.add(this.tree.root);
-        printSpiralOrderInternal(printQueue,false);
+        Stack<TreeNode> printStack = new Stack<>();
+        printStack.add(this.tree.root);
+        printSpiralOrderInternal(printStack,false);
     }
 
-    private void printSpiralOrderInternal(Queue<TreeNode> printQueue, boolean switcharoo) {
-        if(printQueue.isEmpty()){
+    private void printSpiralOrderInternal(Stack<TreeNode> printStack,boolean flip) {
+        if(printStack.isEmpty()){
             return;
         }
-        if(switcharoo){
-            TreeNode examination = printQueue.remove();
+        Stack tempStack = new Stack();
+        while (!printStack.empty()){
+            TreeNode examination = printStack.pop();
             System.out.println(examination.number);
-            if(examination.left!=null)
-                printQueue.add(examination.left);
-            if(examination.right!=null)
-                printQueue.add(examination.right);
-            printSpiralOrderInternal(printQueue,!switcharoo);
-        } else {
-            TreeNode examination = printQueue.remove();
-            System.out.println(examination.number);
-            if(examination.right!=null)
-                printQueue.add(examination.right);
-            if(examination.left!=null)
-                printQueue.add(examination.left);
-            printSpiralOrderInternal(printQueue,!switcharoo);
+            if(!flip) {
+                if (examination.left != null)
+                    tempStack.push(examination.left);
+                if (examination.right != null)
+                    tempStack.push(examination.right);
+            } else {
+                if (examination.right != null)
+                    tempStack.push(examination.right);
+                if (examination.left != null) {
+                    tempStack.push(examination.left);
+                }
+            }
         }
 
-
+        printSpiralOrderInternal(tempStack,!flip);
     }
 
 
@@ -130,10 +131,10 @@ public class TreeTraversals {
         treeTraversals2.printLevelOrder();
 
         System.out.println("printing all the paths in this tree:");
-        treeTraversals2.tree.printAllPaths();
+        treeTraversals.tree.printAllPaths();
 
         System.out.println("printing the Tree in spiral order");
-        //treeTraversals2.printSpiralOrder();
+        treeTraversals2.printSpiralOrder();
 
 
     }
