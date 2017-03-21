@@ -2,6 +2,7 @@ package com.personal.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by prajeev on 19/3/17.
@@ -83,22 +84,22 @@ public class BinaryTree {
     }
 
     public void printAllPaths(){
-        List<TreeNode> treeList = new ArrayList<>();
-        printAllPaths(this.root,treeList,1);
+        Stack<TreeNode> treeStack = new Stack<>();
+        printAllPaths(this.root,treeStack,1);
     }
 
-    private void printAllPaths(TreeNode node, List<TreeNode> pathList, int pathLenght) {
+    private void printAllPaths(TreeNode node, Stack<TreeNode> treeStack, int pathLenght) {
         if(node==null){
             return;
         }
-        pathList.add(node);
+        treeStack.push(node);
         if(node.left == null && node.right == null){
-            System.out.println(pathList);
+            System.out.println(treeStack);
         }else {
-            printAllPaths(node.left, pathList, pathLenght+1);
-            pathList.remove(pathList.size()-1);
-            printAllPaths(node.right, pathList, pathLenght+1);
-            pathList.remove(pathList.size()-1);
+            printAllPaths(node.left, treeStack, pathLenght+1);
+            treeStack.pop();
+            printAllPaths(node.right, treeStack, pathLenght+1);
+            treeStack.pop();
         }
     }
 
