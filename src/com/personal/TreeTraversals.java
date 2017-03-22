@@ -136,6 +136,8 @@ public class TreeTraversals {
         System.out.println("printing the Tree in spiral order");
         treeTraversals2.printSpiralOrder();
 
+        System.out.println("This tree has "+treeTraversals2.tree.countLeaves()+ " leaves");
+
 
     }
 }

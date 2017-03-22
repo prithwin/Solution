@@ -103,5 +103,20 @@ public class BinaryTree {
         }
     }
 
+    public int countLeaves(){
+        return countLeavesInternal(this.root);
+    }
+
+    private int countLeavesInternal(TreeNode node) {
+        if(node==null){
+            return 0;
+        }
+        if(node.left==null && node.right==null){
+            return 1;
+        }
+        return countLeavesInternal(node.left)+countLeavesInternal(node.right);
+
+    }
+
 
 }
