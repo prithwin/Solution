@@ -1,14 +1,70 @@
 package com.personal.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by prajeev on 19/3/17.
  */
 public class BinaryTree {
     public TreeNode root;
+
+    public void printPreOrder() {
+        printPreOrderInternal(this.root);
+    }
+
+    private void printPreOrderInternal(TreeNode root){
+        if(root == null)
+            return;
+        System.out.println(root.number);
+        printPreOrderInternal(root.left);
+        printPreOrderInternal(root.right);
+    }
+
+    public void printinOrder() {
+        printinOrderInternal(this.root);
+    }
+
+    private void printinOrderInternal(TreeNode root){
+        if(root == null)
+            return;
+        printinOrderInternal(root.left);
+        System.out.println(root.number);
+        printinOrderInternal(root.right);
+    }
+
+
+
+    public void printPostOrder() {
+        printPostOrderInternal(root);
+    }
+
+    private void printPostOrderInternal(TreeNode root){
+        if(root == null)
+            return;
+        printPostOrderInternal(root.left);
+        printPostOrderInternal(root.right);
+        System.out.println(root.number);
+    }
+
+    public void printLevelOrder(){
+        Queue<TreeNode> printQueue = new java.util.LinkedList<>();
+        printQueue.add(this.root);
+        printLevelOrderInternal(printQueue);
+    }
+
+    private void printLevelOrderInternal(Queue<TreeNode> printQueue) {
+        if(printQueue.isEmpty()){
+            return;
+        }
+        TreeNode examination = printQueue.remove();
+        System.out.println(examination.number);
+        if(examination.left!=null)
+            printQueue.add(examination.left);
+        if(examination.right!=null)
+            printQueue.add(examination.right);
+        printLevelOrderInternal(printQueue);
+
+    }
 
     public BinaryTree(int root) {
         TreeNode treeNode = new TreeNode(root);
@@ -88,6 +144,7 @@ public class BinaryTree {
         printAllPaths(this.root,treeStack,1);
     }
 
+
     private void printAllPaths(TreeNode node, Stack<TreeNode> treeStack, int pathLenght) {
         if(node==null){
             return;
@@ -115,8 +172,36 @@ public class BinaryTree {
             return 1;
         }
         return countLeavesInternal(node.left)+countLeavesInternal(node.right);
-
     }
 
+    public void printSpiralOrder(){
+        Stack<TreeNode> printStack = new Stack<>();
+        printStack.add(root);
+        printSpiralOrderInternal(printStack,false);
+    }
 
+    private void printSpiralOrderInternal(Stack<TreeNode> printStack,boolean flip) {
+        if(printStack.isEmpty()){
+            return;
+        }
+        Stack tempStack = new Stack();
+        while (!printStack.empty()){
+            TreeNode examination = printStack.pop();
+            System.out.println(examination.number);
+            if(!flip) {
+                if (examination.left != null)
+                    tempStack.push(examination.left);
+                if (examination.right != null)
+                    tempStack.push(examination.right);
+            } else {
+                if (examination.right != null)
+                    tempStack.push(examination.right);
+                if (examination.left != null) {
+                    tempStack.push(examination.left);
+                }
+            }
+        }
+
+        printSpiralOrderInternal(tempStack,!flip);
+    }
 }
