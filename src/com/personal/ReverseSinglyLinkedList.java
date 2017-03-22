@@ -13,14 +13,14 @@ public class ReverseSinglyLinkedList {
     }
 
     private ListNode realReverse(ListNode current) {
-        ListNode prevNode = null;
-       while (current!=null){
-           ListNode nextCurrent = current.next;
-           current.next = prevNode;
-           prevNode = current;
-           current = nextCurrent;
-       }
-        return prevNode;
+      ListNode previous = null;
+      while(current!=null){
+          ListNode next = current.next;
+          current.next = previous;
+          previous = current;
+          current = next;
+      }
+        return previous;
     }
 
     public static void main(String[] args) {

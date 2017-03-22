@@ -18,7 +18,6 @@ public class PrintParantheses2 {
         if(left>right){
             return;
         }
-        System.out.println(s+"\n");
         if(left == 0 && right == 0){
             result.add(s);
             return;
