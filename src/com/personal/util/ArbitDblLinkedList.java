@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class ArbitDblLinkedList implements Cloneable {
     ArbitDblListNode head;
+    int length=0;
 
     public ArbitDblLinkedList clone() {
         ArbitDblLinkedList returnlist = new ArbitDblLinkedList();
@@ -37,15 +38,20 @@ public class ArbitDblLinkedList implements Cloneable {
     }
 
     private void add(ArbitDblListNode node) {
+        int whereToPut = length;
         if(head==null){
             head = node;
+            length++;
             return;
         }
         ArbitDblListNode target = head;
-        while(target.next!=null)
+        while(whereToPut>0) {
             target = target.next;
+            whereToPut--;
+        }
         //at this moment traget is pointing at the last node
         target.next = node;
+        length++;
     }
 
 
