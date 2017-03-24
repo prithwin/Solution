@@ -7,7 +7,12 @@ import java.util.List;
  * Created by prajeev on 17/3/17.
  */
 public class Sorter<E extends Comparable> {
-
+    /**
+     * functioning bubble sort
+     * compare everyother number you will find that the largest number would have bubbled up
+     * you have do repeat this one less time as the largest number is already at the top.
+     * @param targetList
+     */
     public void bubbleSort(List<E> targetList) {
         for (int j = targetList.size(); j > 0; j--) {
             for (int i = 0; i < j - 1; i++) {
@@ -20,6 +25,10 @@ public class Sorter<E extends Comparable> {
         }
     }
 
+    /**
+     * functioning selection/ insertion sort
+     * @param targetList
+     */
     public void insertionSort(List<E> targetList) {
         for (int i = 0; i < targetList.size(); i++) {
             E swap = targetList.get(i);
@@ -88,24 +97,43 @@ public class Sorter<E extends Comparable> {
         return returnList;
     }
 
-    public void quickSort(List<E> targetList, int start, int end) {
-        if (end - start <= 0) {
+    public void quickSort(List<E> targetList,int start, int end) {
+        if(end-start < 2) {
+            if(end-start==1 && targetList.get(start).compareTo(targetList.get(end))==1){
+                E temp = targetList.get(start);
+                targetList.set(start,targetList.get(end));
+                targetList.set(end,temp);
+            }
             return;
         }
-        //let the pivot be rightmostElement;
-        int pivot = end;
-        int partitionPoint = pivot;
-        for (int i = start; i < partitionPoint; i++) {
-            if (targetList.get(i).compareTo(targetList.get(pivot)) == 1) {
-                targetList.add(partitionPoint + 1, targetList.get(i));
-                targetList.remove(i);
-                partitionPoint--;
-                i--;
+        //let the pivot be the middle;
+        int pivot = start + (end - start)/2;
+        //int partitionPoint = pivot;
+        for (int i = start, j = end;  i <= pivot && j >= pivot ; ) {
+           if(targetList.get(i).compareTo(targetList.get(pivot))>=0 && targetList.get(j).compareTo(targetList.get(pivot))<=0){
+               //swap
+               E temp = targetList.get(i);
+               targetList.set(i,targetList.get(j));
+               targetList.set(j,temp);
+               if(i==pivot){
+                   pivot=j;break;
+               } else if(j==pivot){
+                   pivot=i;break;
+               }
+               else {
+                   i++;j--;
+               }
+               continue;
+
+           } if(i<= pivot && targetList.get(i).compareTo(targetList.get(pivot))==-1){
+                i++;
+            } if(j >= pivot && targetList.get(j).compareTo(targetList.get(pivot))==1){
+                j--;
             }
         }
 
-        quickSort(targetList, start, partitionPoint);
-        quickSort(targetList, partitionPoint + 1, end);
+        quickSort(targetList, start, pivot);
+        quickSort(targetList, pivot, end);
     }
 
     static class NonComparableNumber {
@@ -141,11 +169,13 @@ public class Sorter<E extends Comparable> {
 
     public static void main(String[] args) {
         List<Number> numberList = new ArrayList<Number>();
+        numberList.add(new Number(25));
         numberList.add(new Number(3));
         numberList.add(new Number(5));
         numberList.add(new Number(555));
         numberList.add(new Number(5555));
         numberList.add(new Number(58));
+        numberList.add(new Number(4));
         numberList.add(new Number(1));
         numberList.add(new Number(36));
         numberList.add(new Number(23));
