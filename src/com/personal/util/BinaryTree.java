@@ -204,4 +204,26 @@ public class BinaryTree {
 
         printSpiralOrderInternal(tempStack,!flip);
     }
+
+    public boolean isTreeBST(){
+        return isTreeBSTInteral(root);
+    }
+
+    private boolean isTreeBSTInteral(TreeNode node) {
+        if(node == null || (node.left==null && node.right==null)){
+            //its balanced till this point.
+            return true;
+        }
+
+        if(node.right==null || !(node.left.number.compareTo(node.number) <= 0)){
+            return false;
+        }
+        if(node.left==null || !(node.right.number.compareTo(node.number)==1)){
+            return false;
+        }
+        if(!(node.left.number.compareTo(node.number) <= 0 &&  node.right.number.compareTo(node.number)==1)){
+            return false;
+        }
+        return isTreeBSTInteral(node.left) && isTreeBSTInteral(node.right);
+    }
 }
