@@ -22,6 +22,8 @@ public class MotherOfAlltersterClasses {
         for(Number key : testMap.keySet()){
             System.out.println(key.number);
         }
+        A a = new A();
+        a.doSomething();
     }
 
     static class Number implements Comparable {
@@ -45,5 +47,11 @@ public class MotherOfAlltersterClasses {
                 return 0;
             return (this.number-rhs.number)/((this.number-rhs.number)>0? (this.number-rhs.number) : -1*(this.number-rhs.number));
         }
+    }
+}
+
+class A{
+    public static void doSomething(){
+        System.out.println("doing Something");
     }
 }

@@ -26,6 +26,46 @@ public class LoopedList {
         return loopDetected;
     }
 
+    private ListNode findLoopedPoint(ListNode head) {
+        ListNode trailingPointer = head;
+        ListNode leadPointer = head;
+        boolean loopDetected = false;
+        while (leadPointer.next!=null && trailingPointer.next!=null){
+            trailingPointer = trailingPointer.next;
+            leadPointer = leadPointer.next.next;
+            if(trailingPointer == leadPointer){
+                return trailingPointer;
+            }
+        }
+        return null;
+    }
+
+    private ListNode findLoopTermination(ListNode head){
+        ListNode loopPoint = findLoopedPoint(head);
+        if(loopPoint != null){
+            ListNode penultimateLoopPoint = null;
+            //there are Loops
+            for(int counter = 1; ; counter++){
+                penultimateLoopPoint = loopPoint;
+                ListNode fromWithinLoop = loopPoint;
+                ListNode fromHead = head;
+                int currentCounter = counter;
+                while(currentCounter>0){
+                    currentCounter--;
+                    fromHead = fromHead.next;
+                    fromWithinLoop = fromWithinLoop.next;
+                }
+                penultimateLoopPoint = penultimateLoopPoint.next;
+                if(fromHead == fromWithinLoop){
+                    break;
+                }
+            }
+            return penultimateLoopPoint;
+        } else {
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         ListNode head = new ListNode(1);
@@ -37,5 +77,8 @@ public class LoopedList {
         head.next.next.next.next.next = crossroads;
         list.head = head;
         System.out.println(new LoopedList().checkForLoops(list));
+        ListNode point = new LoopedList().findLoopTermination(list.head);
+        point.next = null;
+        System.out.println("wait");
     }
 }
