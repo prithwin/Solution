@@ -1,4 +1,4 @@
-package com.personal;
+package com.random.test;
 
 /**
  * Created by pr250155 on 3/28/16.

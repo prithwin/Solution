@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.threads;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
