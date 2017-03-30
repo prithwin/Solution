@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class ParkingLotBuilder {
     ParkingLot lot;
-    public ParkingLot build(ParkingType type,int slots){
+    public ParkingLotBuilder build(ParkingType type,int slots){
         if(lot == null){
             this.lot = new ParkingLot();
             lot.slots = new ArrayList<>();
@@ -17,6 +17,15 @@ public class ParkingLotBuilder {
             slot.type = type;
             lot.slots.add(slot);
         }
+        return this;
+    }
+
+
+    public ParkingLotBuilder addSlots(ParkingType type, int quantity) {
+        return build(type,quantity);
+    }
+
+    public ParkingLot getInstance() {
         return lot;
     }
 }
