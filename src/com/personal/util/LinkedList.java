@@ -85,4 +85,22 @@ public class LinkedList {
         return stringBuilder.toString();
     }
 
+    public static void deleteNode(ListNode node){
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    public void reverse(){
+        head = reverseInternal(head);
+    }
+
+    private ListNode reverseInternal(ListNode node) {
+        if(node == null) {
+            return node;
+        }
+        ListNode next = reverseInternal(node.next);
+        node.next = next;
+        return next;
+    }
+
 }

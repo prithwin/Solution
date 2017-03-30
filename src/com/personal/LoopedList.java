@@ -79,6 +79,11 @@ public class LoopedList {
         System.out.println(new LoopedList().checkForLoops(list));
         ListNode point = new LoopedList().findLoopTermination(list.head);
         point.next = null;
+        //LinkedList.deleteNode(crossroads);
+        list.reverse();
         System.out.println("wait");
+
+
+        //check if pallindrome
     }
 }
