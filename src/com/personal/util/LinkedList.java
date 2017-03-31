@@ -1,7 +1,5 @@
 package com.personal.util;
 
-import java.util.List;
-
 /**
  * Created by prajeev on 9/8/16.
  */
@@ -103,4 +101,20 @@ public class LinkedList {
         return next;
     }
 
+    public ListNode findNthFromLast(int n){
+        return findNthFromLastInternal(head,n,0);
+    }
+
+    private ListNode findNthFromLastInternal(ListNode node, int n, Integer i) {
+        if (node.next == null) {
+            return node;
+        }
+        ListNode next = findNthFromLastInternal(node.next, n, i);
+        if (++i == n) {
+            return node;
+        }
+        return next;
+    }
 }
+
+

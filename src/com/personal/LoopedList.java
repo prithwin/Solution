@@ -80,7 +80,7 @@ public class LoopedList {
         ListNode point = new LoopedList().findLoopTermination(list.head);
         point.next = null;
         //LinkedList.deleteNode(crossroads);
-        list.reverse();
+        ListNode item =list.findNthFromLast(4);
         System.out.println("wait");
 
 

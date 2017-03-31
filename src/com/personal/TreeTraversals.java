@@ -48,6 +48,7 @@ public class TreeTraversals {
 //        treeTraversals2.tree.root.right.left.left = new TreeNode(8);
 //        treeTraversals2.tree.root.right.left.right = new TreeNode(9);
         treeTraversals2.tree.root.right.right = new TreeNode(7);
+        treeTraversals2.tree.summer();
 
         System.out.println("checking equality with a Copy: "+ treeTraversals.tree.equals(treeTraversals2.tree));
 

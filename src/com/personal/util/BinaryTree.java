@@ -226,4 +226,39 @@ public class BinaryTree {
         }
         return isTreeBSTInteral(node.left) && isTreeBSTInteral(node.right);
     }
+
+    /**
+     * amazon interview question: in a binary tree replace all the nodes with the sum of its children:
+     * algorithm:
+     * -if you have reached the bottom of the tree add copy the left leaf or right leaf if the other one
+     * is empty.
+     * otherwise replace this with the sum of both of its children
+     *
+     */
+    public void summer(){
+        summerInternal(root);
+    }
+
+
+    private void summerInternal(TreeNode node) {
+        if(node.left == null && node.right==null){
+            return;
+        }
+        if(node.left == null & node.right!=null){
+            node.number.number = node.right.number.number;
+            return;
+        }
+        if(node.left != null & node.right==null){
+            node.number.number = node.left.number.number;
+            return;
+        } else {
+            node.number.number = node.left.number.number + node.right.number.number;
+        }
+        if(node.left!=null)
+            summerInternal(node.left);
+        if(node.right!=null)
+            summerInternal(node.right);
+        return;
+
+    }
 }
