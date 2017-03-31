@@ -33,7 +33,7 @@ public class BlockingQueue {
 
     public void add(Integer value) throws InterruptedException {
         queueLock.lock();
-        while (whatLiesWithin.size()>=THEORITICAL_MAX) {
+        while (whatLiesWithin.size() >= THEORITICAL_MAX) {
             conditionFull.await();
         }
         whatLiesWithin.add(value);
