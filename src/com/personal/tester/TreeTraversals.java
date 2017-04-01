@@ -1,13 +1,8 @@
-package com.personal;
+package com.personal.tester;
 
 import com.personal.util.BinarySearchTree;
 import com.personal.util.BinaryTree;
 import com.personal.util.TreeNode;
-
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Created by prajeev on 19/3/17.
