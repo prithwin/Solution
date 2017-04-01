@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.tester;
 
 import com.personal.util.LinkedList;
 import com.personal.util.ListNode;

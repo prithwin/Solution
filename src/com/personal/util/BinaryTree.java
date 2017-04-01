@@ -141,11 +141,11 @@ public class BinaryTree {
 
     public void printAllPaths(){
         Stack<TreeNode> treeStack = new Stack<>();
-        printAllPaths(this.root,treeStack,1);
+        printAllPaths(this.root,treeStack);
     }
 
 
-    private void printAllPaths(TreeNode node, Stack<TreeNode> treeStack, int pathLenght) {
+    private void printAllPaths(TreeNode node, Stack<TreeNode> treeStack) {
         if(node==null){
             return;
         }
@@ -153,9 +153,9 @@ public class BinaryTree {
         if(node.left == null && node.right == null){
             System.out.println(treeStack);
         }else {
-            printAllPaths(node.left, treeStack, pathLenght+1);
+            printAllPaths(node.left, treeStack);
             treeStack.pop();
-            printAllPaths(node.right, treeStack, pathLenght+1);
+            printAllPaths(node.right, treeStack);
             treeStack.pop();
         }
     }

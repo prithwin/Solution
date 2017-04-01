@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.design.virtualshell;
 
 import java.util.ArrayList;
 import java.util.List;

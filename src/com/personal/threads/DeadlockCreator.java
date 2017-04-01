@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.threads;
 
 /**
  * Created by prajeev on 14/3/17.
