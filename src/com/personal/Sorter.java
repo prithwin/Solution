@@ -1,5 +1,8 @@
 package com.personal;
 
+import com.personal.util.ComparableNumber;
+import com.personal.util.Heap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,11 @@ public class Sorter<E extends Comparable> {
         }
     }
 
+    /**
+     * functioning mergeSort
+     * @param targetList
+     * @return
+     */
     public List<E> mergeSort(List<E> targetList) {
         if (targetList.size() == 1) {
             //the list cannot be split anymore
@@ -97,6 +105,12 @@ public class Sorter<E extends Comparable> {
         return returnList;
     }
 
+    /**
+     * functioning quicksort
+     * @param targetList
+     * @param start
+     * @param end
+     */
     public void quickSort(List<E> targetList,int start, int end) {
         if(end-start < 2) {
             if(end-start==1 && targetList.get(start).compareTo(targetList.get(end))==1){
@@ -136,52 +150,57 @@ public class Sorter<E extends Comparable> {
         quickSort(targetList, pivot, end);
     }
 
-    static class NonComparableNumber {
+    /**
+     * functioning max heapsort
+     * @param targetList
+     * @return
+     */
+    public List<E> maxHeapSort(List<E> targetList){
+        ComparableNumber[] elements = targetList.toArray(new ComparableNumber[0]);
+        targetList = new ArrayList<>();
+        Heap<E> maxHeap = new Heap<>();
+        maxHeap.elements = (E[])  elements;
+        while(!maxHeap.isEmpty()){
+            maxHeap.buildMaxHeap();
+            targetList.add(maxHeap.deleteMax());
+        }
+        return targetList;
     }
 
-    static class Number implements Comparable {
-        int number;
-
-        Number(int i) {
-            this.number = i;
+    /**
+     * functioning min heapsort
+     * @param targetList
+     * @return
+     */
+    public List<E> minHeapSort(List<E> targetList){
+        ComparableNumber[] elements = targetList.toArray(new ComparableNumber[0]);
+        targetList = new ArrayList<>();
+        Heap<E> maxHeap = new Heap<>();
+        maxHeap.elements = (E[])  elements;
+        while(!maxHeap.isEmpty()){
+            maxHeap.buildMinHeap();
+            targetList.add(maxHeap.deleteMin());
         }
-
-        @Override
-        public boolean equals(Object obj) {
-            Number rhs = (Number) obj;
-            return number == rhs.number;
-        }
-
-
-        @Override
-        public int compareTo(Object that) {
-            Number thats = (Number) that;
-            if (this.number == thats.number)
-                return 0;
-            return (this.number - thats.number) / ((this.number - thats.number) > 0 ? (this.number - thats.number) : -1 * (this.number - thats.number));
-        }
-
-        @Override
-        public String toString() {
-            return "" + number;
-        }
+        return targetList;
     }
+
 
     public static void main(String[] args) {
-        List<Number> numberList = new ArrayList<Number>();
-        numberList.add(new Number(25));
-        numberList.add(new Number(3));
-        numberList.add(new Number(5));
-        numberList.add(new Number(555));
-        numberList.add(new Number(5555));
-        numberList.add(new Number(58));
-        numberList.add(new Number(4));
-        numberList.add(new Number(1));
-        numberList.add(new Number(36));
-        numberList.add(new Number(23));
-        numberList.add(new Number(37));
-        numberList.add(new Number(39));
-        Sorter<Number> sorter = new Sorter<Number>();
+        List<ComparableNumber> numberList = new ArrayList<ComparableNumber>();
+        numberList.add(new ComparableNumber(25));
+        numberList.add(new ComparableNumber(3));
+        numberList.add(new ComparableNumber(5));
+        numberList.add(new ComparableNumber(555));
+        numberList.add(new ComparableNumber(5555));
+        numberList.add(new ComparableNumber(58));
+        numberList.add(new ComparableNumber(4));
+        numberList.add(new ComparableNumber(1));
+        numberList.add(new ComparableNumber(36));
+        numberList.add(new ComparableNumber(36));
+        numberList.add(new ComparableNumber(23));
+        numberList.add(new ComparableNumber(37));
+        numberList.add(new ComparableNumber(39));
+        Sorter<ComparableNumber> sorter = new Sorter<ComparableNumber>();
 
 //        System.out.println("Sorting using bubble sort");
 //        sorter.bubbleSort(numberList);
@@ -193,9 +212,14 @@ public class Sorter<E extends Comparable> {
 //        List<Number> resultList = sorter.mergeSort(numberList);
 //        numberList = resultList;
 
-        System.out.println("Sorting using quick sort");
-        sorter.quickSort(numberList, 0, numberList.size() - 1);
+//        System.out.println("Sorting using quick sort");
+//        sorter.quickSort(numberList, 0, numberList.size() - 1);
 
+//        System.out.println("Sorting using max Heap sort");
+//        numberList = sorter.maxHeapSort(numberList);
+
+        System.out.println("Sorting using min Heap sort");
+        numberList = sorter.minHeapSort(numberList);
         System.out.println(numberList);
     }
 }

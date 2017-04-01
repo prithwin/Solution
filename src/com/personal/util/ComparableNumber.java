@@ -6,7 +6,7 @@ package com.personal.util;
 public class ComparableNumber implements Comparable {
     int number;
 
-    ComparableNumber(int i) {
+    public ComparableNumber(int i) {
         this.number = i;
     }
 
