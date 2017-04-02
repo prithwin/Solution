@@ -1,11 +1,12 @@
 package com.personal.util;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by prajeev on 19/3/17.
  */
-public class BinaryTree {
+public class BinaryTree implements Serializable {
     public TreeNode root;
 
     public void printPreOrder() {

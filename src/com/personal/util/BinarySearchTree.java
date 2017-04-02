@@ -1,9 +1,11 @@
 package com.personal.util;
 
+import java.io.Serializable;
+
 /**
  * Created by pr250155 on 3/24/17.
  */
-public class BinarySearchTree extends BinaryTree {
+public class BinarySearchTree extends BinaryTree implements Serializable{
 
     public void add(TreeNode node){
         if(this.root == null){

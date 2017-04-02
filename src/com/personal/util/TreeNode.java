@@ -1,9 +1,11 @@
 package com.personal.util;
 
+import java.io.Serializable;
+
 /**
  * Created by prajeev on 19/3/17.
  */
-public class TreeNode {
+public class TreeNode implements Serializable{
     public ComparableNumber number;
     public TreeNode left;
     public TreeNode right;

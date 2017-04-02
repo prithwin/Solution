@@ -1,9 +1,11 @@
 package com.personal.util;
 
+import java.io.Serializable;
+
 /**
  * Created by prajeev on 19/3/17.
  */
-public class ComparableNumber implements Comparable {
+public class ComparableNumber implements Comparable, Serializable{
     int number;
 
     public ComparableNumber(int i) {
