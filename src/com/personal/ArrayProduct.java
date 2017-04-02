@@ -6,6 +6,20 @@ import com.personal.util.LinkedList;
  * Created by prajeev on 20/3/17.
  */
 public class ArrayProduct {
+    public int[] computeProductArrayShort(int[] nums) {
+        int[] result = new int[nums.length];
+        int temp = 1;
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = temp;
+            temp = temp*nums[i];
+        }
+        temp = 1;
+        for (int i = nums.length-1; i >= 0 ; i--) {
+            result[i] = result[i]*temp;
+            temp = temp*nums[i];
+        }
+        return result;
+    }
     public int[] computeProductArray(int[] target){
         int[] productArray = new int[target.length];
         int grossProduct = 1;
@@ -17,6 +31,7 @@ public class ArrayProduct {
                 if(i==j){
                     if(target[i]==0){
                         grossProduct = 0;
+                        productArray[i] = nonZeroProduct;
                         zeroOccurences++;
                     } else {
                         productArray[i] = grossProduct;
@@ -41,6 +56,9 @@ public class ArrayProduct {
                     }
                 }
             } else {
+                if(zeroOccurences>1){
+                    return productArray;
+                }
                 if(grossProduct == 0){
                     if(target[i]!=0) {
                         productArray[i] = 0;
@@ -66,9 +84,9 @@ public class ArrayProduct {
     }
 
     public static void main(String[] args) {
-        int[] target = {6,3,7,8,2,2,4,2,7,3,9,8,0};
+        int[] target = {1,2,3,4};
         System.out.println(new LinkedList(target));
-        int[] result = new ArrayProduct().computeProductArray(target);
+        int[] result = new ArrayProduct().computeProductArrayShort(target);
         System.out.println(new LinkedList(result));
     }
 }

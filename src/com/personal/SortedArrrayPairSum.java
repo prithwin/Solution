@@ -1,0 +1,66 @@
+package com.personal;
+
+/**
+ * Created by pr250155 on 4/2/17.
+ * Q: given a sorted array of and a sum X find the pair in the Array whose Sum is X
+ */
+public class SortedArrrayPairSum {
+    public static void main(String[] args) {
+        int[] target = {10, 22, 28, 29, 30, 40};
+        int sum = 52;
+        findAbsolutePair(target,sum);
+        findClosestPair(target,sum);
+    }
+
+    private static void findClosestPair(int[] target,int sum) {
+        int thizz = 0;
+        int dat = 0;
+        int close = Integer.MAX_VALUE;
+        for(int i=0, j = target.length-1; i<j;){
+            int currentSum = target[i] + target[j];
+            int diff = sum - currentSum;
+            int absDiff = Math.abs(diff);
+            if(absDiff < close) {
+                close = absDiff;
+                thizz = target[i];
+                dat = target[j];
+            }
+            if(diff == 0){
+                break;
+            } else if(diff > 0 ){
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        System.out.printf("\nthe value is %d and %d",thizz,dat);
+
+    }
+
+    private static void findAbsolutePair(int[] target,int sum) {
+        boolean found = false;
+        for (int i = 0; i < target.length; i++) {
+            int thiz = target[i];
+            int dat = sum - thiz;
+            if(dat==thiz) {
+            } else if(dat>thiz){
+                if(RandomDnQ.binarySearchInternal(target, i + 1, target.length - 1, dat)) {
+                    System.out.printf("the combination is %d and %d", thiz, dat);
+                    found=true;
+                    break;
+                }
+            } else {
+                if(RandomDnQ.binarySearchInternal(target,0,i-1,dat)) {
+                    System.out.printf("the combination is %d and %d", thiz, dat);
+                    found=true;
+                    break;
+                }
+            }
+        }
+        if(!found){
+            System.out.printf("this combination doesn't exist");
+        }
+    }
+}
+

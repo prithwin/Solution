@@ -91,6 +91,11 @@ public class Sorter<E extends Comparable> {
                             compareTo(rightSublist.get(rPointer)) == 1)) {
                 mergedList.add(rightSublist.get(rPointer));
                 rPointer++;
+            } else {
+                mergedList.add(rightSublist.get(rPointer));
+                mergedList.add(leftSublist.get(lPointer));
+                lPointer++;
+                rPointer++;
             }
         }
 
@@ -208,9 +213,9 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using insertion sort");
 //        sorter.insertionSort(numberList);
 
-//        System.out.println("Sorting using merge sort");
-//        List<Number> resultList = sorter.mergeSort(numberList);
-//        numberList = resultList;
+        System.out.println("Sorting using merge sort");
+        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
+        numberList = resultList;
 
 //        System.out.println("Sorting using quick sort");
 //        sorter.quickSort(numberList, 0, numberList.size() - 1);
@@ -218,8 +223,8 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using max Heap sort");
 //        numberList = sorter.maxHeapSort(numberList);
 
-        System.out.println("Sorting using min Heap sort");
-        numberList = sorter.minHeapSort(numberList);
+//        System.out.println("Sorting using min Heap sort");
+//        numberList = sorter.minHeapSort(numberList);
         System.out.println(numberList);
     }
 }
