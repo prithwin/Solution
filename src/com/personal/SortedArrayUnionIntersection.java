@@ -20,10 +20,27 @@ public class SortedArrayUnionIntersection {
         return union;
     }
 
+    public int[] intersection(int[] a, int[] b) {
+        int[] intersection = new int[(a.length>b.length)?a.length:b.length];
+        int i=0,j=0,k=0;
+        while(i < a.length && j< b.length){
+            if(a[i]<b[j]){
+                i++;
+            } else if(a[i]>b[j]){
+                j++;
+            } else if(a[i] == b[j]){
+                intersection[k++] = a[i];
+                i++;j++;
+            }
+        }
+        return intersection;
+    }
+
     public static void main(String[] args) {
         int[] a = {1,80,100,200,300};
         int[] b = {5,80,150,80,250,350,350,350};
-        int[] result = new SortedArrayUnionIntersection().union(a, b);
+        int[] union = new SortedArrayUnionIntersection().union(a, b);
+        int[] intersection = new SortedArrayUnionIntersection().intersection(a,b);
         System.out.println("cjecl");
      }
 }
