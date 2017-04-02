@@ -33,4 +33,12 @@ public class Mathematical {
             return power(x,(n/2))*power(x,(n/2)+1);
         }
     }
+
+    public static int maximum(int thizz, int that) {
+        if(thizz> that){
+            return thizz;
+        } else {
+            return that;
+        }
+    }
 }
