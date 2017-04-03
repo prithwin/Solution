@@ -14,11 +14,12 @@ public class Sorter<E extends Comparable> {
      * functioning bubble sort
      * compare everyother number you will find that the largest number would have bubbled up
      * you have do repeat this one less time as the largest number is already at the top.
+     *
      * @param targetList
      */
     public void bubbleSort(List<E> targetList) {
-        for (int j = targetList.size()-2 ; j >= 0; j--) {
-            for (int i = 0; i <= j ; i++) {
+        for (int j = targetList.size() - 2; j >= 0; j--) {
+            for (int i = 0; i <= j; i++) {
                 if (targetList.get(i).compareTo(targetList.get(i + 1)) == 1) {
                     E temp = targetList.get(i);
                     targetList.set(i, targetList.get(i + 1));
@@ -30,6 +31,7 @@ public class Sorter<E extends Comparable> {
 
     /**
      * functioning selection/ insertion sort
+     *
      * @param targetList
      */
     public void insertionSort(List<E> targetList) {
@@ -50,6 +52,7 @@ public class Sorter<E extends Comparable> {
 
     /**
      * functioning mergeSort
+     *
      * @param targetList
      * @return
      */
@@ -112,41 +115,46 @@ public class Sorter<E extends Comparable> {
 
     /**
      * functioning quicksort
+     *
      * @param targetList
      * @param start
      * @param end
      */
-    public void quickSort(List<E> targetList,int start, int end) {
-        if(end-start < 2) {
-            if(end-start==1 && targetList.get(start).compareTo(targetList.get(end))==1){
+    public void quickSort(List<E> targetList, int start, int end) {
+        if (end - start < 2) {
+            if (end - start == 1 && targetList.get(start).compareTo(targetList.get(end)) == 1) {
                 E temp = targetList.get(start);
-                targetList.set(start,targetList.get(end));
-                targetList.set(end,temp);
+                targetList.set(start, targetList.get(end));
+                targetList.set(end, temp);
             }
             return;
         }
         //let the pivot be the middle;
-        int pivot = start + (end - start)/2;
+        int pivot = start + (end - start) / 2;
         //int partitionPoint = pivot;
-        for (int i = start, j = end;  i <= pivot && j >= pivot ; ) {
-            if(targetList.get(i).compareTo(targetList.get(pivot))>=0 && targetList.get(j).compareTo(targetList.get(pivot))<=0){
+        for (int i = start, j = end; i <= pivot && j >= pivot; ) {
+            if (targetList.get(i).compareTo(targetList.get(pivot)) >= 0 && targetList.get(j).compareTo(targetList.get(pivot)) <= 0) {
                 //swap
                 E temp = targetList.get(i);
-                targetList.set(i,targetList.get(j));
-                targetList.set(j,temp);
-                if(i==pivot){
-                    pivot=j;break;
-                } else if(j==pivot){
-                    pivot=i;break;
-                }
-                else {
-                    i++;j--;
+                targetList.set(i, targetList.get(j));
+                targetList.set(j, temp);
+                if (i == pivot) {
+                    pivot = j;
+                    break;
+                } else if (j == pivot) {
+                    pivot = i;
+                    break;
+                } else {
+                    i++;
+                    j--;
                 }
                 continue;
 
-            } if(i<= pivot && targetList.get(i).compareTo(targetList.get(pivot))==-1){
+            }
+            if (i <= pivot && targetList.get(i).compareTo(targetList.get(pivot)) == -1) {
                 i++;
-            } if(j >= pivot && targetList.get(j).compareTo(targetList.get(pivot))== 1){
+            }
+            if (j >= pivot && targetList.get(j).compareTo(targetList.get(pivot)) == 1) {
                 j--;
             }
         }
@@ -157,15 +165,16 @@ public class Sorter<E extends Comparable> {
 
     /**
      * functioning max heapsort
+     *
      * @param targetList
      * @return
      */
-    public List<E> maxHeapSort(List<E> targetList){
+    public List<E> maxHeapSort(List<E> targetList) {
         ComparableNumber[] elements = targetList.toArray(new ComparableNumber[0]);
         targetList = new ArrayList<>();
         Heap<E> maxHeap = new Heap<>();
-        maxHeap.elements = (E[])  elements;
-        while(!maxHeap.isEmpty()){
+        maxHeap.elements = (E[]) elements;
+        while (!maxHeap.isEmpty()) {
             maxHeap.buildMaxHeap();
             targetList.add(maxHeap.deleteMax());
         }
@@ -174,15 +183,16 @@ public class Sorter<E extends Comparable> {
 
     /**
      * functioning min heapsort
+     *
      * @param targetList
      * @return
      */
-    public List<E> minHeapSort(List<E> targetList){
+    public List<E> minHeapSort(List<E> targetList) {
         ComparableNumber[] elements = targetList.toArray(new ComparableNumber[0]);
         targetList = new ArrayList<>();
         Heap<E> maxHeap = new Heap<>();
-        maxHeap.elements = (E[])  elements;
-        while(!maxHeap.isEmpty()){
+        maxHeap.elements = (E[]) elements;
+        while (!maxHeap.isEmpty()) {
             maxHeap.buildMinHeap();
             targetList.add(maxHeap.deleteMin());
         }
@@ -205,6 +215,8 @@ public class Sorter<E extends Comparable> {
         numberList.add(new ComparableNumber(5555));
         numberList.add(new ComparableNumber(37));
         numberList.add(new ComparableNumber(39));
+        System.out.println("Printing the list before the sort");
+        numberList.forEach(Sorter::printElegant);
         Sorter<ComparableNumber> sorter = new Sorter<ComparableNumber>();
 
 //        System.out.println("Sorting using bubble sort");
@@ -213,18 +225,22 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using insertion sort");
 //        sorter.insertionSort(numberList);
 
-//        System.out.println("Sorting using merge sort");
-//        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
-//        numberList = resultList;
+        System.out.println("\nSorting using merge sort");
+        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
+        numberList = resultList;
 
-        System.out.println("Sorting using quick sort");
-        sorter.quickSort(numberList, 0, numberList.size() - 1);
+//        System.out.println("Sorting using quick sort");
+//        sorter.quickSort(numberList, 0, numberList.size() - 1);
 
 //        System.out.println("Sorting using max Heap sort");
 //        numberList = sorter.maxHeapSort(numberList);
 
 //        System.out.println("Sorting using min Heap sort");
 //        numberList = sorter.minHeapSort(numberList);
-        System.out.println(numberList);
+        numberList.forEach(Sorter::printElegant);
+    }
+
+    private static void printElegant(ComparableNumber comparableNumber) {
+        System.out.print(comparableNumber + " , ");
     }
 }
