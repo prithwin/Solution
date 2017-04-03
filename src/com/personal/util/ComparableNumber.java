@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by prajeev on 19/3/17.
  */
 public class ComparableNumber implements Comparable, Serializable{
-    int number;
+    public int number;
 
     public ComparableNumber(int i) {
         this.number = i;

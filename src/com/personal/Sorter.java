@@ -238,6 +238,12 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using min Heap sort");
 //        numberList = sorter.minHeapSort(numberList);
         numberList.forEach(Sorter::printElegant);
+        System.out.println("sum: "+
+                numberList.stream()
+                        .filter(e -> e.number % 1 == 0)
+                        .mapToInt(e -> e.number * 2)
+                        .sum()
+        );
     }
 
     private static void printElegant(ComparableNumber comparableNumber) {
