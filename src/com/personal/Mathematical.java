@@ -41,4 +41,15 @@ public class Mathematical {
             return that;
         }
     }
+
+    public static int decimalTobinary(int decimal){
+        int x = decimal ;
+        while(x>0){
+            System.out.println(x%2);
+            x=x/2;
+        }
+        return 0;
+    }
+
+
 }

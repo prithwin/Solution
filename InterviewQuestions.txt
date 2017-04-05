@@ -1,0 +1,55 @@
+************************************************************************************************************************
+Q1. What are the advantages of using an executer framework to just simply starting and running a thread.
+A1: *it separates task submittion from task execution,letting you control some aspects of the thread execution
+    *using thread.start is unbounded so it doesn't place any JVM level bounds on how many threads that can be started.
+    *It provides some lifecycle methods that can get some lifecycle related, you can control lifecycle like kill
+    and check if its alive
+    *Thread creation is an expensive process and its managed much better within the executors.
+    *you can use callables which return a value.
+    *you can use timed executors.
+    *you can use completion service which can be used with a batch of classes.
+************************************************************************************************************************
+Q2. Can an overloaded method specify a different return type.
+A2. the overloaded method must have exactly the same signature, it can return a subclass of the return type, this Rule
+    applies to interfaces too.
+************************************************************************************************************************
+Q3. Can an overloaded method change the throws clause.
+A3. like the return type the method in the child class should be below it in inheritance hierarchy, this rules applies
+    to interface too.
+************************************************************************************************************************
+Q4. Tell me the difference between hibernate CASCADE and INVERT.
+A4. CASCADE hibernate session that this particular object should be saved or updated if the driver of that relation gets
+    updated. INVERSE reverses this relation, you put in on one to many or many to many relations where you would have p-
+    ut cascade. doing so wiil make the child drive the relationship
+************************************************************************************************************************
+Q5. what are Generics used for.
+A5. writing template methods and compile time type checking.ideally if you are making type errors you better find out a-
+    bout it at the compile time rather than finding out about it at the runtime.
+************************************************************************************************************************
+Q6. how do you work with more than one database with hibernate.
+A6. with Raw hibernate you would need a handle to a different session through different sessionfactory, so only option
+    I a web application is to have a listener initialize a separate factory, then you getting a different factory for
+    database. if you using a JPA implementation like spring orm. you can easily inject a different persistence unit that
+    you would have declare in your persistance.xml.
+************************************************************************************************************************
+Q7. Was shown a piece of code in which there was a for loop, we were removing the an element from the list using an
+    enhanced for loop. for example:
+     for(item : list){
+     list.remove(item)
+     }
+     was asked what will happen.
+A7: There will be a concurrent modification exception because of the way this the enhanced for works, it uses the
+    internal iterator, the java iterator works on a copy of what ever you say.hence there is no concurrent modification
+    exception, you can also use concurrent HashMap.
+************************************************************************************************************************
+Q8: advantages of using ORM software.
+A8: you can switch out any database you want and it also lets you do Object relational mapping.
+************************************************************************************************************************
+Q9: what are the various types of joins in SQL should be able to show it.
+A9: INNER JOIN, OUTER JOIN, SELF JOIN.
+************************************************************************************************************************
+
+
+
+
+

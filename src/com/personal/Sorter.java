@@ -133,7 +133,8 @@ public class Sorter<E extends Comparable> {
         int pivot = start + (end - start) / 2;
         //int partitionPoint = pivot;
         for (int i = start, j = end; i <= pivot && j >= pivot; ) {
-            if (targetList.get(i).compareTo(targetList.get(pivot)) >= 0 && targetList.get(j).compareTo(targetList.get(pivot)) <= 0) {
+            if (targetList.get(i).compareTo(targetList.get(pivot)) >= 0 &&
+                    targetList.get(j).compareTo(targetList.get(pivot)) <= 0) {
                 //swap
                 E temp = targetList.get(i);
                 targetList.set(i, targetList.get(j));

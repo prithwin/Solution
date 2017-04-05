@@ -21,5 +21,20 @@ public class Fibonacci {
     public static void main(String[] args) {
         Fibonacci f = new Fibonacci();
         f.printFibonacciNumbers(11);
+         f.fibonacciRecursive(11);
+    }
+
+    public void fibonacciRecursive(int howMany){
+        fibonacciRecursiveInternal(0,1,howMany,0);
+    }
+
+    private void fibonacciRecursiveInternal(int m, int n ,int howMany, int counter) {
+        if(counter == howMany){
+            return;
+        }else {
+           // System.out.println(m);
+            System.out.println(n);
+            fibonacciRecursiveInternal(n, m + n, howMany, ++counter);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.personal;
 
+import java.util.Objects;
+
 /**
  * Created by pr250155 on 3/25/17.
  */
@@ -26,8 +28,8 @@ public class StringReverse {
         if(character > input.length()-1){
             return;
         }
-        realReverse2(input,builder,++character);
-        builder.append(input.charAt(character-1));
+        realReverse2(input, builder, ++character);
+        builder.append(input.charAt(character - 1));
     }
 
     public static void main(String[] args) {

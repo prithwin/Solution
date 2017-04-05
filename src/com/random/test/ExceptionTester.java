@@ -6,16 +6,18 @@ package com.random.test;
 public class ExceptionTester {
 
     public static int test(int i) {
-        try {
-            System.out.println("tryblock");
-            if (i == 0)
-                throw new Exception();
-            return 0;
-        } catch (Exception e) {
-            System.out.println("exception caught");
-            return 1;
-        } finally {
-            return 2;
+        try{
+            System.out.printf("hi in try");
+            throw new Exception();
+            //System.exit(1);
+        } catch (Exception e){
+            System.out.printf("hi in catch");
+            //System.exit(1);
+            throw new Exception();
+        }finally {
+            System.out.println("Hi in Finally");
+            System.exit(1);
+            return i;
         }
     }
 

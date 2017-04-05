@@ -5,8 +5,12 @@ package com.random.test;
  */
 public class ThreadTesterStartRun {
     public static void main(String[] args) throws InterruptedException {
-        MyThread thread = new MyThread();
-        thread.doSomething();
+//        MyThread thread = new MyThread();
+//        thread.doSomething();
+        Thread otherThread = new Thread(() -> {
+            Thread.currentThread().start();
+        });
+
     }
 }
 

@@ -1,15 +1,15 @@
 package com.random.test;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+import java.util.*;
 
 /**
  * Created by prajeev on 16/3/17.
  */
 public class MotherOfAlltersterClasses {
     public static void main(String[] args) {
+
 //        Map<Number,String> testMap = new HashMap<Number,String>();
         Map<Number,String> testMap = new TreeMap<Number,String>();
 //        Map<Number,String> testMap = new LinkedHashMap<Number,String>();
@@ -53,5 +53,17 @@ public class MotherOfAlltersterClasses {
 class A{
     public static void doSomething(){
         System.out.println("doing Something");
+    }
+}
+
+interface Binterface {
+    List<?> Bmethod() throws IOException;
+}
+
+class Bclass implements Binterface {
+
+    @Override
+    public List<?> Bmethod() throws AccessDeniedException {
+        return null;
     }
 }
