@@ -5,4 +5,5 @@ package com.personal.design.parkinglot;
  */
 public abstract class Vehicle {
     public abstract ParkingType getType();
+    String model;
 }

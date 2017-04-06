@@ -10,6 +10,7 @@ public class ParkingSlot {
     ParkingType type;
     Vehicle mappedVehicle;
     Lock parkingLock = new ReentrantLock();
+    int slotNumber;
 
     public boolean parkVehicle(Vehicle newVehicle){
         boolean isLocked = parkingLock.tryLock();
@@ -18,7 +19,9 @@ public class ParkingSlot {
             parkingLock.unlock();
             return true;
         } else {
+            parkingLock.unlock();
             return false;
+
         }
     }
 }

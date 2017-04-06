@@ -6,6 +6,6 @@ package com.personal.design.parkinglot;
 public interface ParkingLotOrchestrator {
     boolean parkVehicle(Vehicle newVehicle);
     void enter();
-    void leave();
+    void leave(int slot);
     void generateBill();
 }

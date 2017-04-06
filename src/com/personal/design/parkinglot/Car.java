@@ -5,7 +5,6 @@ package com.personal.design.parkinglot;
  */
 public class Car extends Vehicle {
     String numberPlate;
-    String model;
 
     public Car(String nummberPlate, String mode) {
         this.numberPlate = nummberPlate;
