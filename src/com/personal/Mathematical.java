@@ -42,14 +42,12 @@ public class Mathematical {
         }
     }
 
-    public static int decimalTobinary(int decimal){
-        int x = decimal ;
-        while(x>0){
-            System.out.println(x%2);
-            x=x/2;
-        }
-        return 0;
+    public static void decimalTobinary(int decimal){
+         if(decimal<2){
+             System.out.print(decimal);
+         } else{
+             decimalTobinary(decimal / 2);
+             decimalTobinary(decimal % 2);
+         }
     }
-
-
 }

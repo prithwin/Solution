@@ -38,9 +38,8 @@ Q7. Was shown a piece of code in which there was a for loop, we were removing th
      list.remove(item)
      }
      was asked what will happen.
-A7: There will be a concurrent modification exception because of the way this the enhanced for works, it uses the
-    internal iterator, the java iterator works on a copy of what ever you say.hence there is no concurrent modification
-    exception, you can also use concurrent HashMap.
+A7: There will be a concurrent modification exception because of the way this the enhanced for works, the Iterators that
+    are returned by the non-concurrent APIS are called failed fast iterators
 ************************************************************************************************************************
 Q8: advantages of using ORM software.
 A8: you can switch out any database you want and it also lets you do Object relational mapping.
