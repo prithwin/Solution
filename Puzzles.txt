@@ -1,0 +1,1 @@
+Q1: I have 25 horses, you can only race 5 horses at a time.how many races would you need to find the fastest 3 horses.
