@@ -80,23 +80,23 @@ public class ParkingLotOrchestratorImpl implements ParkingLotOrchestrator {
         parker4.start();
         parker5.start();
         parker6.start();
-        latch.countDown(); //Go
+        latch.countDown();
+        while(parker1.isAlive() &&
+                parker2.isAlive() &&
+                parker3.isAlive() &&
+                parker4.isAlive() &&
+                parker5.isAlive() &&
+                parker6.isAlive()
+                ){}
         plo.leave(4);
         plo.leave(2);
         plo.leave(5);
+        plo.leave(3);
+        plo.leave(1);
         CountDownLatch latch1 = new CountDownLatch(1);
         Thread parker7 = new Thread(new Parker(plo ,new Car("KA54MN14534", "new Slot 2"),latch1));
         parker7.start();
-        latch1.countDown(); //Go
-//        latch1 = new CountDownLatch(1);
-//        new Thread(new Parker(plo ,new Car("KA54MN145634", "new Slot 4"),latch1)).start();
-//        latch1.countDown();
-//        plo.leave(2);
-//        latch1 = new CountDownLatch(1);
-//        new Thread(new Parker(plo ,new Car("KA54MN14tewer", "again new Slot 2"),latch1)).start();
-//        latch1.countDown();
-        System.out.println("wait");
-
+        latch1.countDown();
     }
 }
 
