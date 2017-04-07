@@ -1,5 +1,8 @@
-Q. you have a vendor service where the contract requires you to send only X number of requests per hour, after which any
+Q1. you have a vendor service where the contract requires you to send only X number of requests per hour, after which any
    request sent to them would be premium and you would need an agreement from your clients in order to go ahead with the
    call to vendor, how would you implement this scenario.
-A. Beat around the bush , pretend as if you are identifying requirements then say a request queue is all you need.
+A1. Beat around the bush , pretend as if you are identifying requirements then say a request queue is all you need.
+
+Q2. design an object oriented parking lot.
+A1. check the attached package, Identify classes clearly, handle multithreading, and find of the list effectively.
 
