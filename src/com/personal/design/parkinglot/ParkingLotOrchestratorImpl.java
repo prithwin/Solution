@@ -17,13 +17,13 @@ public class ParkingLotOrchestratorImpl implements ParkingLotOrchestrator {
 
         ParkingSlot slot = parkingLot.getFirstFreeParkingSlot(newVehicle);
         if( slot != null) {
-            System.out.println(newVehicle.model+" has been parked in the slot: "+ slot.slotNumber);
+            System.out.println(newVehicle.model+" ===============>: "+ slot.slotNumber);
             try{return slot.parkVehicle(newVehicle);}
             finally {
                 slot.parkingLock.unlock();
             }
         } else {
-            System.out.println(newVehicle.model+" could not be parked" );
+            System.out.println(newVehicle.model+" could not be parked waiting and retrying" );
            return false;
         }
     }
@@ -50,7 +50,10 @@ public class ParkingLotOrchestratorImpl implements ParkingLotOrchestrator {
                 return;
             }
             int i = 0;
-            while (i < parkingLot.empltSlots.size() - 1 && parkingLot.empltSlots.get(i).slotNumber < slot.slotNumber) {
+            while (i < parkingLot.empltSlots.size() - 1 && parkingLot.empltSlots.get(i).slotNumber <= slot.slotNumber) {
+                if(parkingLot.empltSlots.get(i).slotNumber == slot.slotNumber) {
+                    return;
+                }
                 i++;
             }
             this.parkingLot.empltSlots.add(i + 1, slot);
@@ -68,6 +71,7 @@ public class ParkingLotOrchestratorImpl implements ParkingLotOrchestrator {
     public static void main(String[] args) {
         ParkingLotOrchestrator plo = new ParkingLotOrchestratorImpl();
         CountDownLatch latch = new CountDownLatch(1);
+        //plo.leave(4);
         Thread parker1 = new Thread(new Parker(plo ,new Car("KA54MN1522", "Bently cheapster"),latch));
         Thread parker2 = new Thread(new Parker(plo ,new Car("AN54MN8965", "maruti Regalis"),latch));
         Thread parker3 = new Thread(new Parker(plo ,new Car("KA54MN1545", "vwoksfaggen doos"),latch));
@@ -90,8 +94,8 @@ public class ParkingLotOrchestratorImpl implements ParkingLotOrchestrator {
                 ){}
         plo.leave(4);
         plo.leave(2);
-        plo.leave(5);
-        plo.leave(3);
+//        plo.leave(5);
+//        plo.leave(3);
         plo.leave(1);
         CountDownLatch latch1 = new CountDownLatch(1);
         Thread parker7 = new Thread(new Parker(plo ,new Car("KA54MN14534", "new Slot 2"),latch1));
@@ -119,6 +123,16 @@ class Parker implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        plo.parkVehicle(car);
+        boolean isparked = plo.parkVehicle(car);
+        if(!isparked) {
+            for (int i = 0; i < 10 && !isparked; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                isparked =  plo.parkVehicle(car);
+            }
+        }
     }
 }
