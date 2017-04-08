@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.util;
 
 /**
  * Created by pr250155 on 3/27/17.

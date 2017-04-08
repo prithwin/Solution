@@ -1,11 +1,9 @@
-package com.personal;
-
-import java.util.Objects;
+package com.personal.util;
 
 /**
  * Created by pr250155 on 3/25/17.
  */
-public class StringReverse {
+public class CustomStringUtils {
     public String reverse(String input){
         if(input == null || input.equals("")){
             return "";
@@ -32,9 +30,27 @@ public class StringReverse {
         builder.append(input.charAt(character - 1));
     }
 
+    public boolean checkSubstring(String original, String substring){
+        if(original.length()<substring.length()){
+            return false;
+        }
+        if(substring.length() == 0){
+            return false;
+        }
+        if(substring.length() == 1 && original.charAt(0) == substring.charAt(0)){
+            return true;
+        }
+        if(substring.charAt(0)==original.charAt(0)){
+            return checkSubstring(original.substring(1),substring.substring(1));
+        }
+        return checkSubstring(original.substring(1),substring);
+    }
+
     public static void main(String[] args) {
         //System.out.println(new StringReverse().reverse("abcd"));
-        System.out.println(new StringReverse().reverse2("abcd"));
+//        System.out.println(new StringReverse().reverse2("abcd"));
+//        System.out.println(new StringReverse().reverse2("abcd"));
+        System.out.println(new CustomStringUtils().checkSubstring("jsdjfiejfsdfjprithwinsdfjiwejfdfs","z"));
     }
 }
 

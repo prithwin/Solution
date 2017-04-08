@@ -1,5 +1,8 @@
 package com.personal;
 
+import com.personal.util.CustomStringUtils;
+import com.personal.util.Mathematical;
+
 /**
  * Created by pr250155 on 4/2/17.
  */
@@ -12,7 +15,7 @@ public class LongestSubsequenceProblem {
                 if(theString.charAt(i-1) == otherString.charAt(j-1)){
                     matrix[i][j] = 1 + matrix[i-1][j-1];
                 } else {
-                    matrix[i][j] = Mathematical.maximum(matrix[i-1][j],matrix[i][j-1]);
+                    matrix[i][j] = Mathematical.maximum(matrix[i - 1][j], matrix[i][j - 1]);
                 }
             }
         }
@@ -33,7 +36,7 @@ public class LongestSubsequenceProblem {
     }
 
     public static void main(String[] args) {
-        String lcs = new StringReverse().reverse2(new LongestSubsequenceProblem().lcs("ABCDGHLQR","AEDPHR"));
+        String lcs = new CustomStringUtils().reverse2(new LongestSubsequenceProblem().lcs("ABCDGHLQR","AEDPHR"));
         System.out.printf("the longest String is %s and its size is %d",lcs,lcs.length());
     }
 }
