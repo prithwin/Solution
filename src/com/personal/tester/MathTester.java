@@ -1,6 +1,6 @@
 package com.personal.tester;
 
-import com.personal.Mathematical;
+import com.personal.util.Mathematical;
 
 /**
  * Created by pr250155 on 3/27/17.
