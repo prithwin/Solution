@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class KFrequentWords {
     public static void main(String[] args) {
-        String target = "topper topper topaz sdjfj jsdfj sjefj jsiefjjsd iefjjs jsjdfj topper " +
-                "topper topaz topper topper topaz prithwin prithwin prithwin prithwin prithwin prithwin platina platina" +
+        String target = "platina topper topaz platina sdjfj jsdfj sjefj jsiefjjsd platina iefjjs jsjdfj topper " +
+                "topper topaz topper topper platina topaz prithwin prithwin prithwin prithwin prithwin prithwin prithwin platina platina" +
                 " platina platina";
         Map<String, Integer> podium = new HashMap<>();
         Dictionary dictionary = new Dictionary();

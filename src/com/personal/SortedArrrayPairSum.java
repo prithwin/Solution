@@ -1,5 +1,8 @@
 package com.personal;
 
+import com.personal.util.MergeResult;
+import com.personal.util.Merger;
+
 /**
  * Created by pr250155 on 4/2/17.
  * Q: given a sorted array of and a sum X find the pair in the Array whose Sum is X
@@ -7,9 +10,50 @@ package com.personal;
 public class SortedArrrayPairSum {
     public static void main(String[] args) {
         int[] target = {10, 22, 28, 29, 30, 40};
-        int sum = 52;
+        int sum = 10;
         findAbsolutePair(target,sum);
         findClosestPair(target,sum);
+        Integer[] thisArray = {5,20,30,40,50,60,70,80};
+        Integer[] thatArray = {5,15,25,35,45};
+//        Integer[] thisArray = {1, 4, 5, 7};
+//        Integer[] thatArray = {10, 20, 30, 40};
+        findClosestPairTwoArrays(thisArray, thatArray,sum);
+    }
+
+    public static void findClosestPairTwoArrays(Integer[] thisArray, Integer[] thatArray,int sum){
+        MergeResult<Integer> mergeResult = new Merger<Integer>().merge(thisArray, thatArray);
+        findClosestPairSourceAware(mergeResult.resultArray, mergeResult.resultIndex,sum);
+    }
+
+    private static void findClosestPairSourceAware(Object[] resultArray, Boolean[] resultIndex, int sum) {
+        int closest = Integer.MAX_VALUE;
+        int thizz = 0;
+        int that = 0;
+        for(int i = 0, j = resultArray.length-1 ; i < j ;){
+           if(resultIndex[i] != resultIndex[j]){
+               Integer fromThiz = (Integer) resultArray[i];
+               Integer fromthat = (Integer) resultArray[j];
+               int diff = sum - (fromThiz + fromthat);
+               int absdiff = Math.abs(diff);
+               if(absdiff<closest){
+                   closest = absdiff;
+                   thizz = fromThiz;
+                   that = fromthat;
+               }
+               if(diff == 0){
+                   break;
+               } else if(diff > 0){
+                   i++;
+               } else {
+                   j--;
+               }
+           } else {
+              i++;
+           }
+
+        }
+
+        System.out.printf("\nthe closest pair is %d and %d where the sum is %d",thizz,that,(thizz + that));
     }
 
     private static void findClosestPair(int[] target,int sum) {
