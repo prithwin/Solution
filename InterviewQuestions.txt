@@ -39,7 +39,8 @@ Q7. Was shown a piece of code in which there was a for loop, we were removing th
      }
      was asked what will happen.
 A7: There will be a concurrent modification exception because of the way this the enhanced for works, the Iterators that
-    are returned by the non-concurrent APIS are called failed fast iterators
+    are returned by the non-concurrent APIS are called faile fast iterators, wouldn't be a problem if you iterated using
+    an index.
 ************************************************************************************************************************
 Q8: advantages of using ORM software.
 A8: you can switch out any database you want and it also lets you do Object relational mapping.
@@ -47,6 +48,26 @@ A8: you can switch out any database you want and it also lets you do Object rela
 Q9: what are the various types of joins in SQL should be able to show it.
 A9: INNER JOIN, OUTER JOIN, SELF JOIN.
 ************************************************************************************************************************
+Q10: What are the differences between REST and SOAP WebServices.
+A10: These are the major differences that influence our decision.
+     -WS protocol stack is very heavy weight, REST is light weight.
+     -WS can use any transport layer protocol.
+     -WS can implement A tighter security at the added cost of encryption decryption
+     -Usually handled at the front end.
+************************************************************************************************************************
+Q11: what are projections in database?
+A11: A select clause.
+************************************************************************************************************************
+Q12: can you inject a singleton bean in a prototype bean?and the other way round?
+A12: Yes you can and its quite obvious what happens there.
+************************************************************************************************************************
+Q13: what is n and n+1 query problem?
+A13: Its the problem that you fix by lazy initialization.
+************************************************************************************************************************
+naming conventions for rest resources.
+String flipping of 0s and 1s
+a method taking two integers, finding the minimum for n digits using the same method.
+hibernate criteria query api.
 
 
 

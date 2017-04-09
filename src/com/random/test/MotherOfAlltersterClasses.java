@@ -24,6 +24,15 @@ public class MotherOfAlltersterClasses {
         }
         A a = new A();
         a.doSomething();
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(1);
+        integerList.add(2);
+        integerList.add(3);
+        integerList.add(4);
+
+        for(Integer thing : integerList) {
+            integerList.remove(thing);
+        }
     }
 
     static class Number implements Comparable {
