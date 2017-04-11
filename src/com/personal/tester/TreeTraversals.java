@@ -81,6 +81,10 @@ public class TreeTraversals {
         System.out.println("MaxValue:"+ bst.maxValue());
         System.out.println(bst.isTreeBST());
         System.out.println(treeTraversals.tree.isTreeBST());
+        System.out.println("left view of the binary tree is: ");
+        treeTraversals.tree.printLeftView();
+        System.out.println("\nright view of the binary tree is: ");
+        treeTraversals.tree.printRightView();
 
     }
 }

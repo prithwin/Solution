@@ -1,27 +1,26 @@
 package com.personal.threads;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by prajeev on 1/3/17.
+ * Created by prajeev
  */
-public class InfiLoopz2 {
+public class ThreeThreadTurnBased {
     public static void main(String[] args) throws InterruptedException {
         NoticeBoard noticeBoard = new NoticeBoard();
         noticeBoard.turn = 1;
         ExecutorService executorService = Executors.newFixedThreadPool(3);
-        CountDownLatch latch = new CountDownLatch(30);
+        CountDownLatch latch = new CountDownLatch(1);
         for (int i = 1; i < 4; i++) {
             Runner runner = new Runner(i, noticeBoard,latch);
             executorService.execute(runner);
         }
-        latch.await();
+        latch.countDown();
+        executorService.awaitTermination(100, TimeUnit.MILLISECONDS);
+        executorService.shutdown();
     }
 
     static class NoticeBoard {
@@ -34,7 +33,6 @@ public class InfiLoopz2 {
             noticeBoardLock.lock();
             while (turn != seed)
                 condition.await();
-
             System.out.println("[" + seed + "]" + number);
             if (++turn == 4) {
                 turn = 1;
@@ -58,16 +56,18 @@ public class InfiLoopz2 {
 
         @Override
         public void run() {
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             int count = 0;
-            for (int i = seed; count < 10; i += 3, count++) {
+            for (int i = seed; count < 2; i += 3, count++) {
                 try {
                     noticeBoard.printNumber(i, seed);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                } finally {
-                    latch.countDown();
                 }
-
             }
         }
     }

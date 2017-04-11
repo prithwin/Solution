@@ -2,6 +2,7 @@ package com.personal.util;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.LinkedList;
 
 /**
  * Created by prajeev on 19/3/17.
@@ -260,6 +261,44 @@ public class BinaryTree implements Serializable {
         if(node.right!=null)
             summerInternal(node.right);
         return;
+
+    }
+
+    public void printLeftView(){
+        ComparableNumber maxlevel = new ComparableNumber(0);
+        printLeftViewInternal(root,1,maxlevel);
+    }
+
+
+    public void printRightView(){
+        ComparableNumber maxlevel = new ComparableNumber(0);
+        printRightViewInternal(root, 1, maxlevel);
+    }
+
+    private void printRightViewInternal(TreeNode node, int level, ComparableNumber maxlevel) {
+        if(node == null){
+            return;
+        }
+
+        if(level > maxlevel.number){
+            System.out.print(node.number);
+            maxlevel.number = level;
+        }
+        printRightViewInternal(node.right, level+1,maxlevel);
+        printRightViewInternal(node.left, level+1,maxlevel);
+    }
+
+
+    private void printLeftViewInternal(TreeNode node, int level, ComparableNumber maxlevel) {
+        if(node==null){
+            return;
+        }
+        if(level > maxlevel.number) {
+            System.out.print(node.number);
+            maxlevel.number = level;
+        }
+        printLeftViewInternal(node.left,level+1, maxlevel);
+        printLeftViewInternal(node.right,level+1, maxlevel);
 
     }
 }
