@@ -18,9 +18,9 @@ public class TreeTraversals {
         treeTraversals.tree.root.left.left = new TreeNode(4);
         treeTraversals.tree.root.left.right = new TreeNode(5);
         treeTraversals.tree.root.right.left = new TreeNode(6);
-        treeTraversals.tree.root.right.left.left = new TreeNode(8);
-        treeTraversals.tree.root.right.left.right = new TreeNode(9);
+        treeTraversals.tree.root.right.left.right = new TreeNode(8);
         treeTraversals.tree.root.right.right = new TreeNode(7);
+        treeTraversals.tree.root.right.right.right = new TreeNode(9);
 
         System.out.println("printing in order");
         treeTraversals.tree.printinOrder();
@@ -85,6 +85,20 @@ public class TreeTraversals {
         treeTraversals.tree.printLeftView();
         System.out.println("\nright view of the binary tree is: ");
         treeTraversals.tree.printRightView();
+        System.out.println("\nprinting tree with the grid numbers");
+        treeTraversals.tree.printTreeWithLongitude();
+        System.out.println("\nprinting the tree vertically: ");
+        treeTraversals.tree.printTreeVertically();
+        System.out.printf("\nprinting the top view of the binary tree\n");
+        treeTraversals.tree.printTopView();
+
+        System.out.printf("\nprinting the bottom view of the binary tree\n");
+        treeTraversals.tree.printBottomView();
+
+        System.out.printf("\nchecking if the tree contains a certain root to end sum\n");
+        System.out.println(treeTraversals.tree.checkRootToLeafSum(7));
+
+
 
     }
 }

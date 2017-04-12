@@ -155,10 +155,14 @@ public class BinaryTree implements Serializable {
         if(node.left == null && node.right == null){
             System.out.println(treeStack);
         }else {
-            printAllPaths(node.left, treeStack);
-            treeStack.pop();
-            printAllPaths(node.right, treeStack);
-            treeStack.pop();
+            if(node.left!=null) {
+                printAllPaths(node.left, treeStack);
+                treeStack.pop();
+            }
+            if(node.right!=null) {
+                printAllPaths(node.right, treeStack);
+                treeStack.pop();
+            }
         }
     }
 
@@ -281,7 +285,7 @@ public class BinaryTree implements Serializable {
         }
 
         if(level > maxlevel.number){
-            System.out.print(node.number);
+            System.out.printf(" %s ", node.number);
             maxlevel.number = level;
         }
         printRightViewInternal(node.right, level+1,maxlevel);
@@ -294,11 +298,125 @@ public class BinaryTree implements Serializable {
             return;
         }
         if(level > maxlevel.number) {
-            System.out.print(node.number);
+            System.out.printf(" %s ",node.number);
             maxlevel.number = level;
         }
         printLeftViewInternal(node.left,level+1, maxlevel);
         printLeftViewInternal(node.right,level+1, maxlevel);
 
+    }
+
+    public void printTreeWithLongitude(){
+        printTreeWithLongitudeInternal(root, 0);
+    }
+
+    public void printTreeVertically(){
+        Map<Integer,List<ComparableNumber>> orderedLongitudeMap = new TreeMap<>();
+        prePareLongitudanalMap(orderedLongitudeMap,this.root,0);
+        orderedLongitudeMap
+                .keySet()
+                .stream()
+                .forEach((key) -> {
+                    orderedLongitudeMap.get(key).stream().forEach((comparableNumber) -> {
+                        System.out.printf(" %s ", comparableNumber);
+                    });
+                });
+    }
+
+    private void prePareLongitudanalMap(Map<Integer, List<ComparableNumber>> orderedLongitudeMap,
+                                        TreeNode node, int grid) {
+        if(node == null) {
+            return;
+        }
+        if(orderedLongitudeMap.containsKey(grid)){
+            orderedLongitudeMap.get(grid).add(node.number);
+        } else {
+            List<ComparableNumber> comparableNumbers = new LinkedList<>();
+            comparableNumbers.add(node.number);
+            orderedLongitudeMap.put(grid, comparableNumbers);
+        }
+        prePareLongitudanalMap(orderedLongitudeMap, node.left, grid - 1);
+        prePareLongitudanalMap(orderedLongitudeMap, node.right, grid + 1);
+
+    }
+
+    private void printTreeWithLongitudeInternal(TreeNode node, int grid) {
+        if(node == null){
+            return;
+        }
+        System.out.printf("%d ------> %s\n", grid, node.number);
+        printTreeWithLongitudeInternal(node.left, grid - 1);
+        printTreeWithLongitudeInternal(node.right, grid + 1);
+    }
+
+    public void printTopView() {
+        Map<Integer,ComparableNumber> orderedLongitudeMap = new TreeMap<>();
+        prePareLongitudanalTopMap(orderedLongitudeMap, this.root, 0);
+        orderedLongitudeMap.keySet().stream().forEach((key) -> {
+            System.out.printf(" %s ", orderedLongitudeMap.get(key));});
+
+    }
+
+    private void prePareLongitudanalTopMap(Map<Integer, ComparableNumber> orderedLongitudeMap, TreeNode node, int grid) {
+        if(node == null){
+            return;
+        }
+        if(!orderedLongitudeMap.containsKey(grid)){
+            orderedLongitudeMap.put(grid,node.number);
+        }
+        prePareLongitudanalTopMap(orderedLongitudeMap,node.left,grid-1);
+        prePareLongitudanalTopMap(orderedLongitudeMap,node.right,grid+1);
+    }
+
+    public void printBottomView() {
+        Map<Integer,ComparableNumber> orderedLongitudeMap = new TreeMap<>();
+        prePareLongitudanalBottomMap(orderedLongitudeMap, this.root, 0);
+        orderedLongitudeMap.keySet().stream().forEach((key) -> {
+            System.out.printf(" %s ", orderedLongitudeMap.get(key));});
+    }
+
+    private void prePareLongitudanalBottomMap(Map<Integer, ComparableNumber> orderedLongitudeMap, TreeNode node, int grid) {
+        if(node == null){
+            return;
+        }
+        orderedLongitudeMap.put(grid,node.number);
+        prePareLongitudanalBottomMap(orderedLongitudeMap,node.left,grid-1);
+        prePareLongitudanalBottomMap(orderedLongitudeMap,node.right,grid+1);
+    }
+
+    public boolean checkRootToLeafSum(int sum){
+        Stack<TreeNode> printstack = new Stack<>();
+        return checkRootToLeafSumInternal(root,printstack,sum);
+    }
+
+    private boolean checkRootToLeafSumInternal(TreeNode node, Stack<TreeNode> printstack, int sum) {
+        if(node==null) {
+            return false;
+        }
+        printstack.push(node);
+        if (node.left == null && node.right == null) {
+            int currentSum = printstack.
+                    stream().
+                    reduce((t1, t2) -> {
+                        return new TreeNode(((t1 == null) ? 0 : t1.number.number) + ((t2 == null) ? 0 : t2.number.number));
+                    })
+                    .get().number.number;
+            System.out.println(currentSum);
+            if(sum==currentSum){
+                return true;
+            }
+        } else {
+            if (node.left != null) {
+                boolean check = checkRootToLeafSumInternal(node.left, printstack, sum);
+                if(check){return true;}
+                printstack.pop();
+            }
+            if (node.right != null) {
+                boolean check = checkRootToLeafSumInternal(node.right, printstack, sum);
+                if(check){return true;}
+                printstack.pop();
+            }
+        }
+        return false;
     }
 }

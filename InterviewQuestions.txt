@@ -67,6 +67,7 @@ A13: Its the problem that you fix by lazy initialization.
 naming conventions for rest resources.
 String flipping of 0s and 1s
 a method taking two integers, finding the minimum for n digits using the same method.
+what all can you assert in java/junit
 hibernate criteria query api.
 
 
