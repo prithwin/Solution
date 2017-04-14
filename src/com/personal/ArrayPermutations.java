@@ -15,7 +15,7 @@ public class ArrayPermutations {
         inputList.add(3);
         inputList.add(4);
         List<List<Integer>> resultList = new ArrayPermutations().permute(inputList);
-        System.out.println(resultList);
+        resultList.forEach(System.out::println);
     }
 
     private List<List<Integer>> permute(List<Integer> target) {
@@ -33,7 +33,7 @@ public class ArrayPermutations {
             temp.addAll(target);
             resultList.add(temp);
         } else {
-            for (int i = 0; i < target.size(); i++) {
+                for (int i = 0; i < target.size(); i++) {
                 Integer nextSeries = target.get(i);
                 leadList.add(nextSeries);
                 target.remove(i);

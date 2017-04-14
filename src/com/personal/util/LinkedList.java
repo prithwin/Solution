@@ -1,5 +1,9 @@
 package com.personal.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Created by prajeev on 9/8/16.
  */
@@ -54,6 +58,26 @@ public class LinkedList {
             return;
         printInReverese(node.next);
         System.out.println(node.val);
+    }
+
+    public static boolean checkPallindrome(ListNode  node){
+        List<ListNode> reversedList = new ArrayList<>();
+        getReversedList(node,reversedList);
+        for(ListNode item : reversedList){
+            if(!item.equals(node)){
+                return false;
+            }
+            node = node.next;
+        }
+        return true;
+    }
+
+    private static void getReversedList(ListNode node, List<ListNode> resultList) {
+        if(node == null){
+            return;
+        }
+        getReversedList(node.next,resultList);
+        resultList.add(node);
     }
 
     public void rotate() {

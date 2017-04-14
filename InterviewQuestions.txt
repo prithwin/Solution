@@ -69,7 +69,15 @@ String flipping of 0s and 1s
 a method taking two integers, finding the minimum for n digits using the same method.
 what all can you assert in java/junit
 hibernate criteria query api.
-
+*how do you manage change in XSD, say you have a client basically learn more about serialization.
+*what is a container.
+*multithreading in servlet
+*two spring contexts with the same file
+*rest service versioning.
+*Servlet spec how threads are created or not.
+*types of lock.
+*how to send back an error 404
+*read about GET and POST inside rest controller
 
 
 

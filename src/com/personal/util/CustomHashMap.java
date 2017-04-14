@@ -7,11 +7,11 @@ import java.util.LinkedList;
  * Created by prajeev on 19/3/17.
  */
 public class CustomHashMap<K,V> {
-    private List<HashBucket> buckets;
+    private Set<HashBucket> buckets;
 
     public void put(K key, V value){
         if(buckets == null){
-            buckets = new LinkedList<HashBucket>();
+            buckets = new TreeSet<>();
         }
 
         if(!containsHashvalue(buckets,key.hashCode())){
@@ -30,7 +30,7 @@ public class CustomHashMap<K,V> {
         }
     }
 
-    private boolean containsHashvalue(List<HashBucket> buckets,int hashCode) {
+    private boolean containsHashvalue(Set<HashBucket> buckets,int hashCode) {
         for(HashBucket bucket : buckets){
             if(hashCode == bucket.getBucketHashCode()){
                 return true;

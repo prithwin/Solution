@@ -37,6 +37,9 @@ public class ReverseSinglyLinkedList {
         System.out.println("printing in reverse");
         LinkedList.printInReverese(target.head);
 
+        int[] pals = {1,2,2,1};
+        System.out.println(LinkedList.checkPallindrome(new LinkedList(pals).head));
+
 
     }
 }
