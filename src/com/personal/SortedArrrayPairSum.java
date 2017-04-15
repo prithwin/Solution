@@ -70,8 +70,10 @@ public class SortedArrrayPairSum {
                 dat = target[j];
             }
             if(diff == 0){
+                //you have found it
                 break;
             } else if(diff > 0 ){
+                //means your current sum did not exceed your target sum
                 i++;
             } else {
                 j--;

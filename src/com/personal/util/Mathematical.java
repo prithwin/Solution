@@ -35,7 +35,7 @@ public class Mathematical {
     }
 
     public static int maximum(int thizz, int that) {
-        if(thizz> that){
+        if(thizz > that){
             return thizz;
         } else {
             return that;
@@ -49,5 +49,13 @@ public class Mathematical {
              decimalTobinary(decimal / 2);
              decimalTobinary(decimal % 2);
          }
+    }
+
+    public static int gcd(int m, int n) {
+        if(n == 0){
+            return m;
+        } else {
+            return gcd(n, m % n);
+        }
     }
 }
