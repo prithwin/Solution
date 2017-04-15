@@ -3,6 +3,7 @@ package com.personal;
 import com.personal.util.Mathematical;
 import com.personal.util.Print2DMatrix;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +19,16 @@ public class KnapsackProblem {
             this.value = value;
             this.weight = weight;
         }
+
+        @Override
+        public String toString() {
+            return value+","+weight;
+        }
+    }
+
+    class KnapSackResult {
+        int value;
+        List<Item> valueables = new ArrayList<>();
     }
     List<Item> items = null;
     private static int KNAPSACK_CAPACITY=7;
@@ -31,15 +42,10 @@ public class KnapsackProblem {
                 new Item(7,5));
     }
 
-    //         0  1  2  3  4  5  6  7
-    //  _INF   0  0  0  0  0  0  0  0
-    //   1     0  1  1  1  1  1  1  1
-    //   3     0
-    //   4     0
-    //   5     0
-    public int getTotalValue(int weight){
+    public KnapSackResult getTotalValue(int weight){
         KNAPSACK_CAPACITY = weight;
         int[][] weightMatrix = new int[this.items.size()][KNAPSACK_CAPACITY+1];
+        KnapSackResult result = new KnapSackResult();
 
         for(int itemIndex=0 ; itemIndex < items.size(); itemIndex++) {
             for(int kw = 0 ; kw < weightMatrix[itemIndex].length ; kw++){
@@ -49,21 +55,32 @@ public class KnapsackProblem {
                     weightMatrix[itemIndex][kw] = weightMatrix[itemIndex-1][kw];
                 }
                 else{
-                    System.out.printf("comparing %d with %d\n",items.get(itemIndex).value +
-                            weightMatrix[itemIndex-1][kw-items.get(itemIndex).weight], items.get(itemIndex).value);
                     weightMatrix[itemIndex][kw] = Mathematical.maximum(items.get(itemIndex).value +
                                     weightMatrix[itemIndex-1][kw-items.get(itemIndex).weight],
-                            items.get(itemIndex).value);
+                            weightMatrix[itemIndex-1][kw]);
                 }
             }
-            System.out.println();
-            Print2DMatrix.print2dMatrix(weightMatrix);
         }
-
-        return 0;
+        Print2DMatrix.print2dMatrix(weightMatrix);
+        result.value = weightMatrix[this.items.size()-1][KNAPSACK_CAPACITY];
+        //find the path
+        for(int i = this.items.size()-1 ; i >=0 ;){
+            for(int j = weightMatrix[i].length-1 ; j>=0 ; ){
+                if(weightMatrix[i][j] == weightMatrix[i-1][j]){
+                    i--;
+                } else {
+                    result.valueables.add(items.get(i));
+                    j-=items.get(i).weight;
+                }
+            }
+            //if(result.valueables.stream().collect()
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        new KnapsackProblem().getTotalValue(7);
+        KnapSackResult result = new KnapsackProblem().getTotalValue(7);
+        System.out.printf("the max value we can get is %d ",result.value);
+        result.valueables.stream().forEach(System.out::print);
     }
 }
