@@ -46,6 +46,7 @@ public class KnapsackProblem {
         KNAPSACK_CAPACITY = weight;
         int[][] weightMatrix = new int[this.items.size()][KNAPSACK_CAPACITY+1];
         KnapSackResult result = new KnapSackResult();
+        result.valueables.add(new Item(0,0));
 
         for(int itemIndex=0 ; itemIndex < items.size(); itemIndex++) {
             for(int kw = 0 ; kw < weightMatrix[itemIndex].length ; kw++){
@@ -61,19 +62,31 @@ public class KnapsackProblem {
                 }
             }
         }
-        Print2DMatrix.print2dMatrix(weightMatrix);
         result.value = weightMatrix[this.items.size()-1][KNAPSACK_CAPACITY];
         //find the path
         for(int i = this.items.size()-1 ; i >=0 ;){
+            if(result.valueables
+                    .stream()
+                    .reduce((a,b) -> {
+                        return new Item(a.value+b.value,a.weight+b.weight);
+                    }).get().weight == KNAPSACK_CAPACITY){
+                return result;
+            }
             for(int j = weightMatrix[i].length-1 ; j>=0 ; ){
                 if(weightMatrix[i][j] == weightMatrix[i-1][j]){
                     i--;
                 } else {
                     result.valueables.add(items.get(i));
+                    if(result.valueables
+                            .stream()
+                            .reduce((a,b) -> {
+                                return new Item(a.value+b.value,a.weight+b.weight);
+                            }).get().weight == KNAPSACK_CAPACITY){
+                        return result;
+                    }
                     j-=items.get(i).weight;
                 }
             }
-            //if(result.valueables.stream().collect()
         }
         return result;
     }
@@ -81,6 +94,7 @@ public class KnapsackProblem {
     public static void main(String[] args) {
         KnapSackResult result = new KnapsackProblem().getTotalValue(7);
         System.out.printf("the max value we can get is %d ",result.value);
-        result.valueables.stream().forEach(System.out::print);
+        result.valueables.stream().filter((item) -> {if(item.weight==0)return false;return true;}).forEach((item) -> {
+            System.out.printf("\nItem: %s",item);});
     }
 }
