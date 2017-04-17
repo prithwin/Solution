@@ -72,8 +72,13 @@ public class TreeTraversals {
         bst.add(new TreeNode(7));
         bst.add(new TreeNode(4534));
 
+        System.out.println("balancing the BST: ");
+        bst.balanceBST();
+
         System.out.println("Printing BST in order no matter what you do its always in order");
         bst.printinOrder();
+
+        System.out.println("Printing the LCA of some two nodes in a BST:" + bst.getLowestCommonAncestor(bst.root.left.left.left,bst.root.right));
 
         System.out.println("we can also find the min and max value of a tree");
         System.out.println("Minvalue:"+ bst.minValue());
