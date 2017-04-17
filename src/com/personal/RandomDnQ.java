@@ -1,5 +1,7 @@
 package com.personal;
 
+import java.util.List;
+
 /**
  * Created by pr250155 on 3/27/17.
  */
@@ -56,5 +58,21 @@ public class RandomDnQ {
         System.out.println(binarySearch(searchTarget,4));
         System.out.println(binarySearch(searchTarget,0));
         System.out.println(binarySearch(searchTarget,54));
+    }
+
+    public static int binarySearchforCrossOverPoint(List<Integer> target, int value) {
+        return binarySearchInternalCrossOverInternal(target,0,target.size()-1,value);
+    }
+
+    private static int binarySearchInternalCrossOverInternal(List<Integer> target, int start, int end, int value) {
+        int mid = start + ((end-start)/2);
+        if(target.get(mid) == value || target.get(mid-1)<value && target.get(mid)>value){
+           return mid;
+        }
+        if(value < target.get(mid)){
+            return binarySearchInternalCrossOverInternal(target,0,mid-1,value);
+        } else {
+            return binarySearchInternalCrossOverInternal(target,mid+1,end,value);
+        }
     }
 }

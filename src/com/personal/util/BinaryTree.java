@@ -3,6 +3,7 @@ package com.personal.util;
 import java.io.Serializable;
 import java.util.*;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 /**
  * Created by prajeev on 19/3/17.
@@ -419,4 +420,105 @@ public class BinaryTree implements Serializable {
         }
         return false;
     }
+
+    public int getDistance(TreeNode thiz, TreeNode dat){
+        LockedStack<TreeNode> leftStack = new LockedStack<>();
+        leftStack.push(root);
+        LockedStack<TreeNode> rightStack = new LockedStack<>();
+        rightStack.push(root);
+        getStackToNode(thiz, leftStack);
+        getStackToNode(dat,rightStack);
+        List<TreeNode> leftList = leftStack.stream().collect(Collectors.toList());
+        List<TreeNode> rightList = rightStack.stream().collect(Collectors.toList());
+        System.out.println(leftList);
+        System.out.println(rightList);
+        return parseDistance(leftList,rightList);
+    }
+
+    private int parseDistance(List<TreeNode> leftList, List<TreeNode> rightList) {
+        for(int i = leftList.size()-1 ; i >=0 ; i--){
+            if(rightList.contains(leftList.get(i))){
+                //found the common element;
+                return leftList.size()-1-i + rightList.size()-1-rightList.indexOf(leftList.get(i));
+            }
+        }
+        return 0;
+    }
+
+    private void popToSameStartPoint(LockedStack<TreeNode> thisStack, LockedStack<TreeNode> thatStack) {
+        while(thisStack.get(0)!=thatStack.get(0)){
+            thisStack.remove(0);
+        }
+    }
+
+    private void getStackToNode(TreeNode target, LockedStack<TreeNode> stack) {
+        if(stack.isEmpty()){
+            return;
+        }
+        TreeNode examination = stack.peek();
+        if(target == examination){
+            stack.setLocked(true);
+            return;
+        }
+        if(examination!=null){
+           if(examination.left!=null){
+               stack.push(examination.left);
+               getStackToNode(target,stack);
+               stack.pop();
+           }
+            if(examination.right!=null){
+                stack.push(examination.right);
+                getStackToNode(target,stack);
+                stack.pop();
+            }
+        }
+    }
+
+    /**
+     * given a node it gives its depth.
+     * @param node
+     */
+    public int getNodeDepth(TreeNode node){
+        return getNodeDepthInternal(root, node, 1);
+    }
+
+    private int getNodeDepthInternal(TreeNode node, TreeNode target, int level) {
+        if(node == target){
+            return level;
+        } else {
+            if(node.left != null){
+                return getNodeDepthInternal(node.left,target,level+1);
+            }
+            if(node.right != null){
+                return getNodeDepthInternal(node.right,target,level+1);
+            }
+        }
+        return level;
+    }
+
+    public TreeNode getLowestCommonAncestor(TreeNode thiz, TreeNode dat){
+        LockedStack<TreeNode> leftStack = new LockedStack<>();
+        leftStack.push(root);
+        LockedStack<TreeNode> rightStack = new LockedStack<>();
+        rightStack.push(root);
+        getStackToNode(thiz, leftStack);
+        getStackToNode(dat,rightStack);
+        List<TreeNode> leftList = leftStack.stream().collect(Collectors.toList());
+        List<TreeNode> rightList = rightStack.stream().collect(Collectors.toList());
+        System.out.println();
+        System.out.println(leftList);
+        System.out.println(rightList);
+        return findLCAFromStacks(leftList, rightList);
+    }
+
+    private TreeNode findLCAFromStacks(List<TreeNode> leftList, List<TreeNode> rightList) {
+        for(int i = leftList.size()-1 ; i >=0 ; i--){
+            if(rightList.contains(leftList.get(i))){
+                //found the common element;
+                return leftList.get(i);
+            }
+        }
+        return null;
+    }
+
 }

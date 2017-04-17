@@ -97,8 +97,12 @@ public class TreeTraversals {
 
         System.out.printf("\nchecking if the tree contains a certain root to end sum\n");
         System.out.println(treeTraversals.tree.checkRootToLeafSum(7));
+        System.out.println("Distance between nodes: "+treeTraversals.tree.getDistance(treeTraversals.tree.root.left.left
+                                                                                  ,treeTraversals.tree.root.right.left.right));
 
-
+        System.out.printf("Depth of the node treeTraversals.tree.root.right.left.right is %d", treeTraversals.tree.getNodeDepth(treeTraversals.tree.root.right.left.right));
+        System.out.println("\nLCA between nodes: "+treeTraversals.tree.getLowestCommonAncestor(treeTraversals.tree.root.left.left
+                ,treeTraversals.tree.root.left.right));
 
     }
 }
