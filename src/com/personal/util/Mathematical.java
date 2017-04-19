@@ -1,5 +1,8 @@
 package com.personal.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by pr250155 on 3/27/17.
  */
@@ -56,6 +59,27 @@ public class Mathematical {
             return m;
         } else {
             return gcd(n, m % n);
+        }
+    }
+
+    public static List<Integer> getBinaryRepresentationAsAList(int number,int setSize) {
+        List<Integer> responseList = new ArrayList<>();
+        getBinaryRepresentationAsAListInternal(number,responseList);
+        if(responseList.size()<setSize) {
+            int diff = setSize - responseList.size();
+            while (diff>0){
+                responseList.add(0,0); diff--;
+            }
+        }
+        return responseList;
+    }
+
+    private static void getBinaryRepresentationAsAListInternal(int number, List<Integer> responseList) {
+        if (number <= 1){
+            responseList.add(number);
+        } else {
+            getBinaryRepresentationAsAListInternal(number / 2 , responseList);
+            getBinaryRepresentationAsAListInternal(number % 2 , responseList );
         }
     }
 }

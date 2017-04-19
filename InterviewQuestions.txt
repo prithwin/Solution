@@ -66,19 +66,24 @@ A13: Its the problem that you fix by lazy initialization.
 ************************************************************************************************************************
 Q14: Types of lock provided by java.
 A14: A Re-enterent lock is what is provided by java, there is also striped locking provided for
+************************************************************************************************************************
+Q15: how to send back an error using spring MVC/rest controller
+A15: With spring you can have an exception class annotated by a responese type annotation and whenever you throw this ex
+     ception(preferably runtime) you'll see that these exceptions are going back as error codes to your clients.
+Q16: how do you manage change in rest services response.
+A17: versioning a rest service is the way to go.
 naming conventions for rest resources.
 String flipping of 0s and 1s
 a method taking two integers, finding the minimum for n digits using the same method.
 what all can you assert in java/junit
 hibernate criteria query api.
-*how do you manage change in XSD, say you have a client basically learn more about serialization.
 *what is a container.
 *multithreading in servlet
 *two spring contexts with the same file
 *rest service versioning.
 *Servlet spec how threads are created or not.
 *difference between request forwarding or redirecting.
-*how to send back an error 404
+
 *read about GET and POST inside rest controller
 
 
