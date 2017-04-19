@@ -8,8 +8,7 @@ import java.util.Arrays;
 public class DutchNationalFlag {
 
     public static void main(String[] args) {
-//        int[] target = {0,0,0,0,1,1,0,1,2,2,1,1,0,1,2,2,0,1,2,0,0,2,1,0,2,1,0,2,2,0,1};
-        int[] target = {0,1,2};
+        int[] target = {0,0,0,0,1,1,0,1,2,2,1,1,0,1,2,2,0,1,2,0,0,2,1,0,2,1,0,2,2,0,1};
         new DutchNationalFlag().threeWayPartition(target);
        for(int item : target){
            System.out.println(item);
