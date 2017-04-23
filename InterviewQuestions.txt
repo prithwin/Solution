@@ -1,11 +1,11 @@
 ************************************************************************************************************************
-Q1. What are the advantages of using an executer framework to just simply starting and running a thread.
+Q1. What are the advantages of using an executor framework to just simply starting and running a thread.
 A1: *it separates task submittion from task execution,letting you control some aspects of the thread execution
     *using thread.start is unbounded so it doesn't place any JVM level bounds on how many threads that can be started.
     *It provides some lifecycle methods that can get some lifecycle related, you can control lifecycle like kill
     and check if its alive
     *Thread creation is an expensive process and its managed much better within the executors.
-    *you can use callables which return a value.
+    *you can use Callables which return a value.
     *you can use timed executors.
     *you can use completion service which can be used with a batch of classes.
 ************************************************************************************************************************
@@ -39,7 +39,7 @@ Q7. Was shown a piece of code in which there was a for loop, we were removing th
      }
      was asked what will happen.
 A7: There will be a concurrent modification exception because of the way this the enhanced for works, the Iterators that
-    are returned by the non-concurrent APIS are called faile fast iterators, wouldn't be a problem if you iterated using
+    are returned by the non-concurrent APIs are called fail fast iterators, wouldn't be a problem if you iterated using
     an index.
 ************************************************************************************************************************
 Q8: advantages of using ORM software.
@@ -65,26 +65,91 @@ Q13: what is n and n+1 query problem?
 A13: Its the problem that you fix by lazy initialization.
 ************************************************************************************************************************
 Q14: Types of lock provided by java.
-A14: A Re-enterent lock is what is provided by java, there is also striped locking provided for
+A14: A Re-enterent lock is what is provided by java, you have a readWrite Lock too.
 ************************************************************************************************************************
 Q15: how to send back an error using spring MVC/rest controller
 A15: With spring you can have an exception class annotated by a responese type annotation and whenever you throw this ex
      ception(preferably runtime) you'll see that these exceptions are going back as error codes to your clients.
+************************************************************************************************************************
 Q16: how do you manage change in rest services response.
-A17: versioning a rest service is the way to go.
-naming conventions for rest resources.
-String flipping of 0s and 1s
-a method taking two integers, finding the minimum for n digits using the same method.
-what all can you assert in java/junit
-hibernate criteria query api.
-*what is a container.
-*multithreading in servlet
-*two spring contexts with the same file
-*rest service versioning.
-*Servlet spec how threads are created or not.
-*difference between request forwarding or redirecting.
+A16: versioning a rest service is the way to go.
+************************************************************************************************************************
+Q17: describe the entire collection framework in java
+A17: here is the entire collection framework described in one breath.
+     <<List Types>>
+     ArrayList -> a list of objects backed by an array.
+     LinkedList -> a linked List.
+     PriorityQueue -> a minheap based priority Queue.
+     BlockingQueue -> a Blocking Queue.
+     Stack -> a stack.
 
-*read about GET and POST inside rest controller
+     <<Maps>>
+     HashMap -> a hash Based map. O(1) O(1) insertions and deletions. hashcode ordered traversal.
+     TreeMap -> a Map where the keys are stored in the a Self balancing tree(AVL/ Red-black).iteration is in the natur-
+     l order
+     LinkedHashMap -> a hashMap where iteration is performed using a linked list hence it preserves insertion order.
+     ConcurrentHashMap -> segmented locks.
+     WeakHashMap -> hashMap where the instances are weak references
+
+     <<Sets>>
+     HashSet -> a hashmap based set.
+     TreeMap ->  a treeMap Based Set.
+************************************************************************************************************************
+Q18: Was asked a lot of details about rest controllers from framework setup perspective, Can be summarized as follows.
+A18: >how do you declare a controller?
+     >using the @Controller annotation
+
+     >how do you make it return an object?
+     >@ResponseBody annotation.
+
+     >how do you make a Rest controller accept Query params.
+     >query params are the Request parameters themselves, in case of GET they are sent as un-encoded in the URL, in POST
+      Request they are sent encoded in the Form, regardless of whether it is a GET or a POST, this information would be
+      references in our restController using the RequstParam.
+      @Component("someWebService")
+
+      @RequestMapping(value="/users")
+      class myController {
+
+
+          @RequestMapping(value = "/resourceName/{userId}",method = HTTPMethodType.GET,produces = ResponseType.SOMETHING)
+          public @ResponseBody ReturnTypeVo someMethod(@PathParam int userId, @RequestParam String queryParameter){
+
+          }
+      }
+************************************************************************************************************************
+Q19: How can I get access to HttpRequst and HttpResposne Objects in spring web services controllers?
+A19: which ever controller has additional HTTPRequest and HttpResponse objects as an argument would receive the objects
+************************************************************************************************************************
+Q20: How do you access the HttpSession or Request params from the HttpRequest Object?
+A20: You get the session from request.getSession.
+************************************************************************************************************************
+* naming conventions for rest resources.
+* String flipping of 0s and 1s
+* a method taking two integers, finding the minimum for n digits using the same method.
+* what all can you assert in java/junit
+* hibernate criteria query api.
+* what is a container.
+* multithreading in servlet
+* two spring contexts with the same file
+* rest service versioning.
+* Servlet spec how threads are created or not.
+* difference between request forwarding or redirecting.
+
+* strong and weak reference types in java.
+* new Garbage collection concepts in java 8.
+* order of execution of blocks in java
+* what are instance blocks.
+* factory design pattern, why is the factory a singleton itself.
+* can you implements a consumer for your web service using spring.
+* Can you put java code inside a JSP?
+* JVM ClassPath describe.
+* JVM object initialization.
+* is there a chance that you can have platform dependent compiled classes.
+* a little about Java Reflection API.
+* Cloning a shallow and deep copy.
+
+
 
 
 

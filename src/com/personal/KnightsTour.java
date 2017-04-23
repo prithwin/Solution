@@ -23,51 +23,64 @@ public class KnightsTour {
 
     public static void main(String[] args) {
         int[][] chessBoard = new int[8][8];
-        int moveNum = 0;
+        int moveNum = 1;
         chessBoard[0][0] = moveNum;
+
         //creating a list of possible moves
-        List<Move> moves = Arrays.asList(new Move(1, 2),
+        List<Move> moves = Arrays.asList (
+                new Move(1, 2),
                 new Move(2, 1),
                 new Move(1, -2),
                 new Move(-2, 1),
-                new Move(-1, 2),
                 new Move(2, -1),
+                new Move(-1, 2),
                 new Move(-1, -2),
-                new Move(-2, -1));
-        moveKnight(chessBoard, moves, 0, 0, 0);
+                new Move(-2, -1)
+        );
+        moveKnight(chessBoard, moves, moveNum + 1, 0, 0);
         Print2DMatrix.print2dMatrix(chessBoard);
     }
 
-    private static void moveKnight(int[][] chessBoard, List<Move> moves, int moveNum, int currI, int currJ) {
-        if(moveNum < 63 && noSafeMoves(chessBoard,currI,currJ,moves,moveNum)){
-            //backtrack
-            return;
-        }
-        if(moveNum == 63 && noSafeMoves(chessBoard,currI,currJ,moves,moveNum)){
+    private static void moveKnight(int[][] chessBoard, List<Move> moves, int nextMove, int currI, int currJ) {
+
+        if(nextMove <= 64 && noSafeMoves(chessBoard,currI,currJ,moves)){
+            //wipe all move numbers higher than this dead move
+            if(nextMove == 64) {
+                System.out.printf("");
+            }
+            Print2DMatrix.print2dMatrix(chessBoard);
+            System.out.println(nextMove + " cannot be done from  "+currI+","+currJ);
+            System.out.println("backtracking and clearing "+ (nextMove -1) + "onwards");
+            Print2DMatrix.clearNumbersHigherThan(nextMove - 1, chessBoard);
             Print2DMatrix.print2dMatrix(chessBoard);
             return;
         }
-        chessBoard[currI][currJ] = moveNum;
-            for (int i = 0; i < moves.size(); i++) {
+        if(nextMove == 65) {
+            Print2DMatrix.print2dMatrix(chessBoard);
+            return;
+        }
+            for (int i = 0 ; i < moves.size() ; i++) {
                 Move currentMove = moves.get(i);
-                int nextMove=moveNum+1;
-                if (isSafeMove(currentMove, chessBoard, currI, currJ, nextMove)) {
-                    moveKnight(chessBoard, moves, nextMove, currI+currentMove.i, currJ+currentMove.j);
+                if (isSafeMove(currentMove, chessBoard, currI, currJ)) {
+                    chessBoard[currI+currentMove.i][currJ+currentMove.j] = nextMove;
+                    moveKnight(chessBoard, moves, nextMove + 1, currI+currentMove.i, currJ+currentMove.j);
                 }
             }
+            Print2DMatrix.clearNumbersHigherThan(nextMove -1  ,chessBoard);
 
     }
 
-    private static boolean noSafeMoves(int[][] chessBoard, int currI, int currJ, List<Move> moves,int moveNum) {
+    private static boolean noSafeMoves(int[][] chessBoard, int currI, int currJ, List<Move> moves) {
         for(Move move : moves){
-            if(isSafeMove(move,chessBoard,currI,currJ,moveNum+1)){
+            if( isSafeMove(move,chessBoard,currI,currJ)){
                 return false;
             }
         }
         return true;
     }
 
-    private static boolean isSafeMove(Move move, int[][] chessBoard, int currI, int currJ,int moveNum) {
+    private static boolean isSafeMove(Move move, int[][] chessBoard, int currI, int currJ) {
+
         int newI = currI + move.i;
         int newJ = currJ + move.j;
 
@@ -78,12 +91,10 @@ public class KnightsTour {
             return false;
         }
         if(chessBoard[newI][newJ] == 0){
+            //has not been here
             return true;
         }
-        if (chessBoard[newI][newJ]<moveNum) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
 }
