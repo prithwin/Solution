@@ -69,7 +69,12 @@ A14: A Re-enterent lock is what is provided by java, you have a readWrite Lock t
 ************************************************************************************************************************
 Q15: how to send back an error using spring MVC/rest controller
 A15: With spring you can have an exception class annotated by a responese type annotation and whenever you throw this ex
-     ception(preferably runtime) you'll see that these exceptions are going back as error codes to your clients.
+     ception(preferably runtime) you'll see that these exceptions are going back as error codes to your clients. you hav
+     to add the @ResponseSatus annotation.
+
+     there are other ways to handle it too, you can declaratively create an exceptionhandler . where you put an @Control
+     ler advice object and put exception handler
+
 ************************************************************************************************************************
 Q16: how do you manage change in rest services response.
 A16: versioning a rest service is the way to go.
@@ -124,6 +129,23 @@ A19: which ever controller has additional HTTPRequest and HttpResponse objects a
 Q20: How do you access the HttpSession or Request params from the HttpRequest Object?
 A20: You get the session from request.getSession.
 ************************************************************************************************************************
+Q21: new Garbage collection concepts in java 8.
+A21: there are 4 GC algorithm is java after java 8
+     >>serial.
+     >>parellel.
+     >>CMS
+     >>G1 garbage collector
+************************************************************************************************************************
+Q22: what are the different reference types in Java.
+A22: there are 4 reference types in java
+     >>Strong.
+     >>Weak Reference types.
+     >>Soft Reference.
+     >>Phantom references.
+************************************************************************************************************************
+Q23: Is there a chance that you can have platform dependent compiled classes.
+A23: there are native methods using the native keyword, these are written in other languages and are machine depenedant.
+************************************************************************************************************************
 * naming conventions for rest resources.
 * String flipping of 0s and 1s
 * a method taking two integers, finding the minimum for n digits using the same method.
@@ -136,8 +158,6 @@ A20: You get the session from request.getSession.
 * Servlet spec how threads are created or not.
 * difference between request forwarding or redirecting.
 
-* strong and weak reference types in java.
-* new Garbage collection concepts in java 8.
 * order of execution of blocks in java
 * what are instance blocks.
 * factory design pattern, why is the factory a singleton itself.
@@ -145,7 +165,6 @@ A20: You get the session from request.getSession.
 * Can you put java code inside a JSP?
 * JVM ClassPath describe.
 * JVM object initialization.
-* is there a chance that you can have platform dependent compiled classes.
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
 
