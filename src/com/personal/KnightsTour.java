@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Created by pr250155 on 4/18/17.
- * TODO:
+ * TODO: not fully functional
  */
 public class KnightsTour {
 
@@ -28,13 +28,13 @@ public class KnightsTour {
 
         //creating a list of possible moves
         List<Move> moves = Arrays.asList (
-                new Move(1, 2),
                 new Move(2, 1),
-                new Move(1, -2),
+                new Move(1, 2),
                 new Move(-2, 1),
-                new Move(2, -1),
+                new Move(1, -2),
                 new Move(-1, 2),
                 new Move(-1, -2),
+                new Move(2, -1),
                 new Move(-2, -1)
         );
         moveKnight(chessBoard, moves, moveNum + 1, 0, 0);

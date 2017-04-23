@@ -146,6 +146,13 @@ A22: there are 4 reference types in java
 Q23: Is there a chance that you can have platform dependent compiled classes.
 A23: there are native methods using the native keyword, these are written in other languages and are machine depenedant.
 ************************************************************************************************************************
+Q24: JVM object initialization.
+A24: An object is initialized in the following order:
+     >>all static Content in the order it appears in the class.
+     >> all instance blocks the order in which they appear in the class
+************************************************************************************************************************
+Q25: what types of Versioning mechanism do you know for rest API?
+A25:
 * naming conventions for rest resources.
 * String flipping of 0s and 1s
 * a method taking two integers, finding the minimum for n digits using the same method.
@@ -154,7 +161,6 @@ A23: there are native methods using the native keyword, these are written in oth
 * what is a container.
 * multithreading in servlet
 * two spring contexts with the same file
-* rest service versioning.
 * Servlet spec how threads are created or not.
 * difference between request forwarding or redirecting.
 
@@ -164,7 +170,6 @@ A23: there are native methods using the native keyword, these are written in oth
 * can you implements a consumer for your web service using spring.
 * Can you put java code inside a JSP?
 * JVM ClassPath describe.
-* JVM object initialization.
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
 
