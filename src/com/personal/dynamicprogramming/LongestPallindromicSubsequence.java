@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.dynamicprogramming;
 
 import com.personal.util.Mathematical;
 import com.personal.util.Print2DMatrix;

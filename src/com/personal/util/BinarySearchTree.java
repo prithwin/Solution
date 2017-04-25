@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class BinarySearchTree extends BinaryTree implements Serializable{
 
-    public void add(TreeNode node){
+    public void add(TreeNode node) {
         if(this.root == null){
             this.root = node;
             return;

@@ -87,7 +87,6 @@ public class KnightsTour {
             return false;
         }
         if(chessBoard[newI][newJ] == 0){
-            //has not been here
             return true;
         }
         return false;

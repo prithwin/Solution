@@ -1,5 +1,9 @@
 package com.random.test;
 
+import com.personal.util.AVLTree;
+import com.personal.util.AVLTreeNode;
+import com.personal.util.TreeNode;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.*;
@@ -23,7 +27,11 @@ public class MotherOfAlltersterClasses {
             System.out.println(key.number);
         }
         A a = new A();
-        a.doSomething();
+        try {
+            a.doSomething(null);
+        } catch (Exception e){
+
+        }
         List<Integer> integerList = new ArrayList<>();
         integerList.add(1);
         integerList.add(2);
@@ -54,16 +62,30 @@ public class MotherOfAlltersterClasses {
             Number rhs = (Number)o;
             if (this.number == rhs.number)
                 return 0;
-            return (this.number-rhs.number)/((this.number-rhs.number)>0? (this.number-rhs.number) : -1*(this.number-rhs.number));
+            return
+                    (this.number-rhs.number)/((this.number-rhs.number)>0 ?
+                    (this.number-rhs.number)
+                    :
+                    -1*(this.number-rhs.number));
         }
     }
 }
 
 class A{
-    public static void doSomething(){
+    public TreeNode doSomething(TreeNode node) throws Exception {
         System.out.println("doing Something");
+        return null;
     }
 }
+
+class  C extends A {
+    @Override
+    public AVLTreeNode doSomething(TreeNode node) throws IOException{
+        //super.doSomething(node);
+        return null;
+    }
+}
+
 
 interface Binterface {
     List<?> Bmethod() throws IOException;

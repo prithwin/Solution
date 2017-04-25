@@ -1,8 +1,6 @@
 package com.personal.tester;
 
-import com.personal.util.BinarySearchTree;
-import com.personal.util.BinaryTree;
-import com.personal.util.TreeNode;
+import com.personal.util.*;
 
 /**
  * Created by prajeev on 19/3/17.
@@ -109,5 +107,14 @@ public class TreeTraversals {
         System.out.println("\nLCA between nodes: "+treeTraversals.tree.getLowestCommonAncestor(treeTraversals.tree.root.left.left
                 ,treeTraversals.tree.root.left.right));
 
+
+        AVLTree avlTree = new AVLTree();
+        avlTree.add(new AVLTreeNode(45));
+        avlTree.add(new AVLTreeNode(44));
+        avlTree.add(new AVLTreeNode(46));
+        avlTree.add(new AVLTreeNode(32));
+        avlTree.add(new AVLTreeNode(47));
+        avlTree.add(new AVLTreeNode(2));
+        avlTree.add(new AVLTreeNode(200));
     }
 }

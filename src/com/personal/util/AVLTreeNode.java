@@ -5,9 +5,13 @@ package com.personal.util;
  */
 public class AVLTreeNode extends TreeNode {
     
+    ComparableNumber number;
+    AVLTreeNode left;
+    AVLTreeNode right;
     int nodeHeight;
 
     public AVLTreeNode(int number) {
         super(number);
+        this.number = new ComparableNumber(number);
     }
 }
