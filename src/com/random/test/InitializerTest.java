@@ -7,16 +7,16 @@ public class InitializerTest {
     static int staticvalue = getStaticValue();
 
     {
-       System.out.println("Instance block executed");
+       System.out.println((staticvalue++) + ".Instance block executed");
     }
     int value = getValue();
 
     static {
-        System.out.println("Static block run");
+        System.out.println((staticvalue++) + ".Static block run");
     }
 
     public InitializerTest(){
-        System.out.println("constructor");
+        System.out.println((staticvalue++) + ".constructor");
     }
 
     public static void main(String[] args) {
@@ -24,12 +24,12 @@ public class InitializerTest {
     }
 
     public int getValue() {
-        System.out.println("Intitializing a variable");
+        System.out.println((staticvalue++) + ".Intitializing a variable");
         return 0;
     }
 
     public static int getStaticValue() {
-        System.out.println("Intitializing a variable in static method");
-        return 1;
+        System.out.println(1+".Intitializing a variable in static method");
+        return 2;
     }
 }

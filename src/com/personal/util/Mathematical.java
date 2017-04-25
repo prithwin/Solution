@@ -82,4 +82,10 @@ public class Mathematical {
             getBinaryRepresentationAsAListInternal(number % 2 , responseList );
         }
     }
+
+    public static int min(int thiz, int that) {
+        if (thiz <= that)
+            return thiz;
+        return that;
+    }
 }

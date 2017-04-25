@@ -7,9 +7,13 @@ import java.util.List;
 
 /**
  * Created by pr250155 on 4/18/17.
- * TODO: not fully functional
+ * TODO: add greedyness by taking the path with the smallest number of possible Moves
  */
 public class KnightsTour {
+
+    public static final int BOARD_SIZE = 5;
+    public static final int TOTAL_MOVES = BOARD_SIZE * BOARD_SIZE;
+    public static final int MAX_INDEX = BOARD_SIZE - 1;
 
     static class Move {
         int i;
@@ -22,7 +26,7 @@ public class KnightsTour {
     }
 
     public static void main(String[] args) {
-        int[][] chessBoard = new int[8][8];
+        int[][] chessBoard = new int[BOARD_SIZE][BOARD_SIZE];
         int moveNum = 1;
         chessBoard[0][0] = moveNum;
 
@@ -38,25 +42,17 @@ public class KnightsTour {
                 new Move(-2, -1)
         );
         moveKnight(chessBoard, moves, moveNum + 1, 0, 0);
-        Print2DMatrix.print2dMatrix(chessBoard);
     }
 
     private static void moveKnight(int[][] chessBoard, List<Move> moves, int nextMove, int currI, int currJ) {
-
-        if(nextMove <= 64 && noSafeMoves(chessBoard,currI,currJ,moves)){
-            //wipe all move numbers higher than this dead move
-            if(nextMove == 64) {
-                System.out.printf("");
-            }
-            Print2DMatrix.print2dMatrix(chessBoard);
-            System.out.println(nextMove + " cannot be done from  "+currI+","+currJ);
-            System.out.println("backtracking and clearing "+ (nextMove -1) + "onwards");
-            Print2DMatrix.clearNumbersHigherThan(nextMove - 1, chessBoard);
+        if(nextMove == TOTAL_MOVES && !noSafeMoves(chessBoard,currI,currJ,moves)){
+            Print2DMatrix.addKnightToFinalSpot(chessBoard,TOTAL_MOVES);
             Print2DMatrix.print2dMatrix(chessBoard);
             return;
         }
-        if(nextMove == 65) {
-            Print2DMatrix.print2dMatrix(chessBoard);
+        if(nextMove < TOTAL_MOVES && noSafeMoves(chessBoard,currI,currJ,moves)){
+            //wipe all move numbers higher than this dead move
+            Print2DMatrix.clearNumbersHigherThan(nextMove - 1, chessBoard);
             return;
         }
             for (int i = 0 ; i < moves.size() ; i++) {
@@ -84,7 +80,7 @@ public class KnightsTour {
         int newI = currI + move.i;
         int newJ = currJ + move.j;
 
-        if(newI > 7 || newJ > 7){
+        if(newI > MAX_INDEX || newJ > MAX_INDEX){
             return false;
         }
         if(newI < 0 || newJ < 0){
