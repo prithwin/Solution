@@ -152,7 +152,7 @@ A24: An object is initialized in the following order:
      >> all instance blocks the order in which they appear in the class
 ************************************************************************************************************************
 Q25: what types of Versioning mechanism do you know for rest API?
-A25:
+A25: you can either have a URI based versioning or Metadata based
 * naming conventions for rest resources.
 * String flipping of 0s and 1s
 * a method taking two integers, finding the minimum for n digits using the same method.
@@ -172,6 +172,10 @@ A25:
 * JVM ClassPath describe.
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
+* Can a hashMap/HashSet store a null key?
+* why are rest APIs stateless.
+* Factory design pattern restrict visiblity of the constructor.
+
 
 
 

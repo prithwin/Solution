@@ -116,5 +116,6 @@ public class TreeTraversals {
         avlTree.add(new AVLTreeNode(47));
         avlTree.add(new AVLTreeNode(2));
         avlTree.add(new AVLTreeNode(200));
+        avlTree.printAVLTree();
     }
 }

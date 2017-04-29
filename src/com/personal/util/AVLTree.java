@@ -17,6 +17,7 @@ public class AVLTree extends BinarySearchTree {
     }
 
     private void addInternal(AVLTreeNode where, AVLTreeNode what) {
+
         if( where == null ){
             return;
         } else {
@@ -33,7 +34,29 @@ public class AVLTree extends BinarySearchTree {
             }
             where.nodeHeight = 1 +  Mathematical.maximum(getNodeHeight(where.left),getNodeHeight(where.right));
             int balance = getNodeHeight(where.left) -  getNodeHeight(where.right);
+
+            if( balance > 1) {
+                System.out.println("at "+ where.number + " the left tree is larger than the right tree");
+                where = rotateRight(where);
+                System.out.println("examine");
+            }
         }
+    }
+
+    private AVLTreeNode rotateRight(AVLTreeNode y) {
+        AVLTreeNode x = y.left;
+        AVLTreeNode T2 = x.right;
+
+        // Perform rotation
+        x.right = y;
+        y.left = T2;
+
+        // Update heights
+        y.nodeHeight = Mathematical.maximum(getNodeHeight(y.left), getNodeHeight(y.right)) + 1;
+        x.nodeHeight = Mathematical.maximum(getNodeHeight(x.left), getNodeHeight(x.right)) + 1;
+
+        // Return new root
+        return x;
     }
 
     public void addUnbalanced(AVLTreeNode node) {

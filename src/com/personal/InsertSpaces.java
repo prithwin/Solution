@@ -9,6 +9,9 @@ import java.util.function.Function;
  * Created by pr250155 on 4/11/17.
  */
 public class InsertSpaces {
+
+    public static final String SPACE = " ";
+
     public List<String> insertSpaces(String target){
         List<String> result = new LinkedList<>();
         StringBuilder builder = new StringBuilder();
@@ -27,7 +30,7 @@ public class InsertSpaces {
         insertSpacesInternal(target, stringIndex + 1, builder,result);
         builder.delete(builder.length()-1,builder.length());
 
-        builder.append(" ").append(target.charAt(stringIndex));
+        builder.append(SPACE).append(target.charAt(stringIndex));
         insertSpacesInternal(target, stringIndex + 1, builder,result);
         builder.delete(builder.length()-2,builder.length());
     }

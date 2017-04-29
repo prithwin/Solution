@@ -28,6 +28,6 @@ public class TowersOfHanoi {
 
 
     public static void main(String[] args) {
-       TowersOfHanoi.printMoves(64);
+       TowersOfHanoi.printMoves(8);
     }
 }
