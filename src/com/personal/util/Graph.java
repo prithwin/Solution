@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.personal.util.GraphType.DIRECTED_MATRIX;
 import static com.personal.util.GraphType.UNDIRECTED_MATRIX;
 
 /**
