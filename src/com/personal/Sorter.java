@@ -51,6 +51,22 @@ public class Sorter<E extends Comparable> {
     }
 
     /**
+     * Generic method that implements Selection Sort.
+     * @param targetList
+     */
+    public void selectionSort(List<E> targetList){
+        for(int i = 0 ; i < targetList.size()-1 ; i++) {
+            for(int j = i + 1 ; j <targetList.size() ; j++) {
+                if(targetList.get(i).compareTo(targetList.get(j)) == 1) {
+                    E temp = targetList.get(i);
+                    targetList.set(i,targetList.get(j));
+                    targetList.set(j,temp);
+                }
+            }
+        }
+    }
+
+    /**
      * functioning mergeSort
      *
      * @param targetList
@@ -226,9 +242,9 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using insertion sort");
 //        sorter.insertionSort(numberList);
 
-        System.out.println("\nSorting using merge sort");
-        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
-        numberList = resultList;
+//        System.out.println("\nSorting using merge sort");
+//        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
+//        numberList = resultList;
 
 //        System.out.println("Sorting using quick sort");
 //        sorter.quickSort(numberList, 0, numberList.size() - 1);
@@ -238,6 +254,9 @@ public class Sorter<E extends Comparable> {
 
 //        System.out.println("Sorting using min Heap sort");
 //        numberList = sorter.minHeapSort(numberList);
+
+        System.out.println("sorting using selection sort");
+        sorter.selectionSort(numberList);
         numberList.forEach(Sorter::printElegant);
         System.out.println("sum: "+
                 numberList.stream()
