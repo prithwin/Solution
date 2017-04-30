@@ -2,6 +2,7 @@ package com.personal;
 
 import com.personal.util.Graph;
 import com.personal.util.GraphNode;
+import com.personal.util.GraphType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,16 +13,20 @@ import java.util.Map;
 public class GraphTester {
     public static void main(String[] args) {
         Map<Integer,GraphNode> nodeMap = new HashMap<>();
-        int[][] adjacencyMatrix = { {0,1,1,0},
-                                    {0,0,1,0},
-                                    {1,0,0,1},
-                                    {0,0,0,1}};
+
         nodeMap.put(0,new GraphNode("0"));
         nodeMap.put(1,new GraphNode("1"));
         nodeMap.put(2,new GraphNode("2"));
         nodeMap.put(3,new GraphNode("3"));
 
-        Graph graph = new Graph(adjacencyMatrix , nodeMap);
+        Graph graph = new Graph(nodeMap, GraphType.UNDIRECTED_MATRIX);
+        graph.addEdge(0,1);
+        graph.addEdge(0,2);
+        graph.addEdge(1,2);
+        graph.addEdge(2,3);
+        graph.addEdge(2,0);
+        graph.addEdge(3,3);
+
         graph.printDepthFirstSearch(2);
 
     }

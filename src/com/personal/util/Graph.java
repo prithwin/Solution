@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.personal.util.GraphType.DIRECTED_MATRIX;
+import static com.personal.util.GraphType.UNDIRECTED_MATRIX;
+
 /**
  * Created by pr250155 on 4/29/17.
  */
@@ -11,14 +14,42 @@ public class Graph {
 
     Map<Integer,GraphNode> graphNodes;
     int[][] adjecencyMatrix;
+    List<List<GraphNode>> adjacencyList;
+    GraphType type;
 
     public Graph(int[][] adjecencyMatrix, Map<Integer , GraphNode> graphNodes) {
         this.adjecencyMatrix = adjecencyMatrix;
         this.graphNodes = graphNodes;
+        this.type = UNDIRECTED_MATRIX;
+    }
+
+    public Graph(Map<Integer,GraphNode> graphNodes,GraphType type) {
+        if(type.isMatrix()) {
+            if(adjecencyMatrix == null) {
+                adjecencyMatrix = new int[graphNodes.size()][graphNodes.size()];
+            }
+        }
+        this.graphNodes = graphNodes;
+        this.type = type;
+    }
+
+    public void addEdge(int a , int b) {
+        if(type.isDirected()){
+            if(type.isMatrix()) {
+                adjecencyMatrix[a][b] = 1;
+            }
+        } else {
+            if(type.isMatrix()) {
+                adjecencyMatrix[a][b] = 1;
+                adjecencyMatrix[b][a] = 1;
+            }
+        }
     }
 
     public void printDepthFirstSearch(int index) {
-        printDepthFirstSearchInternal(index , new ArrayList<>());
+        if(type.isMatrix()) {
+            printDepthFirstSearchInternal(index, new ArrayList<>());
+        }
     }
 
     public void printDepthFirstSearchInternal(int index,List<Integer> visited) {
