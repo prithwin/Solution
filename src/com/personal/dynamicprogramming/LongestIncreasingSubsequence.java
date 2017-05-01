@@ -21,7 +21,7 @@ public class LongestIncreasingSubsequence {
             results[k] = 1;
         }
         for(int i = 1 ; i < target.size() ; i++) {
-            for(int j = 0 ; j <i ;j++) {
+            for(int j = 0 ; j < i ;j++) {
                 if(target.get(j) < target.get(i)){
                     results[i] = Mathematical.maximum(results[i],1 + results[j]);
                 } else {

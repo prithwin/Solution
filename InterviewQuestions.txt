@@ -153,9 +153,14 @@ A24: An object is initialized in the following order:
 ************************************************************************************************************************
 Q25: what types of Versioning mechanism do you know for rest API?
 A25: you can either have a URI based versioning or Metadata based
-* naming conventions for rest resources.
-* String flipping of 0s and 1s
-* a method taking two integers, finding the minimum for n digits using the same method.
+************************************************************************************************************************
+Q26: Naming conventions for rest resources.
+A26: >use nouns
+     >use plural nouns
+     >GETS should be idempotent.
+     >HATEOAS means the client should infer everything he wants to do by using the hypermedia or the meta data that you
+     are already sending along with your responses.
+************************************************************************************************************************
 * what all can you assert in java/junit
 * hibernate criteria query api.
 * what is a container.
@@ -174,7 +179,13 @@ A25: you can either have a URI based versioning or Metadata based
 * Cloning a shallow and deep copy.
 * Can a hashMap/HashSet store a null key?
 * why are rest APIs stateless.
-* Factory design pattern restrict visiblity of the constructor.
+* Factory design pattern restrict visibility of the constructor.
+* how do you implement a monthly a payment schedule.
+* which parser do you user to parse extremely large.
+* adapter pattern on american and indian plugs
+* how do you really secure a rest application.
+* what java 8 things have you really used.
+
 
 
 

@@ -3,8 +3,7 @@ package com.personal;
 import com.personal.util.ComparableNumber;
 import com.personal.util.Heap;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by prajeev on 17/3/17.
@@ -12,7 +11,7 @@ import java.util.List;
 public class Sorter<E extends Comparable> {
     /**
      * functioning bubble sort
-     * compare everyother number you will find that the largest number would have bubbled up
+     * compare every other number you will find that the largest number would have bubbled up
      * you have do repeat this one less time as the largest number is already at the top.
      *
      * @param targetList
@@ -27,6 +26,32 @@ public class Sorter<E extends Comparable> {
                 }
             }
         }
+    }
+
+    /**
+     *
+     * @param items
+     * @return
+     */
+    public List<Integer> countingSort(List<Integer> items) {
+        List<Integer> registryList = new ArrayList<>(9);
+        List<Integer> outputList = new ArrayList();
+        for(int i = 0 ; i <10 ; i++) {
+            registryList.add(0);
+            outputList.add(0);
+        }
+//        items.stream().forEach(i -> outputList.add(0));
+        items.stream().forEach(i -> {System.out.print(i);registryList.set(i,registryList.get(i)+1);});
+
+        for(int i = 1 ; i < registryList.size() -1 ; i++) {
+            registryList.set(i,registryList.get(i)+registryList.get(i-1));
+        }
+        for (int i = 0 ; i < items.size() ; i++){
+            outputList.set(registryList.get(items.get(i))-1,items.get(i));
+            registryList.set(items.get(i),registryList.get(items.get(i))-1);
+        }
+
+        return outputList;
     }
 
     /**
@@ -255,15 +280,18 @@ public class Sorter<E extends Comparable> {
 //        System.out.println("Sorting using min Heap sort");
 //        numberList = sorter.minHeapSort(numberList);
 
-        System.out.println("sorting using selection sort");
-        sorter.selectionSort(numberList);
-        numberList.forEach(Sorter::printElegant);
-        System.out.println("sum: "+
-                numberList.stream()
-                        .filter(e -> e.number % 1 == 0)
-                        .mapToInt(e -> e.number * 2)
-                        .sum()
-        );
+//        System.out.println("sorting using selection sort");
+//        sorter.selectionSort(numberList);
+//        numberList.forEach(Sorter::printElegant);
+//        System.out.println("sum: "+
+//                numberList.stream()
+//                        .filter(e -> e.number % 1 == 0)
+//                        .mapToInt(e -> e.number * 2)
+//                        .sum()
+//        );
+
+        System.out.println("counting using conting sort");
+        sorter.countingSort(Arrays.asList(1,4,1,2,7,5,2));
     }
 
     private static void printElegant(ComparableNumber comparableNumber) {

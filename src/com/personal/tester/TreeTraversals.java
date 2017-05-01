@@ -109,13 +109,31 @@ public class TreeTraversals {
 
 
         AVLTree avlTree = new AVLTree();
-        avlTree.add(new AVLTreeNode(45));
-        avlTree.add(new AVLTreeNode(44));
-        avlTree.add(new AVLTreeNode(46));
-        avlTree.add(new AVLTreeNode(32));
-        avlTree.add(new AVLTreeNode(47));
+        avlTree.add(new AVLTreeNode(5));
+        avlTree.add(new AVLTreeNode(6));
+        avlTree.add(new AVLTreeNode(7));
+        avlTree.add(new AVLTreeNode(8));
+        avlTree.add(new AVLTreeNode(9));
+        avlTree.add(new AVLTreeNode(10));
+        avlTree.add(new AVLTreeNode(11));
+        avlTree.add(new AVLTreeNode(12));
+        avlTree.add(new AVLTreeNode(13));
+
+        avlTree.add(new AVLTreeNode(34));
+        avlTree.add(new AVLTreeNode(36));
+        avlTree.add(new AVLTreeNode(37));
+        avlTree.add(new AVLTreeNode(38));
+        avlTree.add(new AVLTreeNode(39));
+        avlTree.add(new AVLTreeNode(555));
+
+
+        avlTree.add(new AVLTreeNode(1));
         avlTree.add(new AVLTreeNode(2));
-        avlTree.add(new AVLTreeNode(200));
+        avlTree.add(new AVLTreeNode(3));
+        avlTree.add(new AVLTreeNode(4));
+
+
+
         avlTree.printAVLTree();
     }
 }
