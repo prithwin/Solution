@@ -1,5 +1,8 @@
 package com.personal;
 
+import com.personal.util.BinaryTree;
+import com.personal.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -40,22 +43,51 @@ public class ExpressionEvaluator {
         int temp = 0;
         switch (operator) {
             case "+" :
-                temp = Integer.parseInt(a) + Integer.parseInt(b);return  temp;
+                temp = Integer.parseInt(a) + Integer.parseInt(b); return temp;
 
             case "-" :
-                temp = Integer.parseInt(a) - Integer.parseInt(b);return  temp;
+                temp = Integer.parseInt(a) - Integer.parseInt(b); return temp;
 
             case "*" :
-                temp = Integer.parseInt(a) * Integer.parseInt(b);return  temp;
+                temp = Integer.parseInt(a) * Integer.parseInt(b); return temp;
 
             case "/" :
-                temp = Integer.parseInt(a) / Integer.parseInt(b);return  temp;
+                temp = Integer.parseInt(a) / Integer.parseInt(b); return temp;
 
         }
         return 0;
     }
 
+    public BinaryTree getExpressionTree(List<String> postfix) {
+
+        Stack<TreeNode> expressionStack = new Stack<>();
+        Stack<String> traversalStack = new Stack<>();
+        BinaryTree result = new BinaryTree();
+
+        for(int i = 0 ; i < postfix.size() ; i++) {
+            String item = postfix.get(i);
+            if(item.equals("(") || item.equals(")")){
+                continue;
+            }
+            if(isNumeric(item)) {
+                TreeNode node = new TreeNode(Integer.parseInt(item));
+                expressionStack.push(node);
+            } else {
+                TreeNode r = expressionStack.pop();
+                TreeNode l = expressionStack.pop();
+                TreeNode operator = new TreeNode(item);
+                operator.left = l;
+                operator.right = r;
+                expressionStack.push(operator);
+            }
+        }
+        result.root = expressionStack.pop();
+        return result;
+
+    }
+
     public List<String> infixToPostfix(List<String> infix){
+
         Stack<String> operandStack = new Stack<>();
         List<String> postfix = new ArrayList<>();
         for(int i = 0 ; i < infix.size() ; i++) {
@@ -114,11 +146,15 @@ public class ExpressionEvaluator {
 
     }
     public static void main(String[] args) {
-//       new ExpressionEvaluator().infixToPostfix(Arrays.asList("(","(","23","+","24",")","*","35","-","56",")","*","33")).stream().
+//        new ExpressionEvaluator().infixToPostfix(Arrays.asList("(","(","23","+","24",")","*","35","-","56",")","*","33")).stream().
 //               filter(s -> !s.equals("(")).filter(s -> !s.equals(")")).forEach(i -> System.out.printf(" %s ",i));
-
+//
 //        new ExpressionEvaluator().infixToPostfix(Arrays.asList("1","*","(","2","+","3",")")).stream().
 //                filter(s -> !s.equals("(")).filter(s -> !s.equals(")")).forEach(i -> System.out.printf(" %s ", i));
-        System.out.println(new ExpressionEvaluator().evaluate(new ExpressionEvaluator().infixToPostfix(Arrays.asList("3","*","(","2","+","3",")"))));
+//
+//        System.out.println(new ExpressionEvaluator().evaluate(new ExpressionEvaluator().infixToPostfix(Arrays.asList("3","*","(","2","+","3",")"))));
+        new ExpressionEvaluator().
+                getExpressionTree(new ExpressionEvaluator().infixToPostfix(Arrays.asList("(","(","23","+","24",")","*","35","-","56",")","*","33")))
+                .printinOrder();
     }
 }

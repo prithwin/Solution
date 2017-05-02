@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class TreeNode implements Serializable{
     public ComparableNumber number;
+    public String data;
     public TreeNode left;
     public TreeNode right;
 
@@ -14,6 +15,10 @@ public class TreeNode implements Serializable{
     public TreeNode(int number){
         ComparableNumber comparableNumber = new ComparableNumber(number);
         this.number = comparableNumber;
+    }
+
+    public TreeNode(String data) {
+        this.data = data;
     }
 
     @Override
@@ -30,6 +35,9 @@ public class TreeNode implements Serializable{
 
     @Override
     public String toString() {
-        return number.toString();
+        if(number!=null)
+            return number.toString();
+        else
+            return data;
     }
 }

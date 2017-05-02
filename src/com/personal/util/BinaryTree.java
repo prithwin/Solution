@@ -18,7 +18,7 @@ public class BinaryTree implements Serializable {
     private void printPreOrderInternal(TreeNode root){
         if(root == null)
             return;
-        System.out.println(root.number);
+        System.out.print(root.number==null?root.data:root.number);
         printPreOrderInternal(root.left);
         printPreOrderInternal(root.right);
     }
@@ -31,7 +31,7 @@ public class BinaryTree implements Serializable {
         if(root == null)
             return;
         printinOrderInternal(root.left);
-        System.out.println(root.number);
+        System.out.print(root.number==null?root.data:root.number);
         printinOrderInternal(root.right);
     }
 
@@ -46,7 +46,7 @@ public class BinaryTree implements Serializable {
             return;
         printPostOrderInternal(root.left);
         printPostOrderInternal(root.right);
-        System.out.println(root.number);
+        System.out.print(root.number==null?root.data:root.number);
     }
 
     public void printLevelOrder(){
@@ -520,5 +520,4 @@ public class BinaryTree implements Serializable {
         }
         return null;
     }
-
 }
