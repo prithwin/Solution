@@ -168,7 +168,6 @@ A26: >use nouns
 * two spring contexts with the same file
 * Servlet spec how threads are created or not.
 * difference between request forwarding or redirecting.
-
 * order of execution of blocks in java
 * what are instance blocks.
 * factory design pattern, why is the factory a singleton itself.
@@ -185,11 +184,8 @@ A26: >use nouns
 * adapter pattern on american and indian plugs
 * how do you really secure a rest application.
 * what java 8 things have you really used.
-
-
-
-
-
-
-
-
+* draw a UML diagram explaining some USE cases.
+* how do you provide security in rest web services.
+* implementation of singleton patterns.
+* why is string immutable in java.
+* how do you make something immutable.
