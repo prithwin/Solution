@@ -161,6 +161,12 @@ A26: >use nouns
      >HATEOAS means the client should infer everything he wants to do by using the hypermedia or the meta data that you
      are already sending along with your responses.
 ************************************************************************************************************************
+Q27: Which parser do you user to parse extremely large XML files?
+A27: the SAX parser is the way to go. Becuase the DOM parser is going to build the entire DOM which is memory intensive
+     the SAX parser uses text processing to look for paths withing the XML so its a little space efficient, but will tak
+     larger processing times.
+************************************************************************************************************************
+
 * what all can you assert in java/junit
 * hibernate criteria query api.
 * what is a container.
@@ -180,7 +186,6 @@ A26: >use nouns
 * why are rest APIs stateless.
 * Factory design pattern restrict visibility of the constructor.
 * how do you implement a monthly a payment schedule.
-* which parser do you user to parse extremely large.
 * adapter pattern on american and indian plugs
 * how do you really secure a rest application.
 * what java 8 things have you really used.
