@@ -9,6 +9,15 @@ public class TreeTraversals {
     BinaryTree tree;
 
     public static void main(String[] args) {
+        /*
+                            1
+                          /  \
+                         2    3
+                       / \   / \
+                      4  5  6   7
+                           / \
+                          8   9
+          */
         TreeTraversals treeTraversals = new TreeTraversals();
         treeTraversals.tree = new BinaryTree(1);
         treeTraversals.tree.root.left = new TreeNode(2);
@@ -28,6 +37,7 @@ public class TreeTraversals {
         treeTraversals.tree.printPostOrder();
 
         System.out.println("the height of this tree is:" + treeTraversals.tree.height());
+        System.out.println("the Diametre of the binary Tree is :" + treeTraversals.tree.getDiameter());
         System.out.println("the size of this tree is:" + treeTraversals.tree.size());
         System.out.println("printing the Tree in level order");
         treeTraversals.tree.printLevelOrder();

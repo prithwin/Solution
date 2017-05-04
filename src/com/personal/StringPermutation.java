@@ -8,13 +8,7 @@ import java.util.List;
  */
 public class StringPermutation {
 
-    public static void main(String[] args) {
-        String target = "ABCD";
-        List<String> result = new StringPermutation().permute(target);
-        System.out.println(result);
-    }
-
-    private List<String> permute(String target) {
+    public List<String> permute(String target) {
         List<String> result = new ArrayList<>();
         String lead = "";
         realPermute(lead,target,result);

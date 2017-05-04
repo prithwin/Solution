@@ -520,4 +520,9 @@ public class BinaryTree implements Serializable {
         }
         return null;
     }
+
+    public int getDiameter() {
+        return 1+ computeHeight(root.left)+computeHeight(root.right);
+
+     }
 }
