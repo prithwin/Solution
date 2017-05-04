@@ -192,5 +192,8 @@ A27: the SAX parser is the way to go. Becuase the DOM parser is going to build t
 * draw a UML diagram explaining some USE cases.
 * how do you provide security in rest web services.
 * implementation of singleton patterns.
-* why is string immutable in java.
+* why is string immutable in java?
 * how do you make something immutable.
+* what's the whole point of having a JVM
+* what is the JIT compiler.
+* explain SOLID concepts.

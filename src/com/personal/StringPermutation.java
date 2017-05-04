@@ -5,6 +5,12 @@ import java.util.List;
 
 /**
  * Created by pr250155 on 3/31/17.
+ *                              p(,ABCD)
+ *
+ *           p(A,BCD)             p(B,ACD)    p(C,ABD)    p(D,ABC)
+ *     p(AB,CD) p(AC,BD) p(AD,BC)
+ *     [ABCD ABDC ACBD ACDB ADBC ADCB] = 6 * 4 = 24 such combination
+ *     efficiency is o(n!).
  */
 public class StringPermutation {
 
