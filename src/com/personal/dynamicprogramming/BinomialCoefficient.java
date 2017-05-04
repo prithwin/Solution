@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.dynamicprogramming;
 
 /**
  * Created by pr250155 on 5/2/17.
