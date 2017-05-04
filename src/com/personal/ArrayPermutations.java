@@ -8,17 +8,8 @@ import java.util.List;
  * Created by pr250155 on 3/31/17.
  */
 public class ArrayPermutations {
-    public static void main(String[] args) {
-        List<Integer> inputList = new ArrayList<>();
-        inputList.add(1);
-        inputList.add(2);
-        inputList.add(3);
-        inputList.add(4);
-        List<List<Integer>> resultList = new ArrayPermutations().permute(inputList);
-        resultList.forEach(System.out::println);
-    }
 
-    private List<List<Integer>> permute(List<Integer> target) {
+    public List<List<Integer>> permute(List<Integer> target) {
         List<List<Integer>> resultList = new ArrayList<>();
         List<Integer> leadList = new ArrayList<>();
         realPermute(leadList,target,resultList);
@@ -28,7 +19,7 @@ public class ArrayPermutations {
 
     private void realPermute(List<Integer> leadList, List<Integer> target , List<List<Integer>> resultList) {
         if(target.size() == 1){
-            List<Integer> temp = new ArrayList<Integer>();
+            List<Integer> temp = new ArrayList<>();
             temp.addAll(leadList);
             temp.addAll(target);
             resultList.add(temp);
