@@ -6,14 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by pr250155 on 4/18/17.
- *     a   b   c         d
- *  a  0   1   1         d
- *  b  a   ab  ab,bc,ca
- *  d
- *  d
- */
 public class CalculatePowerSet {
     public List<List<Character>> getPowerSet(List<Character> target) {
         List<List<Character>> responseSet = new ArrayList<>();
