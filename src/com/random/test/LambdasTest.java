@@ -6,38 +6,74 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 class LambdasTest {
-    static class Image {
-        int width;
-        int height;
-
-        Image(int width, int height) {
-            this.width = width;
-            this.height = height;
+    public static void main(String args[]) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        List<String> outputBuffer = new LinkedList();
+        for(int i = 0 ; i < N ; i++) {
+            int length = scanner.nextInt();
+            scanner.nextLine();
+            String target = scanner.nextLine();
+            StringBuilder stringBuilder = new StringBuilder();
+            for(char c : target.toCharArray()) {
+                char cPrime = (char)getNearestPrimeAlphabet(c);
+                if(cPrime<67) cPrime =67;
+                if(cPrime>113)cPrime = 113;
+                stringBuilder.append(cPrime+"");
+            }
+            outputBuffer.add(stringBuilder.toString());
         }
-    }
-    public static void main(String args[] ) throws Exception {
-
-        Scanner s = new Scanner(System.in);
-        int L = s.nextInt();
-        int N = s.nextInt();
-        List<Image> images = new ArrayList<>();
-        BufferedReader inputreader = new BufferedReader(new InputStreamReader(System.in));
-        for ( int i = 0 ; i < N ; i++ ) {
-            String[] imageLines = inputreader.readLine().split(" ");
-            images.add(new Image(Integer.parseInt(imageLines[0]),Integer.parseInt(imageLines[1])));
-        }
-        images.stream().forEach(i -> processImageAndPrint(i,L));
+        outputBuffer.stream().forEach(System.out::println);
     }
 
-    private static void processImageAndPrint(Image image, int requiredLength) {
-        if(image.width < requiredLength || image.height < requiredLength) {
-            System.out.println("UPLOAD ANOTHER");
-        } else if (image.width >= requiredLength && image.height >= requiredLength)  {
-            if(image.width == image.height) {
-                System.out.println("ACCEPTED");
-            } else {
-                System.out.println("CROP IT");
+    private static int getNearestPrimeAlphabet(int c){
+        if(isPrime(c)) return c;
+        int lowPrime = 0;
+        int highPrime = 0;
+        boolean foundLowPrime = false;
+        boolean foundHighPrime = false;
+
+        for(int i = c+1 , j = c-1 ; ;) {
+            if(!foundLowPrime) {
+                if(isPrime(j)) {
+                    foundLowPrime = true;
+                    lowPrime = j;
+                }
+                j--;
+            }
+            if(!foundHighPrime) {
+                if(isPrime(i)) {
+                    foundHighPrime = true;
+                    highPrime = i;
+                }
+                i++;
+            }
+            if(foundLowPrime && foundHighPrime){
+                break;
             }
         }
+        int lowPrimeDiff = c - lowPrime;
+        int highPrimeDiff = highPrime - c;
+        if(lowPrimeDiff == highPrimeDiff) {
+            return lowPrime;
+        } else if(lowPrimeDiff<highPrimeDiff) {
+            return lowPrime;
+        } else if(lowPrimeDiff>highPrimeDiff) {
+            return highPrime;
+        }
+        return c;
+    }
+
+    private static boolean isPrime(int c){
+        int divisorCount = 0 ;
+        for(int i = 1 ; i <=c ; i++) {
+            if(c % i == 0 ){
+                divisorCount++;
+            }
+        }
+        if(divisorCount == 2){
+            return true;
+        }
+        return false;
     }
 }

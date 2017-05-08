@@ -145,16 +145,4 @@ public class ExpressionEvaluator {
         return false;
 
     }
-    public static void main(String[] args) {
-//        new ExpressionEvaluator().infixToPostfix(Arrays.asList("(","(","23","+","24",")","*","35","-","56",")","*","33")).stream().
-//               filter(s -> !s.equals("(")).filter(s -> !s.equals(")")).forEach(i -> System.out.printf(" %s ",i));
-//
-//        new ExpressionEvaluator().infixToPostfix(Arrays.asList("1","*","(","2","+","3",")")).stream().
-//                filter(s -> !s.equals("(")).filter(s -> !s.equals(")")).forEach(i -> System.out.printf(" %s ", i));
-//
-//        System.out.println(new ExpressionEvaluator().evaluate(new ExpressionEvaluator().infixToPostfix(Arrays.asList("3","*","(","2","+","3",")"))));
-        new ExpressionEvaluator().
-                getExpressionTree(new ExpressionEvaluator().infixToPostfix(Arrays.asList("(","(","23","+","24",")","*","35","-","56",")","*","33")))
-                .printinOrder();
-    }
 }

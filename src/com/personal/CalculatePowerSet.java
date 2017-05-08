@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CalculatePowerSet {
+
     public List<List<Character>> getPowerSet(List<Character> target) {
         List<List<Character>> responseSet = new ArrayList<>();
         int powerSetSize = Mathematical.power(2,target.size());
@@ -22,10 +23,4 @@ public class CalculatePowerSet {
         }
         return responseSet;
     }
-
-
-    public static void main(String[] args) {
-        new CalculatePowerSet().getPowerSet(Arrays.asList('a', 'b', 'c')).stream().forEach(System.out::println);
-    }
-
 }

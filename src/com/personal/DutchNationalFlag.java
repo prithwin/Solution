@@ -7,15 +7,7 @@ import java.util.Arrays;
  */
 public class DutchNationalFlag {
 
-    public static void main(String[] args) {
-        int[] target = {0,0,0,0,1,1,0,1,2,2,1,1,0,1,2,2,0,1,2,0,0,2,1,0,2,1,0,2,2,0,1};
-        new DutchNationalFlag().threeWayPartition(target);
-       for(int item : target){
-           System.out.println(item);
-       }
-    }
-
-    public void threeWayPartition(int[] target){
+    public void threeWayPartition(Integer[] target){
 
         for(int i = 0,j = target.length-1 , k = 0, l = target.length-1 ; i < target.length && j >=0 ; ){
             if(i<=j){
@@ -44,7 +36,7 @@ public class DutchNationalFlag {
         }
     }
 
-    private void polarizeArray(int[] target, int start, int end,int left, int right) {
+    private void polarizeArray(Integer[] target, int start, int end,int left, int right) {
         for ( int i = start , j = end  ; j>i ; ) {
             if(target[i]==right && target[j]==left){
                 int temp = target[i];
