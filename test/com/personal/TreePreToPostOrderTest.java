@@ -1,5 +1,6 @@
 package com.personal;
 
+import com.personal.util.BinaryTree;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 /**
@@ -9,6 +10,9 @@ public class TreePreToPostOrderTest {
     @Test public void testFunctionality() {
         int[] preOrder = {1, 2, 4, 5, 3, 6};
         int[] inOrder = {4, 2, 5, 1, 3, 6};
-        new TreePreToPostOrder().getPostOrder(preOrder,inOrder);
+        BinaryTree binaryTree = new TreePreToPostOrder().getPostOrder(preOrder, inOrder);
+        binaryTree.printinOrder();
+        System.out.println();
+        binaryTree.printPreOrder();
     }
 }
