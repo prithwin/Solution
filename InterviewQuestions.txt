@@ -166,7 +166,8 @@ A27: the SAX parser is the way to go. Becuase the DOM parser is going to build t
      the SAX parser uses text processing to look for paths withing the XML so its a little space efficient, but will tak
      larger processing times.
 ************************************************************************************************************************
-
+Q28: What are the best practices used in Rest web services?
+A28:  
 * what all can you assert in java/junit
 * hibernate criteria query api.
 * what is a container.
