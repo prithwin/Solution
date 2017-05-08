@@ -13,8 +13,4 @@ public class FindMissingNumber {
         int actualSum = target.parallelStream().reduce((a,b) -> a+b).get();
         return theoreticalSum - actualSum;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new FindMissingNumber().findMissingNumber(Arrays.asList(1,2,4,6,3,7,8)));
-    }
 }

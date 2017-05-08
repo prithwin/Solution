@@ -9,19 +9,13 @@ public class Fibonacci {
         int m=0;
         int n=1;
         System.out.println(n);
-        for(int i = 0; i< iterations ;i++){
+        for(int i = 0; i< iterations-1 ;i++){
             int sum = m+n;
             System.out.println(sum);
             m=n;
             n=sum;
         }
 
-    }
-
-    public static void main(String[] args) {
-        Fibonacci f = new Fibonacci();
-        f.printFibonacciNumbers(11);
-         f.fibonacciRecursive(11);
     }
 
     public void fibonacciRecursive(int howMany){
@@ -35,6 +29,14 @@ public class Fibonacci {
            // System.out.println(m);
             System.out.println(n);
             fibonacciRecursiveInternal(n, m + n, howMany, ++counter);
+        }
+    }
+
+    public int printNthFibonacciNumber(int n) {
+        if(n<2){
+            return 1;
+        } else {
+            return printNthFibonacciNumber(n-1) + printNthFibonacciNumber(n-2);
         }
     }
 }
