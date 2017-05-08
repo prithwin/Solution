@@ -167,7 +167,35 @@ A27: the SAX parser is the way to go. Becuase the DOM parser is going to build t
      larger processing times.
 ************************************************************************************************************************
 Q28: What are the best practices used in Rest web services?
-A28:  
+A28: Rest is more of a Collection of principles than a set of standard.
+     The rest architectural style describes 6 constraints(US LC2):
+     -Uniform Interface.
+        *resource based
+        *Manipulation of operation
+        *self descriptive messages
+        *HATEOS
+     -Stateless
+        *It does'nt mean dont manage state.
+        *It means all of the state information must be contained in the request itself.
+     -Chachable
+        *response must say if it can be cached or not, minimize server hits.
+     -Client-server
+        *Clear separation of client and server.
+     -Layered
+        *Client cannot tell how the server gets the resposnse, the clients outlook should be absolutely be transparent
+     -Code on demand
+
+     HTTP verb:
+     POST vs PUT : put is for known resources its an update opartion
+                   Post is for a new operation.
+
+     -resource naming and pluralizations.
+     -pagination for large amount of resources.
+
+
+
+
+
 * what all can you assert in java/junit
 * hibernate criteria query api.
 * what is a container.
