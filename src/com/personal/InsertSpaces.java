@@ -7,6 +7,20 @@ import java.util.function.Function;
 
 /**
  * Created by pr250155 on 4/11/17.
+ * addSpaces(target,cIndex,builder) {
+ *  if(cIndex = target.length) {
+ *      sout >> builder;
+ *  }
+ *  builder.append(target.cindex+1);
+ *  addSapaces(target,cindex+1,builder);
+ *  builder.remove(1);
+ *
+ *  builder.append(target.cindex+SPACE+1)
+ *  addSpaces(target,cindex+1,builder);
+ *  builder.remove(2);
+ *
+ *
+ * }
  */
 public class InsertSpaces {
 
@@ -33,9 +47,5 @@ public class InsertSpaces {
         builder.append(SPACE).append(target.charAt(stringIndex));
         insertSpacesInternal(target, stringIndex + 1, builder,result);
         builder.delete(builder.length()-2,builder.length());
-    }
-
-    public static void main(String[] args) {
-        new InsertSpaces().insertSpaces("ABCD");
     }
 }

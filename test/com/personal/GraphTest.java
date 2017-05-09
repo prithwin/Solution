@@ -4,14 +4,17 @@ import com.personal.util.Graph;
 import com.personal.util.GraphNode;
 import com.personal.util.GraphType;
 
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by pr250155 on 4/30/17.
  */
-public class GraphTester {
-    public static void main(String[] args) {
+public class GraphTest {
+    @Test public void testDFS() {
         Map<Integer,GraphNode> nodeMap = new HashMap<>();
 
         nodeMap.put(0,new GraphNode("0"));

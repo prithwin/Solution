@@ -38,8 +38,4 @@ public class HorspoolStringMatching {
         }
         return skipMap;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new HorspoolStringMatching().contains("THIS IS THE TARGET", "ARGE"));
-    }
 }

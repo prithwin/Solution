@@ -18,8 +18,4 @@ public class HornersPolynomial {
         }
         return coefficients.stream().reduce((a,b) -> a+b).get();
     }
-
-    public static void main(String[] args) {
-        System.out.print(new HornersPolynomial().compute(Arrays.asList(2,-1,3,1,-5),3));
-    }
 }
