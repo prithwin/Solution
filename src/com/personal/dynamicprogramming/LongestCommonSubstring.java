@@ -1,6 +1,6 @@
 package com.personal.dynamicprogramming;
 
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 /**
  * Created by pr250155 on 4/28/17.
@@ -52,7 +52,7 @@ public class LongestCommonSubstring {
         Answer answer = new Answer();
         answer.length = longestSubstring;
         answer.answer = thatj.substring( longestJ - longestSubstring + 1 , longestJ + 1 );
-        Print2DMatrix.print2dMatrix(substringRegistry);
+        MatrixUtil.print2dMatrix(substringRegistry);
         return answer;
     }
 

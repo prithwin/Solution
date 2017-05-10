@@ -1,7 +1,7 @@
 package com.personal.dynamicprogramming;
 
 import com.personal.util.Mathematical;
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 /**
  * Created by pr250155 on 5/3/17.
@@ -27,7 +27,7 @@ public class CoinCollectingRobot {
                  chessBoard[i][j] += Mathematical.maximum(chessBoard[i-1][j],chessBoard[i][j-1]);
              }
          }
-        Print2DMatrix.print2dMatrix(chessBoard);
+        MatrixUtil.print2dMatrix(chessBoard);
          return chessBoard[chessBoard.length-1][chessBoard[chessBoard.length-1].length-1];
      }
 

@@ -1,10 +1,7 @@
 package com.personal.dynamicprogramming;
 
 import com.personal.util.Mathematical;
-import com.personal.util.Print2DMatrix;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.personal.util.MatrixUtil;
 
 /**
  * Created by pr250155 on 4/12/17.
@@ -32,7 +29,7 @@ public class LongestPallindromicSubsequence {
                 }
             }
         }
-        Print2DMatrix.print2dMatrix(solutionMatrix);
+        MatrixUtil.print2dMatrix(solutionMatrix);
     }
 
     public static void main(String[] args) {

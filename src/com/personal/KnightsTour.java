@@ -1,13 +1,12 @@
 package com.personal;
 
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by pr250155 on 4/18/17.
- * TODO: add greedyness by taking the path with the smallest number of possible Moves
  */
 public class KnightsTour {
 
@@ -25,12 +24,11 @@ public class KnightsTour {
         }
     }
 
-    public static void main(String[] args) {
+    public void beginTour() {
         int[][] chessBoard = new int[BOARD_SIZE][BOARD_SIZE];
         int moveNum = 1;
         chessBoard[0][0] = moveNum;
 
-        //creating a list of possible moves
         List<Move> moves = Arrays.asList (
                 new Move(2, 1),
                 new Move(1, 2),
@@ -46,13 +44,13 @@ public class KnightsTour {
 
     private static void moveKnight(int[][] chessBoard, List<Move> moves, int nextMove, int currI, int currJ) {
         if(nextMove == TOTAL_MOVES && !noSafeMoves(chessBoard,currI,currJ,moves)){
-            Print2DMatrix.addKnightToFinalSpot(chessBoard,TOTAL_MOVES);
-            Print2DMatrix.print2dMatrix(chessBoard);
+            MatrixUtil.addKnightToFinalSpot(chessBoard, TOTAL_MOVES);
+            MatrixUtil.print2dMatrix(chessBoard);
             return;
         }
         if(nextMove < TOTAL_MOVES && noSafeMoves(chessBoard,currI,currJ,moves)){
             //wipe all move numbers higher than this dead move
-            Print2DMatrix.clearNumbersHigherThan(nextMove - 1, chessBoard);
+            MatrixUtil.clearNumbersHigherThan(nextMove - 1, chessBoard);
             return;
         }
             for (int i = 0 ; i < moves.size() ; i++) {
@@ -62,7 +60,7 @@ public class KnightsTour {
                     moveKnight(chessBoard, moves, nextMove + 1, currI+currentMove.i, currJ+currentMove.j);
                 }
             }
-            Print2DMatrix.clearNumbersHigherThan(nextMove -1  ,chessBoard);
+            MatrixUtil.clearNumbersHigherThan(nextMove - 1, chessBoard);
 
     }
 

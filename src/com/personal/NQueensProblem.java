@@ -1,6 +1,6 @@
 package com.personal;
 
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class NQueensProblem {
             for(int j = 0 ; j < chessBoard[i].length ; j++ ) {
                 chessBoard[i][j] = 1;
                 new NQueensProblem().placeNQueens(chessBoard, N-1);
-                Print2DMatrix.clearMatrix(chessBoard);
+                MatrixUtil.clearMatrix(chessBoard);
             }
         }
     }
@@ -33,7 +33,7 @@ public class NQueensProblem {
 
     public void placeNQueens(int[][] chessBoard, int numberRemaining) {
         if(numberRemaining == 0){
-            Print2DMatrix.print2dMatrix(chessBoard);
+            MatrixUtil.print2dMatrix(chessBoard);
             return;
         }
 

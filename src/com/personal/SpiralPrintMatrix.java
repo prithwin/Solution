@@ -1,6 +1,6 @@
 package com.personal;
 
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 /**
  * Created by pr250155 on 4/10/17.
@@ -27,7 +27,7 @@ public class SpiralPrintMatrix {
                 {11,12,13,14,15},                            //3
                 {16,17,18,19,20},                            //4
                 {21,22,23,24,25}};                           //5
-        Print2DMatrix.print2dMatrix(matrix);
+        MatrixUtil.print2dMatrix(matrix);
         System.out.println();
         spiralPrintMatrix(matrix);
     }

@@ -1,7 +1,5 @@
 package com.personal.dynamicprogramming;
 
-import com.personal.util.Print2DMatrix;
-
 /**
  * Created by pr250155 on 5/9/17.
  *    0 1 2 3

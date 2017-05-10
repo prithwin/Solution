@@ -1,7 +1,7 @@
 package com.personal.dynamicprogramming;
 
 import com.personal.util.Mathematical;
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 /**
  * Created by pr250155 on 5/3/17.
@@ -37,7 +37,7 @@ public class RodCutting {
                 }
             }
         }
-        Print2DMatrix.print2dMatrix(solutionMatrix);
+        MatrixUtil.print2dMatrix(solutionMatrix);
         return solutionMatrix[valuesList.length-1][valuesList.length];
     }
 

@@ -1,7 +1,7 @@
 package com.personal.dynamicprogramming;
 
 import com.personal.util.Mathematical;
-import com.personal.util.Print2DMatrix;
+import com.personal.util.MatrixUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +44,7 @@ public class CoinChangingProblem {
                 }
             }
         }
-        Print2DMatrix.print2dMatrix(solutionMatrix);
+        MatrixUtil.print2dMatrix(solutionMatrix);
         return solutionMatrix[denominations.size()-1][total];
     }
 
