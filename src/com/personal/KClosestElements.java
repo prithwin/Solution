@@ -5,21 +5,40 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by pr250155 on 4/16/17.
+ *
+ * given a sorted Array find the k closest elements to a given number n in that List.
+ * if(n > A[higest])
+ *     sout A[highest -> hightest - K]
+ * if(n< A[lowest])
+ *      sout A[0 -> k-1]
+ * else
+ *      cPoint = binarySeachCpoint(A);
+ *      while(!kElement collected){
+ *          i = cPoint - 1;
+ *          j = cPoint + 1;
+ *          ldiff = ABS(A[i] - n);
+ *          rDiff = ABS(A[j] - n);
+ *          if(lDiff < rDiff) {
+ *              sout A[j--];
+ *          } else {
+ *              sout A[i++]
+ *          }
+ *      }
+ *
  */
 public class KClosestElements {
-    public List<Integer> findKClosestElements(List<Integer> target , int k,int value){
+    public List<Integer> findKClosestElements(List<Integer> target , int k ,int value){
         List<Integer> response = new ArrayList<>();
         if( value > target.get(target.size()-1)){
-            response.add(target.get(target.size()-1));
-            response.add(target.get(target.size()-2));
-            response.add(target.get(target.size()-3));
-            response.add(target.get(target.size()-4));
+            int i = 1;
+            while(i <= k){
+                response.add(target.get(target.size()-(i++)));
+            }
         } else if(value < target.get(0)){
-            response.add(target.get(0));
-            response.add(target.get(1));
-            response.add(target.get(2));
-            response.add(target.get(3));
+            int i = 0;
+            while(i < k) {
+                response.add(target.get(i++));
+            }
         } else {
             int crosssOverpoint = RandomDnQ.binarySearchforCrossOverPoint(target, value);
             for(int i=crosssOverpoint, j=crosssOverpoint;response.size()<4;){
@@ -46,10 +65,5 @@ public class KClosestElements {
             }
         }
         return response;
-    }
-
-    public static void main(String[] args) {
-        new KClosestElements().findKClosestElements(Arrays.asList(12, 16, 22, 30, 34, 39, 42
-                ,45, 48, 50, 53, 55, 56) , 4 , 35).stream().forEach(System.out::println);
     }
 }
