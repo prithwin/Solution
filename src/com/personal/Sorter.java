@@ -40,7 +40,6 @@ public class Sorter<E extends Comparable> {
             registryList.add(0);
             outputList.add(0);
         }
-//        items.stream().forEach(i -> outputList.add(0));
         items.stream().forEach(i -> {System.out.print(i);registryList.set(i,registryList.get(i)+1);});
 
         for(int i = 1 ; i < registryList.size() -1 ; i++) {
@@ -170,39 +169,26 @@ public class Sorter<E extends Comparable> {
             }
             return;
         }
-        //let the pivot be the middle;
-        int pivot = start + (end - start) / 2;
-        //int partitionPoint = pivot;
-        for (int i = start, j = end; i <= pivot && j >= pivot; ) {
-            if (targetList.get(i).compareTo(targetList.get(pivot)) >= 0 &&
-                    targetList.get(j).compareTo(targetList.get(pivot)) <= 0) {
-                //swap
-                E temp = targetList.get(i);
-                targetList.set(i, targetList.get(j));
-                targetList.set(j, temp);
-                if (i == pivot) {
-                    pivot = j;
-                    break;
-                } else if (j == pivot) {
-                    pivot = i;
-                    break;
-                } else {
-                    i++;
-                    j--;
-                }
-                continue;
+        int pivot = partition(targetList,start,end);
+        quickSort(targetList,start,pivot-1);
+        quickSort(targetList,pivot+1,end);
+    }
 
-            }
-            if (i <= pivot && targetList.get(i).compareTo(targetList.get(pivot)) == -1) {
-                i++;
-            }
-            if (j >= pivot && targetList.get(j).compareTo(targetList.get(pivot)) == 1) {
-                j--;
-            }
+    private int partition(List<E> target,int start,int end) {
+        int pivot = start;
+        start++;
+        while(start <= end) {
+            while(start <= end && target.get(start).compareTo(target.get(pivot)) == -1 ) start++;
+            while(start <= end && target.get(end).compareTo(target.get(pivot)) >= 0) end--;
+            if(start > end) break;
+            E temp = target.get(start);
+            target.set(start,target.get(end));
+            target.set(end,temp);
         }
-
-        quickSort(targetList, start, pivot);
-        quickSort(targetList, pivot, end);
+        E temp = target.get(end);
+        target.set(end,target.get(pivot));
+        target.set(pivot,temp);
+        return end;
     }
 
     /**
@@ -271,8 +257,10 @@ public class Sorter<E extends Comparable> {
 //        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
 //        numberList = resultList;
 
-//        System.out.println("Sorting using quick sort");
-//        sorter.quickSort(numberList, 0, numberList.size() - 1);
+        System.out.println("Sorting using quick sort");
+        sorter.quickSort(numberList, 0, numberList.size() - 1);
+
+        System.out.println(numberList);
 
 //        System.out.println("Sorting using max Heap sort");
 //        numberList = sorter.maxHeapSort(numberList);
@@ -290,8 +278,8 @@ public class Sorter<E extends Comparable> {
 //                        .sum()
 //        );
 
-        System.out.println("counting using conting sort");
-        sorter.countingSort(Arrays.asList(1,4,1,2,7,5,2));
+//        System.out.println("counting using conting sort");
+//        sorter.countingSort(Arrays.asList(1,4,1,2,7,5,2));
     }
 
     private static void printElegant(ComparableNumber comparableNumber) {
