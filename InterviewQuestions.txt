@@ -191,13 +191,19 @@ A28: Rest is more of a Collection of principles than a set of standard.
 
      -resource naming and pluralizations.
      -pagination for large amount of resources.
-
-
-
-
-
-* what all can you assert in java/junit
-* hibernate criteria query api.
+************************************************************************************************************************
+Q29: What all can you assert in junit?
+A28: We've been Using testNg off late so we can assert
+     -equality
+     -null
+     -truth
+     -Sameness
+     There are other controls too
+     -explicity faling a test case
+     -annotations to Expect some exceptions
+************************************************************************************************************************
+Q30: Hibernate criteria query api overview.
+************************************************************************************************************************
 * what is a container.
 * multithreading in servlet
 * two spring contexts with the same file

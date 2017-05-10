@@ -72,6 +72,47 @@ public class LinkedList {
         return true;
     }
 
+    /**
+     * Function isPallindrome(L) {
+     *  Node slow = L.head;
+     *  Node fast = L.head;
+     *  Stack S;
+     *  while(slow!=null){
+     *      if(fast!=null){
+     *          fast = fast.next.next;
+     *          S.push(slow);
+     *      } else {
+     *          if(S.POP != slow)
+     *           return false;
+     *      }
+     *  }
+     *  return true;
+     * }
+     */
+    public boolean isPalindrome() {
+        ListNode slow = this.head;
+        ListNode fast = this.head;
+        Stack<ListNode> comparisonStack  = new Stack();
+        while(slow!=null) {
+            if(fast != null) {
+                comparisonStack.push(slow);
+                if(fast.next==null){
+                    fast = null;
+                    comparisonStack.pop();
+                } else {
+                    fast = fast.next.next;
+                }
+                slow = slow.next;
+            } else {
+                if(!comparisonStack.pop().equals(slow)){
+                    return false;
+                }
+                slow = slow.next;
+            }
+        }
+        return true;
+    }
+
     private static void getReversedList(ListNode node, List<ListNode> resultList) {
         if(node == null){
             return;
@@ -138,6 +179,23 @@ public class LinkedList {
             return node;
         }
         return next;
+    }
+
+    public static ListNode findIntersection(LinkedList thiz, LinkedList that) {
+        ListNode headA = thiz.head;
+        ListNode headB = that.head;
+        ListNode focus = headA;
+        while(focus!=null){
+            ListNode scanner = headB;
+            while (scanner!=null){
+                if(focus == scanner){
+                    return focus;
+                }
+                scanner = scanner.next;
+            }
+            focus = focus.next;
+        }
+        return null;
     }
 }
 

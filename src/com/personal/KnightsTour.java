@@ -7,12 +7,36 @@ import java.util.List;
 
 /**
  * Created by pr250155 on 4/18/17.
+ * let B[][] be the chess board
+ * let M[] be the number of moves
+ * Function moveKnight(B,i,j,n) {
+ *     if(n = T-1 && !noSafeMoves){
+ *         M[i][j] = T; return;
+ *     }
+ *     if(n < T-1 %% noSafeMoves) {
+ *         clearMoves(B,n-1);
+ *         return;
+ *     }
+ *     for(move m in M) {
+ *         if isSafe(m) {
+ *             moveKnight(B,i+m,j+m,n+1)
+ *         }
+ *     }
+ *     clearMoves(B,n-1);
+ * }
  */
 public class KnightsTour {
 
-    public static final int BOARD_SIZE = 5;
-    public static final int TOTAL_MOVES = BOARD_SIZE * BOARD_SIZE;
-    public static final int MAX_INDEX = BOARD_SIZE - 1;
+
+    private static int BOARD_SIZE ;
+    private static int TOTAL_MOVES;
+    private static int MAX_INDEX;
+
+    public static void setBoardSize(int boardSize) {
+        KnightsTour.BOARD_SIZE = boardSize;
+        KnightsTour.TOTAL_MOVES = BOARD_SIZE * BOARD_SIZE;
+        KnightsTour.MAX_INDEX = BOARD_SIZE - 1;
+    }
 
     static class Move {
         int i;
