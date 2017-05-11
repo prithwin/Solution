@@ -525,4 +525,28 @@ public class BinaryTree implements Serializable {
         return 1+ computeHeight(root.left)+computeHeight(root.right);
 
      }
+
+    public void remove(TreeNode node) {
+        removeInternal(this.root,node);
+    }
+
+    private void removeInternal(TreeNode root,TreeNode node) {
+        if(root.equals(node)) {
+            TreeNode penUltimate = root;
+            TreeNode ultimate = root.left;
+            while(ultimate.left!=null){
+                penUltimate = penUltimate.left;
+                ultimate = ultimate.left;
+            }
+            root.number = ultimate.number;
+            penUltimate.left = null;
+            return;
+        }
+        if(root.left != null){
+            removeInternal(root.left,node);
+        }
+        if(root.right != null) {
+            removeInternal(root.right,node);
+        }
+    }
 }

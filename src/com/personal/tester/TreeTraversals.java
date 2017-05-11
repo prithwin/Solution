@@ -52,6 +52,7 @@ public class TreeTraversals {
 //        treeTraversals2.tree.root.right.left.right = new TreeNode(9);
         treeTraversals2.tree.root.right.right = new TreeNode(7);
         treeTraversals2.tree.summer();
+        treeTraversals.tree.remove(new TreeNode(2));
 
         System.out.println("checking equality with a Copy: "+ treeTraversals.tree.equals(treeTraversals2.tree));
 
@@ -72,7 +73,6 @@ public class TreeTraversals {
         bst.add(new TreeNode(443));
         bst.add(new TreeNode(4));
         bst.add(new TreeNode(1));
-        bst.add(new TreeNode(1));
         bst.add(new TreeNode(3));
         bst.add(new TreeNode(67));
         bst.add(new TreeNode(999));
@@ -82,6 +82,9 @@ public class TreeTraversals {
 
         System.out.println("balancing the BST: ");
         bst.balanceBST();
+        bst.add(new TreeNode(66));
+        bst.printinOrder();
+        bst.remove(new TreeNode(67));
 
         System.out.println("Printing BST in order no matter what you do its always in order");
         bst.printinOrder();

@@ -26,7 +26,7 @@ public class TreeNode implements Serializable{
 
         if(obj instanceof TreeNode){
             TreeNode that = (TreeNode) obj;
-            if(this.number == that.number){
+            if(this.number.equals(that.number)){
                 return true;
             }
         }

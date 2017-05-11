@@ -108,4 +108,54 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
         flattenedList.add(node);
         inOrderAddToList(node.right,flattenedList);
     }
+
+    @Override
+    public void remove(TreeNode node) {
+        if(node.equals(this.root)){
+            this.root = null;
+        } else if(this.root.left!=null && node.number.compareTo(this.root.left.number) <=0) {
+            removeInternal(this.root,this.root.left, node);
+        } else if(this.root.right!=null && node.number.compareTo(this.root.right.number) >= 0 ) {
+            removeInternal(this.root,this.root.right,node);
+        }
+    }
+
+    private void removeInternal(TreeNode penultimate , TreeNode ultimate , TreeNode node) {
+        if(ultimate == null) return;
+        if(ultimate.equals(node)) {
+            if(ultimate.left == null && ultimate.right == null) {
+                transplant(penultimate, null);
+            }
+            else if(ultimate.left == null || ultimate.right == null){
+                if(ultimate.left != null) {
+                    transplant(penultimate, ultimate.left);
+                } else {
+                    transplant(penultimate, ultimate.right);
+                }
+            } else {
+                TreeNode rLargest = ultimate;
+                TreeNode rLargetp = penultimate;
+                while(rLargest.right!=null){
+                    rLargest = rLargest.right;
+                    rLargetp = rLargetp.right;
+                }
+                ultimate.number = rLargest.number;
+                removeInternal(rLargetp,rLargest,node);
+            }
+        }
+        if(root.left!=null && node.number.compareTo(ultimate.number) <= 0){
+            removeInternal(penultimate.left,ultimate.left,node);
+        }
+        if(root.right!=null && node.number.compareTo(ultimate.number) == 1){
+            removeInternal(penultimate.right,ultimate.right,node);
+        }
+    }
+
+    private void transplant(TreeNode target, TreeNode node) {
+        if(target.number.compareTo(node.number) == 1) {
+            target.left = node;
+        } else {
+            target.right = node;
+        }
+    }
 }

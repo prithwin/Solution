@@ -1,8 +1,6 @@
 package com.personal.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.personal.util.GraphType.UNDIRECTED_MATRIX;
 
@@ -51,7 +49,31 @@ public class Graph {
         }
     }
 
-    public void printDepthFirstSearchInternal(int index,List<Integer> visited) {
+    public void printBreadthFirstSearch(int index) {
+        if(type.isMatrix()){
+            Queue<Integer> printQueue = new java.util.LinkedList();
+            List<Integer> visited = new ArrayList();
+            printQueue.add(index);
+            bfsInternal(printQueue,visited);
+        }
+    }
+
+    private void bfsInternal(Queue<Integer> printQueue, List<Integer> visited) {
+        if(printQueue.isEmpty()) return;
+        int index = printQueue.poll();
+        System.out.println(graphNodes.get(index).readableName);
+        visited.add(index);
+        for(int j = 0 ; j < adjecencyMatrix[index].length ;j++) {
+            if(adjecencyMatrix[index][j] != 0) {
+                if(!visited.contains(j)) {
+                    printQueue.offer(j);
+                }
+            }
+        }
+        bfsInternal(printQueue,visited);
+    }
+
+    private void printDepthFirstSearchInternal(int index,List<Integer> visited) {
         System.out.println(graphNodes.get(index).readableName);
         visited.add(index);
         for(int j = 0 ; j < adjecencyMatrix[index].length ; j++){
