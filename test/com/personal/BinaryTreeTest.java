@@ -67,6 +67,18 @@ public class BinaryTreeTest {
         assertTrue(getSampleBST().isTreeBST());
     }
 
+    @Test public void testTreeSummer(){
+        BinaryTree btree = getSampleBinaryTree();
+        btree.summer();
+        assertEquals(5 , btree.root.number.number);
+    }
+
+    @Test public void testAggregator(){
+        BinaryTree btree = getSampleBinaryTree();
+        btree.aggregate();
+        assertEquals(36 , btree.root.number.number);
+    }
+
     private BinaryTree getSampleBinaryTree() {
         BinaryTree tree = new BinaryTree(1);
         tree.root.left = new TreeNode(2);

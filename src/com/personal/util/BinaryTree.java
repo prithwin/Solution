@@ -293,10 +293,10 @@ public class BinaryTree implements Serializable {
     }
 
     public boolean isTreeBST(){
-        return isTreeBSTInteral(root);
+        return isTreeBSTInternal(root);
     }
 
-    private boolean isTreeBSTInteral(TreeNode node) {
+    private boolean isTreeBSTInternal(TreeNode node) {
         if(node == null || (node.left==null && node.right==null)){
             return true;
         }
@@ -315,7 +315,7 @@ public class BinaryTree implements Serializable {
             }
         }
 
-        return isTreeBSTInteral(node.left) && isTreeBSTInteral(node.right);
+        return isTreeBSTInternal(node.left) && isTreeBSTInternal(node.right);
     }
 
     /**
@@ -632,5 +632,24 @@ public class BinaryTree implements Serializable {
         if(root.right != null) {
             removeInternal(root.right,node);
         }
+    }
+
+    public void aggregate() {
+        aggregateInternal(this.root);
+    }
+
+    private int aggregateInternal(TreeNode node) {
+        if(node == null) return 0;
+        if(node.left == null && node.right == null) return node.number.number;
+        if(node.left == null || node.right == null){
+            if(node.left != null){
+                node.number.number = aggregateInternal(node.left);
+            } else {
+                node.number.number = aggregateInternal(node.right);
+            }
+            return node.number.number;
+        }
+        node.number.number = aggregateInternal(node.left) + aggregateInternal(node.right);
+        return node.number.number;
     }
 }
