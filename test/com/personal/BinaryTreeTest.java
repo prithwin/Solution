@@ -1,8 +1,6 @@
 package com.personal;
 
-import com.personal.util.BinarySearchTree;
-import com.personal.util.BinaryTree;
-import com.personal.util.TreeNode;
+import com.personal.util.*;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
 
@@ -76,7 +74,69 @@ public class BinaryTreeTest {
     @Test public void testAggregator(){
         BinaryTree btree = getSampleBinaryTree();
         btree.aggregate();
-        assertEquals(36 , btree.root.number.number);
+        assertEquals(26 , btree.root.number.number);
+    }
+
+    @Test public void testPrintLeft() {
+        BinaryTree btree = getSampleBinaryTree();
+        btree.printLeftView();
+    }
+
+    @Test public void testPrintRightView() {
+        getSampleBinaryTree().printRightView();
+    }
+
+    @Test public void testPrintVertically() {
+        getSampleBinaryTree().printTreeVertically();
+    }
+
+    @Test public void testPrintTopView() {
+        getSampleBinaryTree().printTopView();
+    }
+
+    @Test public void testPrintBottomView() {
+        getSampleBinaryTree().printBottomView();
+    }
+
+    @Test public void temp() {
+        BinaryTree tree = getSampleBinaryTree();
+        System.out.printf("\nchecking if the tree contains a certain root to end sum\n");
+        System.out.println(tree.checkRootToLeafSum(7));
+        System.out.println("Distance between nodes: "+tree.getDistance(tree.root.left.left
+                ,tree.root.right.left.right));
+
+        System.out.printf("Depth of the node treeTraversals.tree.root.right.left.right is %d", tree.getNodeDepth(tree.root.right.left.right));
+        System.out.println("\nLCA between nodes: "+tree.getLowestCommonAncestor(tree.root.left.left
+                ,tree.root.left.right));
+
+
+        AVLTree avlTree = new AVLTree();
+        avlTree.add(new AVLTreeNode(5));
+        avlTree.add(new AVLTreeNode(6));
+        avlTree.add(new AVLTreeNode(7));
+        avlTree.add(new AVLTreeNode(8));
+        avlTree.add(new AVLTreeNode(9));
+        avlTree.add(new AVLTreeNode(10));
+        avlTree.add(new AVLTreeNode(11));
+        avlTree.add(new AVLTreeNode(12));
+        avlTree.add(new AVLTreeNode(13));
+
+        avlTree.add(new AVLTreeNode(34));
+        avlTree.add(new AVLTreeNode(36));
+        avlTree.add(new AVLTreeNode(37));
+        avlTree.add(new AVLTreeNode(38));
+        avlTree.add(new AVLTreeNode(39));
+        avlTree.add(new AVLTreeNode(555));
+
+
+        avlTree.add(new AVLTreeNode(1));
+        avlTree.add(new AVLTreeNode(2));
+        avlTree.add(new AVLTreeNode(3));
+        avlTree.add(new AVLTreeNode(4));
+
+
+
+        avlTree.printAVLTree();
     }
 
     private BinaryTree getSampleBinaryTree() {

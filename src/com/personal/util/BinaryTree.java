@@ -353,11 +353,20 @@ public class BinaryTree implements Serializable {
 
     }
 
+    /**
+     * plv(n,l,m){
+     *     if n is Null
+     *      return;
+     *   if (l > m)
+     *      print n;
+     *      m = l;
+     *   plv(n,l+1,m);
+     * }
+     */
     public void printLeftView(){
         ComparableNumber maxlevel = new ComparableNumber(0);
         printLeftViewInternal(root,1,maxlevel);
     }
-
 
     public void printRightView(){
         ComparableNumber maxlevel = new ComparableNumber(0);
@@ -376,7 +385,6 @@ public class BinaryTree implements Serializable {
         printRightViewInternal(node.right, level+1,maxlevel);
         printRightViewInternal(node.left, level+1,maxlevel);
     }
-
 
     private void printLeftViewInternal(TreeNode node, int level, ComparableNumber maxlevel) {
         if(node==null){
@@ -408,6 +416,19 @@ public class BinaryTree implements Serializable {
                 });
     }
 
+    /**
+     * PLM(n,M,g) {
+     *     if(n == null) return;
+     *      if(!M.containsKey(g)){
+     *           M.put(g);
+     *       }
+     *       M.get(g).add(n);
+     *   }
+     *   PLM(n.left,M,g-1);
+     *   PLN(n.right,M,g+1)
+     *
+     * }
+     */
     private void prePareLongitudanalMap(Map<Integer, List<ComparableNumber>> orderedLongitudeMap,
                                         TreeNode node, int grid) {
         if(node == null) {
