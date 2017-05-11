@@ -35,8 +35,6 @@ public class BinaryTree implements Serializable {
         printinOrderInternal(root.right);
     }
 
-
-
     public void printPostOrder() {
         printPostOrderInternal(root);
     }
@@ -46,7 +44,7 @@ public class BinaryTree implements Serializable {
             return;
         printPostOrderInternal(root.left);
         printPostOrderInternal(root.right);
-        System.out.print(root.number==null?root.data:root.number);
+        System.out.print(" "+(root.number==null?root.data:root.number)+" ");
     }
 
     public void printLevelOrder(){
@@ -60,7 +58,7 @@ public class BinaryTree implements Serializable {
             return;
         }
         TreeNode examination = printQueue.remove();
-        System.out.println(examination.number);
+        System.out.print(" "+examination.number+" ");
         if(examination.left!=null)
             printQueue.add(examination.left);
         if(examination.right!=null)
@@ -80,6 +78,16 @@ public class BinaryTree implements Serializable {
         super();
     }
 
+    /**
+    H(n){
+        if n is NULL;
+        return 0;
+        lh , rh = 0;
+        lh = 1 + H(n.left);
+        rh = 1 + H(n.right);
+        return max(lh,rh)
+    }
+     */
     public int height(){
         return computeHeight(root);
     }
@@ -97,6 +105,13 @@ public class BinaryTree implements Serializable {
         }
     }
 
+    /**
+     *S(n) {
+     * if n is null;
+     *   return 0;
+     * else
+     *   return 1 + S(n.left) + S(n.right);
+     */
     public int size(){
         return computeSize(this.root);
     }
@@ -122,11 +137,28 @@ public class BinaryTree implements Serializable {
 
     private boolean btreeEquals(TreeNode lhs, TreeNode rhs) {
         if(lhs == null || rhs == null){
-            return true;
+            if(lhs == null && rhs != null){
+                return false;
+            } else if( lhs != null && rhs == null){
+                return false;
+            } else {
+                return true;
+            }
         }
         return (lhs.number.equals(rhs.number)) && btreeEquals(lhs.left,rhs.left) && btreeEquals(lhs.right,rhs.right);
     }
 
+    /**
+     * M(n) {
+     *    if(n==null)return;
+     *     M(n.left);
+     *     M(n.right);
+     *
+     *     temp = n.left;
+     *     n.left = n.right;
+     *     n.right = temp;
+     * }
+     */
     public void mirror(){
         realMirror(this.root);
     }
@@ -142,11 +174,23 @@ public class BinaryTree implements Serializable {
         node.right = temp;
     }
 
+    /**
+     * PrintPaths(n,S){
+     *   S.push(n);
+     *   if(n.left == null && n.right == null){
+     *     print S;
+     *   }
+     *     if(n.left != null)
+     *       PrintPaths(n.left,S); S.pop();
+     *     if(n.right != null)
+     *       PrintPaths(n.right,S); S.pop();
+     *  }
+     *
+     */
     public void printAllPaths(){
         Stack<TreeNode> treeStack = new Stack<>();
         printAllPaths(this.root,treeStack);
     }
-
 
     private void printAllPaths(TreeNode node, Stack<TreeNode> treeStack) {
         if(node==null){
@@ -167,20 +211,43 @@ public class BinaryTree implements Serializable {
         }
     }
 
+    /**
+     *  C(node) {
+     *      if(node.left == null && node.right ==null){
+     *          return 1;
+     *      }
+     *      int lc = 0
+     *      if(node.left!=null){
+     *          lc = C(node.left);
+     *      }
+     *      int rc = 0;
+     *      if(node.right != null){
+     *          rc = C(node.right);
+     *      }
+     *      return lc+rc;
+     *  }
+     * @return the nuumber of leaves
+     */
     public int countLeaves(){
         return countLeavesInternal(this.root);
     }
 
     private int countLeavesInternal(TreeNode node) {
-        if(node==null){
-            return 0;
-        }
         if(node.left==null && node.right==null){
             return 1;
         }
-        return countLeavesInternal(node.left)+countLeavesInternal(node.right);
+        int leftCount = 0,rightCount = 0;
+        if(node.left != null){
+            leftCount = countLeavesInternal(node.left);
+        }
+        if(node.right!=null){
+            rightCount = countLeavesInternal(node.right);
+        }
+        return leftCount + rightCount;
     }
 
+    /**
+     */
     public void printSpiralOrder(){
         Stack<TreeNode> printStack = new Stack<>();
         printStack.add(root);
