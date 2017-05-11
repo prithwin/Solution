@@ -247,36 +247,49 @@ public class BinaryTree implements Serializable {
     }
 
     /**
+     * SP(S,f) {
+     *     if(S.isempty) return;
+     *     DEFINE S';
+     *     while(!S.isEmpty) {
+     *         n = S.pop;
+     *         PRINT n;
+     *         if(f) {
+     *             S'.push(n.left);
+     *             S'.push(n.right);
+     *         } else {
+     *             S'.push(n.right);
+     *             S'.push(n.left);
+     *         }
+     *     }
+     *     SP(S',!f);
+     * }
      */
     public void printSpiralOrder(){
         Stack<TreeNode> printStack = new Stack<>();
-        printStack.add(root);
+        printStack.push(this.root);
         printSpiralOrderInternal(printStack,false);
     }
 
-    private void printSpiralOrderInternal(Stack<TreeNode> printStack,boolean flip) {
-        if(printStack.isEmpty()){
-            return;
-        }
-        Stack tempStack = new Stack();
-        while (!printStack.empty()){
-            TreeNode examination = printStack.pop();
-            System.out.println(examination.number);
-            if(!flip) {
-                if (examination.left != null)
-                    tempStack.push(examination.left);
-                if (examination.right != null)
-                    tempStack.push(examination.right);
+    private void printSpiralOrderInternal(Stack<TreeNode> printStack ,boolean flip) {
+        if(printStack.isEmpty()) return;
+
+        Stack<TreeNode> levelStack = new Stack<>();
+        while(!printStack.isEmpty()) {
+            TreeNode node = printStack.pop();
+            System.out.printf(" %s ",node.number);
+            if(flip) {
+                if(node.right != null)
+                    levelStack.push(node.right);
+                if(node.left != null)
+                    levelStack.push(node.left);
             } else {
-                if (examination.right != null)
-                    tempStack.push(examination.right);
-                if (examination.left != null) {
-                    tempStack.push(examination.left);
-                }
+                if(node.left != null)
+                    levelStack.push(node.left);
+                if(node.right != null)
+                levelStack.push(node.right);
             }
         }
-
-        printSpiralOrderInternal(tempStack,!flip);
+        printSpiralOrderInternal(levelStack,!flip);
     }
 
     public boolean isTreeBST(){
@@ -285,19 +298,23 @@ public class BinaryTree implements Serializable {
 
     private boolean isTreeBSTInteral(TreeNode node) {
         if(node == null || (node.left==null && node.right==null)){
-            //its balanced till this point.
             return true;
         }
+        if(node.left == null && node.right.number.compareTo(node.number) ==-1){
+            return false;
+        }
+        if(node.right == null && node.left.number.compareTo(node.number) == 1) {
+            return false;
+        }
+        if(node.left!=null && node.right!=null){
+            if(node.left.number.compareTo(node.number)==1) {
+                return false;
+            }
+            if(node.right.number.compareTo(node.number) ==-1) {
+                return false;
+            }
+        }
 
-        if(node.right==null || !(node.left.number.compareTo(node.number) <= 0)){
-            return false;
-        }
-        if(node.left==null || !(node.right.number.compareTo(node.number)==1)){
-            return false;
-        }
-        if(!(node.left.number.compareTo(node.number) <= 0 &&  node.right.number.compareTo(node.number)==1)){
-            return false;
-        }
         return isTreeBSTInteral(node.left) && isTreeBSTInteral(node.right);
     }
 

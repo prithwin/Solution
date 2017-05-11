@@ -1,5 +1,6 @@
 package com.personal;
 
+import com.personal.util.BinarySearchTree;
 import com.personal.util.BinaryTree;
 import com.personal.util.TreeNode;
 import org.testng.annotations.*;
@@ -61,6 +62,10 @@ public class BinaryTreeTest {
         getSampleBinaryTree().printSpiralOrder();
     }
 
+    @Test public void testIfTreeBST() {
+        assertFalse(getSampleBinaryTree().isTreeBST());
+        assertTrue(getSampleBST().isTreeBST());
+    }
 
     private BinaryTree getSampleBinaryTree() {
         BinaryTree tree = new BinaryTree(1);
@@ -73,5 +78,20 @@ public class BinaryTreeTest {
         tree.root.right.right = new TreeNode(7);
         tree.root.right.right.right = new TreeNode(9);
         return tree;
+    }
+
+    private BinaryTree getSampleBST() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.add(new TreeNode(45));
+        bst.add(new TreeNode(443));
+        bst.add(new TreeNode(4));
+        bst.add(new TreeNode(1));
+        bst.add(new TreeNode(3));
+        bst.add(new TreeNode(67));
+        bst.add(new TreeNode(999));
+        bst.add(new TreeNode(999));
+        bst.add(new TreeNode(7));
+        bst.add(new TreeNode(4534));
+        return bst;
     }
 }
