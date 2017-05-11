@@ -628,7 +628,6 @@ public class BinaryTree implements Serializable {
 
     public int getDiameter() {
         return 1+ computeHeight(root.left)+computeHeight(root.right);
-
      }
 
     public void remove(TreeNode node) {
