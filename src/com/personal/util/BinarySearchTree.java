@@ -114,7 +114,7 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
     @Override
     public void remove(TreeNode node) {
         if(node.equals(this.root)){
-            this.root = null;
+            removeInternal(null, this.root,node);
         } else if(this.root.left!=null && node.number.compareTo(this.root.left.number) <=0) {
             removeInternal(this.root,this.root.left, node);
         } else if(this.root.right!=null && node.number.compareTo(this.root.right.number) >= 0 ) {

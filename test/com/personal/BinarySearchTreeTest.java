@@ -18,7 +18,15 @@ public class BinarySearchTreeTest {
         assertEquals(getSampleBST().getMinValue(),1);
     }
 
-    private BinarySearchTree getSampleBST() {
+    @Test public void testRemoveFromBST () {
+        BinaryTree binaryTree = getSampleBST();
+        binaryTree.remove(new TreeNode(67));
+        binaryTree.printinOrder();
+        binaryTree.remove(new TreeNode(45));
+        binaryTree.printinOrder();
+    }
+
+    private BinaryTree getSampleBST() {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(new TreeNode(45));
         bst.add(new TreeNode(443));
@@ -26,7 +34,6 @@ public class BinarySearchTreeTest {
         bst.add(new TreeNode(1));
         bst.add(new TreeNode(3));
         bst.add(new TreeNode(67));
-        bst.add(new TreeNode(999));
         bst.add(new TreeNode(999));
         bst.add(new TreeNode(7));
         bst.add(new TreeNode(4534));
