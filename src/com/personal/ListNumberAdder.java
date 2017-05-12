@@ -13,7 +13,7 @@ public class ListNumberAdder {
         int reminder = 0;
         for(int i = daye.size()-1 , j = baye.size()-1;;){
             int sumInPlace = reminder;
-            if(i<0 && j<0){
+            if(i<0 && j<0 && reminder == 0){
                 break;
             }
 
@@ -40,10 +40,5 @@ public class ListNumberAdder {
             j--;
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new ListNumberAdder().add(Arrays.asList(5,6,7,8), Arrays.asList(1,1,2,3,4)));
-
     }
 }
