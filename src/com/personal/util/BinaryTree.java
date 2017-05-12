@@ -491,17 +491,17 @@ public class BinaryTree implements Serializable {
     }
 
     public boolean checkRootToLeafSum(int sum){
-        Stack<TreeNode> printstack = new Stack<>();
-        return checkRootToLeafSumInternal(root,printstack,sum);
+        Stack<TreeNode> printStack = new Stack<>();
+        return checkRootToLeafSumInternal(root,printStack,sum);
     }
 
-    private boolean checkRootToLeafSumInternal(TreeNode node, Stack<TreeNode> printstack, int sum) {
+    private boolean checkRootToLeafSumInternal(TreeNode node, Stack<TreeNode> printStack, int sum) {
         if(node==null) {
             return false;
         }
-        printstack.push(node);
+        printStack.push(node);
         if (node.left == null && node.right == null) {
-            int currentSum = printstack.
+            int currentSum = printStack.
                     stream().
                     reduce((t1, t2) -> {
                         return new TreeNode(((t1 == null) ? 0 : t1.number.number) + ((t2 == null) ? 0 : t2.number.number));
@@ -513,70 +513,96 @@ public class BinaryTree implements Serializable {
             }
         } else {
             if (node.left != null) {
-                boolean check = checkRootToLeafSumInternal(node.left, printstack, sum);
+                boolean check = checkRootToLeafSumInternal(node.left, printStack, sum);
                 if(check){return true;}
-                printstack.pop();
+                printStack.pop();
             }
             if (node.right != null) {
-                boolean check = checkRootToLeafSumInternal(node.right, printstack, sum);
+                boolean check = checkRootToLeafSumInternal(node.right, printStack, sum);
                 if(check){return true;}
-                printstack.pop();
+                printStack.pop();
             }
         }
         return false;
     }
 
+    /**
+     * DISTANCE(this,that) {
+     *     S = getStackToNode(this);
+     *     S'= getStackToNode(that);
+     *     L = toList(S);
+     *     L' = toList(S');
+     *     return parseDistance(L,L');
+     * }
+     * @param thiz a node
+     * @param dat a another node
+     * @return the distance between the nodes
+     */
     public int getDistance(TreeNode thiz, TreeNode dat){
-        LockedStack<TreeNode> leftStack = new LockedStack<>();
+        Stack<TreeNode> leftStack = new Stack<>();
         leftStack.push(root);
-        LockedStack<TreeNode> rightStack = new LockedStack<>();
+        Stack<TreeNode> rightStack = new Stack<>();
         rightStack.push(root);
-        getStackToNode(thiz, leftStack);
-        getStackToNode(dat,rightStack);
-        List<TreeNode> leftList = leftStack.stream().collect(Collectors.toList());
-        List<TreeNode> rightList = rightStack.stream().collect(Collectors.toList());
+        List<TreeNode> leftList = getListToNode(thiz, leftStack);
+        List<TreeNode> rightList = getListToNode(dat, rightStack);
         System.out.println(leftList);
         System.out.println(rightList);
         return parseDistance(leftList,rightList);
     }
 
-    private int parseDistance(List<TreeNode> leftList, List<TreeNode> rightList) {
-        for(int i = leftList.size()-1 ; i >=0 ; i--){
-            if(rightList.contains(leftList.get(i))){
-                //found the common element;
-                return leftList.size()-1-i + rightList.size()-1-rightList.indexOf(leftList.get(i));
-            }
-        }
-        return 0;
-    }
-
-    private void popToSameStartPoint(LockedStack<TreeNode> thisStack, LockedStack<TreeNode> thatStack) {
-        while(thisStack.get(0)!=thatStack.get(0)){
-            thisStack.remove(0);
-        }
-    }
-
-    private void getStackToNode(TreeNode target, LockedStack<TreeNode> stack) {
-        if(stack.isEmpty()){
-            return;
-        }
+    public List<TreeNode> getListToNode(TreeNode node,Stack<TreeNode> stack)  {
+        if(stack.isEmpty()) return null;
         TreeNode examination = stack.peek();
-        if(target == examination){
-            stack.setLocked(true);
-            return;
+        if(examination.equals(node)) {
+            List<TreeNode> result = new ArrayList();
+            for( int i = 0 ; i < stack.size() ; i++ ){
+                result.add(stack.get(i));
+            }
+            return result;
         }
-        if(examination!=null){
-           if(examination.left!=null){
-               stack.push(examination.left);
-               getStackToNode(target,stack);
-               stack.pop();
-           }
-            if(examination.right!=null){
+        if(examination != null) {
+            if(examination.left != null) {
+                stack.push(examination.left);
+                List<TreeNode> result = getListToNode(node,stack);
+                if(result != null) {
+                    return result;
+                }
+                stack.pop();
+            }
+            if(examination.right != null) {
                 stack.push(examination.right);
-                getStackToNode(target,stack);
+                List<TreeNode> result = getListToNode(node,stack);
+                if(result != null) {
+                    return result;
+                }
                 stack.pop();
             }
         }
+        return null;
+    }
+
+    /**
+     * parseDistance(L,L') {
+     *     for i 0 -> L.length - 1
+     *        if(L'.contains(L.get(i))) {
+     *            return (L.length - i) + (L'.length - index(L.get(i))) {
+     *            }
+     *        }
+     *    }
+     *    return 0;
+     * }
+     * @param leftList this list
+     * @param rightList that list
+     * @return the distance between a common point between two nodes.
+     */
+    private int parseDistance(List<TreeNode> leftList, List<TreeNode> rightList) {
+        for(int i = leftList.size() - 1 ; i >= 0 ; i--){
+            if(rightList.contains(leftList.get(i))) {
+                int where  = rightList.lastIndexOf(leftList.get(i));
+                return (leftList.size()-i) + (rightList.size()-where) - 1;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -584,11 +610,11 @@ public class BinaryTree implements Serializable {
      * @param node
      */
     public int getNodeDepth(TreeNode node){
-        return getNodeDepthInternal(root, node, 1);
+        return getNodeDepthInternal(root, node, 1) + 1;
     }
 
     private int getNodeDepthInternal(TreeNode node, TreeNode target, int level) {
-        if(node == target){
+        if(node.equals(target)){
             return level;
         } else {
             if(node.left != null){
@@ -602,14 +628,12 @@ public class BinaryTree implements Serializable {
     }
 
     public TreeNode getLowestCommonAncestor(TreeNode thiz, TreeNode dat){
-        LockedStack<TreeNode> leftStack = new LockedStack<>();
+        Stack<TreeNode> leftStack = new Stack<>();
         leftStack.push(root);
-        LockedStack<TreeNode> rightStack = new LockedStack<>();
+        Stack<TreeNode> rightStack = new Stack<>();
         rightStack.push(root);
-        getStackToNode(thiz, leftStack);
-        getStackToNode(dat,rightStack);
-        List<TreeNode> leftList = leftStack.stream().collect(Collectors.toList());
-        List<TreeNode> rightList = rightStack.stream().collect(Collectors.toList());
+        List<TreeNode> leftList = getListToNode(thiz, leftStack);
+        List<TreeNode> rightList = getListToNode(dat, rightStack);
         System.out.println();
         System.out.println(leftList);
         System.out.println(rightList);
@@ -627,7 +651,7 @@ public class BinaryTree implements Serializable {
     }
 
     public int getDiameter() {
-        return 1+ computeHeight(root.left)+computeHeight(root.right);
+        return 1 + computeHeight(root.left)+computeHeight(root.right);
      }
 
     public void remove(TreeNode node) {
@@ -671,5 +695,35 @@ public class BinaryTree implements Serializable {
         }
         node.number.number = aggregateInternal(node.left) + aggregateInternal(node.right);
         return node.number.number;
+    }
+
+    public int getMaxValue() {
+        ComparableNumber maxValue = new ComparableNumber(Integer.MIN_VALUE);
+        getMaxValueInternal(this.root,maxValue);
+        return maxValue.number;
+    }
+
+    public int getMinValue() {
+        ComparableNumber minValue = new ComparableNumber(Integer.MAX_VALUE);
+        getMinValueInternal(this.root , minValue);
+        return minValue.number;
+    }
+
+    private void getMinValueInternal(TreeNode node, ComparableNumber minValue) {
+        if(node == null) return;
+        if(node.number.number < minValue.number) {
+            minValue.number = node.number.number;
+        }
+        getMinValueInternal(node.left , minValue);
+        getMinValueInternal(node.right , minValue);
+    }
+
+    private void getMaxValueInternal(TreeNode node, ComparableNumber maxValue) {
+        if(node == null) return;
+        if(node.number.number > maxValue.number) {
+            maxValue.number = node.number.number;
+        }
+        getMaxValueInternal(node.left,maxValue);
+        getMaxValueInternal(node.right,maxValue);
     }
 }

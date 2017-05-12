@@ -17,20 +17,22 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
         addBSTInternal(root,node);
     }
 
-    public TreeNode minValue(){
+    @Override
+    public int getMinValue(){
         TreeNode temp = root;
         while(temp.left!=null){
             temp = temp.left;
         }
-        return temp;
+        return temp.number.number;
     }
 
-    public TreeNode maxValue(){
+    @Override
+    public int getMaxValue(){
         TreeNode temp = root;
         while(temp.right!=null){
             temp = temp.right;
         }
-        return temp;
+        return temp.number.number;
     }
 
     private void addBSTInternal(TreeNode currentRoot,TreeNode node) {

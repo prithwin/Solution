@@ -29,6 +29,10 @@ public class BinaryTreeTest {
         assertEquals(4, getSampleBinaryTree().height());
     }
 
+    @Test public void testGetNodeDepth() {
+        assertEquals(4, getSampleBinaryTree().getNodeDepth(new TreeNode(9)));
+    }
+
     @Test public void testComputeSize() {
         assertEquals(9,getSampleBinaryTree().size());
     }
@@ -98,17 +102,30 @@ public class BinaryTreeTest {
         getSampleBinaryTree().printBottomView();
     }
 
+    @Test public void testIfTreeContainsRootToLeafSum() {
+        assertTrue(getSampleBinaryTree().checkRootToLeafSum(7));
+    }
+
+    @Test public void testGetDistanceBetweenNodes() {
+        BinaryTree binaryTree = getSampleBinaryTree();
+        assertEquals(6,binaryTree.getDistance(new TreeNode(4), new TreeNode(9)));
+        assertEquals(3,binaryTree.getDistance(new TreeNode(4), new TreeNode(5)));
+    }
+
+    @Test public void getLowestCommonAncestor() {
+        BinaryTree binaryTree = getSampleBinaryTree();
+        assertEquals(new TreeNode(1), binaryTree.getLowestCommonAncestor(new TreeNode(4), new TreeNode(9)));
+    }
+
+    @Test public void getMaxValue(){
+        assertEquals(9,getSampleBinaryTree().getMaxValue());
+    }
+
+    @Test public void getMinValue() {
+        assertEquals(1,getSampleBinaryTree().getMinValue());
+    }
+
     @Test public void temp() {
-        BinaryTree tree = getSampleBinaryTree();
-        System.out.printf("\nchecking if the tree contains a certain root to end sum\n");
-        System.out.println(tree.checkRootToLeafSum(7));
-        System.out.println("Distance between nodes: "+tree.getDistance(tree.root.left.left
-                ,tree.root.right.left.right));
-
-        System.out.printf("Depth of the node treeTraversals.tree.root.right.left.right is %d", tree.getNodeDepth(tree.root.right.left.right));
-        System.out.println("\nLCA between nodes: "+tree.getLowestCommonAncestor(tree.root.left.left
-                ,tree.root.left.right));
-
 
         AVLTree avlTree = new AVLTree();
         avlTree.add(new AVLTreeNode(5));
