@@ -204,6 +204,16 @@ A28: We've been Using testNg off late so we can assert
 ************************************************************************************************************************
 Q30: Hibernate criteria query api overview.
 ************************************************************************************************************************
+Q31: What happens when you type a URL and press enter?
+A31: -if the page is cached use it
+     -browser uses OS nslookup library to find out the ipaddress of the host. if its not in the hosts file OS knows the
+      DNS servers, so makes a query to find the IP address of the host.
+     -Browser Opens a TCP connection to the host.
+     -browser receives a response.
+     -browser checks status
+     -browser parses the response.
+     -Done.
+
 * what is a container.
 * multithreading in servlet
 * two spring contexts with the same file
@@ -232,3 +242,12 @@ Q30: Hibernate criteria query api overview.
 * what's the whole point of having a JVM
 * what is the JIT compiler.
 * explain SOLID concepts.
+* how are cookies intiated.
+* review SQL, select disinct and group by without aggregate functions.
+* Security considerations around Bill Payment systems.
+* http and https flow.
+* whats a pointer?
+* object on heap or stack
+* refresher about TCP UDP and Socket programming in general.
+* microservices
+
