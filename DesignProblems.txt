@@ -12,3 +12,6 @@ A3: find in codebase
 Q4: Desing an authrization interface with all the required operations.
 A4: trick question you just need one authorization operation.
 
+Q5: Design Pintrest.
+A5:
+
