@@ -213,6 +213,41 @@ A31: -if the page is cached use it
      -browser checks status
      -browser parses the response.
      -Done.
+************************************************************************************************************************
+Q32: What is normalization and reverse normalization in a database?
+    -normalization is Organization and desing of a database in a manner that reduces redundancy and places its for bette
+    r information retrieval.
+    eg you have a database.
+     ----------------------------------------------------
+    | user name | movies Rented |  address | return date |
+    |----------------------------------------------------|
+    | sam       |A,B,C,D,E      | something| 12/12/45    |
+    |----------------------------------------------------|
+    1NF: >>all columns/cells should have a single value     >> all rows should be uniquie
+         $$ in the above table split the movies rented out into different rows and make introduce uniqueness in terms of
+         some combination
+          ----------------------------------------------------
+         | user name | movies Rented |  address | return date |
+         |----------------------------------------------------|
+         | sam       |A              | something| 12/12/45    |
+         |----------------------------------------------------|
+         | sam       |B              | something| 12/12/45    |
+         |----------------------------------------------------|
+    2NF introduces the concept of a primary and a foreign key
+        >> should be in 1NF and  >> should have a key that uniquely identifies the row
+         $$ in the above table introduce a primary key, called member number,so the table looks like this
+     ----------------------------------------------------------           ____________________
+    | pk  | user name |  movies Rented|  address | return date |         |mpk  | name         |
+    |-----|----------------------------------------------------|          --------------------
+    |  1  | sam       |1              | something| 12/12/45    |         | 1   | pirates      |
+    |-----|----------------------------------------------------|
+        $$ youll not be able to continue further untill you split this table between member and movies.
+     3NF: >> should be in 2NF and should'nt have any transitive dependencies.
+     BCNF: >> shouldnt have more than one candiate key.
+************************************************************************************************************************
+
+
+
 
 * what is a container.
 * multithreading in servlet
@@ -250,4 +285,3 @@ A31: -if the page is cached use it
 * object on heap or stack
 * refresher about TCP UDP and Socket programming in general.
 * microservices
-
