@@ -2,6 +2,7 @@ package com.personal;
 
 import com.personal.util.LinkedList;
 import com.personal.util.ListNode;
+import com.personal.util.MLLinkedList;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -28,6 +29,11 @@ public class LinkedListTest {
         int[] array = {1,2,7,3,7,8,1};
         LinkedList target = new LinkedList(array);
         assertFalse(target.isPalindrome());
+    }
+
+    @Test public void mlListFlattenTest() {
+        MLLinkedList list = new MLLinkedList();
+
     }
 
     @Test public void findIntersection() {
