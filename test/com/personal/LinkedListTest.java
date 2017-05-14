@@ -33,7 +33,18 @@ public class LinkedListTest {
 
     @Test public void mlListFlattenTest() {
         MLLinkedList list = new MLLinkedList();
+    }
 
+    @Test public void testIfLoopExists() {
+        assertTrue(getLoopedList().hasLoop());
+    }
+
+    @Test public void removeLoop() {
+        LinkedList liq = getLoopedList();
+        assertTrue(liq.hasLoop());
+        liq.findAndRemoveLoopTermination();
+        assertFalse(liq.hasLoop());
+        System.out.println(liq);
     }
 
     @Test public void findIntersection() {
@@ -53,6 +64,19 @@ public class LinkedListTest {
         listB.head = headB;
         ListNode intersection = LinkedList.findIntersection(listA, listB);
         assertTrue(intersection.val == crossroads.val);
+    }
+
+    private LinkedList getLoopedList(){
+        LinkedList list = new LinkedList();
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        ListNode crossroads = new ListNode(3);
+        head.next.next = crossroads;
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next = crossroads;
+        list.head = head;
+        return list;
     }
 
 }

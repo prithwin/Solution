@@ -22,6 +22,7 @@ public class LongestCommonPrefix {
     }
 
     private int findLastMatchPoint(String first, String subject,int start, int lcpEnd) {
+        if(start==lcpEnd) {return start+1;}
         int mid = start + (lcpEnd - start) / 2;
         if(first.charAt(mid) != subject.charAt(mid) && first.charAt(mid - 1) != subject.charAt(mid - 1)) {
             return findLastMatchPoint(first,subject,start,mid-1);

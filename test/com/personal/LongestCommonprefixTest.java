@@ -11,6 +11,10 @@ import static org.testng.Assert.*;
  */
 public class LongestCommonprefixTest {
     @Test public void testLCP() {
-        System.out.println(new LongestCommonPrefix().getLongestCommonPrefix(Arrays.asList("Essaysdfsdf", "Esspy","Espisjdfjjef")));
+        assertEquals("Es",new LongestCommonPrefix().getLongestCommonPrefix(Arrays.asList("Essaysdfsdf", "Esspy","Espisjdfjjef")));
+        assertEquals("Ess",new LongestCommonPrefix().getLongestCommonPrefix(Arrays.asList("Essaysdfsdf", "Esspy")));
+        assertEquals("Ess",new LongestCommonPrefix().getLongestCommonPrefix(Arrays.asList("Ess", "Ess")));
+        assertEquals("https://google.com/",new LongestCommonPrefix().getLongestCommonPrefix(Arrays.asList("https://google.com/sdjfji/sdfji", "https://google.com/jiefjis/jiefj/","https://google.com/jiefjisjie/jsiefj")));
+
     }
 }

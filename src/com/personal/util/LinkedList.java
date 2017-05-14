@@ -148,9 +148,18 @@ public class LinkedList {
         return stringBuilder.toString();
     }
 
-    public static void deleteNode(ListNode node){
-        node.val = node.next.val;
-        node.next = node.next.next;
+    public void deleteNode(ListNode node){
+        if(head == null) return;
+        ListNode trail = this.head;
+        ListNode lead = trail.next;
+        while(trail.next!=null){
+            if(lead == node){
+                break;
+            }
+            lead=lead.next;
+            trail = trail.next;
+        }
+        trail.next = lead.next;
     }
 
     public void reverse(){
@@ -196,6 +205,56 @@ public class LinkedList {
             focus = focus.next;
         }
         return null;
+    }
+
+    public boolean hasLoop(){
+        return detectLoops(this.getHead());
+    }
+
+    private boolean detectLoops(ListNode head) {
+        ListNode trailingPointer = head;
+        ListNode leadPointer = head;
+        boolean loopDetected = false;
+        while (leadPointer.next!=null && trailingPointer.next!=null){
+            trailingPointer = trailingPointer.next;
+            leadPointer = leadPointer.next.next;
+            if(trailingPointer == leadPointer){
+                loopDetected = true;
+                break;
+            }
+        }
+        return loopDetected;
+    }
+
+    public void findAndRemoveLoopTermination(){
+        if(!this.hasLoop()) return;
+        ListNode pointInsideLoop = findPointWithinLoop();
+        ListNode iori = head;
+        while(iori!=pointInsideLoop) {
+            ListNode kyo = pointInsideLoop.next;
+            ListNode kDash = pointInsideLoop;
+            while (kyo != pointInsideLoop) {
+                if (kyo == iori) {
+                    kDash.next = null;
+                    return;
+                }
+                kyo=kyo.next;
+                kDash = kDash.next;
+            }
+            iori=iori.next;
+        }
+        return;
+    }
+
+    private ListNode findPointWithinLoop() {
+        if(!this.hasLoop()) return null;
+        ListNode fast = head.next.next;
+        ListNode slow = head.next;
+        while(fast!=slow) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 }
 

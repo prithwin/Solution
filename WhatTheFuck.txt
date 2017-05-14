@@ -19,6 +19,8 @@ Q8: Achieve syncronziation without locks?
 Q9: difference between TCP and UDP
 ************************************************************************************************************************
 Q10: What is ASCII encoding.
+https://www.tutorialspoint.com/html/html_url_encoding.htm
+http://kunststube.net/encoding/
 ************************************************************************************************************************
 Q11: what is encoding in general.
 ************************************************************************************************************************
