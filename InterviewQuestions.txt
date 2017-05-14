@@ -285,3 +285,5 @@ Q32: What is normalization and reverse normalization in a database?
 * object on heap or stack
 * refresher about TCP UDP and Socket programming in general.
 * microservices
+* advantges of having session management in HTTP.
+

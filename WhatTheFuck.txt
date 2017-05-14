@@ -30,5 +30,10 @@ Q14: realation between latency and throughput.
 ************************************************************************************************************************
 Q15: what is applications performance according to you.
 ************************************************************************************************************************
+Q16: all details relating to the SSL Exchange.
+A16: read from the CN book.
+************************************************************************************************************************
+Q17: Can we share the memory between user space and kernel space
+
 
 
