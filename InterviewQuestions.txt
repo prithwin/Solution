@@ -286,4 +286,6 @@ Q32: What is normalization and reverse normalization in a database?
 * refresher about TCP UDP and Socket programming in general.
 * microservices
 * advantges of having session management in HTTP.
+*how does memcache work.
+* what types of cache are available and what are the types of cache you can apply to the pinrest website.
 
