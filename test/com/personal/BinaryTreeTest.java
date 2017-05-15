@@ -2,6 +2,13 @@ package com.personal;
 
 import com.personal.util.*;
 import org.testng.annotations.*;
+
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 import static org.testng.Assert.*;
 
 /**
@@ -123,6 +130,12 @@ public class BinaryTreeTest {
 
     @Test public void getMinValue() {
         assertEquals(1,getSampleBinaryTree().getMinValue());
+    }
+
+    @Test public void testGetBinaryTre() throws IOException {
+        int[] preOrder = {10, 5, 1, 7, 40, 50};
+        BinaryTree btree = BinaryTree.newInstancefromPreOrder(preOrder);
+        btree.printPreOrder();
     }
 
     @Test public void temp() {

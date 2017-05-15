@@ -5,14 +5,20 @@ import java.util.List;
 
 /**
  * Created by pr250155 on 3/31/17.
+ * PG(set,nS,nE){
+ *     if(nS > nE) {return}
+ *     if(ns == nE == 0)
+ *      Sout >> set;
+ *      if(ns>0)
+ *          PG(set+"(",ns-1,nE);
+ *      if(nE > 0)
+ *          PG(set+")",ns,nE-1);
+ * }
+ *
  */
-public class ParanthasisGenerator {
-    public static void main(String[] args) {
-        List<String> resultSet = new ParanthasisGenerator().generate(3);
-        System.out.println(resultSet);
-    }
+public class ParenthesisGenerator {
 
-    private List<String> generate(int n) {
+    public List<String> generate(int n) {
         List<String> result = new ArrayList<String>();
         realPermute("",n,n,result);
         return result;

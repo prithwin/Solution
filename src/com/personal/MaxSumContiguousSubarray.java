@@ -5,7 +5,7 @@ package com.personal;
  */
 public class MaxSumContiguousSubarray {
 
-    public void maxSumContiguousSubarray(int[] target , int size){
+    public void maxSumContiguousSubArray(int[] target , int size){
         int initialSum = 0;
         int currentMax = 0;
         int lastFrameSum = 0;
@@ -44,12 +44,12 @@ public class MaxSumContiguousSubarray {
     public static void main(String[] args) {
         int[] target = {1,2,-3,4,5};
         int MAX_SIZE=5;
-        new MaxSumContiguousSubarray().maxSumContiguousSubarray(target,MAX_SIZE);
-        new MaxSumContiguousSubarray().maxSumContiguousSubarray(target);
+        new MaxSumContiguousSubarray().maxSumContiguousSubArray(target,MAX_SIZE);
+        new MaxSumContiguousSubarray().maxSumContiguousSubArray(target);
 
     }
 
-    private void maxSumContiguousSubarray(int[] target) {
+    public void maxSumContiguousSubArray(int[] target) {
         int maxAtPoint = 0 ;
         int maxStartPoint=0;
         int maxEndPoint=0;
