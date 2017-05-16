@@ -296,9 +296,12 @@ A39: general form on an aggregate function
 ************************************************************************************************************************
 Q40: what is classpath.
 A40: Icebreaker question. its the location for User defined class both for java and javac
-
+************************************************************************************************************************
+Q41: Can you implements a consumer for your web service using spring.
+A41: Spring provides a component named Resttemplate that lets you consume rest services.
+     you have to basically call the rest service.Post for object and you'll get the corresponding object.
+************************************************************************************************************************
 * factory design pattern, why is the factory a singleton itself.
-* can you implements a consumer for your web service using spring.
 
 
 * a little about Java Reflection API.
