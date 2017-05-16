@@ -292,16 +292,15 @@ A39: general form on an aggregate function
      this will give some distinct values.
 
      So this is a reduce fucntion which goes through many rows and produces one result.
-     So if you want this value with any other functions youll obviously have to make a mapping.
-
-
-
-
+     So if you want this value with any other functions youll obviously have to make a grouping.
+************************************************************************************************************************
+Q40: what is classpath.
+A40: Icebreaker question. its the location for User defined class both for java and javac
 
 * factory design pattern, why is the factory a singleton itself.
 * can you implements a consumer for your web service using spring.
 
-* JVM ClassPath describe.
+
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
 * Can a hashMap/HashSet store a null key?
