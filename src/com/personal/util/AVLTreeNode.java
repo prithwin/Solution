@@ -14,4 +14,6 @@ public class AVLTreeNode extends TreeNode {
         super(number);
         this.number = new ComparableNumber(number);
     }
+
+
 }

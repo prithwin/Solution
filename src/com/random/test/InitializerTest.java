@@ -20,7 +20,9 @@ public class InitializerTest {
     }
 
     public static void main(String[] args) {
+        System.out.println((staticvalue++) + ".Main method starting");
         InitializerTest test = new InitializerTest();
+        System.out.println((staticvalue++) + ".Main method ended");
     }
 
     public int getValue() {

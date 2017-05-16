@@ -138,10 +138,10 @@ A21: there are 4 GC algorithm is java after java 8
 ************************************************************************************************************************
 Q22: what are the different reference types in Java.
 A22: there are 4 reference types in java
-     >>Strong.
-     >>Weak Reference types.
-     >>Soft Reference.
-     >>Phantom references.
+     >>Strong: normal one
+     >>Weak Reference types: they are definitely garbage collected
+     >>Soft Reference: they are garbage collected before only on an outofmemory error.
+     >>Phantom references: Phantom reference is like a strong references but it take a Queue as an additional paramemter
 ************************************************************************************************************************
 Q23: Is there a chance that you can have platform dependent compiled classes.
 A23: there are native methods using the native keyword, these are written in other languages and are machine depenedant.
@@ -215,7 +215,7 @@ A31: -if the page is cached use it
      -Done.
 ************************************************************************************************************************
 Q32: What is normalization and reverse normalization in a database?
-    -normalization is Organization and desing of a database in a manner that reduces redundancy and places its for bette
+    -normalization is Organization and designing of a database in a manner that reduces redundancy and places its for bette
     r information retrieval.
     eg you have a database.
      ----------------------------------------------------
@@ -244,21 +244,63 @@ Q32: What is normalization and reverse normalization in a database?
         $$ youll not be able to continue further untill you split this table between member and movies.
      3NF: >> should be in 2NF and should'nt have any transitive dependencies.
      BCNF: >> shouldnt have more than one candiate key.
+
+     -Denormalization is the process of adding duplication and replication of data in order to make search and retrieval
+     faster
+     * an obvious example is database indexing.
+     * there are indexed views or materialized views, So if the DBMS is aware that there is a database with some one to
+     many or many to one or one to one mapping what it would do is, create a view in the background and ha
 ************************************************************************************************************************
+Q33: what is a container?
+A33: The containers role is that of an ecoSystem and a place for some kind of java beans to live, the container is repon
+     sible in creation of those beans, and managing its life cycle.
+************************************************************************************************************************
+Q34: multithreading in servlet
+A34: A servlet is instantiated by the servlet container. there is only one instance of the servlet in the container.
+     every request that comes in to the container will be a new thread working on the same servlet, thats why the servlet
+     isnt theread safe.
+     the life cycle of the servlet is:
+     1. the servlet class is loaded
+     2. instance creation.
+     3. servlet init() method is called
+     4. ready for service.
+     5. destroy method is called
+
+     you extend an HTTP servlet hence you know that there is a default implementation for the init and the destroy me
+     thods.
+************************************************************************************************************************
+Q35: Two spring contexts with the same file
+A35: The two instances of the Application Context are completely independant and have no relation between them.
+************************************************************************************************************************
+Q36: Difference between request forwarding and redirecting.
+     *forward is server side and is done by the server and the client never get to know avout what happened.
+     *everything follows from there.
+************************************************************************************************************************
+Q37: Order of execution of blocks in java.
+A37: at the time of class loading
+     - all the static blocks are execute in the order which they appear in the code.
+     - when the class is instantiated. all the instance blocks are executed one by one in the order in which they appear
+     - then the constructor is called.
+************************************************************************************************************************
+Q38: Can you put java code inside a JSP?
+A38: JSP has a jsp ignore tag these will be translalted directly into JSPs.
+************************************************************************************************************************
+Q39: SQL Kunji.
+A39: general form on an aggregate function
+
+     select DISTINCT (name) from ABC where ABC.d = 'somecrap';
+     this will give some distinct values.
+
+     So this is a reduce fucntion which goes through many rows and produces one result.
+     So if you want this value with any other functions youll obviously have to make a mapping.
 
 
 
 
-* what is a container.
-* multithreading in servlet
-* two spring contexts with the same file
-* Servlet spec how threads are created or not.
-* difference between request forwarding or redirecting.
-* order of execution of blocks in java
-* what are instance blocks.
+
 * factory design pattern, why is the factory a singleton itself.
 * can you implements a consumer for your web service using spring.
-* Can you put java code inside a JSP?
+
 * JVM ClassPath describe.
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
@@ -278,7 +320,6 @@ Q32: What is normalization and reverse normalization in a database?
 * what is the JIT compiler.
 * explain SOLID concepts.
 * how are cookies intiated.
-* review SQL, select disinct and group by without aggregate functions.
 * Security considerations around Bill Payment systems.
 * http and https flow.
 * whats a pointer?

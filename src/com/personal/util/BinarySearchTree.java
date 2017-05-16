@@ -124,9 +124,9 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
                 removeInternal(phantom, phantom.left,node);
                 this.root = phantom.left;
             }
-        } else if(this.root.left!=null && node.number.compareTo(this.root.left.number) <=0) {
+        } else if(this.root.left!=null && node.number.compareTo(this.root.number) <=0) {
             removeInternal(this.root,this.root.left, node);
-        } else if(this.root.right!=null && node.number.compareTo(this.root.right.number) >= 0 ) {
+        } else if(this.root.right!=null && node.number.compareTo(this.root.number) >= 0 ) {
             removeInternal(this.root,this.root.right,node);
         }
     }
@@ -151,11 +151,19 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
             }
             return;
         }
-        if(root.left!=null && node.number.compareTo(ultimate.number) <= 0){
-            removeInternal(penultimate.left,ultimate.left,node);
+        if(ultimate.left!=null && node.number.compareTo(ultimate.number) <= 0){
+            if(penultimate.left!=null && node.number.compareTo(penultimate.number) <= 0) {
+                removeInternal(penultimate.left, ultimate.left, node);
+            } else {
+                removeInternal(penultimate.right, ultimate.left, node);
+            }
         }
-        if(root.right!=null && node.number.compareTo(ultimate.number) == 1){
-            removeInternal(penultimate.right,ultimate.right,node);
+        if(ultimate.right!=null && node.number.compareTo(ultimate.number) == 1){
+            if(penultimate.right!=null && node.number.compareTo(penultimate.number) == 1) {
+                removeInternal(penultimate.right, ultimate.right, node);
+            } else {
+                removeInternal(penultimate.left, ultimate.right, node);
+            }
         }
     }
 
