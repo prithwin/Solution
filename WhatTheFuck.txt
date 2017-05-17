@@ -17,6 +17,8 @@ Q7: how the fuck do you generate a Guid ?
 Q8: Achieve syncronziation without locks?
 ************************************************************************************************************************
 Q9: difference between TCP and UDP
+A9: TCP is connection oriented, you first establish a connection, but in UDP you just send unordered packets the client
+    May or may not be listening on the other end.
 ************************************************************************************************************************
 Q10: What is ASCII encoding.
 https://www.tutorialspoint.com/html/html_url_encoding.htm

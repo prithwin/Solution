@@ -1,6 +1,9 @@
 package com.personal.util;
 
+import com.personal.Sorter;
+
 import java.util.*;
+import java.util.LinkedList;
 
 import static com.personal.util.GraphType.UNDIRECTED_MATRIX;
 
@@ -84,6 +87,36 @@ public class Graph {
                 }
             }
         }
+    }
+
+    public DisjointSet getKruskalMST() {
+        if(type.isMatrix()) {
+            List<ComparableEdge> comparableEdges = getAsListOfComparableEdges();
+            List<ComparableEdge> sortedList = new Sorter<ComparableEdge>().mergeSort(comparableEdges);
+            DisjointSet result = new DisjointSet(sortedList.size());
+            result.union(sortedList.get(0).from,sortedList.get(0).to);
+            for(int i = 1 ; i < sortedList.size() ; i++) {
+                result.union(sortedList.get(i-1).to,sortedList.get(i).to);
+            }
+            return result;
+        }
+        return new DisjointSet(0);
+    }
+
+    private List<ComparableEdge> getAsListOfComparableEdges() {
+        List<ComparableEdge> edgeList = new LinkedList();
+        if(type.isMatrix()) {
+            for(int i = 0 ; i < adjecencyMatrix.length ; i++) {
+                for (int j = 0; j < adjecencyMatrix[i].length; j++) {
+                    ComparableEdge edge = new ComparableEdge();
+                    edge.from = i;
+                    edge.to = j;
+                    edge.weight = adjecencyMatrix[i][j];
+                    edgeList.add(edge);
+                }
+            }
+        }
+        return edgeList;
     }
 
 }

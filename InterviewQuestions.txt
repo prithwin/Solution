@@ -301,12 +301,34 @@ Q41: Can you implements a consumer for your web service using spring.
 A41: Spring provides a component named Resttemplate that lets you consume rest services.
      you have to basically call the rest service.Post for object and you'll get the corresponding object.
 ************************************************************************************************************************
+Q42: Can a hashMap/HashSet store a null key?
+A42: yes, conterintuitively the hashcode() on a null key wouldnt throw a null pointer exception, basically in case of a
+     very crappy HashCode algorithm too you would have O(1) performance. and its globally unique.
+************************************************************************************************************************
+Q43: Clone in Object vs Cloneable interface.
+A43: clone in object is protected,its a native method
+************************************************************************************************************************
+Q44: Difference between ClassNotfoundException and NoClassDefination.
+A44: ClassNotFoundException is thrown when you try to load a class explicity, whereas t
+************************************************************************************************************************
+Q45: try with resources.
+A45: Autocloseable resources will be closed.
+************************************************************************************************************************
+Q46: DUAL Query
+A46: Low resource query need not know the table structure.
+************************************************************************************************************************
+Q47: Java stream terminal operations.
+A47: Map() reduce() forEach().
+************************************************************************************************************************
+Q48: Comparator in java?
+A48: A Comparator is used for when you dont have a comparable class but when you need to create a comparison between two
+     Different Objects.pretty useless if you ask me.
+************************************************************************************************************************
+Q49: Load factor for arrayList and vector
+A49: This is the amount by which is an array is increased after it has reached its maximum. an array goes
 * factory design pattern, why is the factory a singleton itself.
-
-
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
-* Can a hashMap/HashSet store a null key?
 * why are rest APIs stateless.
 * Factory design pattern restrict visibility of the constructor.
 * how do you implement a monthly a payment schedule.
@@ -331,4 +353,6 @@ A41: Spring provides a component named Resttemplate that lets you consume rest s
 * advantges of having session management in HTTP.
 *how does memcache work.
 * what types of cache are available and what are the types of cache you can apply to the pinrest website.
+* Serialization of a class with a non serializable member.
+
 

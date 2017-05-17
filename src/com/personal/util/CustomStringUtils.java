@@ -13,6 +13,11 @@ public class CustomStringUtils {
 
     /**
      * newer much more concise algorithm.
+     * R(S,I,Sb) {
+     *     if(i>s.length-1) return;
+     *     R(S,++I,Sb);
+     *     Sb.append(s.charat(i-1))
+     * }
      * @param input
      * @return
      */
