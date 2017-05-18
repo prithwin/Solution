@@ -359,5 +359,6 @@ A50: component scan is an annotation is able to load special annotations like @R
 *how does memcache work.
 * what types of cache are available and what are the types of cache you can apply to the pinrest website.
 * Serialization of a class with a non serializable member.
+* how do you do validation in spring web services
 
 

@@ -1,0 +1,16 @@
+maven uses conventions to easily create a build job
+built in phases of maven
+-clean
+-default
+-site
+each of these built in lifecycles has some predifined phases.
+for example the one called default has the folllowing phases:
+-validate: it validates all the modules and all the dependencies
+-compile: compiles java files
+-test runs all the junit test.
+-package
+-install
+-deploy
+
+each build phase is mapped to a particular execution in a plugin. so what ever works out of the box is working because
+they are all predefined by maven in some way or the other.
