@@ -22,7 +22,7 @@ public class JavaStreamTest {
             reader.read(buffer);
             String url = new String(buffer);
             System.out.println(url);
-            UUID uid = UUID.fromString(System.currentTimeMillis()+"");
+            UUID uid = UUID.randomUUID();
             byte[] response = ("HTTP/1.1 200 OK\nContent-Length: 51\nContent-Type: text/html\nConnection: Closed\n<html><head></head><body>chowbakasoma"+uid.toString()+"</body></html>").getBytes();
             bos.write(response);
             bos.flush();
