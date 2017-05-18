@@ -326,6 +326,11 @@ A48: A Comparator is used for when you dont have a comparable class but when you
 ************************************************************************************************************************
 Q49: Load factor for arrayList and vector
 A49: This is the amount by which is an array is increased after it has reached its maximum. an array goes
+************************************************************************************************************************
+Q50: Annotation config vs component scan.
+A50: component scan is an annotation is able to load special annotations like @Repository @Component and @Service ect.
+     annotation config wouldnt be able do that.
+
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.
 * Cloning a shallow and deep copy.
