@@ -5,6 +5,7 @@ import sun.net.TelnetInputStream;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.UUID;
 
 /**
  * Created by pr250155 on 5/17/17.
@@ -21,7 +22,8 @@ public class JavaStreamTest {
             reader.read(buffer);
             String url = new String(buffer);
             System.out.println(url);
-            byte[] response = "HTTP/1.1 200 OK\nContent-Length: 51\nContent-Type: text/html\nConnection: Closed\n<html><head></head><body>chowbakasoma</body></html>".getBytes();
+            UUID uid = UUID.fromString(System.currentTimeMillis()+"");
+            byte[] response = ("HTTP/1.1 200 OK\nContent-Length: 51\nContent-Type: text/html\nConnection: Closed\n<html><head></head><body>chowbakasoma"+uid.toString()+"</body></html>").getBytes();
             bos.write(response);
             bos.flush();
             socket.close();
