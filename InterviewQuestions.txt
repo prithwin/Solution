@@ -122,6 +122,8 @@ A18: >how do you declare a controller?
 
           }
       }
+      a lot of undestanding of these components would be realated to seeing a HTTP request message and how it looks like
+      for example:
 ************************************************************************************************************************
 Q19: How can I get access to HttpRequst and HttpResposne Objects in spring web services controllers?
 A19: which ever controller has additional HTTPRequest and HttpResponse objects as an argument would receive the objects
@@ -329,11 +331,25 @@ A49: This is the amount by which is an array is increased after it has reached i
 ************************************************************************************************************************
 Q50: Annotation config vs component scan.
 A50: component scan is an annotation is able to load special annotations like @Repository @Component and @Service ect.
-     annotation config wouldnt be able do that.
-
+     annotation config wouldn't be able do that.
+     avoid confusion:
+     #I only use component-scan
+     #i used mvc:annotation driven for Message conversion.
+************************************************************************************************************************
+Q51: how do you validate the various spring rest controllers.
+A51: Spring based controller can take inputs from either path param request param or an @RequestBody target
+     either:
+     1. you put the JSR303 annotations directly on the pathvariable or the request param.
+     2. you put an @Validated annotation on the @RequestBody Object and then you put the JSR303 annotation on the members
+     of that particular bean.
+************************************************************************************************************************
+Q52: How do you do content negotiation using spring.
+A52: for content negotiation spring user the produces and consumes controlller matcher arguments, the correct values mus
+     t be there for a successful mapping or automatic mapping.
+************************************************************************************************************************
+* Cloning a shallow and deep copy.
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.
-* Cloning a shallow and deep copy.
 * why are rest APIs stateless.
 * Factory design pattern restrict visibility of the constructor.
 * how do you implement a monthly a payment schedule.
