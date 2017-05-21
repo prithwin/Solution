@@ -347,6 +347,10 @@ Q52: How do you do content negotiation using spring.
 A52: for content negotiation spring user the produces and consumes controlller matcher arguments, the correct values mus
      t be there for a successful mapping or automatic mapping.
 ************************************************************************************************************************
+Q53: why do you use Base64 encoding?
+A53: We use Base64 encoding because it converts all the ASCII character set into 64 most common ASCII chaacters which ar
+    Universally understood by all.
+************************************************************************************************************************
 * Cloning a shallow and deep copy.
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.

@@ -23,7 +23,10 @@ public class JavaStreamTest {
             String url = new String(buffer);
             System.out.println(url);
             UUID uid = UUID.randomUUID();
-            byte[] response = ("HTTP/1.1 200 OK\nContent-Length: 51\nContent-Type: text/html\nConnection: Closed\n<html><head></head><body>chowbakasoma"+uid.toString()+"</body></html>").getBytes();
+//            byte[] response = ("HTTP/1.1 200 OK\nContent-Length: 51\nContent-Type: text/html\nConnection: Closed\n<html><head></head><body>chowbakasoma"+uid.toString()+"</body></html>").getBytes();
+            byte[] response = ("HTTP/1.1 401 Access Denied\n" +
+                    "WWW-Authenticate: Basic realm=\"My Server\"\n" +
+                    "Content-Length: 0").getBytes();
             bos.write(response);
             bos.flush();
             socket.close();
