@@ -5,52 +5,57 @@ import java.util.LinkedList;
 
 /**
  * Created by prajeev on 19/3/17.
+ * constant amortized constant time HashMap
  */
 public class CustomHashMap<K,V> {
-    private Set<HashBucket> buckets;
 
-    public void put(K key, V value){
-        if(buckets == null){
-            buckets = new TreeSet<>();
-        }
+    MapNode[] buckets = new MapNode[100];
 
-        if(!containsHashvalue(buckets,key.hashCode())){
-            HashBucket hashBucket = new HashBucket();
-            hashBucket.setItems(new HashSet<MapNode<K,V>>());
-            hashBucket.setBucketHashCode(key.hashCode());
-            buckets.add(hashBucket);
-        }
-        for (HashBucket bucket : buckets){
-            if(bucket.getBucketHashCode() == key.hashCode()){
-                MapNode<K,V> mapnode = new MapNode<K, V>();
-                mapnode.setKey(key);
-                mapnode.setValue(value);
-                bucket.getItems().add(mapnode);
+    public void put(K key, V value) {
+        MapNode<K, V> mapNode = new MapNode();
+        mapNode.setKey(key);
+        mapNode.setValue(value);
+        int bucket = key.hashCode();
+        ensureBucketCapacity(bucket);
+        if (buckets[bucket] == null) {
+            buckets[bucket] = mapNode;
+        } else {
+            MapNode temp = buckets[bucket];
+            while (temp.next != null) {
+                temp = temp.next;
             }
+            temp.next = mapNode;
         }
     }
 
-    private boolean containsHashvalue(Set<HashBucket> buckets,int hashCode) {
-        for(HashBucket bucket : buckets){
-            if(hashCode == bucket.getBucketHashCode()){
-                return true;
-            }
-        }
-        return false;
+    private void ensureBucketCapacity(int bucket) {
+        buckets = Arrays.copyOf(buckets,bucket+1);
     }
 
     public V get(K key){
-        for(HashBucket bucket : buckets){
-            if(bucket.getBucketHashCode() == key.hashCode()){
-                Set<MapNode> items = bucket.getItems();
-                for(MapNode<K,V> mapNode : items){
-                    if(mapNode.getKey().equals(key)){
-                        return mapNode.getValue();
-                    }
+        int bucket = key.hashCode();
+        if(buckets[bucket] != null){
+            MapNode temp = buckets[bucket];
+            while(temp!=null){
+                if(temp.getKey().equals(key)){
+                    return (V) temp.getValue();
                 }
             }
         }
         return null;
+    }
+
+    public boolean containsKey(K key){
+        int bucket = key.hashCode();
+        if(buckets[bucket] != null){
+            MapNode temp = buckets[bucket];
+            while(temp!=null){
+                if(temp.getKey().equals(key)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

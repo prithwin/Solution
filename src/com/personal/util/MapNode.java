@@ -7,6 +7,7 @@ public class MapNode<K,V> {
 
     private K key;
     private V value;
+    MapNode<K,V> next;
 
     public V getValue() {
         return value;
