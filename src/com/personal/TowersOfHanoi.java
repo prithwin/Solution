@@ -1,5 +1,8 @@
 package com.personal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by pr250155 on 4/15/17.
  */
@@ -10,6 +13,15 @@ public class TowersOfHanoi {
         } else {
             return numberOfMoves(size-1) + 1 + numberOfMoves(size-1);
         }
+    }
+
+    public static int numberOfMovesDP(int size) {
+        List<Integer> solutionList = new ArrayList();
+        solutionList.add(1);
+        for(int i = 1 ; i < size; i++){
+            solutionList.add(1+2*(solutionList.get(i-1)));
+        }
+        return solutionList.get(solutionList.size()-1);
     }
 
     public static void printMoves(int size){
@@ -28,6 +40,7 @@ public class TowersOfHanoi {
 
 
     public static void main(String[] args) {
-       TowersOfHanoi.printMoves(8);
+//       TowersOfHanoi.printMoves(8);
+        System.out.println(TowersOfHanoi.numberOfMovesDP(8));
     }
 }

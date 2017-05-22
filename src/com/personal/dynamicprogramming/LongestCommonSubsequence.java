@@ -35,8 +35,15 @@ public  class LongestCommonSubsequence {
 
     }
 
-    public static void main(String[] args) {
-        String lcs = new CustomStringUtils().reverse2(new LongestCommonSubsequence().lcs("ABCDGHLQR","AEDPHR"));
-        System.out.printf("the longest String is %s and its size is %d",lcs,lcs.length());
+    public int findLongestCommonSubsequence(String theString,String otherString) {
+        if(theString.length() == 0 || otherString.length() == 0 ){
+            return 0;
+        }
+        if(theString.charAt(0) == otherString.charAt(0)) {
+            return 1 + findLongestCommonSubsequence(theString.substring(1), otherString.substring(1));
+        } else {
+            return Mathematical.maximum(findLongestCommonSubsequence(theString.substring(1),otherString) ,
+                    findLongestCommonSubsequence(theString,otherString.substring(1)));
+        }
     }
 }

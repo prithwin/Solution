@@ -2,11 +2,10 @@ package com.personal.dynamicprogramming;
 
 /**
  * Created by pr250155 on 5/9/17.
- *    0 1 2 3
- * 0  0
- * 1    0
- * 2      0
- * 3        0
+ *
+ * MCM( mS ) {
+ *     for()
+ * }
  */
 public class MatrixChainMultiplication {
     public int findMinimumCost(int[] ... matrices ) {
@@ -18,7 +17,6 @@ public class MatrixChainMultiplication {
                 if(i == j){
                     resultMatrix[i][j] = 0; continue;
                 }
-                if(i>j)continue;
                 int minValue = Integer.MAX_VALUE;
                 for(int k = i ; k < j  ; k++) {
                     int cost = resultMatrix[i][k] + resultMatrix[k+1][j] + (matrices[i][0] * matrices[k][1] * matrices[j][1]);

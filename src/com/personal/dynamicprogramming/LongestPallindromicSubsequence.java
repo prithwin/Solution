@@ -15,7 +15,7 @@ import com.personal.util.MatrixUtil;
  */
 public class LongestPallindromicSubsequence {
 
-    public void findSizeOfLongestPallindromicSubsequence(String target){
+    public int findSizeOfLongestPallindromicSubsequence(String target){
         int[][] solutionMatrix = new int[target.length()][target.length()];
         for (int i = 0; i < solutionMatrix.length; i++) {
             solutionMatrix[i][i]=1;
@@ -29,10 +29,19 @@ public class LongestPallindromicSubsequence {
                 }
             }
         }
-        MatrixUtil.print2dMatrix(solutionMatrix);
+        return solutionMatrix[0][target.length()-1];
     }
 
+    public int longestPalindromicSubsequence(String target){
+        if(target.length()==1) return 1;
+        if(target.charAt(0) == target.charAt(target.length()-1)) {
+            return 2 + longestPalindromicSubsequence(target.substring(1,target.length()-1));
+        } else {
+            return Mathematical.maximum(longestPalindromicSubsequence(target.substring(0,target.length()-1)),
+                    longestPalindromicSubsequence(target.substring(1,target.length())));
+        }
+    }
     public static void main(String[] args) {
-        new LongestPallindromicSubsequence().findSizeOfLongestPallindromicSubsequence("BBABCBCAB");
+        System.out.println(new LongestPallindromicSubsequence().longestPalindromicSubsequence("BBABCBCAB"));
     }
 }
