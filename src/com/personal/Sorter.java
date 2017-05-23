@@ -1,7 +1,9 @@
 package com.personal;
 
 import com.personal.util.ComparableNumber;
+import com.personal.util.CustomHashMap;
 import com.personal.util.Heap;
+import com.personal.util.MapNode;
 
 import java.util.*;
 
@@ -34,23 +36,29 @@ public class Sorter<E extends Comparable> {
      * @return
      */
     public List<Integer> countingSort(List<Integer> items) {
-        List<Integer> registryList = new ArrayList<>(9);
-        List<Integer> outputList = new ArrayList();
-        for(int i = 0 ; i <10 ; i++) {
-            registryList.add(0);
-            outputList.add(0);
+        List<Integer> result = new ArrayList();
+        CustomHashMap<Integer,Integer> registry = new CustomHashMap<>();
+        items.stream().forEach(i -> countingAdd(registry,i));
+        for(MapNode<Integer,Integer> node : registry.getBuckets()){
+            if(node!=null){
+                addNTimes(result,node.getKey(),node.getValue());
+            }
         }
-        items.stream().forEach(i -> {System.out.print(i);registryList.set(i,registryList.get(i)+1);});
+        return result;
+    }
 
-        for(int i = 1 ; i < registryList.size() -1 ; i++) {
-            registryList.set(i,registryList.get(i)+registryList.get(i-1));
+    private void addNTimes(List<Integer> result, Integer value, Integer count) {
+        for(int i = 0 ; i < count ; i++) {
+            result.add(value);
         }
-        for (int i = 0 ; i < items.size() ; i++){
-            outputList.set(registryList.get(items.get(i))-1,items.get(i));
-            registryList.set(items.get(i),registryList.get(items.get(i))-1);
-        }
+    }
 
-        return outputList;
+    private void countingAdd(CustomHashMap<Integer, Integer> registry, Integer item) {
+        if(registry.containsKey(item)){
+            registry.put(item, (registry.get(item) + 1));
+        } else {
+            registry.put(item,1);
+        }
     }
 
     /**

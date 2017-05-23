@@ -21,7 +21,13 @@ public class CustomHashMap<K,V> {
             buckets[bucket] = mapNode;
         } else {
             MapNode temp = buckets[bucket];
+            if(temp.getKey().equals(mapNode.getKey())){
+                temp.setValue(mapNode.getValue());return;
+            }
             while (temp.next != null) {
+                if(temp.getKey().equals(mapNode.getKey())){
+                    temp.setValue(mapNode.getValue());return;
+                }
                 temp = temp.next;
             }
             temp.next = mapNode;
@@ -29,7 +35,12 @@ public class CustomHashMap<K,V> {
     }
 
     private void ensureBucketCapacity(int bucket) {
-        buckets = Arrays.copyOf(buckets,bucket+1);
+        if(bucket<=buckets.length-1) return;
+        MapNode[] bucketstemp = new MapNode[bucket+1];
+        for(int i = 0 ; i < buckets.length ; i++) {
+            bucketstemp[i] = buckets[i];
+        }
+        buckets = bucketstemp;
     }
 
     public V get(K key){
@@ -47,6 +58,7 @@ public class CustomHashMap<K,V> {
 
     public boolean containsKey(K key){
         int bucket = key.hashCode();
+        if(bucket >= buckets.length - 1) return false;
         if(buckets[bucket] != null){
             MapNode temp = buckets[bucket];
             while(temp!=null){
@@ -56,6 +68,10 @@ public class CustomHashMap<K,V> {
             }
         }
         return false;
+    }
+
+    public MapNode[] getBuckets(){
+        return buckets;
     }
 
 }
