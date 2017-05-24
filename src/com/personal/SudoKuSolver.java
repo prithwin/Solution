@@ -20,7 +20,10 @@ public class SudoKuSolver {
     }
 
     private static boolean solveInternal(int[][] puzzle, FixedPoint startPoint, List<FixedPoint> fixedElements) {
-        if(startPoint.x > 8) {MatrixUtil.print2dMatrix(puzzle,fixedElements); return true;}
+        if(startPoint.x > 8) {
+            MatrixUtil.print2dMatrix(puzzle,fixedElements); return true;
+        }
+
         if(fixedElements.contains(startPoint)) {
             FixedPoint newStartPoint = new FixedPoint(startPoint.x , startPoint.y+1);
             return solveInternal(puzzle,newStartPoint,fixedElements);
@@ -79,7 +82,7 @@ public class SudoKuSolver {
 
     private static FixedPoint getSubsquareStart(FixedPoint atPoint) {
         FixedPoint point = new FixedPoint(0,0);
-        if(atPoint.x>=0 && atPoint.x<=2){
+        if(atPoint.x >= 0 && atPoint.x<=2){
             point.x = 0;
         } else if(atPoint.x>=3 && atPoint.x<=5){
             point.x = 3;
