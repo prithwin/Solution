@@ -4,6 +4,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.Arrays;
 
 /**
  * Created by pr250155 on 3/31/17.
@@ -77,21 +78,13 @@ public class Heap<E extends Comparable> {
 
     public E deleteMax() {
         E temp = elements[0];
-        ComparableNumber[] revisedArray = new ComparableNumber[elements.length-1];
-        for(int i =1 ;i < elements.length ; i++){
-            revisedArray[i-1] = (ComparableNumber)elements[i];
-        }
-        this.elements = (E[])revisedArray;
+        this.elements = Arrays.copyOfRange(elements,1,elements.length);
         return temp;
     }
 
     public E deleteMin() {
         E temp = elements[0];
-        ComparableNumber[] revisedArray = new ComparableNumber[elements.length-1];
-        for(int i =1 ;i < elements.length ; i++){
-            revisedArray[i-1] = (ComparableNumber)elements[i];
-        }
-        this.elements = (E[])revisedArray;
+        this.elements = Arrays.copyOfRange(elements,1,elements.length);
         return temp;
     }
 
