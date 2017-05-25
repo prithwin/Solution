@@ -32,4 +32,9 @@ public class ComparableNumber implements Comparable, Serializable{
     public String toString() {
         return "" + number;
     }
+
+
+    public static void printElegant(ComparableNumber comparableNumber) {
+        System.out.print(comparableNumber + " , ");
+    }
 }

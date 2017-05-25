@@ -67,18 +67,14 @@ public class Sorter<E extends Comparable> {
      * @param targetList
      */
     public void insertionSort(List<E> targetList) {
-        for (int i = 0; i < targetList.size(); i++) {
-            E swap = targetList.get(i);
-            if (targetList.get(i).compareTo(targetList.get(0)) == 1) {
-                int j = 0;
-                while (targetList.get(++j).compareTo(swap) == -1) {
-
+        for (int i = 1 ; i < targetList.size() ; i++){
+            for ( int j =  i ; j > 0 ; j--) {
+                if(targetList.get(j-1).compareTo(targetList.get(j)) == 1) {
+                    E temp = targetList.get(j-1);
+                    targetList.set(j-1,targetList.get(j));
+                    targetList.set(j,temp);
                 }
-                targetList.add(j, swap);
-            } else {
-                targetList.add(0, swap);
             }
-            targetList.remove(i + 1);
         }
     }
 
@@ -95,6 +91,49 @@ public class Sorter<E extends Comparable> {
                     targetList.set(j,temp);
                 }
             }
+        }
+    }
+
+    public void mergeSort(int[] target,int start, int end) {
+        if(start >= end) return;
+        if(end - start == 1) {
+            if(target[start] > target[end]) {
+                int temp = target[start];
+                target[start] = target[end];
+                target[end] = temp;
+                return;
+            }
+        }
+
+        int mid = start + ((end - start) / 2);
+        mergeSort(target,start,mid);
+        mergeSort(target,mid+1,end);
+        merge(target,start,mid,mid+1,end);
+    }
+
+    private void merge(int[] target, int leftStart, int leftEnd, int rightStart, int rightend) {
+        int i = leftStart;
+        int j = rightStart;
+        int[] tempArray = new int[rightend-leftStart+1];
+        int k = 0;
+        while(i<= leftEnd && j<=rightend) {
+            if(target[i] < target[j]) {
+               tempArray[k++] = target[i++];
+            }else if(target[j] < target[i]) {
+                tempArray[k++] = target[j++];
+            } else {
+                tempArray[k++] = target[j++];
+                tempArray[k++] = target[i++];
+            }
+        }
+        while(j <= rightend){
+            tempArray[k++] = target[j++];
+        }
+        while(i <= leftEnd){
+            tempArray[k++] = target[i++];
+        }
+        for(int l = leftStart,n=0 ; l <=rightend ; l++,n++) {
+            target[l] = tempArray[n];
         }
     }
 
@@ -161,14 +200,11 @@ public class Sorter<E extends Comparable> {
         return returnList;
     }
 
-    /**
-     * functioning quicksort
-     *
-     * @param targetList
-     * @param start
-     * @param end
-     */
-    public void quickSort(List<E> targetList, int start, int end) {
+   public void quickSort(List<E> targetList) {
+       quickSort(targetList,0,targetList.size()-1);
+   }
+
+    private void quickSort(List<E> targetList, int start, int end) {
         if (end - start < 2) {
             if (end - start == 1 && targetList.get(start).compareTo(targetList.get(end)) == 1) {
                 E temp = targetList.get(start);
@@ -233,64 +269,5 @@ public class Sorter<E extends Comparable> {
             targetList.add(maxHeap.deleteMin());
         }
         return targetList;
-    }
-
-
-    public static void main(String[] args) {
-        List<ComparableNumber> numberList = new ArrayList<ComparableNumber>();
-        numberList.add(new ComparableNumber(25));
-        numberList.add(new ComparableNumber(3));
-        numberList.add(new ComparableNumber(5));
-        numberList.add(new ComparableNumber(555));
-        numberList.add(new ComparableNumber(5355));
-        numberList.add(new ComparableNumber(58));
-        numberList.add(new ComparableNumber(4));
-        numberList.add(new ComparableNumber(1));
-        numberList.add(new ComparableNumber(36));
-        numberList.add(new ComparableNumber(23));
-        numberList.add(new ComparableNumber(5555));
-        numberList.add(new ComparableNumber(37));
-        numberList.add(new ComparableNumber(39));
-        System.out.println("Printing the list before the sort");
-        numberList.forEach(Sorter::printElegant);
-        Sorter<ComparableNumber> sorter = new Sorter<ComparableNumber>();
-
-//        System.out.println("Sorting using bubble sort");
-//        sorter.bubbleSort(numberList);
-
-//        System.out.println("Sorting using insertion sort");
-//        sorter.insertionSort(numberList);
-
-//        System.out.println("\nSorting using merge sort");
-//        List<ComparableNumber> resultList = sorter.mergeSort(numberList);
-//        numberList = resultList;
-
-        System.out.println("Sorting using quick sort");
-        sorter.quickSort(numberList, 0, numberList.size() - 1);
-
-        System.out.println(numberList);
-
-//        System.out.println("Sorting using max Heap sort");
-//        numberList = sorter.maxHeapSort(numberList);
-
-//        System.out.println("Sorting using min Heap sort");
-//        numberList = sorter.minHeapSort(numberList);
-
-//        System.out.println("sorting using selection sort");
-//        sorter.selectionSort(numberList);
-//        numberList.forEach(Sorter::printElegant);
-//        System.out.println("sum: "+
-//                numberList.stream()
-//                        .filter(e -> e.number % 1 == 0)
-//                        .mapToInt(e -> e.number * 2)
-//                        .sum()
-//        );
-
-//        System.out.println("counting using conting sort");
-//        sorter.countingSort(Arrays.asList(1,4,1,2,7,5,2));
-    }
-
-    private static void printElegant(ComparableNumber comparableNumber) {
-        System.out.print(comparableNumber + " , ");
     }
 }
