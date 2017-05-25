@@ -18,8 +18,88 @@ public class FastCodingTest {
         System.out.println(isPallindrome("MalaMalaMalaMalaMalaMalaMalaMalaMalaMalaMalaMalayalaMalaMalaMalaMalaMalaMalaMalaMalaMalaMalaMalaM"));
         long endI = System.currentTimeMillis();
         System.out.println("time taken by recursive algorithm="+(endI-startI));
+        String test = "ABDCEFGH";
+        String reverse = new String(reverseC(test.toCharArray(),0,test.length()-1));
+        System.out.println(reverse);
 
+        //check for duplicates in a string
+        String target = "ABCDEFGH";
+        System.out.println("does the string have a repeat char : "+isRepeatingChar(target));
 
+        String thizz = "ABCDE";
+        String that = "DECBA";
+        System.out.println("are the strings Anagrams of each other: "+areTheyAnagrams(thizz,that));
+
+        String mayBeNumber = "ABCDEFBCDEF";
+        for(int i = 0 ; i < mayBeNumber.length() ; i++ ) {
+            if(mayBeNumber.charAt(i)>= 48 && mayBeNumber.charAt(i) <=57) {
+                System.out.println("Number found");
+            }
+        }
+
+        String vc = "abcdefghijklmnopqrstuvwxyz";
+        int vow = 0 , con = 0;
+        List<Character> vows = Arrays.asList('a','e','i','o','u');
+        for(int i = 0 ; i < vc.length() ; i++) {
+            char ciq = vc.charAt(i);
+            if(vows.contains(ciq)) {
+                vow++;
+            } else {con++;
+            }
+
+        }
+        System.out.println(vow);
+        System.out.println(con);
+
+    }
+
+    private String areTheyAnagrams(String thizz, String that) {
+        if(thizz.length() != that.length()) return "NO";
+
+        Map<Character,Integer> registry = new HashMap<>();
+        for(int i = 0 ; i < thizz.length() ; i++) {
+            if(registry.containsKey(thizz.charAt(i))) {
+                registry.put(thizz.charAt(i) , registry.get(thizz.charAt(i) + 1));
+            } else {
+                registry.put(thizz.charAt(i), 1);
+            }
+        }
+
+        for (int i = 0 ; i < that.length() ; i++ ) {
+            if(!registry.containsKey(that.charAt(i))) {
+                return "NO";
+            } else {
+                int newCount = registry.get(that.charAt(i)) - 1;
+                if(newCount == 0) {
+                    registry.remove(that.charAt(i));
+                } else {
+                    registry.put(that.charAt(i),newCount);
+                }
+
+            }
+        }
+        return "YES";
+    }
+
+    private String isRepeatingChar(String target) {
+        Set<Character> registry = new HashSet();
+        for(int i = 0 ; i < target.length() ; i++) {
+            if(registry.contains(target.charAt(i))) {
+                return "YES";
+            } else {
+                registry.add(target.charAt(i));
+            }
+        }
+        return "NO";
+    }
+
+    private char[] reverseC(char[] chars, int start, int end) {
+        if(end <= start) return chars;
+        char temp = chars[start];
+        chars[start] = chars[end];
+        chars[end] = temp;
+        reverseC(chars, start + 1, end - 1);
+        return chars;
     }
 
     private boolean isPallindrome(String target) {

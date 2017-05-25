@@ -7,6 +7,17 @@ import java.io.ObjectOutput;
 
 /**
  * Created by pr250155 on 3/31/17.
+ * a heap is implemented with the help of an array.
+ * the heap property can mathematically be expressed by if an element is at the position n
+ * then its children will be at the position 2n and 2n + 1.
+ * for example
+ *                1             =     1 2 3 4 5 6 7
+ *             2    3
+ *            4 5  6 7
+ *
+ *            imples that we can figure out the parent of an index i by first doing
+ *   if the left and right children are i and i-1 then the parent can be deduced by having the euqation
+ *   i + 1 = 2 (r+1)  // n = ((i+1) / 2) - 1 //
  */
 public class Heap<E extends Comparable> {
     public E[] elements;
