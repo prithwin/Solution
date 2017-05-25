@@ -9,7 +9,12 @@ import java.util.*;
  */
 public class PalindromicPossiblitiesTest {
     @Test public void printPossibilities() {
-        new PallindromicPossibilities().printPallindromicPossiblities("PritMalayalaMhwin ");
+        new PallindromicPossibilities().printPallindromicPossiblities("PritMalayalaMhwin");
+
+    }
+
+    @Test public void printPossibilities2() {
+        new PallindromicPossibilities().printPallindromicPossiblities("nitin");
 
     }
 }

@@ -46,15 +46,4 @@ public class LargestSquareCompleteMatrix {
         System.out.printf("the largest matrix is of size %d by %d which starts at %d,%d",result.size,result.size,result.startPointX,result.startPointY);
 
     }
-
-    public static void main(String[] args) {
-        int[][] matrix = { {0,1,1,0,1,0,0},
-                           {0,1,0,1,0,1,0},
-                           {0,1,1,1,1,0,0},
-                           {0,1,1,1,0,1,0},
-                           {0,1,1,1,1,0,0},
-                           {0,0,0,0,0,0,0}
-        };
-        new LargestSquareCompleteMatrix().findLargetCompleteMatrix(matrix);
-     }
 }

@@ -13,7 +13,7 @@ public class KnightsTourTest {
         new KnightsTour().beginTour();
     }
 
-    @Test public void starTour6() {
+    public void starTour6() {
         KnightsTour.setBoardSize(6);
         new KnightsTour().beginTour();
     }
