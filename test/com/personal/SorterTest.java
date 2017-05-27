@@ -1,9 +1,9 @@
 package com.personal;
 
 import com.personal.util.ComparableNumber;
+import com.personal.util.Sorter;
 import org.testng.annotations.*;
 import java.util.*;
-import static org.testng.Assert.*;
 
 /**
  * Created by pr250155 on 5/23/17.

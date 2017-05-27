@@ -1,4 +1,4 @@
-package com.personal;
+package com.personal.util;
 
 import com.personal.util.ComparableNumber;
 import com.personal.util.CustomHashMap;

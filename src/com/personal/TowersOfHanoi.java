@@ -7,7 +7,8 @@ import java.util.List;
  * Created by pr250155 on 4/15/17.
  */
 public class TowersOfHanoi {
-    public static int numberOfMoves(int size){
+
+    public int numberOfMoves(int size){
         if(size == 1){
             return 1;
         } else {
@@ -15,20 +16,11 @@ public class TowersOfHanoi {
         }
     }
 
-    public static int numberOfMovesDP(int size) {
-        List<Integer> solutionList = new ArrayList();
-        solutionList.add(1);
-        for(int i = 1 ; i < size; i++){
-            solutionList.add(1+2*(solutionList.get(i-1)));
-        }
-        return solutionList.get(solutionList.size()-1);
-    }
-
-    public static void printMoves(int size){
+    public void printMoves(int size){
         printMovesInternal(size,"A","C","B");
     }
 
-    private static void printMovesInternal(int size, String source, String destination, String temp) {
+    private void printMovesInternal(int size, String source, String destination, String temp) {
         if(size == 1){
             System.out.printf("Move %s ----> %s\n",source,destination);
         } else {
@@ -38,9 +30,4 @@ public class TowersOfHanoi {
         }
     }
 
-
-    public static void main(String[] args) {
-//       TowersOfHanoi.printMoves(8);
-        System.out.println(TowersOfHanoi.numberOfMovesDP(8));
-    }
 }

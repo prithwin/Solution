@@ -334,7 +334,7 @@ A50: component scan is an annotation is able to load special annotations like @R
      annotation config wouldn't be able do that.
      avoid confusion:
      #I only use component-scan
-     #i used mvc:annotation driven for Message conversion.
+     #i used mvc:annotation driven for Message conversion and transaction-annotation drive.
 ************************************************************************************************************************
 Q51: how do you validate the various spring rest controllers.
 A51: Spring based controller can take inputs from either path param request param or an @RequestBody target
@@ -351,6 +351,7 @@ Q53: why do you use Base64 encoding?
 A53: We use Base64 encoding because it converts all the ASCII character set into 64 most common ASCII chaacters which ar
     Universally understood by all.
 ************************************************************************************************************************
+Q54:
 * Cloning a shallow and deep copy.
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.
