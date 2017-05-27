@@ -15,4 +15,10 @@ public class MathematicalTest {
         assertEquals(Mathematical.factorial(3),6);
         assertEquals(Mathematical.factorial(4),24);
     }
+
+    @Test public void testPow(){
+        assertEquals(3*3*3,Mathematical.power(3,3));
+        assertEquals(2*2*2,Mathematical.power(2,3));
+        assertEquals(2*2*2*2,Mathematical.power(2,4));
+    }
 }

@@ -24,6 +24,10 @@ public class FastCodingTest {
         assertTrue(isPalindrome("MalaalaM"));
     }
 
+    @Test public void testFloatingPoint() {
+        System.out.println((1f/3f) + (1f/3f) + (1f/3f));
+    }
+
 
     private boolean isPalindrome(String text) {
         if(text.length() <= 1) return true;
