@@ -11,6 +11,8 @@ import java.util.*;
  */
 public class ExpressionEvaluator {
 
+    public static final String LEFT_PARENTHESES = "(";
+    public static final String RIGHT_PARENTHESES = ")";
     Map<String,Integer> operandPriority = getOperandTable();
 
     private Map<String, Integer> getOperandTable() {
@@ -28,19 +30,18 @@ public class ExpressionEvaluator {
             if(isNumeric(item)){
                 evaluationStack.push(item);
             } else {
-                if(item.equals("(") || item.equals(")")) continue;
-                int result = 0;
+                int result;
                 String b = evaluationStack.pop();
                 String a = evaluationStack.pop();
                 result = applyOpeator(a,b,item);
-                evaluationStack.push(result+"");
+                evaluationStack.push(Integer.toString(result));
             }
         }
         return Integer.parseInt(evaluationStack.pop());
     }
 
     private int applyOpeator(String a, String b, String operator) {
-        int temp = 0;
+        int temp;
         switch (operator) {
             case "+" :
                 temp = Integer.parseInt(a) + Integer.parseInt(b); return temp;
@@ -61,14 +62,10 @@ public class ExpressionEvaluator {
     public BinaryTree getExpressionTree(List<String> postfix) {
 
         Stack<TreeNode> expressionStack = new Stack<>();
-        Stack<String> traversalStack = new Stack<>();
         BinaryTree result = new BinaryTree();
 
         for(int i = 0 ; i < postfix.size() ; i++) {
             String item = postfix.get(i);
-            if(item.equals("(") || item.equals(")")){
-                continue;
-            }
             if(isNumeric(item)) {
                 TreeNode node = new TreeNode(Integer.parseInt(item));
                 expressionStack.push(node);
@@ -87,59 +84,50 @@ public class ExpressionEvaluator {
     }
 
     public List<String> infixToPostfix(List<String> infix){
-
         Stack<String> operandStack = new Stack<>();
         List<String> postfix = new ArrayList<>();
-        for(int i = 0 ; i < infix.size() ; i++) {
-            String item = infix.get(i);
-            if(item.equals("(")){
-                operandStack.push(item);
-                continue;
-            }
-            if(item.equals(")")) {
-                while(true) {
-                    if(operandStack.isEmpty()) break;
-                    String stackedItem = operandStack.pop();
-                    postfix.add(stackedItem);
-                    if(stackedItem.equals("(")) {
-                        postfix.add(")");
-                        break;
-                    }
-                }
-                continue;
-            }
-            if(isNumeric(item)) {
-                postfix.add(item);
-            } else {
-                if(isHigherPrescedence(operandStack,item)){
-                    operandStack.push(item);
-                } else {
-                  while (!isHigherPrescedence(operandStack,item)){
-                      postfix.add(operandStack.pop());
-                  }
-                  operandStack.push(item);
-                }
-            }
-
-        }
+        operandStack.push(LEFT_PARENTHESES);
+        infix.add(RIGHT_PARENTHESES);
+        int i = 0;
         while(!operandStack.isEmpty()) {
-            postfix.add(operandStack.pop());
+            String item = infix.get(i);
+            if(item.equals(LEFT_PARENTHESES)) {
+                operandStack.push(item);
+            } else if(isNumeric(item)) {
+                postfix.add(item);
+            } else if(isOperator(item)) {
+                while(!isSameOrHigherPrecedence(operandStack,item)) {
+                    postfix.add(operandStack.pop());
+                }
+                operandStack.push(item);
+
+            } else {
+                while(true) {
+                    String operand = operandStack.pop();
+                    if(operand.equals(LEFT_PARENTHESES)) break;
+                    postfix.add(operand);
+                }
+            }
+            i++;
         }
         return postfix;
+    }
+
+    private boolean isOperator(String item) {
+        if(operandPriority.containsKey(item)) return true;
+        return false;
     }
 
     private boolean isNumeric(String item) {
         return item.matches("[0-9]+");
     }
 
-    private boolean isHigherPrescedence(Stack<String> operandStack , String operator){
-        if(operandStack.isEmpty()){
+    private boolean isSameOrHigherPrecedence(Stack<String> operandStack , String operator){
+
+        if(operandStack.peek().equals(LEFT_PARENTHESES)){
             return true;
         }
-        if(operandStack.peek().equals("(")){
-            return true;
-        }
-        if(operandPriority.get(operandStack.peek()) > operandPriority.get(operator)){
+        if(operandPriority.get(operandStack.peek()) >= operandPriority.get(operator)){
             return true;
         }
         return false;

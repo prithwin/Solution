@@ -135,13 +135,13 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
         if(ultimate == null) return;
         if(ultimate.equals(node)) {
             if(ultimate.left == null && ultimate.right == null) {
-                transplant(penultimate, null);
+                transplant(penultimate,ultimate , null);
             }
             else if(ultimate.left == null || ultimate.right == null){
                 if(ultimate.left != null) {
-                    transplant(penultimate, ultimate.left);
+                    transplant(penultimate,ultimate,ultimate.left);
                 } else {
-                    transplant(penultimate, ultimate.right);
+                    transplant(penultimate,ultimate ,ultimate.right);
                 }
             } else {
                 TreeNode rLargest = ultimate.right;
@@ -167,16 +167,16 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
         }
     }
 
-    private void transplant(TreeNode target, TreeNode node) {
-        if(node == null) {
-            target.left = null;
-            target.right = null;
-            return;
+    private void transplant(TreeNode penultimate, TreeNode ultimate, TreeNode replacement) {
+        if(penultimate.left!=null) {
+            if (penultimate.left.equals(ultimate)) {
+                penultimate.left = replacement;
+            }
         }
-        if(target.number.compareTo(node.number) == 1) {
-            target.left = node;
-        } else {
-            target.right = node;
+        if(penultimate.right!=null) {
+            if (penultimate.right.equals(ultimate)) {
+                penultimate.right = replacement;
+            }
         }
     }
 }

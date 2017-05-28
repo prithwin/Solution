@@ -17,17 +17,36 @@ public class BinarySearchTreeTest {
     }
 
     @Test public void testRemoveFromBST () {
-        BinaryTree binaryTree = getSampleBST();
+        BinarySearchTree binaryTree = getSampleBST();
+        System.out.println("\nORIGINAL TREE\n");
         binaryTree.printinOrder();
-        System.out.println();
+        System.out.println("\nRemoving-67\n");
        binaryTree.remove(new TreeNode(67));
         binaryTree.printinOrder();
-        System.out.println();
+        System.out.println("\nRemoving-45\n");
         binaryTree.remove(new TreeNode(45));
         binaryTree.printinOrder();
-        System.out.println();
+        System.out.println("\nRemoving-899\n");
         binaryTree.remove(new TreeNode(899));
         binaryTree.printinOrder();
+        System.out.println("\nRemoving-7\n");
+        binaryTree.remove(new TreeNode(7));
+        binaryTree.printinOrder();
+        System.out.println("\nadding-998\n");
+        binaryTree.add(new TreeNode(998));
+        binaryTree.printinOrder();
+        System.out.println("\nRemoving-4534\n");
+        binaryTree.remove(new TreeNode(4534));
+        binaryTree.printinOrder();
+        System.out.println("\nRemoving-1\n");
+        binaryTree.remove(new TreeNode(1));
+        binaryTree.printinOrder();
+
+        System.out.println("\nadding-4545\n");
+        binaryTree.add(new TreeNode(4545));
+        binaryTree.printinOrder();
+
+
     }
 
     @Test public void checkAVLCreation() {
@@ -67,7 +86,7 @@ public class BinarySearchTreeTest {
         return avlTree;
     }
 
-    private BinaryTree getSampleBST() {
+    private BinarySearchTree getSampleBST() {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(new TreeNode(45));
         bst.add(new TreeNode(50));

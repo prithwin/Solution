@@ -19,81 +19,6 @@ public class AVLTree extends BinarySearchTree {
         }
     }
 
-    public void remove(AVLTreeNode node) {
-        if(node.equals(this.root)){
-            AVLTreeNode phantom = new AVLTreeNode(0);
-            if(root.number.number > 0) {
-                phantom.right = root;
-                removeInternal(phantom, phantom.right,node);
-                this.root = phantom.right;
-            } else {
-                phantom.left = root;
-                removeInternal(phantom, phantom.left,node);
-                this.root = phantom.left;
-            }
-        } else if(this.root.left!=null && node.number.number < this.root.number.number) {
-            removeInternal(this.root,this.root.left, node);
-        } else if(this.root.right!=null && node.number.number > this.root.number.number ) {
-            removeInternal(this.root,this.root.right,node);
-        }
-    }
-
-    private void removeInternal(AVLTreeNode penultimate , AVLTreeNode ultimate , AVLTreeNode node) {
-        if(ultimate == null) return;
-        if(ultimate.equals(node)) {
-            if(ultimate.left == null && ultimate.right == null) {
-                if(penultimate.left.equals(node)){
-                    penultimate.left = null;
-                } else {
-                    penultimate.right = null;
-                }
-            }
-            else if(ultimate.left == null || ultimate.right == null){
-                if(ultimate.left != null) {
-                    transplant(penultimate, ultimate.left);
-                } else {
-                    transplant(penultimate, ultimate.right);
-                }
-            } else {
-                AVLTreeNode rLargest = ultimate.right;
-                AVLTreeNode rLargetp = penultimate.right;
-                ultimate.number = rLargest.number;
-                removeInternal(rLargetp,rLargest,new AVLTreeNode(rLargest.number.number));
-            }
-            return;
-        }
-        if(ultimate.left!=null && node.number.compareTo(ultimate.number) <= 0){
-            if(penultimate.left!=null && node.number.compareTo(penultimate.number) <= 0) {
-                removeInternal(penultimate.left, ultimate.left, node);
-            } else {
-                removeInternal(penultimate.right, ultimate.left, node);
-            }
-        }
-        if(ultimate.right!=null && node.number.compareTo(ultimate.number) == 1){
-            if(penultimate.right!=null && node.number.compareTo(penultimate.number) == 1) {
-                removeInternal(penultimate.right, ultimate.right, node);
-            } else {
-                removeInternal(penultimate.left, ultimate.right, node);
-            }
-        }
-
-        penultimate.nodeHeight = 1 +  Mathematical.maximum(getNodeHeight(penultimate.left),getNodeHeight(penultimate.right));
-        int balance = getNodeHeight(penultimate.left) -  getNodeHeight(penultimate.right);
-    }
-
-    private void transplant(TreeNode target, TreeNode node) {
-        if(node == null) {
-            target.left = null;
-            target.right = null;
-            return;
-        }
-        if(target.number.compareTo(node.number) == 1) {
-            target.left = node;
-        } else {
-            target.right = node;
-        }
-    }
-
     private AVLTreeNode addInternal(AVLTreeNode where, AVLTreeNode what) {
         if(where == null) {
             return null;
@@ -229,39 +154,6 @@ public class AVLTree extends BinarySearchTree {
         return pivot;
     }
 
-    public void addUnbalanced(AVLTreeNode node) {
-       if(root == null){
-           node.nodeHeight = 0;
-           this.root = node;
-       } else {
-           if ( this.root.number.compareTo(node.number) == 1 ) {
-              avlAddInternalUnbalanced(root,node);
-           } else {
-              avlAddInternalUnbalanced(root,node);
-           }
-       }
-
-   }
-
-   public void avlAddInternalUnbalanced(AVLTreeNode where, AVLTreeNode what) {
-       if( where == null ){
-           return;
-       } else {
-           if(where.left == null && what.number.compareTo(where.number) <= 0) {
-               what.nodeHeight = 0;
-               where.left = what;
-           } else if(where.right == null && what.number.compareTo(where.number) == 1){
-               what.nodeHeight = 0 ;
-               where.right = what;
-           } else if(what.number.compareTo(where.number) <= 0) {
-               avlAddInternalUnbalanced(where.left,what);
-           } else {
-               avlAddInternalUnbalanced(where.right,what);
-           }
-           where.nodeHeight = 1 +  Mathematical.maximum(getNodeHeight(where.left),getNodeHeight(where.right));
-       }
-   }
-
     private int getNodeHeight(AVLTreeNode node) {
         if(node == null){
             return -1;
@@ -281,5 +173,74 @@ public class AVLTree extends BinarySearchTree {
         printAvlTreeInOrder(node.left);
         System.out.println(node.number+"->"+node.nodeHeight);
         printAvlTreeInOrder(node.right);
+    }
+
+
+    public void remove(AVLTreeNode node) {
+        if(node.equals(this.root)){
+            AVLTreeNode phantom = new AVLTreeNode(0);
+            if(root.number.number > 0) {
+                phantom.right = root;
+                removeInternal(phantom, phantom.right,node);
+                this.root = phantom.right;
+            } else {
+                phantom.left = root;
+                removeInternal(phantom, phantom.left,node);
+                this.root = phantom.left;
+            }
+        } else if(this.root.left!=null && node.number.compareTo(this.root.number) <=0) {
+            removeInternal(this.root,this.root.left, node);
+        } else if(this.root.right!=null && node.number.compareTo(this.root.number) >= 0 ) {
+            removeInternal(this.root,this.root.right,node);
+        }
+    }
+
+    private void removeInternal(AVLTreeNode penultimate , AVLTreeNode ultimate , AVLTreeNode node) {
+        if(ultimate == null) return;
+        if(ultimate.equals(node)) {
+            if(ultimate.left == null && ultimate.right == null) {
+                transplant(penultimate,ultimate , null);
+            }
+            else if(ultimate.left == null || ultimate.right == null){
+                if(ultimate.left != null) {
+                    transplant(penultimate,ultimate,ultimate.left);
+                } else {
+                    transplant(penultimate,ultimate ,ultimate.right);
+                }
+            } else {
+                AVLTreeNode rLargest = ultimate.right;
+                AVLTreeNode rLargetp = penultimate.right;
+                ultimate.number = rLargest.number;
+                removeInternal(rLargetp,rLargest,new AVLTreeNode(rLargest.number.number));
+            }
+            return;
+        }
+        if(ultimate.left!=null && node.number.compareTo(ultimate.number) <= 0){
+            if(penultimate.left!=null && node.number.compareTo(penultimate.number) <= 0) {
+                removeInternal(penultimate.left, ultimate.left, node);
+            } else {
+                removeInternal(penultimate.right, ultimate.left, node);
+            }
+        }
+        if(ultimate.right!=null && node.number.compareTo(ultimate.number) == 1){
+            if(penultimate.right!=null && node.number.compareTo(penultimate.number) == 1) {
+                removeInternal(penultimate.right, ultimate.right, node);
+            } else {
+                removeInternal(penultimate.left, ultimate.right, node);
+            }
+        }
+    }
+
+    private void transplant(AVLTreeNode penultimate, AVLTreeNode ultimate, AVLTreeNode replacement) {
+        if(penultimate.left!=null) {
+            if (penultimate.left.equals(ultimate)) {
+                penultimate.left = replacement;
+            }
+        }
+        if(penultimate.right!=null) {
+            if (penultimate.right.equals(ultimate)) {
+                penultimate.right = replacement;
+            }
+        }
     }
 }
