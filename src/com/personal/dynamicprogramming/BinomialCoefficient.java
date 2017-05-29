@@ -35,8 +35,4 @@ public class BinomialCoefficient {
         }
         return computationMatrix[n][r];
     }
-
-    public static void main(String[] args) {
-        System.out.println(new BinomialCoefficient().C2(10, 3));
-    }
 }

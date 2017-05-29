@@ -17,6 +17,7 @@ import java.util.List;
  *   8
  */
 public class CoinChanginConstrained {
+
     public int getNumberOfCoins(List<Integer> denominations, int total) {
         int[][] solutionMatrix = new int[denominations.size()][total+1];
         for (int i = 0; i < solutionMatrix.length; i++) {
@@ -52,7 +53,16 @@ public class CoinChanginConstrained {
         return solutionMatrix[denominations.size()-1][total];
     }
 
-    public static void main(String[] args) {
-        new CoinChanginConstrained().getNumberOfCoins(Arrays.asList(1),2);
+    public int getNumberOfCoinsOS(List<Integer> denominations , int total) {
+        if(denominations.size() == 0) return 0;
+        if(denominations.size() == 1 && denominations.get(0).equals(total)) return 1;
+        Integer sample = denominations.get(0);
+        if(sample == total) return 1;
+        List<Integer> remainder = denominations.subList(1,denominations.size()-1);
+        if(sample > total) {
+            return getNumberOfCoins(remainder,total);
+        } else {
+            return (1 + getNumberOfCoinsOS(remainder,total-sample));
+        }
     }
 }
