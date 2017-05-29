@@ -1,6 +1,7 @@
 package com.personal;
 
 import com.personal.dynamicprogramming.BinomialCoefficient;
+import com.personal.util.Mathematical;
 import org.testng.annotations.*;
 
 import java.util.Arrays;
@@ -26,6 +27,21 @@ public class PermutationAndCombinationsTest {
         int r = 3;
         Set<String> result = new PermutationsAndCombinations<String>().C(target, r);
         assertEquals(result.size(), new BinomialCoefficient().C(target.size(),r));
+        result.stream().forEach(System.out::println);
+    }
+
+    @Test public void testnPr() {
+        List<String> target = Arrays.asList("A", "B", "C");
+        int r = 3;
+        Set<String> result = new PermutationsAndCombinations<String>().P(target, r);
+        result.stream().forEach(System.out::println);
+    }
+
+    @Test public void testnPr2() {
+        List<String> target = Arrays.asList("A", "B", "C", "D", "E", "F");
+        int r = 3;
+        Set<String> result = new PermutationsAndCombinations<String>().P(target, r);
+        assertEquals(result.size(), Mathematical.factorial(r)* new BinomialCoefficient().C(target.size(),r));
         result.stream().forEach(System.out::println);
     }
 }

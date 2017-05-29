@@ -10,7 +10,6 @@ import java.util.Set;
  */
 public class PermutationsAndCombinations<E> {
 
-    private final static String COMMA = ",";
     private final static String BLANK = "";
 
     public Set<String> C(List<E> items, int size) {
@@ -27,17 +26,15 @@ public class PermutationsAndCombinations<E> {
         if(size == items.size() && lead.equals(BLANK)) {
             StringBuilder stringBuilder = new StringBuilder();
             for(E item : items) {
-                stringBuilder.append(item.toString()).append(COMMA);
+                stringBuilder.append(item.toString());
             }
-            stringBuilder.deleteCharAt(stringBuilder.length()-1);
             result.add(stringBuilder.toString());
         } else if(items.size() == size - 1 && !lead.equals(BLANK)) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(lead);
             for(E item : items) {
-                stringBuilder.append(item.toString()).append(COMMA);
+                stringBuilder.append(item.toString());
             }
-            stringBuilder.deleteCharAt(stringBuilder.length()-1);
             result.add(stringBuilder.toString());
         } else {
             for(int i = 0 ; i < items.size() ; i++) {
@@ -46,6 +43,17 @@ public class PermutationsAndCombinations<E> {
                 nCr(BLANK,remainderList,size,result);
             }
         }
+    }
+
+    public Set<String> P(List<E> items, int size) {
+        Set<String> combinations = new HashSet<>();
+        nCr(BLANK,items,size,combinations);
+        Set<String> permutations = new HashSet<>();
+        for(String combination : combinations) {
+            permutations.addAll(new StringPermutation().permute(combination));
+        }
+        return permutations;
+
     }
 
     private List<E> getListExcluding(List<E> items, int index) {
