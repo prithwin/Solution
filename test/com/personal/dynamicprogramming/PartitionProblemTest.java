@@ -16,4 +16,9 @@ public class PartitionProblemTest {
         int[] target = {1,5,5,15};
         assertFalse(new PartitionProblem().isPartitionPossible(target));
     }
+
+    @Test public void testPartition3() {
+        int[] target = {1,5,5,15};
+        assertFalse(new PartitionProblem().isPartitionPossible(target));
+    }
 }

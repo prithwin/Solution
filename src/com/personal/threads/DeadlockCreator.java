@@ -1,6 +1,7 @@
 package com.personal.threads;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -10,47 +11,48 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class DeadlockCreator {
 
+      static class NoticBoard {
+          Chalk chalk;
+          public synchronized void writeOnBoard(String content){
+              chalk.getNewChalk("white");
+              System.out.println("writeing on noticBoard:"+ content);
+              if(!content.contains("B"))
+                chalk.replaceChalk();
+          }
+      }
 
-     static class X {
-         Lock lockX = new ReentrantLock();
-         Condition xDoable = lockX.newCondition();
+    static class Chalk {
+        int availablePcs = 1;
+        public synchronized Chalk getNewChalk( String color) {
+            while(availablePcs ==0) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            availablePcs--;
+            System.out.println("creating new "+color+" piece of chalk");
+            return new Chalk();
+        }
 
-         public void doX(){
-             lockX.lock();
-             try {
-                 xDoable.await();
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
-             }
-             xDoable.signalAll();
-             System.out.println("doingX");
-             lockX.unlock();
-         }
-     }
-
-
+        public synchronized void replaceChalk(){
+            availablePcs++;
+        }
+    }
 
     public static void main(String[] args) {
-        X x = new X();
-        CountDownLatch latch = new CountDownLatch(1);
-        new Thread(() -> {
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            x.doX();}).start();  //Thread A
-        new Thread(() -> {
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            x.doX();}).start();  //Thread B
-        latch.countDown();
-        x.lockX.lock();
-        x.xDoable.signalAll();
-        x.lockX.unlock();
+        NoticBoard nb = new NoticBoard();
 
+        Chalk chalk = new Chalk();
+        nb.chalk = chalk;
+        new Thread(() -> {
+            nb.writeOnBoard("ThreadA content");
+        }).start();
+        new Thread(() -> {
+            nb.writeOnBoard("ThreadB content");
+        }).start();
+        AtomicLong atomicLong = new AtomicLong();
+//        atomicLong.compareAndSet()
     }
 }

@@ -87,6 +87,10 @@ public class Graph {
         }
     }
 
+    public boolean hasCycles() {
+        return false;
+    }
+
     public DisjointSet getKruskalMST() {
         if(type.isMatrix()) {
             List<ComparableEdge> comparableEdges = getAsListOfComparableEdges();
@@ -106,11 +110,13 @@ public class Graph {
         if(type.isMatrix()) {
             for(int i = 0 ; i < adjecencyMatrix.length ; i++) {
                 for (int j = 0; j < adjecencyMatrix[i].length; j++) {
-                    ComparableEdge edge = new ComparableEdge();
-                    edge.from = i;
-                    edge.to = j;
-                    edge.weight = adjecencyMatrix[i][j];
-                    edgeList.add(edge);
+                    if(adjecencyMatrix[i][j] != 0) {
+                        ComparableEdge edge = new ComparableEdge();
+                        edge.from = i;
+                        edge.to = j;
+                        edge.weight = adjecencyMatrix[i][j];
+                        edgeList.add(edge);
+                    }
                 }
             }
         }

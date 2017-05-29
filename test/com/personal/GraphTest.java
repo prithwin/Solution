@@ -1,5 +1,6 @@
 package com.personal;
 
+import com.personal.util.DisjointSet;
 import com.personal.util.Graph;
 import com.personal.util.GraphNode;
 import com.personal.util.GraphType;
@@ -53,5 +54,25 @@ public class GraphTest {
 
         graph.printBreadthFirstSearch(2);
 
+    }
+
+    @Test public void testKruskalsMST() {
+        Map<Integer,GraphNode> nodeMap = new HashMap<>();
+        nodeMap.put(0,new GraphNode("0"));
+        nodeMap.put(1,new GraphNode("1"));
+        nodeMap.put(2,new GraphNode("2"));
+        nodeMap.put(3,new GraphNode("3"));
+
+        Graph graph = new Graph(nodeMap, GraphType.DIRECTED_MATRIX);
+        graph.addEdge(0,1);
+        graph.addEdge(0,2);
+        graph.addEdge(1,2);
+        graph.addEdge(2,0);
+        graph.addEdge(2,3);
+        graph.addEdge(3,3);
+
+        graph.printBreadthFirstSearch(2);
+        DisjointSet disjointSet = graph.getKruskalMST();
+        System.out.println("Test");
     }
 }

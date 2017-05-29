@@ -1,0 +1,28 @@
+the Java memory Model
+* the java memory model defines a relationship (partial-ordering) called happens before.
+* For changes made by a Thread B to be visible to thread A. there must be a clear Happens-before relation between them
+* in the absence of this happens before relationship the JVM is free to reorder everything in its best wisdom.
+* Rules of happens before:
+    $$: Program order rule (PO):
+        each line in the program order happens before every line following it in that program
+    $$: Monitor Lock rule (ML):
+        a monitor unlock happens before every other monitor lock
+    $$: Volatile variable rule(V):
+        a write to volatile variable happnes before everyread to the variable
+    $$ Thread start rule(T):
+        a call to thread start happens before every statement in the same thread.
+    $$ Thread Termination rule(Terminator):
+        every action in a thread happens before any thread can find out about its termination. either
+        throught thread.join or through isAlive() method.
+    $$ Thread interruption(I):
+        if a thread attemps to interrupt some thread. then call to thread.interrupt() happens before any actio
+        in the thread that it is trying to interrupt.
+    $$ Finalization and trasitivity(Fity):
+        constructor happens before finalization.
+        if a happens before b and b happens before c then A happnes before C
+    Fity interrupted the terminator, the start the motor vehicle and PO
+
+    finalization and transitivy, thread interrruption and termination. thread start rule ,monitor lock, volatile.
+    program order
+
+
