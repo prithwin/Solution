@@ -25,7 +25,7 @@ public class CoinChangingConstrained {
                     solutionMatrix[i][j] = solutionMatrix[i-1][j];
                 } else {
                     if(solutionMatrix[i-1][Math.abs(j-sample)] != -1)
-                        solutionMatrix[i][j] = 1 + solutionMatrix[i-1][Math.abs(j-sample)];
+                        solutionMatrix[i][j] = 1 + solutionMatrix[i][Math.abs(j-sample)];
                     else
                         solutionMatrix[i][j] = -1;
                 }
@@ -41,17 +41,27 @@ public class CoinChangingConstrained {
     }
 
     public int getNumberOfCoinsOS(List<Integer> denominations, int total) {
-        if(denominations.size() == 0 || total == 0) return -1;
+        if(denominations.size() == 0 || total == 0) return 0;
 
-        Integer sample = denominations.get(0);
+        Integer sample = denominations.get(denominations.size()-1);
         if(sample == total) return 1;
-        List<Integer> remainder = denominations.subList(1,denominations.size());
+        List<Integer> remainder = denominations.subList(0,denominations.size()-1);
         if(sample > total) {
             return getNumberOfCoinsOS(remainder,total);
         } else {
-            if(getNumberOfCoinsOS(remainder,Math.abs(total-sample)) != -1)
-                return (1 + getNumberOfCoinsOS(remainder,Math.abs(total-sample)));
-            return -1;
+            int noSelect = getNumberOfCoinsOS(remainder,total);
+            int ifSelect = getNumberOfCoinsOS(remainder,Math.abs(total - sample));
+
+            if(noSelect == 0 && ifSelect==0) {
+                return 0;
+            } else if(noSelect == 0 && ifSelect != 0) {
+                return 1+ifSelect;
+            } else if(noSelect != 0 && ifSelect == 0) {
+                return noSelect;
+            } else {
+                return Mathematical.min( noSelect ,
+                        1 + ifSelect);
+            }
         }
     }
 }

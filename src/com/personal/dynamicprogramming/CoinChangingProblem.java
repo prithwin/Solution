@@ -3,7 +3,6 @@ package com.personal.dynamicprogramming;
 import com.personal.util.Mathematical;
 import com.personal.util.MatrixUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class CoinChangingProblem {
                 if(denominations.get(i) > j) {
                     solutionMatrix[i][j] = solutionMatrix[i-1][j];
                 } else {
-                    solutionMatrix[i][j] = Mathematical.min(solutionMatrix[i-1][j], 1 + solutionMatrix[i][j-denominations.get(i)]);
+                    solutionMatrix[i][j] = Mathematical.min(solutionMatrix[i - 1][j], 1 + solutionMatrix[i][j - denominations.get(i)]);
                 }
             }
         }
@@ -48,7 +47,28 @@ public class CoinChangingProblem {
         return solutionMatrix[denominations.size()-1][total];
     }
 
-    public static void main(String[] args) {
-        new CoinChangingProblem().getNumberOfCoins(Arrays.asList(2),3);
+    public int getNumberOfCoinsOS(List<Integer> denominations,int total) {
+        if(total == 0) {
+            return 0;
+        }
+        int sample = denominations.get(denominations.size()-1);
+        if(denominations.size() == 1) {
+            if(sample > total) return 0;
+            if(total % sample == 0) {
+                return total / denominations.get(0);
+            } else {
+                return 0;
+            }
+        }
+
+
+        List<Integer> reminder = denominations.subList(0,denominations.size()-1);
+        if(sample > total) {
+            return getNumberOfCoinsOS(reminder,total);
+        } else {
+            return Mathematical.min(getNumberOfCoinsOS(reminder,total) ,
+                      1 + getNumberOfCoinsOS(reminder,Math.abs(total-sample))
+                    );
+        }
     }
 }
