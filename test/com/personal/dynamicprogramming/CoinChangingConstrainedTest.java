@@ -14,10 +14,10 @@ public class CoinChangingConstrainedTest {
 
     @Test public void testConChangeConstrained() {
         assertEquals(2,new CoinChangingConstrained().getNumberOfCoins(Arrays.asList(1, 5, 6, 8),11));
-        assertEquals(2, new CoinChangingConstrained().getNumberOfCoins(Arrays.asList(1, 5, 6, 8), 14));
+        assertEquals(2,new CoinChangingConstrained().getNumberOfCoins(Arrays.asList(1, 5, 6, 8), 14));
     }
 
-    @Test public void testConChangeConstrainedOS() {
+    public void testConChangeConstrainedOS() {
         assertEquals(2,new CoinChangingConstrained().getNumberOfCoinsOS(Arrays.asList(1, 5, 6, 8), 11));
         assertEquals(2,new CoinChangingConstrained().getNumberOfCoinsOS(Arrays.asList(1, 5, 6, 8), 14));
     }

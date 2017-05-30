@@ -16,7 +16,7 @@ public class CoinChangingConstrained {
         int[][] solutionMatrix = new int[denominations.size()+1][total+1];
         for (int i = 0; i < solutionMatrix.length; i++) {
             for (int j = 0; j < solutionMatrix[i].length; j++) {
-                if(i==0 || j == 0) {solutionMatrix[i][j] = 0 ;continue;}
+                if(i==0 || j == 0) {solutionMatrix[i][j] = -1 ;continue;}
                 int sample = denominations.get(i-1);
                 if(sample == j) {
                     solutionMatrix[i][j] = 1; continue;
@@ -24,24 +24,34 @@ public class CoinChangingConstrained {
                 if(sample > j) {
                     solutionMatrix[i][j] = solutionMatrix[i-1][j];
                 } else {
-                    solutionMatrix[i][j] = 1 + solutionMatrix[i-1][Math.abs(j-sample)];
+                    if(solutionMatrix[i-1][Math.abs(j-sample)] != -1)
+                        solutionMatrix[i][j] = 1 + solutionMatrix[i-1][Math.abs(j-sample)];
+                    else
+                        solutionMatrix[i][j] = -1;
                 }
             }
         }
         MatrixUtil.print2dMatrix(solutionMatrix);
-        return solutionMatrix[denominations.size()][total];
+        int returnValue = Integer.MAX_VALUE;
+        for(int i = 0 ; i < solutionMatrix.length ; i++) {
+            if(solutionMatrix[i][total]!= -1 && solutionMatrix[i][total] < returnValue)
+                returnValue = solutionMatrix[i][total];
+        }
+        return returnValue;
     }
 
-    public int getNumberOfCoinsOS(List<Integer> denominations , int total) {
-        if(denominations.size() == 0) return 0;
-        if(denominations.size() == 1 && denominations.get(0).equals(total)) return 1;
+    public int getNumberOfCoinsOS(List<Integer> denominations, int total) {
+        if(denominations.size() == 0 || total == 0) return -1;
+
         Integer sample = denominations.get(0);
         if(sample == total) return 1;
-        List<Integer> remainder = denominations.subList(1,denominations.size()-1);
+        List<Integer> remainder = denominations.subList(1,denominations.size());
         if(sample > total) {
-            return getNumberOfCoins(remainder,total);
+            return getNumberOfCoinsOS(remainder,total);
         } else {
-            return (1 + getNumberOfCoinsOS(remainder,Math.abs(total-sample)));
+            if(getNumberOfCoinsOS(remainder,Math.abs(total-sample)) != -1)
+                return (1 + getNumberOfCoinsOS(remainder,Math.abs(total-sample)));
+            return -1;
         }
     }
 }
