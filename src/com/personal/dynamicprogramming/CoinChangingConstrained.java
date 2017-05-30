@@ -16,7 +16,7 @@ public class CoinChangingConstrained {
         int[][] solutionMatrix = new int[denominations.size()+1][total+1];
         for (int i = 0; i < solutionMatrix.length; i++) {
             for (int j = 0; j < solutionMatrix[i].length; j++) {
-                if(i==0 || j == 0) {solutionMatrix[i][j] = -1 ;continue;}
+                if(i==0 || j == 0) {solutionMatrix[i][j] = 0 ;continue;}
                 int sample = denominations.get(i-1);
                 if(sample == j) {
                     solutionMatrix[i][j] = 1; continue;
@@ -24,20 +24,23 @@ public class CoinChangingConstrained {
                 if(sample > j) {
                     solutionMatrix[i][j] = solutionMatrix[i-1][j];
                 } else {
-                    if(solutionMatrix[i-1][Math.abs(j-sample)] != -1)
-                        solutionMatrix[i][j] = 1 + solutionMatrix[i][Math.abs(j-sample)];
-                    else
-                        solutionMatrix[i][j] = -1;
+                    int noSelect = solutionMatrix[i-1][j];
+                    int ifSelect = solutionMatrix[i-1][Math.abs(j-sample)];
+
+                    if(noSelect == 0 && ifSelect==0) {
+                        solutionMatrix[i][j] = 0;
+                    } else if(noSelect == 0 && ifSelect != 0) {
+                        solutionMatrix[i][j] = 1+ifSelect;
+                    } else if(noSelect != 0 && ifSelect == 0) {
+                        solutionMatrix[i][j] = noSelect;
+                    } else {
+                        solutionMatrix[i][j] = Mathematical.min( noSelect ,
+                                1 + ifSelect);
+                    }
                 }
             }
         }
-        MatrixUtil.print2dMatrix(solutionMatrix);
-        int returnValue = Integer.MAX_VALUE;
-        for(int i = 0 ; i < solutionMatrix.length ; i++) {
-            if(solutionMatrix[i][total]!= -1 && solutionMatrix[i][total] < returnValue)
-                returnValue = solutionMatrix[i][total];
-        }
-        return returnValue;
+        return solutionMatrix[denominations.size()][total];
     }
 
     public int getNumberOfCoinsOS(List<Integer> denominations, int total) {

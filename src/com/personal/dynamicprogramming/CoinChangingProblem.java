@@ -43,7 +43,6 @@ public class CoinChangingProblem {
                 }
             }
         }
-        MatrixUtil.print2dMatrix(solutionMatrix);
         return solutionMatrix[denominations.size()-1][total];
     }
 
@@ -67,7 +66,7 @@ public class CoinChangingProblem {
             return getNumberOfCoinsOS(reminder,total);
         } else {
             return Mathematical.min(getNumberOfCoinsOS(reminder,total) ,
-                      1 + getNumberOfCoinsOS(reminder,Math.abs(total-sample))
+                      1 + getNumberOfCoinsOS(denominations,Math.abs(total-sample))
                     );
         }
     }
