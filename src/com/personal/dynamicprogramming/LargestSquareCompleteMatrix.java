@@ -28,9 +28,6 @@ public class LargestSquareCompleteMatrix {
                     resultMatrix[i][j] = target[i][j];
                 }
                 else if(target[i][j] == 1) {
-                    if(i == 4 && j == 2){
-                        System.out.println();
-                    }
                     resultMatrix[i][j] = 1+ (Mathematical.min(
                                                     Mathematical.min(resultMatrix[i-1][j],
                                                             resultMatrix[i][j-1])

@@ -20,6 +20,11 @@ public class LongestCommonSubstring {
     class Answer {
         int length;
         String answer;
+
+        @Override
+        public String toString() {
+            return "Answer: " + answer + " of length: " +length;
+        }
     }
 
     public Answer getLongestCommonSubstringDetails(String thiz, String thatj) {
@@ -56,8 +61,18 @@ public class LongestCommonSubstring {
         return answer;
     }
 
-    public static void main(String[] args) {
-        Answer answer = new LongestCommonSubstring().getLongestCommonSubstringDetails("GEEKSFORGEEKS","GEEKSQUIZ");
-        System.out.printf("the longest substring is of size %d and is the string %s",answer.length,answer.answer);
+    public int getLongestCommonSubstringDetailsOS(String thiz, String thatj) {
+        if(thiz.length() == 0 || thatj.length() == 0) return 0;
+        for(int i = 0 ; i < thiz.length() ; i++) {
+            char candidate = thiz.charAt(i);
+            for(int j = 0 ; j < thatj.length() ; j++) {
+                if(thatj.charAt(j) == candidate) {
+                    int lcs = 1 + getLongestCommonSubstringDetailsOS(thiz.substring(0,i), thatj.substring(0,j));
+                    System.out.println(lcs);
+                    return lcs;
+                }
+            }
+        }
+        return 0;
     }
 }

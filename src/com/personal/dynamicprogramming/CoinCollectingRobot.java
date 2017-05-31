@@ -13,8 +13,6 @@ import com.personal.util.MatrixUtil;
 public class CoinCollectingRobot {
 
     public int getHighestNumber(int[][] chessBoard) {
-
-
          for(int i = 0 ; i < chessBoard.length ;i++) {
              for(int j = 0 ; j < chessBoard[i].length ; j++) {
                  if(i == 0 && j == 0 )continue;
@@ -28,18 +26,6 @@ public class CoinCollectingRobot {
              }
          }
         MatrixUtil.print2dMatrix(chessBoard);
-         return chessBoard[chessBoard.length-1][chessBoard[chessBoard.length-1].length-1];
+        return chessBoard[chessBoard.length-1][chessBoard[chessBoard.length-1].length-1];
      }
-
-    public static void main(String[] args) {
-        int[][] board = {{0, 0, 0, 0, 1, 0},
-                         {0, 1, 0, 1, 0, 0},
-                         {0, 0, 0, 1, 0, 1},
-                         {0, 0, 1, 0, 0, 1},
-                         {1, 0, 0, 0, 1, 0}
-
-        };
-        System.out.println(new CoinCollectingRobot().getHighestNumber(board));
-    }
-
 }
