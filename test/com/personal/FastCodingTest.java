@@ -8,7 +8,21 @@ import java.util.*;
  * Created by pr250155 on 5/25/17.
  */
 public class FastCodingTest {
-   @Test public void testPalindromeFasle() {
+
+    @Test public void reverseStringtest() {
+        String target ="PRITHWIN";
+        assertEquals("NIWHTIRP",new String(reverse(target.toCharArray(),0, target.length()-1)));
+    }
+
+    private char[] reverse(char[] chars, int start, int end) {
+        if(start>end) return chars;
+        char temp = chars[start];
+        chars[start] = chars[end];
+        chars[end] = temp;
+        return reverse(chars,start + 1, end -1);
+    }
+
+    @Test public void testPalindromeFasle() {
        assertFalse(isPalindrome("ASPRIN"));
    }
 
