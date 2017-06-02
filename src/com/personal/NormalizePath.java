@@ -8,7 +8,7 @@ import java.util.List;
  * Created by prith on 02-06-2017.
  */
 public class NormalizePath {
-    public String normazlie(String path) {
+    public String normalize(String path) {
         String[] components = path.split("/");
         List<String> result = new ArrayList<>();
         for(int i = 1 ; i < components.length ; i++) {
