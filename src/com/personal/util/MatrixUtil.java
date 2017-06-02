@@ -63,4 +63,16 @@ public class MatrixUtil {
             }
         }
     }
+
+    public static boolean isEqual(int[][] thiz, int[][] that) {
+        if(thiz.length != that.length) return false;
+        for(int i = 0 ; i < thiz.length ; i++) {
+            if(thiz[i].length != that[i].length) return false;
+            for(int j = 0 ; j < thiz[i].length ;j++) {
+                if(thiz[i][j] != that[i][j])
+                    return false;
+            }
+        }
+        return true;
+    }
 }

@@ -27,18 +27,4 @@ public class Rotate2DMatrix {
             }
         }
     }
-
-
-    public static void main(String[] args) {
-        int[][] matrix = {{1, 2, 3, 4, 5},                             //1
-                          {6, 7, 8, 9, 10},                            //2
-                          {11,12,13,14,15},                            //3
-                          {16,17,18,19,20},                            //4
-                          {21,22,23,24,25}};                           //5
-        MatrixUtil.print2dMatrix(matrix);
-        new Rotate2DMatrix().inPlaceRotate(matrix);
-        System.out.println();
-        MatrixUtil.print2dMatrix(matrix);
-
-    }
 }
