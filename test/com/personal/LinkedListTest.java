@@ -1,8 +1,6 @@
 package com.personal;
 
-import com.personal.util.LinkedList;
-import com.personal.util.ListNode;
-import com.personal.util.MLLinkedList;
+import com.personal.util.*;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -79,4 +77,33 @@ public class LinkedListTest {
         return list;
     }
 
+    private ArbitDblLinkedList getSampleArbitLinkedList() {
+        ArbitDblLinkedList originalList = new ArbitDblLinkedList();
+        originalList.head = new ArbitDblListNode();
+        originalList.head.value = 1;
+        originalList.head.next = new ArbitDblListNode(2);
+        originalList.head.next.next = new ArbitDblListNode(3);
+        originalList.head.next.next.next = new ArbitDblListNode(4);
+        originalList.head.next.next.next.next = new ArbitDblListNode(5);
+        originalList.head.next.next.next.next.next = new ArbitDblListNode(6);
+        originalList.head.next.next.next.next.next.next = new ArbitDblListNode(7);
+
+        originalList.head.arbit =  originalList.head.next.next.next.next.next.next;
+        originalList.head.next.arbit =  originalList.head.next.next.next.next.next;
+        originalList.head.next.next.arbit =  originalList.head.next.next.next.next;
+        originalList.head.next.next.next.arbit =  originalList.head.next.next.next;
+        originalList.head.next.next.next.next.arbit =  originalList.head.next.next;
+        originalList.head.next.next.next.next.next.arbit =  originalList.head.next;
+        originalList.head.next.next.next.next.next.next.arbit =  originalList.head;
+
+        return originalList;
+    }
+
+    //test for Classes ArbitLinked list
+    @Test public void testLinkedList() {
+        ArbitDblLinkedList originalList = getSampleArbitLinkedList();
+
+        ArbitDblLinkedList newList = originalList.clone();
+        System.out.println("check");
+    }
 }

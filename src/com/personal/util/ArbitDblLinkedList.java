@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by pr250155 on 3/22/17.
  */
 public class ArbitDblLinkedList implements Cloneable {
-    ArbitDblListNode head;
+    public ArbitDblListNode head;
     int length=0;
 
     public ArbitDblLinkedList clone() {
