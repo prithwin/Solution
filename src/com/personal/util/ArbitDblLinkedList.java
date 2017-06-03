@@ -29,11 +29,12 @@ public class ArbitDblLinkedList implements Cloneable {
         while(temp!=null){
             ArbitDblListNode cloneNode = temp.next;
             cloneNode.arbit = temp.arbit.next;
-            //cloneNode.next = null;
             returnlist.add(cloneNode);
-
+            ArbitDblListNode old = temp;
             temp = temp.next.next;
+            old.next = temp;
         }
+        returnlist.length = this.length;
         return returnlist;
     }
 
@@ -54,28 +55,25 @@ public class ArbitDblLinkedList implements Cloneable {
         length++;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof ArbitDblLinkedList) {
+            ArbitDblLinkedList that  = (ArbitDblLinkedList) obj;
+            if(this.length != that.length) {
+                return false;
+            }
+            ArbitDblListNode thisStart = this.head;
+            ArbitDblListNode thatStart = that.head;
+            while(thisStart!=null) {
+                if(!thisStart.equals(thatStart)) {
+                    return false;
+                }
+                thatStart = thatStart.next;
+                thisStart = thisStart.next;
+            }
+            return true;
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-        ArbitDblLinkedList originalList = new ArbitDblLinkedList();
-        originalList.head = new ArbitDblListNode();
-        originalList.head.value = 1;
-        originalList.head.next = new ArbitDblListNode(2);
-        originalList.head.next.next = new ArbitDblListNode(3);
-        originalList.head.next.next.next = new ArbitDblListNode(4);
-        originalList.head.next.next.next.next = new ArbitDblListNode(5);
-        originalList.head.next.next.next.next.next = new ArbitDblListNode(6);
-        originalList.head.next.next.next.next.next.next = new ArbitDblListNode(7);
-
-        originalList.head.arbit =  originalList.head.next.next.next.next.next.next;
-        originalList.head.next.arbit =  originalList.head.next.next.next.next.next;
-        originalList.head.next.next.arbit =  originalList.head.next.next.next.next;
-        originalList.head.next.next.next.arbit =  originalList.head.next.next.next;
-        originalList.head.next.next.next.next.arbit =  originalList.head.next.next;
-        originalList.head.next.next.next.next.next.arbit =  originalList.head.next;
-        originalList.head.next.next.next.next.next.next.arbit =  originalList.head;
-
-        ArbitDblLinkedList newList = originalList.clone();
-        System.out.println("check");
-
+        }
+        return false;
     }
 }

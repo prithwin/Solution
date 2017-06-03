@@ -20,4 +20,16 @@ public class ArbitDblListNode implements Cloneable{
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof ArbitDblListNode) {
+            ArbitDblListNode that = (ArbitDblListNode) obj;
+            if(this.value != that.value) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

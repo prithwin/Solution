@@ -102,8 +102,7 @@ public class LinkedListTest {
     //test for Classes ArbitLinked list
     @Test public void testLinkedList() {
         ArbitDblLinkedList originalList = getSampleArbitLinkedList();
-
         ArbitDblLinkedList newList = originalList.clone();
-        System.out.println("check");
+        assertEquals(originalList,newList);
     }
 }
