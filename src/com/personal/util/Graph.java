@@ -10,10 +10,10 @@ import static com.personal.util.GraphType.UNDIRECTED_MATRIX;
  */
 public class Graph {
 
-    Map<Integer,GraphNode> graphNodes;
-    int[][] adjecencyMatrix;
-    List<List<GraphNode>> adjacencyList;
-    GraphType type;
+    public Map<Integer,GraphNode> graphNodes;
+    public int[][] adjecencyMatrix;
+    public List<List<GraphNode>> adjacencyList;
+    public GraphType type;
 
     public Graph(int[][] adjecencyMatrix, Map<Integer , GraphNode> graphNodes) {
         this.adjecencyMatrix = adjecencyMatrix;
@@ -44,6 +44,19 @@ public class Graph {
         }
     }
 
+    public void addWeightedEdge(int a , int b,int weight) {
+        if(type.isDirected()){
+            if(type.isMatrix()) {
+                adjecencyMatrix[a][b] = weight;
+            }
+        } else {
+            if(type.isMatrix()) {
+                adjecencyMatrix[a][b] = weight;
+                adjecencyMatrix[b][a] = weight;
+            }
+        }
+    }
+
     public void printDepthFirstSearch(int index) {
         if(type.isMatrix()) {
             printDepthFirstSearchInternal(index, new ArrayList<>());
@@ -57,6 +70,26 @@ public class Graph {
             printQueue.add(index);
             bfsInternal(printQueue,visited);
         }
+    }
+
+    public boolean isCyclicGraph() {
+        if(type.isMatrix()) {
+            if(type == GraphType.UNDIRECTED_MATRIX) {
+                DisjointSet checker = new DisjointSet(adjecencyMatrix.length);
+                List<ComparableEdge> comparableEdges = getAsListOfComparableEdges();
+                for (ComparableEdge edge : comparableEdges) {
+                    if (checker.find(edge.from) != checker.find(edge.to)) {
+                        checker.union(edge.from, edge.to);
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                return containsCycles(0, new ArrayList<>());
+            }
+        }
+        return false;
     }
 
     private void bfsInternal(Queue<Integer> printQueue, List<Integer> visited) {
@@ -87,22 +120,47 @@ public class Graph {
         }
     }
 
+    private boolean containsCycles(int index,List<Integer> visited) {
+        visited.add(index);
+        for(int j = 0 ; j < adjecencyMatrix[index].length ; j++){
+            if(adjecencyMatrix[index][j] != 0) {
+                //there is an edge
+                if(!visited.contains(j)) {
+                    containsCycles(j, visited);
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean hasCycles() {
         return false;
     }
 
-    public DisjointSet getKruskalMST() {
+    public Graph getKruskalMST() {
+        if(type.isDirected()) {
+            throw new UnsupportedOperationException("Kruskal's Algorithm only works for undirected graphs");
+        }
         if(type.isMatrix()) {
+            int[][] result = new int[adjecencyMatrix.length][adjecencyMatrix[0].length];
+            DisjointSet checker  = new DisjointSet(adjecencyMatrix.length);
+
             List<ComparableEdge> comparableEdges = getAsListOfComparableEdges();
             List<ComparableEdge> sortedList = new Sorter<ComparableEdge>().mergeSort(comparableEdges);
-            DisjointSet result = new DisjointSet(sortedList.size());
-            result.union(sortedList.get(0).from,sortedList.get(0).to);
-            for(int i = 1 ; i < sortedList.size() ; i++) {
-                result.union(sortedList.get(i-1).to,sortedList.get(i).to);
+
+            for (ComparableEdge edge : sortedList) {
+                if(checker.find(edge.from) != checker.find(edge.to)) {
+                    checker.union(edge.from,edge.to);
+                    result[edge.from][edge.to] = edge.weight;
+                    result[edge.to][edge.from] = edge.weight;
+                }
             }
-            return result;
+            return new Graph(result,this.graphNodes);
+
         }
-        return new DisjointSet(0);
+        return new Graph(null,GraphType.UNDIRECTED_LIST);
     }
 
     private List<ComparableEdge> getAsListOfComparableEdges() {
@@ -110,12 +168,14 @@ public class Graph {
         if(type.isMatrix()) {
             for(int i = 0 ; i < adjecencyMatrix.length ; i++) {
                 for (int j = 0; j < adjecencyMatrix[i].length; j++) {
-                    if(adjecencyMatrix[i][j] != 0) {
-                        ComparableEdge edge = new ComparableEdge();
-                        edge.from = i;
-                        edge.to = j;
-                        edge.weight = adjecencyMatrix[i][j];
-                        edgeList.add(edge);
+                    if(j>=i) {
+                        if (adjecencyMatrix[i][j] != 0) {
+                            ComparableEdge edge = new ComparableEdge();
+                            edge.from = i;
+                            edge.to = j;
+                            edge.weight = adjecencyMatrix[i][j];
+                            edgeList.add(edge);
+                        }
                     }
                 }
             }
