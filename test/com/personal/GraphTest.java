@@ -109,7 +109,6 @@ public class GraphTest {
         nodeMap.put(1,new GraphNode("1"));
         nodeMap.put(2,new GraphNode("2"));
         nodeMap.put(3,new GraphNode("3"));
-        nodeMap.put(4,new GraphNode("4"));
 
         Graph graph = new Graph(nodeMap, GraphType.UNDIRECTED_MATRIX);
 
@@ -120,6 +119,27 @@ public class GraphTest {
         graph.addWeightedEdge(2,3,4);
 
         Graph mst = graph.getKruskalMST();
+        MatrixUtil.print2dMatrix(graph.adjecencyMatrix);
+        MatrixUtil.print2dMatrix(mst.adjecencyMatrix);
+        System.out.println("check");
+    }
+
+    @Test public void testPrimsMST() {
+        Map<Integer,GraphNode> nodeMap = new HashMap<>();
+        nodeMap.put(0,new GraphNode("0"));
+        nodeMap.put(1,new GraphNode("1"));
+        nodeMap.put(2,new GraphNode("2"));
+        nodeMap.put(3,new GraphNode("3"));
+
+        Graph graph = new Graph(nodeMap, GraphType.UNDIRECTED_MATRIX);
+
+        graph.addWeightedEdge(0,1,10);
+        graph.addWeightedEdge(0,2,6);
+        graph.addWeightedEdge(0,3,5);
+        graph.addWeightedEdge(1,3,15);
+        graph.addWeightedEdge(2,3,4);
+
+        Graph mst = graph.getPrimsMST();
         MatrixUtil.print2dMatrix(graph.adjecencyMatrix);
         MatrixUtil.print2dMatrix(mst.adjecencyMatrix);
         System.out.println("check");

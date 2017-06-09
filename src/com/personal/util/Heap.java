@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by pr250155 on 3/31/17.
@@ -22,6 +23,18 @@ import java.util.Arrays;
  */
 public class Heap<E extends Comparable> {
     public E[] elements;
+
+    public Heap() {
+
+    }
+
+    public Heap(List<E> list) {
+        Comparable[] elements = new Comparable[list.size()];
+        for(int i = 0 ; i < list.size() ; i++) {
+            elements[i] = list.get(i);
+        }
+        this.elements = (E[])elements;
+    }
 
     public void buildMaxHeap(){
         for(int i = elements.length-1 ; i >= 0  ; i-=2){
@@ -89,7 +102,7 @@ public class Heap<E extends Comparable> {
     }
 
     public boolean isEmpty() {
-        if(elements.length==0){
+        if(this.elements.length==0){
             return true;
         }
         return false;

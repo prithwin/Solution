@@ -8,6 +8,15 @@ public class ComparableEdge implements Comparable {
     int to;
     int weight;
 
+    public ComparableEdge(int start, int end, int weight) {
+        this.from = start;
+        this.to = end;
+        this.weight = weight;
+    }
+    public ComparableEdge(){
+
+    }
+
     @Override
     public int compareTo(Object object) {
         ComparableEdge that = (ComparableEdge) object;
