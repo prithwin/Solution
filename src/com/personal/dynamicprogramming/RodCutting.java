@@ -56,10 +56,5 @@ public class RodCutting {
             return getMaxValue(Arrays.copyOfRange(values, 0, values.length - 1),rem);
         }
     }
-
-    public static void main(String[] args) {
-        int[] values = {1, 5, 8, 9, 10, 17, 17, 20};
-        System.out.print(new RodCutting().getMaxValue(values,8));
-    }
 }
 
