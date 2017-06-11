@@ -37,7 +37,7 @@ public class Heap<E extends Comparable> {
     }
 
     public void buildMaxHeap(){
-        for(int i = elements.length-1 ; i >= 0  ; i-=2){
+        for(int i = elements.length-1 ; i > 0  ; i-=2){
             int rootIndex = ((i+1)/2)-1;
             int leftChildIndex = i-1;
             int rightChildIndex = i;
@@ -59,7 +59,7 @@ public class Heap<E extends Comparable> {
     }
 
     public void buildMinHeap(){
-        for(int i = elements.length-1 ; i >= 0  ; i-=2){
+        for(int i = elements.length-1 ; i > 0  ; i-=2){
             int rootIndex = ((i+1)/2)-1;
             int leftChildIndex = i-1;
             int rightChildIndex = i;

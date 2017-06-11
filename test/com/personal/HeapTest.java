@@ -29,4 +29,20 @@ public class HeapTest {
         }
         System.out.println(sortedList);
     }
+
+    @Test public void testHeapFunctionalityWithTreeElements() {
+        Heap<ComparableNumber> heap = new Heap<>();
+        List<ComparableNumber> sortedList = new ArrayList<>();
+        ComparableNumber[] comparableNumbers = new ComparableNumber[4];
+        comparableNumbers[0] = new ComparableNumber(111);
+        comparableNumbers[1] = new ComparableNumber(5);
+        comparableNumbers[2] = new ComparableNumber(76);
+        comparableNumbers[3] = new ComparableNumber(98);
+        heap.elements = comparableNumbers;
+        while(!heap.isEmpty()){
+            heap.buildMaxHeap();
+            sortedList.add(heap.deleteMax());
+        }
+        System.out.println(sortedList);
+    }
 }

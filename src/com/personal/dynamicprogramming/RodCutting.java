@@ -3,6 +3,8 @@ package com.personal.dynamicprogramming;
 import com.personal.util.Mathematical;
 import com.personal.util.MatrixUtil;
 
+import java.util.Arrays;
+
 /**
  * Created by pr250155 on 5/3/17.
  * there is a rod n or 1 units long, what is the maximum price that can be obtained by cutting it.where the price of th
@@ -41,9 +43,23 @@ public class RodCutting {
         return solutionMatrix[valuesList.length-1][valuesList.length];
     }
 
+    public int getMaxValue(int[] values, int rem) {
+        if(rem == 0) return 0;
+        if(values.length == 0) return 0;
+        if(values.length <= rem) {
+            return Mathematical.maximum(
+                    getMaxValue(Arrays.copyOfRange(values, 0, values.length - 1), rem),
+                    values[values.length - 1] +
+                            getMaxValue(Arrays.copyOfRange(values, 0, values.length - 1), (rem - values.length))
+            );
+        } else {
+            return getMaxValue(Arrays.copyOfRange(values, 0, values.length - 1),rem);
+        }
+    }
+
     public static void main(String[] args) {
         int[] values = {1, 5, 8, 9, 10, 17, 17, 20};
-        System.out.print(new RodCutting().getMaxValue(values));
+        System.out.print(new RodCutting().getMaxValue(values,8));
     }
 }
 

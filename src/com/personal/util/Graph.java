@@ -139,6 +139,18 @@ public class Graph {
         return false;
     }
 
+    /**
+     * Kruskal's MST Algorithm implementation.
+     * The Classic Algorithm Can be explained as follows.
+     * SL = mergeSort(Es)
+     * DEFINE MST = _;
+     * for(E in Es) {
+     *     if(isAcyclic(MST + E)) {
+     *         MST.add(E);
+     *     }
+     * }
+     * @return A graph representing the minimum spanning Tree for this Graph(new Instance)
+     */
     public Graph getKruskalMST() {
         if (type.isDirected()) {
             throw new UnsupportedOperationException("Kruskal's Algorithm only works for undirected graphs");
@@ -183,6 +195,25 @@ public class Graph {
         return edgeList;
     }
 
+    /**
+     * An implementation of Prim's minimum Spanning Tree algorithm.
+     * The Classic algorithm can be described as follows:
+     * DEFINE reducableHeap RH;
+     * DEFINE edgeStore;
+     * INITIALIZE RH (n, INFINITY)
+     * while(!RH.empty) {
+     *     Node = RH.deleteMin();
+     *     for(Node Adjecent to Node) {
+     *         if(W(N-A) < RH.n.w) {
+     *             RH.reducingHeapify();
+     *             edgeStore.put(A,A-E);
+     *         }
+     *     }
+     * }
+     *
+     *
+     * @return Prim's Minimum Spanning Tree.
+     */
     public Graph getPrimsMST() {
         if (type.isDirected()) {
             throw new UnsupportedOperationException("Prims's Algorithm only works for undirected graphs");
