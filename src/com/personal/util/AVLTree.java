@@ -2,6 +2,12 @@ package com.personal.util;
 
 /**
  * Created by pr250155 on 4/20/17.
+ * Hi there, if you find this code online and decide to use it in production,
+ * please don't. It's only theoritically verified by me with sparse test cases.
+ * please feel free to test this code and add supplementary test case before putting
+ * this our there marked as production ready.
+ *
+ *
  */
 public class AVLTree extends BinarySearchTree {
     AVLTreeNode root;
