@@ -40,23 +40,23 @@ public class AVLTree extends BinarySearchTree {
             int balance = getNodeHeight(where.left) -  getNodeHeight(where.right);
 
             //LL case
-            if (balance > 1 && safeCompare(where,BalanceType.LL)) {
+            if (balance > 1 && isBalanceType(where,BalanceType.LL)) {
                 return rotateRight(where);
             }
 
             //LR case
-            if (balance > 1 && safeCompare(where,BalanceType.LR)) {
+            if (balance > 1 && isBalanceType(where,BalanceType.LR)) {
                 where.left = rotateLeft(where.left);
                 return rotateRight(where);
             }
 
             //RR Case
-            if (balance < -1 && safeCompare(where,BalanceType.RR)) {
+            if (balance < -1 && isBalanceType(where,BalanceType.RR)) {
                 return rotateLeft(where);
             }
 
             //RL CASE
-            if (balance < -1 && safeCompare(where,BalanceType.RL)) {
+            if (balance < -1 && isBalanceType(where,BalanceType.RL)) {
                 where.right = rotateRight(where.right);
                 return rotateLeft(where);
             }
@@ -64,7 +64,7 @@ public class AVLTree extends BinarySearchTree {
         }
     }
 
-    private boolean safeCompare(AVLTreeNode node, BalanceType balanceType) {
+    private boolean isBalanceType(AVLTreeNode node, BalanceType balanceType) {
         if(balanceType == BalanceType.LL) {
             if(node.left == null || node.left.left==null){
                 return false;
@@ -178,7 +178,7 @@ public class AVLTree extends BinarySearchTree {
 
     public void remove(AVLTreeNode node) {
         if(node.equals(this.root)){
-            AVLTreeNode phantom = new AVLTreeNode(0);
+            AVLTreeNode phantom = new AVLTreeNode(0,true);
             if(root.number.number > 0) {
                 phantom.right = root;
                 removeInternal(phantom, phantom.right,node);
@@ -195,8 +195,8 @@ public class AVLTree extends BinarySearchTree {
         }
     }
 
-    private void removeInternal(AVLTreeNode penultimate , AVLTreeNode ultimate , AVLTreeNode node) {
-        if(ultimate == null) return;
+    private AVLTreeNode removeInternal(AVLTreeNode penultimate , AVLTreeNode ultimate , AVLTreeNode node) {
+        if(ultimate == null) return ultimate;
         if(ultimate.equals(node)) {
             if(ultimate.left == null && ultimate.right == null) {
                 transplant(penultimate,ultimate , null);
@@ -211,24 +211,49 @@ public class AVLTree extends BinarySearchTree {
                 AVLTreeNode rLargest = ultimate.right;
                 AVLTreeNode rLargetp = penultimate.right;
                 ultimate.number = rLargest.number;
-                removeInternal(rLargetp,rLargest,new AVLTreeNode(rLargest.number.number));
+                return removeInternal(rLargetp,rLargest,new AVLTreeNode(rLargest.number.number));
             }
-            return;
+            return ultimate;
         }
         if(ultimate.left!=null && node.number.compareTo(ultimate.number) <= 0){
             if(penultimate.left!=null && node.number.compareTo(penultimate.number) <= 0) {
-                removeInternal(penultimate.left, ultimate.left, node);
+                return removeInternal(penultimate.left, ultimate.left, node);
             } else {
-                removeInternal(penultimate.right, ultimate.left, node);
+                return removeInternal(penultimate.right, ultimate.left, node);
             }
         }
         if(ultimate.right!=null && node.number.compareTo(ultimate.number) == 1){
             if(penultimate.right!=null && node.number.compareTo(penultimate.number) == 1) {
-                removeInternal(penultimate.right, ultimate.right, node);
+                return removeInternal(penultimate.right, ultimate.right, node);
             } else {
-                removeInternal(penultimate.left, ultimate.right, node);
+                return removeInternal(penultimate.left, ultimate.right, node);
             }
         }
+        ultimate.nodeHeight = 1 +  Mathematical.maximum(getNodeHeight(ultimate.left),getNodeHeight(ultimate.right));
+        int balance = getNodeHeight(ultimate.left) -  getNodeHeight(ultimate.right);
+
+        //LL case
+        if (balance > 1 && isBalanceType(ultimate,BalanceType.LL)) {
+            return rotateRight(ultimate);
+        }
+
+        //LR case
+        if (balance > 1 && isBalanceType(ultimate,BalanceType.LR)) {
+            ultimate.left = rotateLeft(ultimate.left);
+            return rotateRight(ultimate);
+        }
+
+        //RR Case
+        if (balance < -1 && isBalanceType(ultimate,BalanceType.RR)) {
+            return rotateLeft(ultimate);
+        }
+
+        //RL CASE
+        if (balance < -1 && isBalanceType(ultimate,BalanceType.RL)) {
+            ultimate.right = rotateRight(ultimate.right);
+            return rotateLeft(ultimate);
+        }
+        return ultimate;
     }
 
     private void transplant(AVLTreeNode penultimate, AVLTreeNode ultimate, AVLTreeNode replacement) {

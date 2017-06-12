@@ -35,22 +35,22 @@ public class BinarySearchTree extends BinaryTree implements Serializable{
         return temp.number.number;
     }
 
-    private void addBSTInternal(TreeNode currentRoot,TreeNode node) {
+    private TreeNode addBSTInternal(TreeNode currentRoot,TreeNode node) {
        if(currentRoot==null){
-          return;
+          return currentRoot;
        }
         if(currentRoot.left==null && node.number.compareTo(currentRoot.number)<=0){
             currentRoot.left = node;
-            return;
+            return currentRoot;
         }
         if(currentRoot.right==null && node.number.compareTo(currentRoot.number)==1){
             currentRoot.right = node;
-            return;
+            return currentRoot;
         }
         if(node.number.compareTo(currentRoot.number) == -1){
-            addBSTInternal(currentRoot.left,node);
+            return addBSTInternal(currentRoot.left,node);
         } else {
-            addBSTInternal(currentRoot.right,node);
+            return addBSTInternal(currentRoot.right,node);
         }
     }
 

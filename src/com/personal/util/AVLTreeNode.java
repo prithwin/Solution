@@ -9,11 +9,17 @@ public class AVLTreeNode extends TreeNode {
     AVLTreeNode left;
     AVLTreeNode right;
     int nodeHeight;
+    boolean phantom;
 
     public AVLTreeNode(int number) {
         super(number);
         this.number = new ComparableNumber(number);
+        this.phantom = false;
     }
 
-
+    public AVLTreeNode(int number,boolean isPhantom) {
+        super(number);
+        this.number = new ComparableNumber(number);
+        this.phantom = isPhantom;
+    }
 }
