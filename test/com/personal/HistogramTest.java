@@ -12,7 +12,34 @@ import org.testng.annotations.*;
 public class HistogramTest {
     @Test public void testHistogramFunctionality() {
         int[] histogram = {6, 2, 5, 4, 5, 1, 6};
-        System.out.println(new Histogram(histogram).getMaximumContinuousArea().area);
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,12);
     }
+    @Test public void testHistogramFunctionalitySC() {
+        int[] histogram = {4,4,5,4,2};
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,16);
+    }
+
+    @Test public void testHistogramFunctionality1() {
+        int[] histogram = {1,3,2,1,2};
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,5);
+    }
+
+    @Test public void testHistogramFunctionality2() {
+        int[] histogram = {1,1,2,3};
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,4);
+    }
+
+    //2, 1, 3, 5, 1, 3, 3
+
+    @Test public void testHistogramFunctionality3() {
+        int[] histogram = {2, 1, 3, 5, 1, 3, 3};
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,7);
+    }
+
+    @Test public void testHistogramFunctionality4() {
+        int[] histogram = {2, 1, 3, 5, 0, 3, 3};
+        assertEquals(new Histogram(histogram).getMaximumContinuousArea().area,6);
+    }
+
 }
 

@@ -19,28 +19,38 @@ public class Histogram {
     public HistogramData getMaximumContinuousArea(){
         HistogramData result = new HistogramData();
         StackADT stack = new StackADT(histogram.length);
-        for(int i = 0 ; i < histogram.length ; i++) {
-            if(stack.isEmpty() ||
-                    histogram[stack.peek()] <= histogram[i]) {
-                stack.push(i);
+        for(int i = 0 ; i < histogram.length ;) {
+            if (stack.isEmpty() || histogram[stack.peek()] <= histogram[i]) {
+                stack.push(i++);
             } else {
-                int c = 1;
-                while(!stack.isEmpty() && histogram[i]<(histogram[stack.peek()])) {
-                    int currentArea = c *  histogram[stack.pop()];
-                    if(currentArea > result.area) {
-                        result.area = currentArea;
-                    }
-                    c++;
+                int toIndex = stack.peek();
+                stack.pop();
+                int fromIndex = stack.isEmpty() ? i : i - stack.peek() - 1;
+                int area = histogram[toIndex] * (fromIndex);
+                if (area > result.area) {
+                    result.area = area;
+                    result.start = fromIndex;
+                    result.end = toIndex;
                 }
             }
         }
-        int c = 1;
-        while(!stack.isEmpty()) {
-             int currentArea = c * histogram[stack.pop()];
-             if(currentArea > result.area) {
-                 result.area = currentArea;
-             }
-             c++;
+        int i = histogram.length;
+        if(!stack.isEmpty()) {
+            //these are the elements that hung around the respective are they form can be simply compute witht heassumpi
+            //tion that I has reached the end and there is no breakage from this element to the end, and yes this if con
+            //dition is written here just to show that this details exist in the code and is a special condition that yo
+            //u woudl have to handle spearately.
+            while(!stack.isEmpty()) {
+                int toIndex = stack.peek();
+                stack.pop();
+                int fromIndex = stack.isEmpty() ? i : i - stack.peek() - 1;
+                int area = histogram[toIndex] * (fromIndex);
+                if (area > result.area) {
+                    result.area = area;
+                    result.start = fromIndex;
+                    result.end = toIndex;
+                }
+            }
         }
         return result;
     }
