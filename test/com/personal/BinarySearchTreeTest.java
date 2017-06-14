@@ -53,6 +53,10 @@ public class BinarySearchTreeTest {
         assertTrue(getSampleAvlTree().isTreeBST());
     }
 
+    @Test public void checkRedBlackTreeCreateCreation() {
+        assertTrue(getSampleRedBlackree().isTreeBST());
+    }
+
     @Test public void checkAVLDeletion() {
         AVLTree tree = getSampleAvlTree();
         tree.remove(new AVLTreeNode(36));
@@ -86,6 +90,30 @@ public class BinarySearchTreeTest {
         return avlTree;
     }
 
+    private RedBlackTree getSampleRedBlackree(){
+        RedBlackTree redBlackTree = new RedBlackTree();
+        redBlackTree.add(new RedBlackTreeNode(5));
+        redBlackTree.add(new RedBlackTreeNode(6));
+        redBlackTree.add(new RedBlackTreeNode(7));
+        redBlackTree.add(new RedBlackTreeNode(8));
+        redBlackTree.add(new RedBlackTreeNode(9));
+        redBlackTree.add(new RedBlackTreeNode(10));
+        redBlackTree.add(new RedBlackTreeNode(11));
+        redBlackTree.add(new RedBlackTreeNode(12));
+        redBlackTree.add(new RedBlackTreeNode(13));
+        redBlackTree.add(new RedBlackTreeNode(34));
+        redBlackTree.add(new RedBlackTreeNode(36));
+        redBlackTree.add(new RedBlackTreeNode(37));
+        redBlackTree.add(new RedBlackTreeNode(38));
+        redBlackTree.add(new RedBlackTreeNode(39));
+        redBlackTree.add(new RedBlackTreeNode(555));
+        redBlackTree.add(new RedBlackTreeNode(1));
+        redBlackTree.add(new RedBlackTreeNode(2));
+        redBlackTree.add(new RedBlackTreeNode(3));
+        redBlackTree.add(new RedBlackTreeNode(4));
+        redBlackTree.printRedBlackTree();
+        return redBlackTree;
+    }
     private BinarySearchTree getSampleBST() {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(new TreeNode(45));

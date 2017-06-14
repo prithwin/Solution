@@ -8,13 +8,28 @@ public class RedBlackTreeNode extends TreeNode{
     ComparableNumber number;
     RedBlackTreeNode left;
     RedBlackTreeNode right;
+    RedBlackTreeNode parent;
+    boolean isSentinel;
     boolean isBlack;
 
-    public RedBlackTreeNode(int number, boolean isBlack) {
+    public RedBlackTreeNode(int number) {
         super(number);
         this.number = new ComparableNumber(number);
         this.left = null;
         this.right = null;
-        this.isBlack = isBlack;
+        this.isBlack = false;
+        this.isSentinel = false;
+    }
+
+    public RedBlackTreeNode(boolean isSentinel){
+        super(0);
+        this.isBlack = true;
+        this.isSentinel = true;
+    }
+
+    @Override
+    public String toString() {
+        if(isSentinel) return "S";
+        return number +  ((isBlack)?" -> BLACK" : " -> RED");
     }
 }
