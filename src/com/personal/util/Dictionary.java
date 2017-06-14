@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
+ * A Trie based dictionary implementation
  * Created by pr250155 on 4/7/17.
  */
 public class Dictionary {
@@ -70,6 +71,8 @@ public class Dictionary {
         for(int i = 0 ; i < start.length() ; i++) {
             if(startingDictionary.chars.containsKey(start.charAt(i))) {
                 startingDictionary = startingDictionary.chars.get(start.charAt(i));
+            } else {
+                return new ArrayList<>();
             }
         }
         List<String> result = new ArrayList<>();
