@@ -8,6 +8,7 @@ public class AVLTreeNode extends TreeNode {
     ComparableNumber number;
     AVLTreeNode left;
     AVLTreeNode right;
+    AVLTreeNode parent;
     int nodeHeight;
     boolean phantom;
 
