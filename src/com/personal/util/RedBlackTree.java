@@ -4,6 +4,15 @@ package com.personal.util;
  * Created by prith on 12-06-2017.
  */
 public class RedBlackTree extends BinarySearchTree {
+    class SubTreeReference {
+        boolean rotated;
+        RedBlackTreeNode ref;
+
+        SubTreeReference(RedBlackTreeNode ref , boolean rotated) {
+            this.rotated = rotated;
+            this.ref = ref;
+        }
+    }
     RedBlackTreeNode root = new RedBlackTreeNode(true);
 
     enum BalanceType{
@@ -19,99 +28,96 @@ public class RedBlackTree extends BinarySearchTree {
             this.root = node;
         } else {
             node.isBlack =false;
-            RedBlackTreeNode temp = addInternal(root, node);
-            while (temp.parent!=null) temp = temp.parent;
-            root = temp;
+            root = addInternal(root, node).ref;
             root.parent = null;
             root.isBlack = true;
-            System.out.println("check");
         }
     }
 
-    public RedBlackTreeNode addInternal(RedBlackTreeNode where, RedBlackTreeNode what) {
-        if (where.left.isSentinel && what.number.compareTo(where.number) == -1) {
-            what.parent = where;
-            where.left = what;
+    public SubTreeReference addInternal(RedBlackTreeNode where, RedBlackTreeNode what) {
+        if(where.isSentinel) return new SubTreeReference(what,false);
 
-        } else if (where.right.isSentinel && what.number.compareTo(where.number) >= 0) {
-            what.parent = where;
-            where.right = what;
-        } else {
-            if (!where.left.isSentinel && what.number.compareTo(where.number) == -1) {
-                where = addInternal(where.left, what);
-            } else if (!where.right.isSentinel && what.number.compareTo(where.number) >= 0) {
-                where = addInternal(where.right, what);
+        boolean left = true;
+        if (what.number.compareTo(where.number) == -1) {
+            SubTreeReference subTreeReference = addInternal(where.left, what);
+            if(!subTreeReference.rotated) {
+                where.left = subTreeReference.ref;
+            } else {
+                where = subTreeReference.ref;
+            }
+            where.left.parent = where;
+        } else  {
+            SubTreeReference subTreeReference = addInternal(where.right, what);
+            if(!subTreeReference.rotated) {
+                where.right = subTreeReference.ref;
+            } else {
+                where = subTreeReference.ref;
+            }
+            where.right.parent = where;
+            left = false;
+        }
+        //Fix Up logic CLRS
+        //        <C>
+        //    {B}     {Dy}
+        //  a   {zA}  d  e
+        //       b g
+
+        RedBlackTreeNode z = left? where.left : where.right;
+        RedBlackTreeNode zP = z.parent;
+        if(zP.parent != null && (!z.isBlack && !zP.isBlack)) {
+            RedBlackTreeNode y = zP.getOtherSibling(zP);
+            if(!zP.isBlack && !y.isBlack) {
+                zP.isBlack = true;
+                y.isBlack = true;
+                zP.parent.isBlack = false;
+            } else {
+                if(y.isBlack) {
+                    if(isBalanceType(zP.parent,BalanceType.LL)){
+                        zP.parent = rotateLeft(zP.parent);
+                    } else if(isBalanceType(zP.parent,BalanceType.RR)){
+                        zP.parent = rotateLeft(zP.parent);
+                    } else if(isBalanceType(zP.parent,BalanceType.LR)) {
+                        zP = rotateLeft(zP);
+                        zP.parent = rotateRight(zP.parent);
+                    } else if(isBalanceType(zP.parent,BalanceType.RL)) {
+                        zP = rotateRight(zP);
+                        zP.parent = rotateLeft(zP.parent);
+                    }
+                    zP.isBlack = true;
+                    zP.left.isBlack = false;
+                    zP.right.isBlack = false;
+                    return new SubTreeReference(zP, true);
+                }
             }
         }
-        if(!where.isBlack && where.parent!=null) {
-            RedBlackTreeNode whereParent = where.parent;
-            RedBlackTreeNode whereSibling = new RedBlackTreeNode(true);
-            if(!where.left.isBlack) {
-                whereSibling = whereParent.right;
-            } else {
-                whereSibling = whereParent.left;
-            }
-            if(!whereSibling.isSentinel && whereParent.parent!=null) {
-                whereParent.isBlack = false;
-                where.isBlack = true;
-                whereSibling.isBlack = true;
-            } else {
-                if (isBalanceType(whereParent, BalanceType.LL)) {
-                    where.left = rotateRight(whereParent);
-                }
-
-                if (isBalanceType(whereParent, BalanceType.LR)) {
-                    whereParent.left = rotateLeft(whereParent.left);
-                    where.left = rotateRight(whereParent);
-                }
-
-                if (isBalanceType(whereParent,BalanceType.RR)) {
-                    where.right = rotateLeft(whereParent);
-                }
-
-                if (isBalanceType(whereParent, BalanceType.RL)) {
-                    whereParent.right = rotateRight(whereParent.right);
-                    where.right  = rotateLeft(whereParent);
-                }
-            }
-        }
-        return where;
+        return new SubTreeReference(where, false);
     }
 
     private boolean isBalanceType(RedBlackTreeNode node, BalanceType balanceType) {
         if(balanceType == BalanceType.LL) {
-            if(node.left.isSentinel || node.left.left.isSentinel){
-                return false;
-            }
-            if(node.left.number.compareTo(node.left.left.number) >= 0){
-                return true;
-            }
+           if(!node.left.isBlack && !node.left.left.isBlack){
+               return true;
+           }
         }
-        else if(balanceType == BalanceType.RR) {
-            if(node.right.isSentinel|| node.right.right.isSentinel){
-                return false;
-            }
-            if(node.right.number.compareTo(node.right.right.number) == -1){
+
+        if(balanceType == BalanceType.RR) {
+            if(!node.right.isBlack && !node.right.right.isBlack){
                 return true;
             }
         }
 
-        else if(balanceType == BalanceType.LR) {
-            if(node.left.isSentinel || node.left.right.isSentinel){
-                return false;
-            }
-            if(node.left.number.compareTo(node.left.right.number) == -1){
+        if(balanceType == BalanceType.LR) {
+            if(!node.left.isBlack && !node.left.right.isBlack){
                 return true;
             }
         }
-        else if(balanceType == BalanceType.RL) {
-            if(node.right.isSentinel || node.right.left.isSentinel){
-                return false;
-            }
-            if(node.right.number.compareTo(node.right.left.number) >= 0){
+
+        if(balanceType == BalanceType.RL) {
+            if(!node.right.isBlack && !node.right.left.isBlack){
                 return true;
             }
         }
+
         return false;
     }
 
@@ -129,10 +135,6 @@ public class RedBlackTree extends BinarySearchTree {
         root.parent = pivot;
         pivot.parent = godFather;
 
-        pivot.isBlack = false;
-        alpha.isBlack = true;
-        root.isBlack = true;
-
         return pivot;
     }
 
@@ -149,9 +151,6 @@ public class RedBlackTree extends BinarySearchTree {
         pivot.right = beta;
         root.parent = pivot;
         pivot.parent = godFather;
-        pivot.isBlack = false;
-        root.isBlack = true;
-        beta.isBlack = true;
 
         return pivot;
     }
