@@ -32,12 +32,4 @@ public class RedBlackTreeNode extends TreeNode{
         if(isSentinel) return "S";
         return number +  ((isBlack)?" -> BLACK" : " -> RED");
     }
-
-    public RedBlackTreeNode getOtherSibling(RedBlackTreeNode node) {
-        if(this.parent.left == node) {
-            return this.parent.right;
-        } else {
-            return this.parent.left;
-        }
-    }
 }

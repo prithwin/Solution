@@ -57,6 +57,13 @@ public class BinarySearchTreeTest {
         assertTrue(getSampleRedBlackree().isTreeBST());
     }
 
+    @Test public void testRedBlackTreeDeletion() {
+        RedBlackTree tree = getSampleRedBlackree();
+        tree.delete(new RedBlackTreeNode(36));
+        System.out.println();
+        tree.printRedBlackTree();
+    }
+
     @Test public void checkAVLDeletion() {
         AVLTree tree = getSampleAvlTree();
         tree.remove(new AVLTreeNode(36));

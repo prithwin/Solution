@@ -1,158 +1,139 @@
 package com.personal.util;
 
+import com.random.test.RecursiveTester;
+import com.sun.org.apache.regexp.internal.RE;
+
 /**
  * Created by prith on 12-06-2017.
  */
 public class RedBlackTree extends BinarySearchTree {
-    class SubTreeReference {
-        boolean rotated;
-        RedBlackTreeNode ref;
-
-        SubTreeReference(RedBlackTreeNode ref , boolean rotated) {
-            this.rotated = rotated;
-            this.ref = ref;
-        }
-    }
     RedBlackTreeNode root = new RedBlackTreeNode(true);
 
-    enum BalanceType{
-        LL,RR,LR,RL
+    enum BalanceType {
+        LL,LR,RR,RL
     }
 
-    public void add(RedBlackTreeNode node) {
-        node.left = new RedBlackTreeNode(true);
-        node.right = new RedBlackTreeNode(true);
-        if (root.isSentinel) {
-            node.isBlack = true;
-            node.isSentinel = false;
-            this.root = node;
-        } else {
-            node.isBlack =false;
-            root = addInternal(root, node).ref;
-            root.parent = null;
-            root.isBlack = true;
-        }
+    public void add(RedBlackTreeNode what){
+        what.left = new RedBlackTreeNode(true);
+        what.right = new RedBlackTreeNode(true);
+        root = add(root,what);
+        root.isBlack = true;
+        root.parent = null;
     }
 
-    public SubTreeReference addInternal(RedBlackTreeNode where, RedBlackTreeNode what) {
-        if(where.isSentinel) return new SubTreeReference(what,false);
-
-        boolean left = true;
-        if (what.number.compareTo(where.number) == -1) {
-            SubTreeReference subTreeReference = addInternal(where.left, what);
-            if(!subTreeReference.rotated) {
-                where.left = subTreeReference.ref;
-            } else {
-                where = subTreeReference.ref;
-            }
+    private RedBlackTreeNode add(RedBlackTreeNode where ,  RedBlackTreeNode what) {
+        if(where.isSentinel) return what;
+        if(what.number.compareTo(where.number) == -1) {
+            where.left = add(where.left,what);
             where.left.parent = where;
-        } else  {
-            SubTreeReference subTreeReference = addInternal(where.right, what);
-            if(!subTreeReference.rotated) {
-                where.right = subTreeReference.ref;
-            } else {
-                where = subTreeReference.ref;
-            }
+        } else if(what.number.compareTo(where.number) == 1) {
+            where.right = add(where.right,what);
             where.right.parent = where;
-            left = false;
+        } else {
+            where.number = what.number;
         }
-        //Fix Up logic CLRS
-        //        <C>
-        //    {B}     {Dy}
-        //  a   {zA}  d  e
-        //       b g
 
-        RedBlackTreeNode z = left? where.left : where.right;
-        RedBlackTreeNode zP = z.parent;
-        if(zP.parent != null && (!z.isBlack && !zP.isBlack)) {
-            RedBlackTreeNode y = zP.getOtherSibling(zP);
-            if(!zP.isBlack && !y.isBlack) {
-                zP.isBlack = true;
-                y.isBlack = true;
-                zP.parent.isBlack = false;
+        return balanceRB(where);
+    }
+
+    public void delete(RedBlackTreeNode what) {
+        root = delete(root, what);
+    }
+
+    private RedBlackTreeNode delete(RedBlackTreeNode where,RedBlackTreeNode what) {
+        if(what.number.compareTo(where.number) ==-1){
+            where.left = delete(where.left,what);
+        } else if(what.number.compareTo(where.number) == 1) {
+            where.right = delete(where.right,what);
+        } else {
+            if(where.left.isSentinel) {
+                return where.right;
+            } else if(where.right.isSentinel) {
+                return where.left;
             } else {
-                if(y.isBlack) {
-                    if(isBalanceType(zP.parent,BalanceType.LL)){
-                        zP.parent = rotateLeft(zP.parent);
-                    } else if(isBalanceType(zP.parent,BalanceType.RR)){
-                        zP.parent = rotateLeft(zP.parent);
-                    } else if(isBalanceType(zP.parent,BalanceType.LR)) {
-                        zP = rotateLeft(zP);
-                        zP.parent = rotateRight(zP.parent);
-                    } else if(isBalanceType(zP.parent,BalanceType.RL)) {
-                        zP = rotateRight(zP);
-                        zP.parent = rotateLeft(zP.parent);
-                    }
-                    zP.isBlack = true;
-                    zP.left.isBlack = false;
-                    zP.right.isBlack = false;
-                    return new SubTreeReference(zP, true);
+                RedBlackTreeNode temp = where;
+                where.number = min(temp.right).number;
+                where.left = temp.left;
+                where.right = deleteMin(temp.right);
+            }
+        }
+        return balanceRB(where);
+    }
+
+    private RedBlackTreeNode balanceRB(RedBlackTreeNode where) {
+        if(where.parent != null){
+            BalanceType balance = getBalanceType(where);
+            if(balance == BalanceType.LL || balance == BalanceType.LR) {
+                if(!where.right.isSentinel) {
+                    return flipColorsDown(where);
                 }
+                if(balance == BalanceType.LR) {
+                    where.left = rotateLeft(where.left);
+                }
+                where = rotateRight(where);
+            }
+            if(balance == BalanceType.RL || balance == BalanceType.RR) {
+                if(!where.left.isSentinel) {
+                    return flipColorsDown(where);
+                }
+                if(balance == BalanceType.RL) {
+                    where.right = rotateRight(where.right);
+                }
+                where = rotateLeft(where);
             }
         }
-        return new SubTreeReference(where, false);
+        return where;
     }
 
-    private boolean isBalanceType(RedBlackTreeNode node, BalanceType balanceType) {
-        if(balanceType == BalanceType.LL) {
-           if(!node.left.isBlack && !node.left.left.isBlack){
-               return true;
-           }
-        }
-
-        if(balanceType == BalanceType.RR) {
-            if(!node.right.isBlack && !node.right.right.isBlack){
-                return true;
-            }
-        }
-
-        if(balanceType == BalanceType.LR) {
-            if(!node.left.isBlack && !node.left.right.isBlack){
-                return true;
-            }
-        }
-
-        if(balanceType == BalanceType.RL) {
-            if(!node.right.isBlack && !node.right.left.isBlack){
-                return true;
-            }
-        }
-
-        return false;
+    private RedBlackTreeNode min(RedBlackTreeNode where) {
+        if(where.left.isSentinel) return where;
+        return min(where.left);
     }
+
+    private RedBlackTreeNode deleteMin(RedBlackTreeNode where) {
+        if(where.left.isSentinel) return where.right;
+        where.left = deleteMin(where.left);
+        return balanceRB(where);
+    }
+
 
     private RedBlackTreeNode rotateRight(RedBlackTreeNode root) {
-        RedBlackTreeNode godFather = root.parent;
         RedBlackTreeNode pivot = root.left;
         RedBlackTreeNode alpha = pivot.left;
         RedBlackTreeNode beta = pivot.right;
         RedBlackTreeNode gamma = root.right;
-
         root.left = beta;
-        root.right =  gamma;
+        root.right = gamma;
         pivot.left = alpha;
         pivot.right = root;
-        root.parent = pivot;
-        pivot.parent = godFather;
-
         return pivot;
     }
 
     private RedBlackTreeNode rotateLeft(RedBlackTreeNode root) {
-        RedBlackTreeNode godFather = root.parent;
         RedBlackTreeNode pivot = root.right;
-        RedBlackTreeNode alpha = pivot.left;
-        RedBlackTreeNode beta = pivot.right;
-        RedBlackTreeNode gamma = root.left;
-
-        root.left = gamma;
-        root.right =  alpha;
+        RedBlackTreeNode alpha = root.left;
+        RedBlackTreeNode beta = pivot.left;
+        RedBlackTreeNode gamma = pivot.right;
+        root.left = alpha;
+        root.right = beta;
         pivot.left = root;
-        pivot.right = beta;
-        root.parent = pivot;
-        pivot.parent = godFather;
-
+        pivot.right = gamma;
         return pivot;
+    }
+
+    private RedBlackTreeNode flipColorsDown(RedBlackTreeNode where) {
+        where.isBlack = false;
+        where.left.isBlack = true;
+        where.right.isBlack = true;
+        return where;
+    }
+
+    private BalanceType getBalanceType(RedBlackTreeNode where) {
+        if(!where.left.isBlack && !where.left.left.isBlack) return BalanceType.LL;
+        if(!where.left.isBlack && !where.left.right.isBlack) return BalanceType.LR;
+        if(!where.right.isBlack && !where.right.right.isBlack) return BalanceType.RR;
+        if(!where.right.isBlack && !where.right.left.isBlack) return BalanceType.RL;
+        return null;
     }
 
     public void printRedBlackTree(){
@@ -166,5 +147,4 @@ public class RedBlackTree extends BinarySearchTree {
         System.out.println(node.number+" -> "+((node.isBlack)?"Black":"Red"));
         printRedBlackTreeInOrder(node.right);
     }
-
 }
