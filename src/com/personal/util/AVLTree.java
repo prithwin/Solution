@@ -52,15 +52,14 @@ public class AVLTree extends BinarySearchTree {
     }
 
     /**
-     * root                 pivot
-     * /\                  /    \
-     * /  Gamma   ->      alpha   root
-     * pivot                        /  \
-     * /    \                      Beta Gamma
+     *      root                 pivot
+     *      /\                  /    \
+     *    /  Gamma   ->      alpha   root
+     *  pivot                        /  \
+     *  /    \                      Beta Gamma
      * alpha  beta
      */
     private AVLTreeNode rotateRight(AVLTreeNode root) {
-        System.out.println("rotating the tree right");
         AVLTreeNode pivot = root.left;
         AVLTreeNode alpha = pivot.left;
         AVLTreeNode beta = pivot.right;
@@ -78,12 +77,12 @@ public class AVLTree extends BinarySearchTree {
     }
 
     /**
-     * root                 pivot
-     * / \                  /    \
-     * /   \         ->    root   Beta
+     *   root                 pivot
+     *   / \                  /    \
+     *  /   \         ->    root   Beta
      * gamma  pivot          /  \
-     * /    \       Gamma alpha
-     * alpha  beta
+     *       /    \       Gamma alpha
+     *    alpha  beta
      */
     private AVLTreeNode rotateLeft(AVLTreeNode root) {
         AVLTreeNode pivot = root.right;
