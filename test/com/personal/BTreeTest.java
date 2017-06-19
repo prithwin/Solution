@@ -21,12 +21,20 @@ public class BTreeTest {
         bTree.add(new ComparableNumber(4));
         bTree.add(new ComparableNumber(5));
         System.out.println("");
-        bTree.add(new ComparableNumber(13));
+        bTree.add(new ComparableNumber(15));
         bTree.add(new ComparableNumber(21));
         bTree.add(new ComparableNumber(19));
         bTree.add(new ComparableNumber(9));
         bTree.add(new ComparableNumber(11));
         bTree.add(new ComparableNumber(12));
+        bTree.add(new ComparableNumber(13));
+        bTree.add(new ComparableNumber(22));
+        bTree.add(new ComparableNumber(23));
+        bTree.add(new ComparableNumber(24));
+        bTree.add(new ComparableNumber(3));
+        bTree.add(new ComparableNumber(2));
+        bTree.add(new ComparableNumber(1));
+
         System.out.println("test");
     }
 }

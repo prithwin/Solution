@@ -47,7 +47,15 @@ public class BTree {
                     }
                 }
             }
-            if(o!=null) {merge(where,o);return where;}
+            if(o!=null && where.n == degree - 1) {
+                addChildren(where,o);
+                BTreeNode ro =  split(where,o.keys[0]);
+                System.out.println();
+            }
+            if(o!=null) {
+                merge(where,o);
+                return where;
+            }
             return o;
         }
         //overflow condition  the array in half
@@ -65,20 +73,39 @@ public class BTree {
         if(whose.keys[0].compareTo(where.keys[0]) == -1) {
             updatedChildren[0] = whose.children[0];
             updatedChildren[1] = whose.children[1];
-            for (int i = 0,j = 2 ; i < where.c ; i++,j++){
+            for (int i = 1,j = 2 ; i < where.c ; i++,j++){
                 updatedChildren[j] = where.children[i];
             }
-        } else if(whose.keys[0].compareTo(where.keys[where.c-1]) == 1) {
+        } else if(whose.keys[0].compareTo(where.keys[where.n-1]) == 1) {
             int i = 0;
             for (; i < where.c ; i++){
                 updatedChildren[i] = where.children[i];
             }
-            updatedChildren[i++] = whose.children[0];
+            updatedChildren[i-1] = whose.children[0];
             updatedChildren[i] = whose.children[1];
         } else {
-
+            //find out the g and g+1 where the item would fit
+            int g = 0;
+            for(; g < where.n - 1 ; g++) {
+                if(whose.keys[0].compareTo(where.keys[g]) == 1
+                        && whose.keys[0].compareTo(where.keys[g+1]) == -1) {
+                    break;
+                }
+            }
+            //add keys from 0 to g-1 then add then add whose children and then add g+2 onwards;
+            int j=0;
+            for(int i = 0 ; i < g + 1 ; i++) {
+                updatedChildren[j++] = where.children[i];
+            }
+            updatedChildren[j] = whose.children[0];
+            updatedChildren[j+1] = whose.children[1];
+            j+=2;
+            for(int i = g+2 ; i < where.c ; i++) {
+                updatedChildren[j++] = where.children[i];
+            }
         }
-        where.c+=2;
+        where.children = updatedChildren;
+        where.c++;
     }
 
     private BTreeNode include(BTreeNode where, ComparableNumber what) {
