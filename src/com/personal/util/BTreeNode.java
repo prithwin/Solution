@@ -27,6 +27,7 @@ public class BTreeNode {
             this.children[j] = source.children[i];
             this.children[j + 1] = source.children[i + 1];
         }
+        this.c = 0;
     }
 
     public static boolean lessThan(BTreeNode source, ComparableNumber number) {
@@ -56,5 +57,13 @@ public class BTreeNode {
         this.children[i+1] = null;
         n--;
         return detached;
+    }
+
+    public void recountChildren() {
+        for(BTreeNode c : this.children){
+            if(c != null) {
+                this.c++;
+            }
+        }
     }
 }

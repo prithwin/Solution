@@ -34,7 +34,9 @@ public class BTreeTest {
         bTree.add(new ComparableNumber(3));
         bTree.add(new ComparableNumber(2));
         bTree.add(new ComparableNumber(1));
-
+        bTree.add(new ComparableNumber(455));
+        bTree.add(new ComparableNumber(456));
+        bTree.add(new ComparableNumber(457));
         System.out.println("test");
     }
 }

@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 /**
  * Created by prith on 15-06-2017.
+ * Implementation notes this is not production tested the only sequence of inserts
+ * that have been testes is this one.
  */
 public class BTree {
     BTreeNode root;
@@ -47,14 +49,12 @@ public class BTree {
                     }
                 }
             }
-            if(o!=null && where.n == degree - 1) {
-                addChildren(where,o);
-                BTreeNode ro =  split(where,o.keys[0]);
-                System.out.println();
+            if(o!=null &&  where.n == degree - 1) {
+                return split(where,o);
             }
             if(o!=null) {
                 merge(where,o);
-                return where;
+                return null;
             }
             return o;
         }
@@ -68,15 +68,15 @@ public class BTree {
     }
 
     private void addChildren(BTreeNode where, BTreeNode whose) {
-        //the element whose definately has exactly two cheildren as it is the result of a recent split opertaion
+        //the element whose definately has exactly two children as it is the result of a recent split opertaion
         BTreeNode[] updatedChildren = new BTreeNode[degree];
-        if(whose.keys[0].compareTo(where.keys[0]) == -1) {
+        if(whose.keys[0].compareTo(where.keys[0]) <= 0) {
             updatedChildren[0] = whose.children[0];
             updatedChildren[1] = whose.children[1];
             for (int i = 1,j = 2 ; i < where.c ; i++,j++){
                 updatedChildren[j] = where.children[i];
             }
-        } else if(whose.keys[0].compareTo(where.keys[where.n-1]) == 1) {
+        } else if(whose.keys[0].compareTo(where.keys[where.n-1]) >= 0 ) {
             int i = 0;
             for (; i < where.c ; i++){
                 updatedChildren[i] = where.children[i];
@@ -132,7 +132,17 @@ public class BTree {
         if(item == null) return new BTreeNode(degree);
         else return item;
     }
-
+    private BTreeNode split(BTreeNode where,BTreeNode o) {
+        BTreeNode oD = split(where,o.keys[0]);
+        if(o.keys[0].compareTo(oD.keys[0]) == -1){
+            //update required int the left Subtree of oD;
+            addChildren(oD.children[0],o);
+        } else {
+            //update required in the right subtree of oD;
+            addChildren(oD.children[1],o);
+        }
+        return oD;
+    }
     private BTreeNode split(BTreeNode where, ComparableNumber what) {
         int mid = ((degree - 1) / 2) - 1;
         BTreeNode o = new BTreeNode(degree);    //the overflow node
@@ -152,6 +162,8 @@ public class BTree {
         o.children[0] = left;
         o.children[1] = right;
         o.c+=2;
+        o.children[0].recountChildren();
+        o.children[1].recountChildren();
         return o;
     }
 }
