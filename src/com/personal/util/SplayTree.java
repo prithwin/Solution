@@ -20,7 +20,7 @@ public class SplayTree {
         }
         if(what < where.number.number) {
             where.left = add(where.left,what);
-        } else if(what < where.number.number) {
+        } else if(what > where.number.number) {
             where.right = add(where.right,what);
         } else {
             where.number.number = what;
@@ -130,10 +130,10 @@ public class SplayTree {
     }
 
     private SplayType getSplayType(TreeNode splay, int what) {
-        if(splay.left.left.number.number == what) return SplayType.LL;
-        if(splay.left.right.number.number == what) return SplayType.LR;
-        if(splay.right.right.number.number == what ) return SplayType.RR;
-        if(splay.right.left.number.number == what) return SplayType.RL;
+        if (splay.left.left.number.number == what) return SplayType.LL;
+        if (splay.left.right.number.number == what) return SplayType.LR;
+        if (splay.right.right.number.number == what) return SplayType.RR;
+        if (splay.right.left.number.number == what) return SplayType.RL;
         return null;
     }
 }

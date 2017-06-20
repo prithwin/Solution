@@ -140,4 +140,28 @@ public class BinarySearchTreeTest {
         bst.balanceBST();
         return bst;
     }
+    @Test public void testSplay() {
+        SplayTree st = getSplayBST();
+        st.search(23);
+        System.out.println();
+    }
+
+    private SplayTree getSplayBST() {
+        SplayTree bst = new SplayTree();
+        bst.add(45);
+        bst.add(50);
+        bst.add(443);
+        bst.add(4);
+        bst.add(1);
+        bst.add(13);
+        bst.add(23);
+        bst.add(33);
+        bst.add(67);
+        bst.add(899);
+        bst.add(999);
+        bst.add(7);
+        bst.add(677);
+        bst.add(4534);
+        return bst;
+    }
 }
