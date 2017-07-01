@@ -7,7 +7,7 @@ A1: *it separates task submittion from task execution,letting you control some a
     *Thread creation is an expensive process and its managed much better within the executors.
     *you can use Callables which return a value.
     *you can use timed executors.
-    *you can use completion service which can be used with a batch of classes.
+    *you can use ExecuterCompletionService which can be used with a batch of classes.
 ************************************************************************************************************************
 Q2. Can an overloaded method specify a different return type.
 A2. the overloaded method must have exactly the same signature, it can return a subclass of the return type, this Rule
@@ -377,7 +377,7 @@ Q54:
 * refresher about TCP UDP and Socket programming in general.
 * microservices
 * advantges of having session management in HTTP.
-*how does memcache work.
+* how does memcache work.
 * what types of cache are available and what are the types of cache you can apply to the pinrest website.
 * Serialization of a class with a non serializable member.
 * how do you do validation in spring web services
