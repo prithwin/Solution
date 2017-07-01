@@ -13,12 +13,8 @@ public class KnightsTourTest {
         new KnightsTour().beginTour();
     }
 
-    @Test public void starTour6() {
+    @Test(enabled = true) public void starTour6() {
         KnightsTour.setBoardSize(6);
         new KnightsTour().beginTour();
-    }
-
-    @Test public void testInfiniteLoops(){
-        while(true){}
     }
 }

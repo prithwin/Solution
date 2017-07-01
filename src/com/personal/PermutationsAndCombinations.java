@@ -12,12 +12,38 @@ public class PermutationsAndCombinations<E> {
 
     private final static String BLANK = "";
 
+    /**
+     * magical method that computes ncr.
+     * @param items the list of items
+     * @param size the size of the items.
+     * @return a set of unite items that contains all combinations of r size in the above list
+     */
     public Set<String> C(List<E> items, int size) {
         Set<String> result = new HashSet<>();
         nCr(BLANK,items,size,result);
         return result;
     }
 
+    /**
+     * The algorithm can be summarized as shown below.
+     * nCr(L , V, R) {
+     *     if(R > V.size) return -- combination not possible
+     *     if(V.size == 0) return -- such a combination not possible.
+     *
+     *     if(R==V.size) {
+     *         if(L is BLANK) {
+     *             sout V;
+     *         } else {
+     *             sout L+V;
+     *         }
+     *     } else {
+     *         for(V[i] in V) {
+     *             nCr(V[i] , V-(V[i]) , r - 1);
+     *             nCr( BLANK , V-(V[i]) , r);
+     *         }
+     *     }
+     * }
+     */
     private void nCr(String lead, List<E> items, int size, Set<String> result) {
         if(size > items.size()) return;
 
@@ -29,7 +55,7 @@ public class PermutationsAndCombinations<E> {
                 stringBuilder.append(item.toString());
             }
             result.add(stringBuilder.toString());
-        } else if(items.size() == size - 1 && !lead.equals(BLANK)) {
+        } else if(items.size() == size - 1  && !lead.equals(BLANK)) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(lead);
             for(E item : items) {
@@ -39,7 +65,7 @@ public class PermutationsAndCombinations<E> {
         } else {
             for(int i = 0 ; i < items.size() ; i++) {
                 List<E> remainderList = getListExcluding(items, i);
-                nCr(items.get(i).toString(),remainderList,size,result);
+                nCr(items.get(i).toString(),remainderList,size ,result);
                 nCr(BLANK,remainderList,size,result);
             }
         }

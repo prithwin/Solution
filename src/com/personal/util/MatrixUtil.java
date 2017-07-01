@@ -20,6 +20,43 @@ public class MatrixUtil {
         System.out.println();
     }
 
+    public static void spiralPrint(int[][] matrix) {
+        for(int i = 0 ; i < matrix.length ; i++) {
+            for(int j = 0 ; j < matrix[i].length ; j++) {
+                if(i %2 == 0) {
+                    System.out.print(matrix[i][j]);
+                } else {
+                    System.out.print(matrix[i][matrix[i].length - j - 1]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * 1
+     * 23
+     * 456
+     * 78910
+     */
+    public static void printTreeNumber(boolean nSquare) {
+        if(nSquare) {
+            int s = 3;
+            int n = 1;
+            for (int number = 1; number <= 10; ) {
+                for (int j = 0; j < n; j++) {
+                    System.out.printf(" %d ", number++);
+                }
+                for (int k = 0; k < s; k++) {
+                    System.out.print("   ");
+                }
+                s--;
+                n++;
+                System.out.println();
+            }
+        }
+    }
+
     public static void print2dMatrix(int[][] matrix,List<FixedPoint> fixedPoints){
         System.out.println();
         for(int i = 0; i< matrix.length ; i++){
