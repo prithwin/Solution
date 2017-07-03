@@ -15,7 +15,7 @@ import java.io.*;
  * Created by prith on 10-06-2017.
  */
 public class DictionaryTester {
-    @Test public void testAddFirst500words() throws IOException {
+    @Test(enabled = false) public void testAddFirst500words() throws IOException {
         FileInputStream fileInputStream = new FileInputStream(new File("./words.txt"));
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

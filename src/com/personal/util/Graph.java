@@ -1,5 +1,6 @@
 package com.personal.util;
 
+import javax.xml.soap.Node;
 import java.util.*;
 import java.util.LinkedList;
 
@@ -198,6 +199,7 @@ public class Graph {
     /**
      * An implementation of Prim's minimum Spanning Tree algorithm.
      * The Classic algorithm can be described as follows:
+     *
      * DEFINE reducableHeap RH;
      * DEFINE edgeStore;
      * INITIALIZE RH (n, INFINITY)
@@ -253,5 +255,76 @@ public class Graph {
         nodeDistances.get(0).weight = 0;
         edgeMap.put(nodeDistances.get(0).node, new ComparableEdge(0, 0, 0));
         return nodeDistances;
+    }
+
+    public List<NodeDistance> getListOfNodeWeights(int s) {
+        List<NodeDistance> result = new ArrayList<>();
+        graphNodes.keySet().stream().forEach(k -> {
+            if(k!=s) {
+                result.add(new NodeDistance(k,Integer.MAX_VALUE));
+            } else {
+                result.add(new NodeDistance(k,0));
+            }
+        });
+        return result;
+    }
+
+    /**
+     * gets the graph representing Dijkstra's shortest path in a connected graph
+     * @param startNode some start node
+     * @return the graph representation of the shortest path.
+     */
+    public Graph getDijkstrasShortestPath(String startNode,String endNode) {
+        int s = getNodeIndex(startNode);
+        int e = getNodeIndex(endNode);
+
+        UpdatableHeap<NodeDistance> minHeap = new UpdatableHeap<>(getListOfNodeWeights(s));
+        Map<Integer , Integer> distanceMap = new HashMap<>();
+        Map<Integer , Integer> pathMap = new HashMap<>();
+        pathMap.put(s,null);
+
+        while(!minHeap.isEmpty()) {
+            NodeDistance min = minHeap.deleteMin();
+            int from = s;
+            s = min.node;
+            List<NodeDistance> adjacentNodes = getAdjacentNodes(s);
+            distanceMap.put(min.node , min.weight);
+            pathMap.put(min.node, from);
+
+            for(NodeDistance n : adjacentNodes) {
+                if(minHeap.reduceKey(n ,distanceMap.get(min.node) + n.weight)) {
+                }
+            }
+        }
+        System.out.println(pathMap);
+        return null;
+    }
+
+    private List<NodeDistance> getAdjacentNodes(int from) {
+        List<NodeDistance> response = new ArrayList<>();
+        for(int i = 0 ; i < adjecencyMatrix.length ; i++) {
+            if(adjecencyMatrix[from][i] != 0) {
+                response.add(new NodeDistance(i,adjecencyMatrix[from][i]));
+            }
+        }
+        return response;
+    }
+
+    private int getNodeIndex(String node) {
+        for(int k : graphNodes.keySet()) {
+            if(graphNodes.get(k).equals(node)) {
+                return k;
+            }
+        }
+        return 0;
+    }
+
+    public Map<Integer,Integer> getDistancesMap(int startIndex) {
+        Map<Integer, Integer> distancesMap = new HashMap<>();
+        for(int k : graphNodes.keySet()) {
+            distancesMap.put(k, Integer.MAX_VALUE);
+        }
+        distancesMap.put(startIndex,0);
+        return distancesMap;
     }
 }

@@ -12,6 +12,29 @@ import java.util.Map;
  * Created by pr250155 on 4/30/17.
  */
 public class GraphTest {
+    @Test
+    public void testGetDijkstrasShortestPath() throws Exception {
+        Map<Integer,GraphNode> nodeMap = new HashMap<>();
+        nodeMap.put(0,new GraphNode("0"));
+        nodeMap.put(1,new GraphNode("1"));
+        nodeMap.put(2,new GraphNode("2"));
+        nodeMap.put(3,new GraphNode("3"));
+        nodeMap.put(4,new GraphNode("4"));
+        nodeMap.put(5,new GraphNode("5"));
+
+        Graph graph = new Graph(nodeMap, GraphType.UNDIRECTED_MATRIX);
+
+        graph.addWeightedEdge(0,1,5);
+        graph.addWeightedEdge(0,4,2);
+        graph.addWeightedEdge(0,3,9);
+        graph.addWeightedEdge(1,2,2);
+        graph.addWeightedEdge(2,3,3);
+        graph.addWeightedEdge(3,5,2);
+        graph.addWeightedEdge(4,5,3);
+
+        graph.getDijkstrasShortestPath("0","3");
+    }
+
     @Test public void testDFS() {
         Map<Integer,GraphNode> nodeMap = new HashMap<>();
 
