@@ -29,6 +29,24 @@ public class LinkedListTest {
         assertFalse(target.isPalindrome());
     }
 
+    @Test public void testInPlaceReverse() {
+        int[] array = {1,2,7,3,7,8,1};
+        LinkedList target = new LinkedList(array);
+        target.printList();
+        target.reverseInPlace();
+        System.out.println("--------printing the list after the modification-------");
+        target.printList();
+    }
+
+    @Test public void testHalfListOverwrite() {
+        int[] array = {1,2,7,3,7,8,1};
+        LinkedList target = new LinkedList(array);
+        target.printList();
+        target.modifyHalfList();
+        System.out.println("--------Printing the list after the modification--------");
+        target.printList();
+    }
+
     @Test public void mlListFlattenTest() {
         MLLinkedList list = new MLLinkedList();
     }

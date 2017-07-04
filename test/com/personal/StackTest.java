@@ -11,7 +11,7 @@ import static org.testng.Assert.*;
  * Created by pr250155 on 5/21/17.
  */
 public class StackTest {
-    @Test @ExpectedExceptions(EmptyStackException.class) public void testStack() {
+    @Test(expectedExceptions = EmptyStackException.class) public void testStack() {
         StackADT stack = new StackADT(3);
         for(int i = 1 ; i < 100 ; i++) {
             stack.push(i);

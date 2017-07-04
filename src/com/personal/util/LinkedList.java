@@ -1,5 +1,7 @@
 package com.personal.util;
 
+import com.random.test.ClonableTest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -7,7 +9,8 @@ import java.util.Stack;
 /**
  * Created by prajeev on 9/8/16.
  */
-public class LinkedList {
+public class LinkedList implements Cloneable {
+
     public ListNode head;
     int length;
 
@@ -53,6 +56,68 @@ public class LinkedList {
         }
     }
 
+    /**
+     * supposedly asked in an amazon interview.
+     */
+    public void reverseInPlace() {
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode next;
+        while(curr !=null) {
+            next = curr.next;
+            curr.next=prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
+    /**
+     * modifies half the list as asked in the amazon interview.
+     * assuming that the list is always odd length.
+     * fuck the even length linked lists
+     */
+    public void modifyHalfList() {
+        LinkedList clone = (LinkedList) clone();
+
+        ListNode latterHalf = clone.getMidPoint().next;
+        ListNode reversed = LinkedList.reverseFromNode(latterHalf);
+        ListNode temp = reversed;
+        ListNode curr = head;
+        while(temp!=null) {
+            curr.val = curr.val + temp.val;
+            curr = curr.next;
+            temp = temp.next;
+        }
+    }
+
+    public static ListNode reverseFromNode(ListNode fromNode) {
+        ListNode curr = fromNode;
+        ListNode prev = null;
+        ListNode next;
+        while(curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    /**
+     * returns the mid point of the list
+     * @return the midpoint of the list.
+     */
+    public ListNode getMidPoint() {
+
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
     public static void printInReverese(ListNode node){
         if(node==null)
             return;
@@ -255,6 +320,17 @@ public class LinkedList {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    @Override
+    protected Object clone() {
+        LinkedList newList = new LinkedList();
+        ListNode temp = head;
+        while(temp != null) {
+            newList.add(temp.val);
+            temp = temp.next;
+        }
+        return newList;
     }
 }
 
