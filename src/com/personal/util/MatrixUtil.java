@@ -20,6 +20,18 @@ public class MatrixUtil {
         System.out.println();
     }
 
+    public static void print2dMatrix(char[][] matrix){
+        System.out.println();
+        for(int i = 0; i< matrix.length ; i++){
+            for (int j = 0 ; j < matrix[i].length ; j++){
+                System.out.printf(" %c  ",matrix[i][j]);
+            }
+            System.out.println();
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public static void spiralPrint(int[][] matrix) {
         for(int i = 0 ; i < matrix.length ; i++) {
             for(int j = 0 ; j < matrix[i].length ; j++) {
