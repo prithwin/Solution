@@ -78,6 +78,35 @@ public class BinaryTree implements Serializable {
         super();
     }
 
+    public void add(TreeNode item, Integer key , boolean left) {
+        addInternal(root,item,key,left);
+    }
+
+    private void addInternal(TreeNode node , TreeNode item , Integer key , boolean left) {
+        if(node.entry.key == key) {
+            if(left) {
+                if(node.left != null) {
+                    item.left = node.left;
+                }
+                node.left = item;
+            } else {
+                if(node.right != null) {
+                    item.right = node.right;
+                }
+                node.right = item;
+            }
+            node.number = new ComparableNumber(item.entry.value);
+            return;
+        }
+        if(node.left != null) {
+            addInternal(node.left , item,key,left);
+        }
+
+        if(node.right != null) {
+            addInternal(node.right , item,key,left);
+        }
+    }
+
     /**
     H(n){
         if n is NULL;

@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class TreeNode implements Serializable{
     public ComparableNumber number;
+    public Entry<Integer, Integer> entry;
     public String data;
     public TreeNode left;
     public TreeNode right;
