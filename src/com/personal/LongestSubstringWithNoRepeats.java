@@ -26,6 +26,25 @@ public class LongestSubstringWithNoRepeats {
         return longestStringObserved;
     }
 
+    public int lengthOfLongestSubstring(String target) {
+      if(target.length() <= 1) return target.length();
+
+      Map<Character , Integer> registry = new HashMap<>();
+      int start = 0 , end = 0 ;
+      int max = 0;
+
+      while(end < target.length()) {
+          if(registry.containsKey(target.charAt(end))) {
+              start = Math.max(start, registry.get(target.charAt(end)) + 1);
+          }
+          registry.put(target.charAt(end), end);
+          max = Math.max(max , end - start + 1);
+          end++;
+      }
+      return max;
+
+    }
+
     private boolean shouldReset(char c,Map<Character,Integer> registery) {
         if(registery.containsKey(c)){
             return true;
@@ -36,6 +55,6 @@ public class LongestSubstringWithNoRepeats {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LongestSubstringWithNoRepeats().longestSubstringWithNoRepeats("GEEKSFORGEEKS"));
+        System.out.println(new LongestSubstringWithNoRepeats().lengthOfLongestSubstring("abcabcbb"));
     }
 }

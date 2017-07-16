@@ -25,10 +25,6 @@ public class KFrequentWords {
     private static void leaderBoardTally(Map<String, Integer> podium, String word, int currentCount) {
         if(podium.size() == 3){
             //podium we have to compare and replace
-            if(podium.containsKey(word)){
-                podium.put(word,currentCount);
-                return;
-            }
             String lesser = "";
             for(String leader : podium.keySet()){
                 if(podium.get(leader) < currentCount){

@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class ParenthesesGeneratorTest {
     @Test public void testParenthesesGenerator() {
-         List<String> result = new ParenthesisGenerator().generate(3);
+         List<String> result = new ParenthesisGenerator().generateParenthesis(3);
          result.stream().forEach(System.out::println);
     }
 }

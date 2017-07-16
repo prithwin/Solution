@@ -18,27 +18,20 @@ import java.util.List;
  */
 public class ParenthesisGenerator {
 
-    public List<String> generate(int n) {
-        List<String> result = new ArrayList<String>();
-        realPermute("",n,n,result);
-        return result;
-    }
+   public List<String> generateParenthesis(int n) {
+       List<String> response = new ArrayList<>();
+       generate("",n,n,response);
+       return response;
+   }
 
-    private void realPermute(String set, int start, int end, List<String> result) {
-        if(start > end)
-            return;
-
-        if(start == 0 && end == 0){
-            result.add(set);
-            return;
+   private void generate(String curr , int st, int en , List<String> response) {
+       if(st > en) return;
+        if(st ==0 && en ==0) {
+            response.add(curr);
         }
+        if(st > 0) generate(curr + "(" , st - 1 , en, response);
+        if(en > 0) generate(curr + ")" , st , en - 1 ,response);
+   }
 
-        if(start > 0 ){
-            realPermute(set+"(",start-1,end,result);
-        }
-        if(end > 0) {
-            realPermute(set+")",start,end-1,result);
-        }
 
-    }
 }
