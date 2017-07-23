@@ -19,18 +19,18 @@ package com.personal;
  */
 public class ArrayProduct {
 
-    public int[] computeProductArrayShort(int[] nums) {
-        int[] result = new int[nums.length];
+    public int[] computeProductArrayShort(int[] t) {
+        int[] a = new int[t.length];
         int temp = 1;
-        for (int i = 0; i < nums.length; i++) {
-            result[i] = temp;
-            temp = temp*nums[i];
+        for (int i = 0; i < t.length; i++) {
+            a[i] = temp;
+            temp = temp*t[i];
         }
         temp = 1;
-        for (int i = nums.length-1; i >= 0 ; i--) {
-            result[i] *= temp;
-            temp = temp*nums[i];
+        for (int i = t.length-1; i >= 0 ; i--) {
+            a[i] *= temp;
+            temp = temp*t[i];
         }
-        return result;
+        return a;
     }
 }
