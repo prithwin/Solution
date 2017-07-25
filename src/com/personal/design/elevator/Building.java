@@ -26,6 +26,7 @@ public class Building {
         System.out.println("jackass presses 28");
         building.elevator1.giveCommand(28);
         sleep(8000);
+        System.out.println("jackass presses 2");
         building.elevator1.giveCommand(2);
         sleep(8000);
         sleep(8000);
