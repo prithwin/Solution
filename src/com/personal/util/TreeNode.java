@@ -41,4 +41,13 @@ public class TreeNode implements Serializable{
         else
             return data;
     }
+
+    public static TreeNode merge(TreeNode thiz, TreeNode that) {
+        if(thiz == null) return that;
+        if(that == null) return thiz;
+        TreeNode node = new TreeNode(thiz.number.number + that.number.number);
+        node.left = merge(thiz.left , that.left);
+        node.right = merge(thiz.right , that.right);
+        return node;
+    }
 }

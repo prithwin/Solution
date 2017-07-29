@@ -326,20 +326,20 @@ public class BinaryTree implements Serializable {
     }
 
     private boolean isTreeBSTInternal(TreeNode node) {
-        if(node == null || (node.left==null && node.right==null)){
+        if (node == null || (node.left == null && node.right == null)) {
             return true;
         }
-        if(node.left == null && node.right.number.compareTo(node.number) ==-1){
+        if (node.left == null && node.right.number.compareTo(node.number) == -1) {
             return false;
         }
-        if(node.right == null && node.left.number.compareTo(node.number) == 1) {
+        if (node.right == null && node.left.number.compareTo(node.number) == 1) {
             return false;
         }
-        if(node.left!=null && node.right!=null){
-            if(node.left.number.compareTo(node.number)==1) {
+        if (node.left != null && node.right != null) {
+            if (node.left.number.compareTo(node.number) == 1) {
                 return false;
             }
-            if(node.right.number.compareTo(node.number) ==-1) {
+            if (node.right.number.compareTo(node.number) == -1) {
                 return false;
             }
         }
@@ -837,5 +837,11 @@ public class BinaryTree implements Serializable {
             result[j] = inOrder[i];
         }
         return result;
+    }
+
+    public static BinaryTree merge(BinaryTree thiz , BinaryTree that) {
+        BinaryTree response = new BinaryTree();
+        response.root = TreeNode.merge(thiz.root , that.root);
+        return response;
     }
 }

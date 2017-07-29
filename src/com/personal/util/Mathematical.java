@@ -79,4 +79,18 @@ public class Mathematical {
             return thiz;
         return that;
     }
+
+    public int findComplement(int num) {
+        String rep = Integer.toBinaryString(num);
+        String com = "";
+        for(int i = 0 ; i < rep.length() ; i++) {
+            if(rep.charAt(i) == '1') {
+                com = "0" + com;
+            } else {
+                com = "1" + com;
+            }
+        }
+        return Integer.parseInt(com,2);
+    }
+
 }

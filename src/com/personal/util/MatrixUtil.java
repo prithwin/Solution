@@ -3,6 +3,7 @@ package com.personal.util;
 import com.personal.SudoKuSolver;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by pr250155 on 4/10/17.
@@ -43,6 +44,45 @@ public class MatrixUtil {
             }
             System.out.println();
         }
+    }
+
+    /**
+     *  [i][j]...........[j][i - N - 1]
+     *    .                      .
+     *    .                      .
+     *    .                      .
+     *  [j - M - 1][i]...[i - M - 1][j - N - 1]
+     *
+     * @param matrix
+     * @return
+     */
+    public static List<Integer> conchPrint(int[][] matrix ) {
+        int M = matrix.length;
+        int N = 0;
+        if(matrix.length >0)
+            N = matrix[0].length;
+        List<Integer> response = new ArrayList<>();
+
+        for(int i = 0 ; i < M / 2 ; i++) {
+            for(int j = i ; j < N - i - 1 ;j++) {
+               response.add(matrix[i][j]);
+            }
+
+            for(int j = i ; j < N - i - 1 ;j++) {
+                response.add(matrix[j][M - i - 1]);
+            }
+
+            for(int j = i ; j < N - i - 1 ;j++) {
+                response.add(matrix[N - i - 1][M - j - 1]);
+            }
+
+            for(int j = i ; j < N - i - 1 ;j++) {
+                response.add(matrix[N - j - 1][i]);
+            }
+
+
+        }
+        return response;
     }
 
     /**

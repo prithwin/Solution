@@ -28,4 +28,8 @@ public class MathematicalTest {
         }
     }
 
+    @Test public void testComplement() {
+        System.out.println(new Mathematical().findComplement(7));
+    }
+
 }
