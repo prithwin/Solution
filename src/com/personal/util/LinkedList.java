@@ -322,6 +322,33 @@ public class LinkedList implements Cloneable {
         return slow;
     }
 
+    public void reverseInBlocks(int k) {
+        Stack<ListNode> stack = new Stack<>();
+        ListNode temp = head;
+        ListNode result = null;
+        while(temp!=null) {
+            int stackedItems = 0 ;
+            while(stackedItems < k) {
+                stack.push(temp);
+                stackedItems++;
+                temp = temp.next;
+                if(temp == null) {
+                    break;
+                }
+            }
+            while(!stack.isEmpty()) {
+                ListNode item = stack.pop();
+                if(result == null) {
+                    result = new ListNode(item.val);
+                    head = result;
+                } else {
+                    result.next = new ListNode(item.val);
+                    result = result.next;
+                }
+            }
+        }
+    }
+
     @Override
     protected Object clone() {
         LinkedList newList = new LinkedList();

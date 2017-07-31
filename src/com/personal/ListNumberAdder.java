@@ -1,5 +1,7 @@
 package com.personal;
 
+import com.personal.util.ListNode;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,4 +43,76 @@ public class ListNumberAdder {
         }
         return sum;
     }
+
+    public int addTwoNumbers(ListNode l1, ListNode l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2);
+        int radix = 1;
+        int total = 0;
+        int reminder = 0;
+        while(l1 != null && l2!=null) {
+            int sum = reminder;
+            if(l1!=null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if(l2!=null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            if(sum >= 10) {sum = sum % 10 ;reminder = 1;}
+            else reminder = 0;
+            sum *= radix;
+            total+=sum;
+            radix*=10;
+
+        }
+        return total;
+    }
+
+    public ListNode addTwoNumbersL(ListNode l1, ListNode l2) {
+        ListNode response = null;
+        ListNode returnHead = null;
+        int reminder = 0;
+        while(l1 != null || l2!=null || reminder == 1) {
+            int sum = reminder;
+            if(l1!=null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if(l2!=null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            if(sum >= 10) {sum = sum % 10 ;reminder = 1;}
+            else reminder = 0;
+            if(returnHead == null) {
+                returnHead = new ListNode(sum);
+                response = returnHead;
+            } else {
+                response.next = new ListNode(sum);
+                response = response.next;
+            }
+        }
+        return returnHead;
+    }
+
+    private ListNode reverseList(ListNode list) {
+        if(list == null) return list;
+        ListNode prev = null;
+        ListNode curr = list;
+        ListNode next = curr.next;
+
+        while(next != null) {
+            ListNode future = next.next;
+            curr.next = prev;
+            next.next = curr;
+
+            prev = curr;
+            curr = next;
+            next = future;
+        }
+        return curr;
+    }
+
 }

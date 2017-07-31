@@ -16,4 +16,11 @@ public class ListNode {
         ListNode otherNode = (ListNode) obj;
         return this.val==((ListNode) obj).val;
     }
+
+    @Override
+    public String toString() {
+        LinkedList toList = new LinkedList();
+        toList.head = this;
+        return toList.toString();
+    }
 }

@@ -38,6 +38,15 @@ public class LinkedListTest {
         target.printList();
     }
 
+    @Test public void testInPlaceReverseinKblocks() {
+        int[] array = {1,2,7,3,7,8,1,6,34,2,1,23,5,67,1,4,7,9,31,3,76,3};
+        LinkedList target = new LinkedList(array);
+        target.printList();
+        target.reverseInBlocks(3);
+        System.out.println("--------printing the list after the modification-------");
+        target.printList();
+    }
+
     @Test public void testHalfListOverwrite() {
         int[] array = {1,2,7,3,7,8,1};
         LinkedList target = new LinkedList(array);
