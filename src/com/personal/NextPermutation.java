@@ -15,27 +15,41 @@ import java.util.Map;
  */
 public class NextPermutation {
 
-    public void nextPermutation(int[] nums) {
-        int rp = 0;
-        for(int i = nums.length - 1 ; i >=0 ; i--) {
-            if(nums[i-1] < nums[i]) {
-                rp = i ;
-                int pivot =  i - 1;
-                for(int j = nums.length - 1 ; j <=pivot ; j--) {
-                    if(nums[j] >= nums[pivot]) {
-                        int temp = nums[pivot];
-                        nums[pivot] = nums[j];
-                        nums[j] = temp;
-                        break;
-                    }
-                }
-                break;
-            }
+    public void nextPermutation(int[] num) {
+
+        if(num.length < 2) {
+            return;
         }
-        for(int i = rp , j = nums.length - 1 ; i < j ; i++, j--) {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+
+        int ip = num.length - 1;
+
+        while(ip > 0) {
+            if(num[ip-1] < num[ip]) break;
+            ip--;
+        }
+
+        if(ip == 0) {
+            reverse(num , 0 , num.length - 1);
+            return;
+        }
+        int sp = num.length - 1;
+        while(sp >= ip) {
+            if(num[sp] > num[ip - 1]) break;
+            sp--;
+        }
+        int temp = num[ip - 1];
+        num[ip - 1] = num[sp];
+        num[sp] = temp;
+        reverse(num, ip,num.length - 1);
+
+    }
+
+    private void reverse(int[] num , int start , int end) {
+        while(start < end) {
+            int temp = num[start];
+            num[start] = num[end];
+            num[end] = temp;
+            start++;end--;
         }
     }
 }

@@ -57,32 +57,54 @@ public class MatrixUtil {
      * @return
      */
     public static List<Integer> conchPrint(int[][] matrix ) {
-        int M = matrix.length;
-        int N = 0;
-        if(matrix.length >0)
-            N = matrix[0].length;
         List<Integer> response = new ArrayList<>();
-
-        for(int i = 0 ; i < M / 2 ; i++) {
-            for(int j = i ; j < N - i - 1 ;j++) {
-               response.add(matrix[i][j]);
-            }
-
-            for(int j = i ; j < N - i - 1 ;j++) {
-                response.add(matrix[j][M - i - 1]);
-            }
-
-            for(int j = i ; j < N - i - 1 ;j++) {
-                response.add(matrix[N - i - 1][M - j - 1]);
-            }
-
-            for(int j = i ; j < N - i - 1 ;j++) {
-                response.add(matrix[N - j - 1][i]);
-            }
-
-
-        }
+        conchPrintInternal(matrix , response);
         return response;
+
+    }
+
+    private static void conchPrintInternal(int[][] matrix, List<Integer> response) {
+        if(matrix == null) return;
+        if(matrix.length == 0) return;
+        if(matrix.length == 1) {
+            if(matrix[0] == null || matrix[0].length == 0) return;
+            for(int i = 0 ; i < matrix[0].length ; i++) {
+                response.add(matrix[0][i]);
+            }
+            return;
+        }
+
+        if(matrix[0].length == 1) {
+            for(int i = 0 ; i < matrix.length ; i++) {
+                response.add(matrix[i][0]);
+            }
+            return;
+        }
+        for(int i =  0 ; i < matrix[0].length -1 ; i++) {
+            response.add(matrix[0][i]);
+        }
+
+        for(int i = 0 ; i < matrix.length -1 ; i++) {
+            response.add(matrix[i][matrix[0].length-1]);
+        }
+
+        for(int i = matrix[0].length - 1 ; i >0 ; i--) {
+            response.add(matrix[matrix.length -1][i]);
+        }
+
+        for(int i = matrix.length - 1 ; i >0 ; i--) {
+            response.add(matrix[i][0]);
+        }
+
+        if(matrix.length > 2 && matrix[0].length > 2) {
+            int[][] future = new int[matrix.length -2][matrix[0].length - 2];
+            for(int i = 1 ; i <= matrix.length - 2 ; i++) {
+                for(int j = 1 ; j <= matrix[i].length - 2 ; j++) {
+                    future[i - 1][j - 1] = matrix[i][j];
+                }
+            }
+            conchPrintInternal(future , response);
+        }
     }
 
     /**

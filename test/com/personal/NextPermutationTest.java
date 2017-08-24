@@ -10,8 +10,8 @@ import static org.testng.Assert.*;
 public class NextPermutationTest {
     @Test
     public void testNextPermutation() throws Exception {
-        int[] target = {2,3,1,3,3};
-//        int[] target = {8 ,7 ,6, 5, 4, 3 ,2 ,1};
+//        int[] target = {2,3,1,3,3};
+        int[] target = {1,5,8,4,7,6,5,3,1};
         new NextPermutation().nextPermutation(target);
         for(int i = 0 ; i < target.length ; i++) {
             System.out.println(target[i]);

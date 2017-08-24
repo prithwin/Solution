@@ -30,22 +30,20 @@ public class InsertSpaces {
         List<String> result = new LinkedList<>();
         StringBuilder builder = new StringBuilder();
         builder.append(target.charAt(0));
-        insertSpacesInternal(target, 1,builder,result);
+        insertSpacesInternal(target, 1 ,"" +target.charAt(0),result);
         System.out.println(result);
         return result;
     }
 
-    private void insertSpacesInternal(String target, int stringIndex,StringBuilder builder,List<String> result)  {
-        if(stringIndex == target.length()){
-            result.add(builder.toString());
+    private void insertSpacesInternal(String target, int i,String in,List<String> result)  {
+        if(i == target.length()){
+            result.add(in);
             return;
         }
-        builder.append(target.charAt(stringIndex));
-        insertSpacesInternal(target, stringIndex + 1, builder,result);
-        builder.delete(builder.length()-1,builder.length());
+        String one = in + target.charAt(i);
+        insertSpacesInternal(target, i + 1, one,result);
 
-        builder.append(SPACE).append(target.charAt(stringIndex));
-        insertSpacesInternal(target, stringIndex + 1, builder,result);
-        builder.delete(builder.length()-2,builder.length());
+        String two = in + " "+  target.charAt(i);
+        insertSpacesInternal(target, i + 1, two,result);
     }
 }
