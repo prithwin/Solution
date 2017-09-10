@@ -35,8 +35,10 @@ public class ExpressionEvaluatorTest {
     }
 
     @Test public void testEvaluation() {
-        System.out.println("\n( ( 23 + 24 ) * 35 - 56 ) * 33\n");
-        List<String> postfix = new ExpressionEvaluator().infixToPostfix(getExpressionAsList("( ( 23 + 24 ) * 35 - 56 ) * 33"));
+        System.out.println("\n((A+T)*((B+(A+C))^(C+D)))\n");
+        List<String> postfix = new ExpressionEvaluator().infixToPostfix(new ExpressionEvaluator().lexp("25 + ( 30 + 78 * 45 ) + 34 * ( ( ( 45 * 76 ) + ( 34 / 2 ) ) * ( 11 + 100 ) ) / 1 + 30"));
+        int val = 25 + ( 30 + 78 * 45 ) + 34 * ( ( ( 45 * 76 ) + ( 34 / 2 ) ) * ( 11 + 100 ) ) / 1 + 30;
+        System.out.println(val);
         System.out.println(new ExpressionEvaluator().evaluate(postfix));
     }
 

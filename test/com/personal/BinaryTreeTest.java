@@ -139,15 +139,15 @@ public class BinaryTreeTest {
     }
 
     private BinaryTree getSampleBinaryTree() {
-        BinaryTree tree = new BinaryTree(1);
-        tree.root.left = new TreeNode(2);
-        tree.root.right = new TreeNode(3);
-        tree.root.left.left = new TreeNode(4);
-        tree.root.left.right = new TreeNode(5);
-        tree.root.right.left = new TreeNode(6);
-        tree.root.right.left.right = new TreeNode(8);
-        tree.root.right.right = new TreeNode(7);
-        tree.root.right.right.right = new TreeNode(9);
+            BinaryTree tree = new BinaryTree(1);
+            tree.root.left = new TreeNode(2);
+            tree.root.right = new TreeNode(3);
+            tree.root.left.left = new TreeNode(4);
+            tree.root.left.right = new TreeNode(5);
+            tree.root.right.left = new TreeNode(6);
+            tree.root.right.left.right = new TreeNode(8);
+            tree.root.right.right = new TreeNode(7);
+            tree.root.right.right.right = new TreeNode(9);
         return tree;
     }
 

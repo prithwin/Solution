@@ -24,6 +24,56 @@ public class ExpressionEvaluator {
         return operands;
     }
 
+    public List<String> lexp(String expression) {
+        List<String> response = new ArrayList<>();
+        Queue<Character> operandStack = new LinkedList<>();
+        char[] expressionCharArray = expression.toCharArray();
+        for (int i = 0; i < expressionCharArray.length; i++) {
+            char c = expressionCharArray[i];
+            if (c == ' ') {
+                emptyStack(operandStack , response);
+            } else if (isArithmaticOperator(c)) {
+                emptyStack(operandStack , response);
+                response.add(c + "");
+            } else if (isGreaterThanOrLessThan(c)) {
+                emptyStack(operandStack , response);
+                char n = expressionCharArray[i+1];
+                if(isCompoundOperatorComponent(n)) {
+                    response.add(c+""+n);i++;
+                }
+                response.add(c+"");
+            } else {
+                operandStack.offer(c);
+            }
+        }
+        emptyStack(operandStack , response);
+        return response;
+    }
+    private void emptyStack(Queue<Character> queue , List<String> target) {
+        StringBuilder sb = new StringBuilder();
+        while(!queue.isEmpty()) {
+            sb.append(queue.poll());
+        }
+        if(sb.toString().equals("")) return;
+        target.add(sb.toString());
+    }
+
+    private boolean isGreaterThanOrLessThan(char c) {
+        if(c == '<' || c == '>') return true;
+        return false;
+    }
+
+    private boolean isArithmaticOperator(char c) {
+        if(c == '+' || c == '-' || c == '/' || c == '*' || c == '|' || c == '&' || c == '(' || c == ')')
+            return true;
+        return false;
+    }
+
+    private boolean isCompoundOperatorComponent(char c) {
+        if(c == '=' || c == '>') return true;
+        return false;
+    }
+
     public int evaluate(List<String> postfix) {
         Stack<String> evaluationStack = new Stack<>();
         for(String item : postfix) {

@@ -138,4 +138,23 @@ public class BinarySearchTree extends BinaryTree implements Serializable {
         return where;
     }
 
+    public void trim(int low , int high) {
+        ComparableNumber l = new ComparableNumber(low);
+        ComparableNumber h = new ComparableNumber(high);
+        root = trimInternal(root , l , h);
+    }
+
+    private TreeNode trimInternal(TreeNode node , ComparableNumber low , ComparableNumber high) {
+        if(node == null) return node;
+        if(node.number.compareTo(low) == -1) {
+            return trimInternal(node.right , low , high);
+        } else if(node.number.compareTo(high) == 1) {
+            return trimInternal(node.left , low , high);
+        } else {
+            node.left = trimInternal(node.left , low , high);
+            node.right = trimInternal(node.right, low , high);
+            return node;
+        }
+    }
+
 }

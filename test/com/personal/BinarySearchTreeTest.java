@@ -16,6 +16,14 @@ public class BinarySearchTreeTest {
         assertEquals(getSampleBST().getMinValue(), 1);
     }
 
+    @Test public void testBinaryTreeTrim() {
+        BinarySearchTree tree = getSampleBST();
+        tree.trim(1,50);
+        System.out.println();
+        tree.printinOrder();
+
+    }
+
     @Test public void testRemoveFromBST () {
         BinarySearchTree binaryTree = getSampleBST();
         System.out.println("\nORIGINAL TREE\n");
