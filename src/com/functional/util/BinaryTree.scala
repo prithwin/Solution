@@ -6,10 +6,6 @@ import scala.collection.mutable
   * Created by prajeeva on 9/7/17.
   */
 case class BinaryTree(var root:TreeNode) {
-  def this() = {
-    this(null)
-  }
-
   def printInOrder(): Unit = printInOrderInternal(root)
   def printPreOrder(): Unit  = printPreOrderInternal(root)
   def printPostOrder(): Unit  = printPostOrderInternal(root)
@@ -17,7 +13,14 @@ case class BinaryTree(var root:TreeNode) {
   def size:Int = size(root)
   def mirror():Unit = mirror(root)
   def leafCount():Int = leafCount(root)
-  def isBST():Boolean = isBSTInternal(root)
+  def isBST():Boolean = isBSTInternal(root, Int.MinValue , Int.MaxValue)
+  def printOnlyRight:Unit = {
+    var temp = root
+    while(temp!=null) {
+      println(temp.data)
+      temp = temp.right
+    }
+  }
   def printOutline():Unit = {
     var map = mutable.TreeMap[Int , mutable.MutableList[Int]]()
     printOutlineInternal(root , map , 0)
@@ -26,6 +29,48 @@ case class BinaryTree(var root:TreeNode) {
     println(map(map.lastKey).head)
     map.filterKeys(k => k != map.firstKey && k != map.lastKey).keys.toList.reverse.foreach(k => println(map(k)(map(k).length - 1)))
   }
+
+  def flatten(): Unit = {
+    root = flatten(root)
+    while(root.left!=null) root = root.left
+  }
+
+  def flattenRight(): Unit = flattenRight(root)
+
+  private def flattenRight(node:TreeNode):TreeNode = {
+    if(node == null) return node
+    var left = node.left
+    var right = node.right
+
+    left = flattenRight(left)
+    right = flattenRight(right)
+    node.left = null
+    node.right = left
+    var temp = node
+    while(temp.right!=null) temp = temp.right
+    temp.right = right
+    node
+  }
+
+  private def flatten(node:TreeNode):TreeNode = {
+    if(node == null) return node
+    if(node.left != null) {
+      var left = flatten(node.left)
+      while(left.right != null) left = left.right
+      left.right = node
+      node.left = left
+    }
+
+    if(node.right != null) {
+      var right = flatten(node.right)
+      while(right.left!=null) right = right.left
+      right.left = node
+      node.right = right
+    }
+    node
+  }
+
+
 
   private def printOutlineInternal(node: TreeNode,
                                    map: mutable.TreeMap[Int, mutable.MutableList[Int]],
@@ -119,11 +164,13 @@ case class BinaryTree(var root:TreeNode) {
     printLefViewInternal(node.right, level + 1)
   }
 
-  private def isBSTInternal(node: TreeNode): Boolean = {
+  private def isBSTInternal(node: TreeNode , min:Int , max:Int): Boolean = {
+    if(node == null) return true
     if(node.left == null && node.right == null) return true
     if(node.left!=null && node.left.data > node.data) return false
     if(node.right!=null && node.right.data < node.data) return false
-    isBSTInternal(node.left) && isBSTInternal(node.right)
+    if(node.data < min || node.data >max) return false
+    isBSTInternal(node.left, min, root.data ) && isBSTInternal(node.right, root.data ,max )
   }
 
   private def printSpiralOrderInternal(s: mutable.Stack[TreeNode], dir: Boolean): Unit = {
@@ -254,4 +301,8 @@ case class BinaryTree(var root:TreeNode) {
       printPostOrderInternal(node.right)
       println(node.data)
   }
+}
+
+object BinaryTree {
+  def apply(): BinaryTree = new BinaryTree(null)
 }

@@ -73,11 +73,11 @@ public class CrosswordTest {
     @Test
     public void testFindWordInMatrixFalse() throws Exception {
         char[][] matrix =  {{'x','x','x','x','x','x'},
-                {'x','x','x','H','W','I'},
-                {'x','x','P','T','x','N'},
-                {'x','x','R','I','x','Z'},
-                {'x','x','x','x','x','x'},
-                {'x','x','x','x','x','x'}
+                            {'x','x','x','H','W','I'},
+                            {'x','x','P','T','x','N'},
+                            {'x','x','R','I','x','Z'},
+                            {'x','x','x','x','x','x'},
+                            {'x','x','x','x','x','x'}
         };
         Crossword c = new Crossword();
         c.setMatrix(matrix);
@@ -87,11 +87,11 @@ public class CrosswordTest {
     @Test
     public void testFindWordInMatrixFalse2() throws Exception {
         char[][] matrix =  {{'x','x','x','x','x','x'},
-                {'x','x','x','H','W','I'},
-                {'x','x','P','T','x','N'},
-                {'x','x','R','I','x','Z'},
-                {'x','x','x','x','x','x'},
-                {'x','x','x','x','x','x'}
+                            {'x','x','x','H','W','I'},
+                            {'x','x','P','T','x','N'},
+                            {'x','x','R','I','x','Z'},
+                            {'x','x','x','x','x','x'},
+                            {'x','x','x','x','x','x'}
         };
         Crossword c = new Crossword();
         c.setMatrix(matrix);

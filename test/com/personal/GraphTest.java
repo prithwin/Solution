@@ -148,6 +148,8 @@ public class GraphTest {
     }
 
     @Test public void testPrimsMST() {
+        int count = 0;
+
         Map<Integer,GraphNode> nodeMap = new HashMap<>();
         nodeMap.put(0,new GraphNode("0"));
         nodeMap.put(1,new GraphNode("1"));

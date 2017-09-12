@@ -6,29 +6,29 @@ import com.functional.util.{BinarySearchTree, BinaryTree, TreeNode}
 
 object TreeInitializer {
   def main(args: Array[String]): Unit = {
-    var tree = new BinaryTree()
-    tree.root = new TreeNode(1)
+    var tree = BinaryTree()
+    tree.root =  TreeNode(1)
     tree.root.data = 1
-    tree.root.left = new TreeNode(2)
-    tree.root.right = new TreeNode(3)
-    tree.root.left.left = new TreeNode(4)
-    tree.root.left.right = new TreeNode(5)
-    tree.root.right.left = new TreeNode(6)
-    tree.root.right.right = new TreeNode(7)
+    tree.root.left =  TreeNode(2)
+    tree.root.right =  TreeNode(3)
+    tree.root.left.left =  TreeNode(4)
+    tree.root.left.right =  TreeNode(5)
+    tree.root.right.left =  TreeNode(6)
+    tree.root.right.right =  TreeNode(7)
     tree.printLevelOrder
     println(tree.height)
     println(tree.size)
 
 
-    var tree2 = new BinaryTree()
-    tree2.root = new TreeNode(1)
+    var tree2 =  BinaryTree()
+    tree2.root =  TreeNode(1)
     tree2.root.data = 1
-    tree2.root.left = new TreeNode(2)
-    tree2.root.right = new TreeNode(3)
-    tree2.root.left.left = new TreeNode(4)
-    tree2.root.left.right = new TreeNode(5)
-    tree2.root.right.left = new TreeNode(6)
-    tree2.root.right.right = new TreeNode(7)
+    tree2.root.left =  TreeNode(2)
+    tree2.root.right =  TreeNode(3)
+    tree2.root.left.left =  TreeNode(4)
+    tree2.root.left.right =  TreeNode(5)
+    tree2.root.right.left =  TreeNode(6)
+    tree2.root.right.right =  TreeNode(7)
     println(tree.equals(tree2))
 
     tree2.mirror
@@ -40,15 +40,15 @@ object TreeInitializer {
     println("=====================Spiral tree===================")
     tree.printSpiralOrder
 
-    var tree3 = new BinaryTree()
-    tree3.root = new TreeNode(1)
+    var tree3 =  BinaryTree()
+    tree3.root =  TreeNode(1)
     tree3.root.data = 100
-    tree3.root.left = new TreeNode(50)
-    tree3.root.right = new TreeNode(120)
-    tree3.root.left.left = new TreeNode(14)
-    tree3.root.left.right = new TreeNode(51)
-    tree3.root.right.left = new TreeNode(119)
-    tree3.root.right.right = new TreeNode(121)
+    tree3.root.left =  TreeNode(50)
+    tree3.root.right =  TreeNode(120)
+    tree3.root.left.left =  TreeNode(14)
+    tree3.root.left.right =  TreeNode(51)
+    tree3.root.right.left =  TreeNode(119)
+    tree3.root.right.right =  TreeNode(121)
     println(tree.isBST)
     println("=====================left view =====================")
     tree.printLeftView()
@@ -98,6 +98,8 @@ object TreeInitializer {
 
     println(s"the LCA of 1 and 156 in the binary search tree is ${binarySearchTree.lca(1, 156)}")
 
+    tree.flatten
+    tree.printOnlyRight
 
   }
 }

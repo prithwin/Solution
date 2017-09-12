@@ -9,7 +9,7 @@ import java.util.*;
 public class TwoNumberSum {
     public List<Integer> twoSum(int[] nums, int target) {
         //scan and store the indices in a map:
-        Map<Integer,Integer> storage = new HashMap<Integer,Integer>((int)(nums.length/0.75)+1);
+        Map<Integer,Integer> storage = new HashMap<>();
         for(int i=0 ;i<nums.length; i++){
             storage.putIfAbsent(nums[i],i);
             int temp = target-nums[i];

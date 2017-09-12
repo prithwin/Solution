@@ -4,14 +4,6 @@ package com.functional.util
   * Created by prajeeva on 9/7/17.
   */
 case class TreeNode(var data:Int , var left:TreeNode,var right:TreeNode) {
-  def this() = {
-    this(0,null,null)
-  }
-
-  def this(data:Int) = {
-    this(data,null,null)
-  }
-
   override def canEqual(that: Any): Boolean = {
     if(that.isInstanceOf[TreeNode]) return true
     false
@@ -31,5 +23,16 @@ case class TreeNode(var data:Int , var left:TreeNode,var right:TreeNode) {
       }
     }
     true
+  }
+}
+
+object TreeNode {
+  def apply: TreeNode = new TreeNode(0,null,null)
+  def apply(data:Int):TreeNode = new TreeNode(data,null,null)
+
+  def +(x:TreeNode , y:TreeNode):TreeNode = {
+    if(x == null) return y
+    if(y == null) return x
+    this.apply
   }
 }

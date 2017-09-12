@@ -351,7 +351,9 @@ Q53: why do you use Base64 encoding?
 A53: We use Base64 encoding because it converts all the ASCII character set into 64 most common ASCII chaacters which ar
     Universally understood by all.
 ************************************************************************************************************************
-Q54:
+Q54: what happens when you try and Serialize a class with a non serializable member?
+A54: This is will throw and expception, if you serialize a class with non serializable member the member would have to
+     be declared transient.
 * Cloning a shallow and deep copy.
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.
@@ -379,7 +381,7 @@ Q54:
 * advantges of having session management in HTTP.
 * how does memcache work.
 * what types of cache are available and what are the types of cache you can apply to the pinrest website.
-* Serialization of a class with a non serializable member.
+
 * how do you do validation in spring web services
 
 
