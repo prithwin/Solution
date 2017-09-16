@@ -64,9 +64,9 @@ object ListInitializer {
     randomlist.head.next.next.next.next.next.random = randomlist.head.next.next
     randomlist.head.next.next.next.next.next.next.random = randomlist.head.next
     randomlist.head.next.next.next.next.next.next.next.random = randomlist.head
-
-//    randomlist.clone()
-    println()
+    println(randomlist)
+    val res = randomlist.clone()
+    println(res)
   }
 }
 

@@ -1,5 +1,8 @@
 package com.personal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by pr250155 on 3/22/17.
  */
@@ -47,6 +50,25 @@ public class MaxSumContiguousSubarray {
         new MaxSumContiguousSubarray().maxSumContiguousSubArray(target,MAX_SIZE);
         new MaxSumContiguousSubarray().maxSumContiguousSubArray(target);
 
+    }
+
+
+    public boolean canPermutePalindrome(String s) {
+        Map<Character ,Integer> reg = new HashMap<>();
+        for(int i = 0 ; i < s.length() ; i++) {
+            if(reg.containsKey(s.charAt(i))) {
+                reg.put(s.charAt(i) , reg.get(s.charAt(i)));
+            } else {
+                reg.put(s.charAt(i) , 1);
+            }
+        }
+        if(s.length() % 2 == 0 ){
+            if(reg.values().stream().filter(x -> x%2!=0).count() > 0) return false;
+            return true;
+        } else {
+            if(reg.values().stream().filter(x -> x%2!=0).count() != 1) return false;
+            return true;
+        }
     }
 
     public void maxSumContiguousSubArray(int[] target) {

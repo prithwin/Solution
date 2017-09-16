@@ -1,6 +1,7 @@
 package com.functional.util
 
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 /**
   * Created by prajeeva on 9/7/17.
@@ -14,6 +15,22 @@ case class BinaryTree(var root:TreeNode) {
   def mirror():Unit = mirror(root)
   def leafCount():Int = leafCount(root)
   def isBST():Boolean = isBSTInternal(root, Int.MinValue , Int.MaxValue)
+  def trim(low:Int , high:Int):Unit = {
+    root = trim(low, high , root)
+  }
+
+  private def trim(low:Int , high:Int , node:TreeNode):TreeNode = {
+    if(node.data < low) {
+      trim(low , high , node.right)
+    } else if(node.data > high) {
+      trim(low , high , node.left)
+    } else {
+      node.left = trim(low,high , node.left)
+      node.right = trim(low , high , node.right)
+      node
+    }
+  }
+
   def printOnlyRight:Unit = {
     var temp = root
     while(temp!=null) {
@@ -21,6 +38,7 @@ case class BinaryTree(var root:TreeNode) {
       temp = temp.right
     }
   }
+
   def printOutline():Unit = {
     var map = mutable.TreeMap[Int , mutable.MutableList[Int]]()
     printOutlineInternal(root , map , 0)
@@ -306,3 +324,5 @@ case class BinaryTree(var root:TreeNode) {
 object BinaryTree {
   def apply(): BinaryTree = new BinaryTree(null)
 }
+
+

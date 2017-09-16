@@ -1,5 +1,6 @@
 package com.functional.util
 
+import scala.collection.mutable
 import scala.util.control.Breaks._
 
 /**
@@ -18,6 +19,23 @@ case class RandomLinkedList(var head:RandomListNode) {
     rep += ")"
     rep
   }
+
+  override def clone(): RandomLinkedList = {
+    var temp = head
+    val reg = mutable.TreeMap[RandomListNode , RandomListNode]()
+    while (temp != null) {
+      reg.put(temp, RandomListNode(temp.label))
+      temp = temp.next
+    }
+    temp = head
+    while(temp!=null) {
+      reg(temp).next = reg(temp.next)
+      reg(temp).random = reg(temp.random)
+      temp = temp.next
+    }
+    RandomLinkedList(reg(head))
+  }
+
 }
 
 object RandomLinkedList {

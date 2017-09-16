@@ -15,21 +15,24 @@ import com.personal.util.MatrixUtil;
  */
 public class LongestPallindromicSubsequence {
 
-    public int findSizeOfLongestPallindromicSubsequence(String target){
-        int[][] solutionMatrix = new int[target.length()][target.length()];
-        for (int i = 0; i < solutionMatrix.length; i++) {
-            solutionMatrix[i][i]=1;
-        }
-        for(int k = 1 ; k < target.length() ; k++){
-            for(int i = 0 , j = k ; j < solutionMatrix.length || j <solutionMatrix.length ;i++,j++){
-                if(target.charAt(i) == target.charAt(j)){
-                    solutionMatrix[i][j] = solutionMatrix[i+1][j-1] + 2;
+    public int findSizeOfLongestPallindromicSubsequence(String s){
+        int[][] r = new int[s.length()][s.length()];
+        for(int i = 0 ; i < r.length ; i++) {
+            int I = 0;
+            for(int j = i ; j < r.length ; j++,I++) {
+                if(I == j) {
+                    r[I][j] = 1;
                 } else {
-                    solutionMatrix[i][j] = Mathematical.maximum(solutionMatrix[i][j-1],solutionMatrix[i+1][j]);
+                    if(s.charAt(I) == s.charAt(j)) {
+                        r[I][j] = 2 + r[I+1][j-1];
+                    } else {
+                        r[I][j] = Math.max(r[I+1][j] , r[I][j-1]);
+                    }
                 }
             }
         }
-        return solutionMatrix[0][target.length()-1];
+        MatrixUtil.print2dMatrix(r);
+        return r[0][s.length() -1 ];
     }
 
     public int longestPalindromicSubsequence(String target){

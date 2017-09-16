@@ -4,43 +4,30 @@ package com.personal;
  * Created by prajeev on 13/3/17.
  */
 public class LongestPallindromicSubstring {
+    int gmax = Integer.MIN_VALUE;
+    int ps = -1;
+    int pe = -1;
 
-    public String find(String target) {
-        char[] targetArray = target.toCharArray();
-        int longestOverAll = 0;
-        int xstart=0;
-        int xend=0;
-        for (int i = 0; i <targetArray.length; i++) {
-            int j = i-1;
-            int longestOddValue = 1;
-            int k = i+1;
-            while(j>=0 && k<=targetArray.length-1 && targetArray[j]==targetArray[k]){
-                longestOddValue+=2;
-                j--;
-                k++;
-            }
-            if(longestOddValue> longestOverAll){
-                longestOverAll = longestOddValue;
-                xstart = j;
-                xend = k;
-            }
-
-            j = i;
-            k = i+1;
-            int longestEvenValue = 0;
-            while (j>=0 && k<=targetArray.length-1 && targetArray[j]==targetArray[k] ){
-                longestEvenValue+=2;
-                j--;
-                k++;
-            }
-
-            if(longestEvenValue> longestOverAll){
-                longestOverAll = longestEvenValue;
-                xstart = j;
-                xend = k;
-            }
-
+    public String find(String s) {
+        for(int i = 0 ; i < s.length() ; i++) {
+            process(s, i , i+1);
+            process(s, i , i);
         }
-        return target.substring(xstart+1,xend);
+        return s.substring(ps,pe+1);
+
+    }
+
+    private void process(String s, int k , int j) {
+            int len = 0;
+            while(k >= 0 && j<s.length()) {
+                if(s.charAt(k) == s.charAt(j)) {
+                    len+=2;
+                    if(len > gmax){
+                        gmax =  len;
+                        ps = k; pe = j;
+                    }
+                    k--;j++;
+                } else break;
+            }
     }
 }

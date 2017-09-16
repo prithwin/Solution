@@ -844,4 +844,63 @@ public class BinaryTree implements Serializable {
         response.root = TreeNode.merge(thiz.root , that.root);
         return response;
     }
+
+    @Override
+    public String toString() {
+        List<String> buffer = new ArrayList<>();
+        srlz(root , buffer);
+        return buffer.toString();
+    }
+
+    private void srlz(TreeNode node , List<String> buffer) {
+        if(node == null) {buffer.add("N");}
+        else {
+            buffer.add(""+node.number.number);
+            srlz(node.left , buffer);
+            srlz(node.right , buffer);
+        }
+    }
+
+    public static BinaryTree fromString(String data) {
+        Deque<String> q = new LinkedList<>();
+        q.addAll(Arrays.asList(data.substring(1, data.length() -1 ).split(",")));
+        BinaryTree binaryTree  = new BinaryTree();
+        binaryTree.root = buildTree(q);
+        return binaryTree;
+    }
+
+    private static TreeNode buildTree(Deque<String> queue) {
+        String val = queue.remove();
+        if(val.equals("N")) return null;
+        else {
+            TreeNode node = new TreeNode(Integer.parseInt(val));
+            node.left = buildTree(queue);
+            node.right = buildTree(queue);
+            return node;
+        }
+    }
+
+
+    public TreeNode deserialize(String data) {
+        String[] sa = data.substring(1 , data.length() -1 ).split(",");
+        if(sa.length == 1 && sa[0].trim().equals("")) return null;
+        int[] pro = new int[sa.length];
+        for(int i = 0 ; i < sa.length ; i++) pro[i] = Integer.parseInt(sa[i].trim());
+        return dsrlz(pro);
+    }
+
+    private TreeNode dsrlz(int[] pro) {
+        if(pro == null || pro.length == 0) return null;
+        TreeNode node = new TreeNode(pro[0]);
+        if(pro.length == 1) return node;
+
+        int breakPoint = 1;
+        for(int i = 1 ; i < pro.length ; i++) {
+            if(pro[i] > pro[0]) {breakPoint = i; break;}
+        }
+        if(breakPoint >= 1)
+        node.left = dsrlz(Arrays.copyOfRange(pro, 1, breakPoint+1));
+        node.right = dsrlz(Arrays.copyOfRange(pro, breakPoint+1, pro.length));
+        return node;
+    }
 }

@@ -21,6 +21,17 @@ public class MatrixUtil {
         System.out.println();
     }
 
+    public static void print2dMatrixD(int[][] matrix) {
+        for(int i = 0 ; i < matrix.length; i++) {
+            int I = 0;
+            for(int j = i ; j < matrix[i].length;j++,I++) {
+                System.out.printf(" %d  ",matrix[I][j]);
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
+
     public static void print2dMatrix(char[][] matrix){
         System.out.println();
         for(int i = 0; i< matrix.length ; i++){

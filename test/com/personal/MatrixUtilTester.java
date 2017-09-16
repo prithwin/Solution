@@ -16,6 +16,15 @@ public class MatrixUtilTester {
         System.out.println(MatrixUtil.conchPrint(target));
     }
 
+    @Test
+    public void testPrintD() throws Exception {
+        int[][] target =   {{1,2,3,4},
+                            {5,6,7,8},
+                            {9,10,11,12},
+                            {13,14,15,16}};
+        MatrixUtil.print2dMatrixD(target);
+    }
+
 
     @Test
     public void testConchPrint3() throws Exception {

@@ -9,11 +9,11 @@ A1: *it separates task submittion from task execution,letting you control some a
     *you can use timed executors.
     *you can use ExecuterCompletionService which can be used with a batch of classes.
 ************************************************************************************************************************
-Q2. Can an overloaded method specify a different return type.
+Q2. Can an overridden method specify a different return type.
 A2. the overloaded method must have exactly the same signature, it can return a subclass of the return type, this Rule
     applies to interfaces too.
 ************************************************************************************************************************
-Q3. Can an overloaded method change the throws clause.
+Q3. Can an overridden method change the throws clause.
 A3. like the return type the method in the child class should be below it in inheritance hierarchy, this rules applies
     to interface too.
 ************************************************************************************************************************
@@ -54,6 +54,7 @@ A10: These are the major differences that influence our decision.
      -WS can use any transport layer protocol.
      -WS can implement A tighter security at the added cost of encryption decryption
      -Usually handled at the front end.
+     -Rest thinks of a system in terms of resources. wheres SOAP thinks of resources in terms of oerations.
 ************************************************************************************************************************
 Q11: what are projections in database?
 A11: A select clause.
@@ -373,6 +374,7 @@ A54: This is will throw and expception, if you serialize a class with non serial
 * explain SOLID concepts.
 * how are cookies intiated.
 * Security considerations around Bill Payment systems.
+    confidentialiy and integrity
 * http and https flow.
 * whats a pointer?
 * object on heap or stack

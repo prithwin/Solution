@@ -163,6 +163,13 @@ public class BinaryTreeTest {
         bst.add(new TreeNode(999));
         bst.add(new TreeNode(7));
         bst.add(new TreeNode(4534));
+        System.out.println(bst);
         return bst;
+    }
+
+    @Test public void testBSTDSRLZ() {
+        BinaryTree b = new BinaryTree();
+        b.root = new BinaryTree().deserialize("[2,1]");
+        System.out.println(b);
     }
 }

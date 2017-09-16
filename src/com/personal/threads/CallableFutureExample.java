@@ -6,6 +6,13 @@ import java.util.concurrent.*;
  * Created by prajeev on 1/3/17.
  */
 public class CallableFutureExample {
+    public String someThing(String a) {
+        return null;
+    }
+
+    public String someThing(Object a) {
+        return "";
+    }
     public static void main(String[] args){
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<Integer> handleWhenCompleted = executorService.submit(new CallableClass());
