@@ -1,0 +1,12 @@
+# here is the complete list of problem that you should be knowing at all points
+#
+
+########################### Array manipulation ################################
+1.Product of elements apart from themselves.
+2.Rotate and array in-place.
+3.Union and Intersection of two arrays.
+4.Reverse an array in-place.
+
+###################### General programming problems ###########################
+1.
+

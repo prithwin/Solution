@@ -58,18 +58,21 @@ public class LinkedList implements Cloneable {
 
     /**
      * supposedly asked in an amazon interview.
+     * (D,p) -> (1,c) -> (2,n) -> (3) -> (4) -> (5)
      */
     public void reverseInPlace() {
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode next;
-        while(curr !=null) {
+        ListNode dummy = new ListNode(Integer.MAX_VALUE);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode curr = prev.next;
+        ListNode next = curr.next;
+        while(curr.next != null) {
+            curr.next = next.next;
+            next.next = prev.next;
+            prev.next = next;
             next = curr.next;
-            curr.next=prev;
-            prev = curr;
-            curr = next;
         }
-        head = prev;
+        head = dummy.next;
     }
 
     /**

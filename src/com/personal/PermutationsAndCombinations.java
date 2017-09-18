@@ -24,6 +24,17 @@ public class PermutationsAndCombinations<E> {
         return result;
     }
 
+    public void pascalTriangle() {
+        for (int n = 0; n < 10; n++) {
+            int nCk = 1;
+            for (int k = 0; k <= n; k++) {
+                System.out.print(nCk + " ");
+                nCk = nCk / ((n-k) *(k));
+            }
+            System.out.println();
+        }
+    }
+
     /**
      * The algorithm can be summarized as shown below.
      * nCr(L , V, R) {

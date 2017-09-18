@@ -1,6 +1,7 @@
 package com.personal;
 
-import com.personal.util.ArrayToListConverter;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Created by pr250155 on 4/12/17.
@@ -8,19 +9,24 @@ import com.personal.util.ArrayToListConverter;
 public class BracesEqualPoint {
 
     public int findEqualPoint(String expression){
-        int[] opening = new int[expression.length()];
-        int[] closing = new int[expression.length()];
-        int leftOpenBraces = 0 , rightCloseBraces = 0;
-        for(int i=1, j=expression.length()-1 ; ; i++,j--){
-            if(i==expression.length()) {break;}
-            if(expression.charAt(i)=='(') {opening[i] = leftOpenBraces++;} else {opening[i] = leftOpenBraces;}
-            if(expression.charAt(j)==')') {closing[j] = rightCloseBraces++;} else {closing[j] = rightCloseBraces;}
+        Map<Integer, Integer> o_reg = new HashMap<>();
+        Map<Integer, Integer> c_reg = new HashMap<>();
+        int o_cnt = 0 ;
+        for(int i = 0 ; i < expression.length(); i++) {
+            if(expression.charAt(i) == '(') o_cnt++;
+            o_reg.put(i , o_cnt);
         }
-        for(int i = 1 ; i < expression.length() ; i++){
-            if(opening[i] == closing[i]){
-                return i;
-            }
+
+        int c_cnt = 0 ;
+        for(int i = expression.length()-1 ; i >= 0; i--) {
+            if(expression.charAt(i) == ')') c_cnt++;
+            c_reg.put(i , c_cnt);
         }
+
+        for(int o : o_reg.keySet()) {
+            if(o_reg.get(o) == c_reg.get(o)) return o;
+        }
+
         return 0;
     }
 }

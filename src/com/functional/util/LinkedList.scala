@@ -58,16 +58,44 @@ case class LinkedList(var head:ListNode) {
     val dummy = ListNode(0)
     dummy.next = head
     val prev = dummy
-    val start = prev.next
-    var next = start.next
-    while(start.next!=null) {
-      start.next = next.next
+    val curr = prev.next
+    var next = curr.next
+    while(curr.next!=null) {
+      curr.next = next.next
       next.next = prev.next
       prev.next = next
-      next = start.next
+      next = curr.next
     }
     head = dummy.next
     this
+  }
+
+  def reverse(gSize:Int):LinkedList = {
+    val dummy = ListNode(0)
+    dummy.next = head
+    var prev = dummy
+    var curr = dummy.next
+    var next = curr.next
+    while(curr.next != null) {
+      (0 until gSize - 1).foreach(i => {
+        curr.next = next.next
+        next.next = prev.next
+        prev.next = next
+        next = curr.next
+      })
+      if(curr.next==null) return LinkedList(dummy.next)
+      (0 until gSize).foreach(i => {
+        prev = prev.next
+      })
+      curr = prev.next
+      next = curr.next
+    }
+//      prev = next
+//      curr = prev.next
+//      next = curr.next
+//      println("status")
+//    }
+    LinkedList(dummy.next)
   }
 
   def reverse(m:Int , n :Int): Unit ={
