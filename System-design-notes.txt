@@ -1,0 +1,10 @@
+scalability for dummies:
+1. clones: public infrastructure for public websites usually hidden behind a load balancer.
+    first rule : every server should contain the exact same code but should contain none of the users data.
+
+High level trade offs
+
+    performance vs scalability
+    latency vs througput
+    availability vs consistency
+

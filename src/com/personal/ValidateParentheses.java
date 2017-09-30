@@ -11,6 +11,7 @@ public class ValidateParentheses {
 
     List<Character> OPENS = Arrays.asList('(','[','{');
     List<Character> CLOSES = Arrays.asList(')',']','}');
+
     Map<Character,StackADT> registry = new HashMap<>();
     {
         for(int i = 0 ; i < 3 ; i++) {

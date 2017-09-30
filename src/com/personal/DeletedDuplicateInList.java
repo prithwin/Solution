@@ -6,23 +6,9 @@ import com.personal.util.ListNode;
  */
 public class DeletedDuplicateInList {
     public ListNode deleteDuplicates(ListNode head) {
-        if(head==null) return null;
-        ListNode FakeHead=new ListNode(0);
-        FakeHead.next=head;
-        ListNode pre=FakeHead;
-        ListNode cur=head;
-        while(cur!=null){
-            while(cur.next!=null && cur.val==cur.next.val){
-                cur=cur.next;
-            }
-            if(pre.next==cur){
-                pre=pre.next;
-            }
-            else{
-                pre.next=cur.next;
-            }
-            cur=cur.next;
-        }
-        return FakeHead.next;
+        if(head == null || head.next == null) return head;
+        head.next = deleteDuplicates(head.next);
+        if(head.val == head.next.val) return head.next;
+        return head;
     }
 }

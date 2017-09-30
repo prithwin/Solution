@@ -78,6 +78,10 @@ object TreeInitializer {
     binarySearchTree += 156
     binarySearchTree.printInOrder
 
+    println()
+    println(s"The Penultimate Elements is ${binarySearchTree.pen().data}")
+    println()
+
     binarySearchTree -= 57
     println("=====================Binary Search Tree deleted 57=================")
     binarySearchTree.printInOrder

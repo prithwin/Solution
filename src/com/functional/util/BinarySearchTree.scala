@@ -1,5 +1,7 @@
 package com.functional.util
 
+import scala.collection.mutable
+
 /**
   * Created by prajeeva on 9/9/17.
   */
@@ -66,6 +68,20 @@ case class BinarySearchTree(var root : TNode) {
   private def findMin(node:TNode):Int = {
     if(node.left == null) node.data
     else findMin(node.left)
+  }
+
+  def pen():TNode = pen(root)
+
+  private def pen(node:TNode):TNode = {
+    val s = mutable.Stack[TNode]()
+    var temp = node
+    while(temp!=null) {
+      s.push(temp)
+      temp = temp.right
+    }
+    if(s.top.left != null) return s.top.left
+    s.pop()
+    s.top
   }
 
   def printInOrder : Unit = printInOrder(root)

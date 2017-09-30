@@ -23,4 +23,8 @@ public class DecimalToBaseNTest {
         System.out.println(new DecimalToBaseN().baseNToDecimal(new DecimalToBaseN().decimalToBaseN(555, 16),16));
     }
 
+    @Test public void testHardWare() {
+        System.out.println(Integer.toHexString(-1));
+    }
+
 }

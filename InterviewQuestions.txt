@@ -1,4 +1,4 @@
-************************************************************************************************************************
+n************************************************************************************************************************
 Q1. What are the advantages of using an executor framework to just simply starting and running a thread.
 A1: *it separates task submittion from task execution,letting you control some aspects of the thread execution
     *using thread.start is unbounded so it doesn't place any JVM level bounds on how many threads that can be started.
@@ -355,6 +355,15 @@ A53: We use Base64 encoding because it converts all the ASCII character set into
 Q54: what happens when you try and Serialize a class with a non serializable member?
 A54: This is will throw and expception, if you serialize a class with non serializable member the member would have to
      be declared transient.
+************************************************************************************************************************
+Q55: S.O.L.I.D concepts"
+A55: the acronym stands for
+     S - single responsibility - every class that you write should have one and one responsiblity only.
+     O - open/close princile - your classes should be open to extension and closed for modification
+     L - Liskov substituion - your classes should be designed such that every place that you user a super class you shoulbe
+      be aple to substitute that with a subclass and you should still be correct.
+     I - interface segregation, interface segregation should be a fine grained as possible.
+     D - dependency inversion. make sure that
 * Cloning a shallow and deep copy.
 * factory design pattern, why is the factory a singleton itself.
 * a little about Java Reflection API.
@@ -371,7 +380,8 @@ A54: This is will throw and expception, if you serialize a class with non serial
 * how do you make something immutable.
 * what's the whole point of having a JVM
 * what is the JIT compiler.
-* explain SOLID concepts.
+
+
 * how are cookies intiated.
 * Security considerations around Bill Payment systems.
     confidentialiy and integrity

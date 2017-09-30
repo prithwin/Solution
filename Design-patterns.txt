@@ -1,0 +1,101 @@
+//////////////////////// CREATIONAL PATTERNS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+#############################  Factory  #################################
+-the problem here being that there is one interface multiple implementationss
+-you can switch them with a factory instance.
+-for higher performance the factory is usually a singleton.
+
+#############################  Singleton  #################################
+-the grand daddy of all useful patterns,
+-Usually in order to make objects that are inherrently singleton like the file system link.
+-thread safe singleton is the pattern that makes all modern web applications possible.
+
+#############################  Builder  #################################
+-this pattern is usually helped to address telescopic constructor problem.
+-often used to create a fluent API
+
+#############################  Abstract Factory  #################################
+-This addresses the reusable component factory.
+-the spring application context works in the same fashion where it dishes out singleton.
+
+#############################   Prototype  #################################
+-Prototype pattern is used when you want to create a bean half baked and then clone it.
+-very useful while testing
+
+
+//////////////////////// STRUCTURAL PATTERNS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+#############################   Adapter  #################################
+-convert the interface of one class into another class by implementing a common interface.
+
+#############################   Bridge  #################################
+-this is your typical interface and implementation pattern.
+
+#############################   Composite  #################################
+-This design pattern is kind of dfs
+-when you call a method from one class and it goes and call a method from all the child components.
+
+#############################   Decorator  #################################
+-this is a very important pattern that emphasises composition over inheritence.
+
+#############################   Facade  #################################
+-this is where you simplify the interface to multiple interfaces by making one inteface to rule them all.
+
+#############################   Flyweight  #################################
+-this is a pattern where you reuse similar objects in order to minimize memory usage.
+-String interning is a classic example.
+-basically shared objects.
+
+#############################   Proxy  #################################
+-an adapter for a remote object or something that is too complex to create
+
+
+//////////////////////// BEHAVIORAL PATTERNS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#############################   Chain of Responsibility  #################################
+-here you have handler for a request but you have multiple handlers that can serve the requests.
+-you give them each a chance to server the request by iterating through each one of them and giving them a chance to
+serve the request.
+
+#############################   Iterator  #################################
+-who doesn't know iterators
+
+#############################   Mediator  #################################
+-it s a typical delegate that interacts between you view and athe model layer
+-it makes changes to your requests so that they are cmplaitble with the model layer.
+
+#############################   mememnto  #################################
+- typical usage of an undo functinality.
+
+#############################   Observer  #################################
+-fairly typical listener implementation.
+
+#############################   State  #################################
+-an object oriented finite state machine.
+
+#############################   Srategy  #################################
+-used just as the message digest selector simple and straight forward
+
+#############################   template  #################################
+-Typical Generic method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

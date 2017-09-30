@@ -21,8 +21,6 @@ public class FindPairs {
             }else {
                 if(reg.containsKey(n + k)) count++;
             }
-
-
         }
         return count;
     }

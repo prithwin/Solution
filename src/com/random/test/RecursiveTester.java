@@ -9,9 +9,7 @@ public class RecursiveTester {
     }
 
     private static int callRecursive(int i) {
-        if(i==32){
-            return i;
-        }
+        System.out.println(i);
         return callRecursive(i+1);
     }
 }

@@ -1,3 +1,31 @@
+MultiThreading problems:
+
+1.safety hazard
+once you solve the safety hazard you run into the problem of
+2.Liveness hazard : here a thread of execution give the feeling of being dead, just like a single threaded
+    program can do the same by never coming out of an infinte loop, a multithreaded program can do the same
+    thing by going for a lock and never coming back, these are called liveness hazards.
+    there are three types of liveness problems.
+    *Deadlock
+    *starvation
+    *livelock
+3. Performance
+   Threads are all about resource sharing. and once a resource doesnt get shared efficiently you run into
+   all kinds of resource sharing problems.
+
+
+Thread safety:
+    Atomicity:
+    race conditions:
+
+    few of the things that you already know about:
+
+
+Sharing Objects:
+
+
+
+
 the Java memory Model
 * the java memory model defines a relationship (partial-ordering) called happens before.
 * For changes made by a Thread B to be visible to thread A. there must be a clear Happens-before relation between them
@@ -26,3 +54,14 @@ the Java memory Model
     program order
 
 
+
+
+git add UnderwritingV4/src/main/java/com/intuit/sbg/risk/Application.java
+git add UnderwritingV4/src/main/java/com/intuit/sbg/risk/configuration/CassandraObj.java
+git add UnderwritingV4/src/main/java/com/intuit/sbg/risk/dao/impl/cs/LinkAnalysisDAOCSImpl.java
+git add UnderwritingV4/src/main/java/com/intuit/sbg/risk/dao/impl/cs/VelocityListDaoImpl.java
+git add UnderwritingV4/src/main/resources/queries/cs/riskCSQueries.xml
+git add UnderwritingV4/src/test/java/com/intuit/sbg/risk/configuration/CassandraObjTest.java
+git add UnderwritingV4/src/test/java/com/intuit/sbg/risk/dao/impl/cs/LinkAnalysisDAOCSImplTest.java
+git add UnderwritingV4/src/test/java/com/intuit/sbg/risk/dao/impl/cs/VelocityListDaoImplTest.java
+git add UnderwritingV4/src/test/java/com/intuit/sbg/risk/healthcheck/CassandraHealthCheckTest.java

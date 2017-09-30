@@ -29,14 +29,9 @@ class ProducerProcess2 implements Runnable{
     @Override
     public void run() {
         for (int i = 0; i < 150;i++) {
-            try {
-                System.out.println("adding element"+i);
-                queue.add(i);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            queue.enque(i);
         }
-        }
+    }
 
 }
 
@@ -52,11 +47,7 @@ class ConsumerProcess2 implements Runnable{
     public void run() {
 
         while (true){
-            try {
-                System.out.println("removing element"+ queue.remove());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                System.out.println("removing element"+ queue.deque());
 
         }
     }

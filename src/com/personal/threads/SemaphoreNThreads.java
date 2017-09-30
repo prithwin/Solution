@@ -13,18 +13,16 @@ public class SemaphoreNThreads {
         final Semaphore semaphore = new Semaphore(3);
         final List<Integer> workingList = Arrays.asList(1,2,3,4,5,6);
         for(int i = 0 ; i < 10 ; i++ ){
-            new Thread(() -> {waitedPrint(semaphore,workingList);}).start();
+            int tid = i;
+            new Thread(() -> {waitedPrint(tid,semaphore);}).start();
         }
     }
 
-    private static void waitedPrint(Semaphore semaphore, List<Integer> workingList) {
+    private static void waitedPrint(int processnumber,Semaphore semaphore) {
         try {
             semaphore.acquire();
-            Thread.sleep(2000);
-            workingList.parallelStream().
-                    filter((e) -> e+5==10).
-                    map((e) -> e*=2).
-                    forEach(System.out::print);
+            System.out.println(processnumber);
+            Thread.sleep(1000);
             semaphore.release();
         } catch (InterruptedException e) {
             e.printStackTrace();
