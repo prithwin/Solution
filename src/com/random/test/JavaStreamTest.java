@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class JavaStreamTest {
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(1234);
+        ServerSocket serverSocket = new ServerSocket(8080);
         while(true) {
             Socket socket = serverSocket.accept();
             BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());

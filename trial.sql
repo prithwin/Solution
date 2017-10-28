@@ -1,5 +1,5 @@
 -- you can create these tables in any online table editor and try out a varity of commands that have
--- been listed here, this is a simple thing just to make your life easier
+-- been listed here, this is a simple thing just to make your life easier root@localhost: .Sk>%;KZo96w
 
 create table users (
   id int PRIMARY KEY,

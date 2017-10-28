@@ -19,6 +19,12 @@ case class BinaryTree(var root:TreeNode) {
     root = trim(low, high , root)
   }
 
+  def hasPathSum(sum:Int):Boolean = hasPathSum(root , sum)
+
+  private def hasPathSum(node: TreeNode, i: Int):Boolean = {
+    true
+  }
+
   private def trim(low:Int , high:Int , node:TreeNode):TreeNode = {
     if(node.data < low) {
       trim(low , high , node.right)

@@ -1,5 +1,10 @@
 package com.functional.util
 
+import java.util
+import java.util.Stack
+
+import com.personal.util.TreeNode
+
 import scala.collection.mutable
 
 /**
@@ -98,6 +103,33 @@ case class BinarySearchTree(var root : TNode) {
     if(x.data < node.data) node.left = add(node.left , x)
     else if(x.data > node.data) node.right = add(node.right , x)
     node
+  }
+
+  def inorderSuccessor(root: TreeNode, p: TreeNode): TreeNode = {
+    val s: util.Stack[TreeNode] = new util.Stack[TreeNode]
+    findNode(root, p, s)
+    if (s.peek.right != null) {
+      var can = s.peek.right
+      while ( {
+        can.left != null
+      }) can = can.left
+      return can
+    }
+    val ul: TreeNode = s.pop
+    if (s.isEmpty) return null
+    while ( {
+      !s.isEmpty && s.peek.data < ul.data
+    }) s.pop
+    if (s.isEmpty) return null
+    s.peek
+  }
+
+  private def findNode(node: TreeNode, what: TreeNode, s: util.Stack[TreeNode]): Unit = {
+    if (node == null) return
+    s.push(node)
+    if (what.data == node.data) return
+    if (what.data < node.data) findNode(node.left, what, s)
+    if (what.data > node.data) findNode(node.right, what, s)
   }
 
 

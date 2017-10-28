@@ -1,5 +1,7 @@
 package com.personal;
 
+import java.util.Scanner;
+
 /**
  * Created by pr250155 on 5/27/17.
  */
@@ -12,6 +14,7 @@ public class ArrayRotate {
             }
             target[target.length - 1] = temp;
         }
+        new Scanner(System.in).nextLine();
     }
 
     public void rotateRight(int[] target, int n) {
