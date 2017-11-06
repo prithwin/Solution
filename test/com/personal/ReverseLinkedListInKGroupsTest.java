@@ -16,8 +16,8 @@ public class ReverseLinkedListInKGroupsTest {
         n.next.next = new ListNode(3);
         n.next.next.next = new ListNode(4);
         n.next.next.next.next = new ListNode(5);
-        n.next.next.next.next.next = new ListNode(6);
-        n = new ReverseLinkedListInKGroups().reverseKGroup(n,4);
+//        n.next.next.next.next.next = new ListNode(6);
+//        n = new ReverseLinkedListInKGroups().reverseKGroup(n,2);
         System.out.println(n);
     }
 

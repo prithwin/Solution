@@ -17,9 +17,7 @@ public class MathematicalTest {
     }
 
     @Test public void testPow(){
-        assertEquals(3*3*3,Mathematical.power(3,3));
-        assertEquals(2*2*2,Mathematical.power(2,3));
-        assertEquals(2*2*2*2,Mathematical.power(2,4));
+        System.out.println(Mathematical.power(2,20));
     }
 
     @Test public void TestSineWave() {

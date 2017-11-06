@@ -10,4 +10,9 @@ public class SomeClass implements SomeClassService {
         System.out.println("do something and then some more things");
         return 38;
     }
+
+    @Override
+    public Integer doSomeOtherThing(String theThing, Integer otherThing) {
+        return null;
+    }
 }

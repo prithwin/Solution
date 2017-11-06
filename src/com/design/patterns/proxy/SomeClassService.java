@@ -5,4 +5,5 @@ package com.design.patterns.proxy;
  */
 public interface SomeClassService {
     Integer doSomeThing(String theThing , Integer otherThing);
+    Integer doSomeOtherThing(String theThing , Integer otherThing);
 }

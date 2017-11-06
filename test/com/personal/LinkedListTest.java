@@ -30,7 +30,7 @@ public class LinkedListTest {
     }
 
     @Test public void testInPlaceReverse() {
-        int[] array = {1,2,7,3,7,8,1};
+        int[] array = {1,2,3,4,5,6};
         LinkedList target = new LinkedList(array);
         target.printList();
         target.reverseInPlace();
@@ -131,5 +131,14 @@ public class LinkedListTest {
         ArbitDblLinkedList originalList = getSampleArbitLinkedList();
         ArbitDblLinkedList newList = originalList.clone();
         assertEquals(originalList,newList);
+    }
+
+    @Test public void z() {
+
+        LinkedList l1 = new LinkedList(1);
+        LinkedList l2 = new LinkedList(1);
+        ListNode response = ListNode.mergeTwoLists(l1.head, l2.head);
+        System.out.println();
+
     }
 }

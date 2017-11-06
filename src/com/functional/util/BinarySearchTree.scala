@@ -137,4 +137,35 @@ case class BinarySearchTree(var root : TNode) {
 
 object BinarySearchTree {
   def apply(): BinarySearchTree = new BinarySearchTree(null)
+
+  private def sortedListToTreeNode(head: ListNode):TNode = head match {
+    case null => null
+    case _ =>
+      if(head.next == null) TNode(head.data)
+      else {
+        if(head.next.next==null) {
+          //this list has only two elements
+          val response = TNode(head.data)
+          response.right = TNode(head.next.data)
+          return response
+        }
+        var s = head
+        var f = head
+        var prev:ListNode = null
+        while(f != null && f.next != null) {
+          prev = s
+          s = s.next
+          f = f.next.next
+        }
+        val tail = s
+        prev.next = null
+        val response = TNode(s.data)
+        response.left = sortedListToTreeNode(head)
+        response.right = sortedListToTreeNode(tail.next)
+        response
+      }
+  }
+
+  def apply(listNode:ListNode) : BinarySearchTree =
+    new BinarySearchTree(sortedListToTreeNode(listNode))
 }

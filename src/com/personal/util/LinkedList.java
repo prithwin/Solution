@@ -1,7 +1,5 @@
 package com.personal.util;
 
-import com.random.test.ClonableTest;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -19,11 +17,11 @@ public class LinkedList implements Cloneable {
          length=0;
      }
 
-    public LinkedList(int[] fromList){
+    public LinkedList(int... fromList){
         length=0;
-       for(int item : fromList){
-           add(item);
-       }
+        for(int item : fromList){
+            add(item);
+        }
     }
 
     public void add(int item) {
@@ -67,6 +65,8 @@ public class LinkedList implements Cloneable {
         ListNode curr = prev.next;
         ListNode next = curr.next;
         while(curr.next != null) {
+            System.out.println(prev);
+            System.out.println(String.format("at each iteration the values are  curr = %s and next = %s" , curr.val , next.val));
             curr.next = next.next;
             next.next = prev.next;
             prev.next = next;

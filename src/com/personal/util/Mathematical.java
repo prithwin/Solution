@@ -23,9 +23,12 @@ public class Mathematical {
     }
 
     public static int power(int x, int n){
-        int pow = x;
-        while(--n > 0) pow*=x;
-        return pow;
+        if(n == 0) return 1;
+        if(n == 1) return x;
+        if(n%2 == 0) return power(x,n/2) * power(x,n/2);
+        else {
+            return power(x,n/2) * power(x ,n/2+n%2);
+        }
     }
 
     public static int maximum(int thizz, int that) {

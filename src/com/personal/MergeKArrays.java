@@ -6,63 +6,23 @@ import java.util.*;
 
 /**
  * Created by prajeeva on 7/16/17.
- * TODO: come back to this later
  *
  */
 public class MergeKArrays {
     public ListNode mergeKLists(ListNode[] lists) {
-        List<ListNode> g = new ArrayList<ListNode>();
-        for(int i = 0 ; i < lists.length ; i++) {
-            g.add(lists[i]);
-        }
-        //preparation done
-        while(g.size() > 1) {
-            for(int i = 0 ; i < g.size() ;) {
-                if(i < g.size() - 1) {
-                    ListNode merged = merge(g.get(i),g.get(i+1));
-                    g.remove(i); g.remove(i + 1);
-                    g.add(merged);
-                    i+=2;
-                }
-            }
-        }
-        return g.get(0);
+        return Arrays.stream(lists).parallel().filter(Objects::nonNull).
+                reduce(this::merge).orElse(null);
     }
 
-    private ListNode merge(ListNode thiz , ListNode that) {
-        ListNode response = new ListNode(Integer.MAX_VALUE);
-        ListNode returnHead = response;
-        while(thiz.next!=null && that.next!=null) {
-            if(thiz.val < that.val) {
-                response.next = thiz;
-                response = response.next;
-                thiz = thiz.next;
-            } else if(that.val < thiz.val) {
-                response.next = that.next;
-                response = response.next;
-                that = that.next;
-            } else {
-                response.next = thiz.next;
-                response = response.next;
-                response.next = that.next;
-                response = response.next;
-            }
+    private ListNode merge(ListNode l1 , ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+        if(l1.val < l2.val) {
+            l1.next = merge(l1.next , l2);
+            return l1;
+        } else {
+            l2.next = merge(l1 , l2.next);
+            return l2;
         }
-        if(thiz.next == null) {
-            while(that.next != null) {
-                response.next = that.next;
-                response = response.next;
-                that = that.next;
-            }
-        }
-
-        if(that.next == null) {
-            while(thiz.next != null) {
-                response.next = thiz;
-                response = response.next;
-                thiz = thiz.next;
-            }
-        }
-        return returnHead.next;
     }
 }

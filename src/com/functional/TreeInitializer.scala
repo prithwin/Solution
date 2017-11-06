@@ -1,4 +1,4 @@
-import com.functional.util.{BinarySearchTree, BinaryTree, TreeNode}
+import com.functional.util.{BinarySearchTree, BinaryTree, LinkedList, TreeNode}
 
 /**
   * Created by prajeeva on 9/7/17.
@@ -104,6 +104,25 @@ object TreeInitializer {
 
     tree.flatten
     tree.printOnlyRight
+
+    println("this the dreaded balance a binary tree probelm")
+
+    val sortedList = LinkedList()
+    sortedList += 1
+    sortedList += 2
+    sortedList += 3
+    sortedList += 4
+    sortedList += 5
+    sortedList += 6
+    sortedList += 7
+    sortedList += 8
+//    sortedList += 9
+
+    //this is how you remind me of what i really am
+
+    var bbinsertree = BinarySearchTree(sortedList.head)
+    bbinsertree.printInOrder
+
 
   }
 }

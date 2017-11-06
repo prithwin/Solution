@@ -1,8 +1,7 @@
 package com.functional;
 
+import com.personal.MaxSubarraySum;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * Created by prajeeva on 10/1/17.

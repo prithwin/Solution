@@ -1,7 +1,12 @@
 package com.personal.threads;
 
+import scala.Char;
+
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -9,62 +14,55 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by pr250155 on 5/24/17.
  */
-public class ThreadPool implements Runnable {
-    int availableSlots;
-    int theoreticalMax;
-    Lock threadPoolLock = new ReentrantLock();
-    Condition boundryCondition = threadPoolLock.newCondition();
-    boolean running;
-    BlockingQueue<Runnable> q;
+public class ThreadPool {
 
-    public ThreadPool(int size) {
-        this.availableSlots = size;
-        this.theoreticalMax = size;
-        q = new ArrayBlockingQueue<>(size);
+    private AtomicInteger c;
+    private int maxPoolSize;
+    BlockingQueue<Thread> taskQueue;
+
+    public ThreadPool(int maxPoolSize) {
+        c = new AtomicInteger(0);
+        this.maxPoolSize = maxPoolSize;
+        this.taskQueue = new LinkedBlockingQueue<>(maxPoolSize);
     }
 
-    public void execute(Runnable thread) throws InterruptedException {
-        if(!running) {
-            synchronized (this) {
-                q.put(thread);
-            }
-        } else {
-            running = true;
-            q.put(thread);
-            new Thread(this).start();
+//    private void startExecution() {
+//        for(;;) {
+//            Runnable task =
+//        }
+//    }
+
+    public void execute(Runnable task) {
+
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+    boolean isCryptSolution(String[] crypt, char[][] solution) {
+        Map<Character, Integer> reg = getMap(solution);
+        int a = findSum(crypt[0],reg);
+        int b = findSum(crypt[1],reg);
+        int c = findSum(crypt[2],reg);
+        System.out.println(String.format("a=%d b=%d c=%d",a,b,c));
+        return a+b == c || b+c == a || c+a == b;
+    }
+
+    private int findSum(String s , Map<Character, Integer> reg) {
+        StringBuilder number = new StringBuilder();
+        for(int i = 0 ; i < s.length() ; i++) {
+            number.append(s.charAt(i));
         }
+        return Integer.parseInt(number.toString());
     }
 
-    @Override
-    public void run() {
-        while(true) {
-            Runnable r = null;
-            try {
-                r = q.take();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread thread = new Thread(r);
-            threadPoolLock.lock();
-            while (availableSlots == 0) {
-                try {
-                    boundryCondition.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            thread.start();
-            availableSlots--;
-            threadPoolLock.unlock();
-            new Thread(() -> {
-                while (thread.isAlive()) {
-
-                }
-                this.threadPoolLock.lock();
-                this.availableSlots += 1;
-                this.boundryCondition.signal();
-                this.threadPoolLock.unlock();
-            }).start();
+    private Map<Character,Integer> getMap(char[][] solution) {
+        Map<Character,Integer> response = new HashMap<>();
+        for(int i = 0 ; i < solution.length ; i++) {
+            response.put(solution[i][0] , solution[i][1] - 0);
         }
+        return response;
     }
+
 }
